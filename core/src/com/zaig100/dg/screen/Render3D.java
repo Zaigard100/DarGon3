@@ -41,6 +41,8 @@ public class Render3D implements Screen {
     float dirTempx=0.0f,dirTempy=0.0f,dirTempz=0.0f;
     int w = 1300,h = 650;
 
+    int atx=0,aty=0;
+
     public Render3D(Main m) {
         this.m = m;
     }
@@ -63,7 +65,7 @@ public class Render3D implements Screen {
         //wind.bind(0);
         ShaderProgram.pedantic=false;
         shader = new ShaderProgram(Gdx.files.internal("shaders/default.vert"),
-                (Gdx.files.internal("shaders/rayCastShader.frag")));
+                (Gdx.files.internal("shaders/rayCastShader.glsl")));
         if (!shader.isCompiled()) {
             System.err.println(shader.getLog());
             System.exit(0);
@@ -101,8 +103,19 @@ public class Render3D implements Screen {
         diry=0.0f;
         dirz=0.0f;
         if(!Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
-            mx +=  (((float)Gdx.input.getX()-w/2)/w);
-            my +=  (((float)Gdx.input.getY()-h/2)/h);
+            if (!m.isAndroid()) {
+                mx += (((float) Gdx.input.getX() - w / 2) / w);
+                my += (((float) Gdx.input.getY() - h / 2) / h);
+            }else{
+                if(Gdx.input.isTouched()){
+
+                    mx += Gdx.input.getX() - atx;
+                    my += Gdx.input.getY() - aty;
+
+                    atx = Gdx.input.getX();
+                    aty = Gdx.input.getY();
+                }
+            }
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.W)) {
