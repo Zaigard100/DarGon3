@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import java.util.Calendar;
 
@@ -20,41 +21,40 @@ public class  Res {
     public Texture tileset = new Texture(Gdx.files.internal("texture/TileSet.png"));
     public Texture logo;
 
-    public Sprite play_button;
-    public Sprite play_button_toched;
+    public TextureRegion play_button;
+    public TextureRegion play_button_toched;
 
-    public Sprite tutorial_button;
-    public Sprite tutorial_button_toched;
+    public TextureRegion tutorial_button;
+    public TextureRegion tutorial_button_toched;
 
-    public Sprite settings_button;
-    public Sprite settings_button_toched;
+    public TextureRegion settings_button;
+    public TextureRegion settings_button_toched;
 
-    public Sprite nextlv;
-    public Sprite dark;
+    public TextureRegion nextlv;
+    public Texture dark;
 
-    public Sprite bag;
-    public Sprite hp_potion;
-    public Sprite sheld;
-    public Sprite torch;
+    public Texture bag;
+    public Texture hp_potion;
+    public Texture sheld;
+    public Texture torch;
 
-    public Sprite teleport;
-    public Sprite damage;
+    public Texture teleport;
+    public Texture damage;
 
-    public Sprite flamethrowfer;
+    public TextureRegion flamethrowfer;
 
-    public Sprite arrow;
+    public TextureRegion arrow;
 
     Sprite hero;
-    Sprite tile;
 
-    public Sprite amonghero;
-    public Sprite firedhero;
-    public Sprite shotedhero;
+    public Texture amonghero;
+    public Texture firedhero;
+    public Texture shotedhero;
 
-    public Sprite pause_dark;
+    public Texture pause_dark;
 
-    public Sprite joystick;
-    public Sprite use;
+    public Texture joystick;
+    public Texture use;
 /*
     public Music mainmenu;
     public Music ingame;
@@ -64,7 +64,7 @@ public class  Res {
     public Sound wasted;
     public Sound lov;
 
-    public Sprite boards;
+    public Texture boards;
 
     Sprite spr = null;
 
@@ -85,28 +85,28 @@ public class  Res {
         settings_button = new Sprite(ui,42,32,21,21);
         settings_button_toched = new Sprite(ui,63,32,21,21);
 
-        nextlv = new Sprite(new Texture(Gdx.files.internal("texture/nextlevel.png")),0,0,16,16);
+        nextlv = new TextureRegion(new Texture(Gdx.files.internal("texture/nextlevel.png")));
         logo =  new Texture(Gdx.files.internal("texture/logo.png"));
-        dark = new Sprite(new Texture(Gdx.files.internal("texture/Dark.png")),0,0,240,176);
+        dark = new Texture(Gdx.files.internal("texture/Dark.png"));
 
-        bag = new Sprite(new Texture(Gdx.files.internal("texture/bag.png")),0,0,16,16);
-        hp_potion =new Sprite(new Texture(Gdx.files.internal("texture/hp_potion.png")));
-        sheld =new Sprite(new Texture(Gdx.files.internal("texture/sheld.png")));
-        torch =new Sprite(new Texture(Gdx.files.internal("texture/torch_spritesheet.png")),0,0,16,16);
+        bag = new Texture(Gdx.files.internal("texture/bag.png"));
+        hp_potion =new Texture(Gdx.files.internal("texture/hp_potion.png"));
+        sheld =new Texture(Gdx.files.internal("texture/sheld.png"));
+        torch =new Texture(Gdx.files.internal("texture/torch_spritesheet.png"));
 
-        teleport = new Sprite(new Texture(Gdx.files.internal("texture/teleporter.png")),0,0,16,16);
-        damage = new Sprite(new Texture(Gdx.files.internal("texture/Damage.png")),0,0,112,80);
-        flamethrowfer = new Sprite(new Texture(Gdx.files.internal("texture/flamethrower.png")),0,0,16,16);
-        arrow = new Sprite(new Texture((Gdx.files.internal("texture/arrow.png"))));
+        teleport =new Texture(Gdx.files.internal("texture/teleporter.png"));
+        damage = new Texture(Gdx.files.internal("texture/Damage.png"));
+        flamethrowfer = new TextureRegion(new Texture(Gdx.files.internal("texture/flamethrower.png")));
+        arrow = new TextureRegion(new Texture(Gdx.files.internal("texture/arrow.png")));
 
-        amonghero = new Sprite(new Texture((Gdx.files.internal("texture/amonghero.png"))));
-        firedhero = new Sprite(new Texture((Gdx.files.internal("texture/firedhero.png"))));
-        shotedhero = new Sprite(new Texture((Gdx.files.internal("texture/shotedhero.png"))));
+        amonghero = new Texture(Gdx.files.internal("texture/amonghero.png"));
+        firedhero = new Texture(Gdx.files.internal("texture/firedhero.png"));
+        shotedhero = new Texture(Gdx.files.internal("texture/shotedhero.png"));
 
-        pause_dark = new Sprite(new Texture(Gdx.files.internal("texture/resume.png")));
+        pause_dark = new Texture(Gdx.files.internal("texture/resume.png"));
 
-        joystick = new Sprite(new Texture(Gdx.files.internal("texture/Joystick.png")));
-        use = new Sprite(new Texture(Gdx.files.internal("texture/use.png")));
+        joystick =new Texture(Gdx.files.internal("texture/Joystick.png"));
+        use = new Texture(Gdx.files.internal("texture/use.png"));
 /*
         mainmenu = Gdx.audio.newMusic(Gdx.files.internal("sounds/mainmenu.mp3"));
         ingame = Gdx.audio.newMusic(Gdx.files.internal("sounds/ingame.mp3"));
@@ -117,7 +117,7 @@ public class  Res {
         click[2] = Gdx.audio.newSound(Gdx.files.internal("sounds/click2.mp3"));
         wasted = Gdx.audio.newSound(Gdx.files.internal("sounds/wasted.mp3"));
         lov = Gdx.audio.newSound(Gdx.files.internal("sounds/lov.mp3"));
-        boards = new Sprite(new Texture(Gdx.files.internal("texture/Dark.png")),0,0,16,16);
+        boards = new Texture(Gdx.files.internal("texture/Dark.png"));
 
 
     }
@@ -182,8 +182,7 @@ public class  Res {
      * @return Return tile
      */
     public Sprite tile(int x,int y){
-        tile = new Sprite(tileset,x*16,y*16,16,16);
-        return tile;
+        return new Sprite(tileset,x*16,y*16,16,16);
     }
 
 
@@ -202,5 +201,19 @@ public class  Res {
         ui.dispose();
         tileset.dispose();
         logo.dispose();
+        bag.dispose();
+        boards.dispose();
+        damage.dispose();
+        dark.dispose();
+        firedhero.dispose();
+        joystick.dispose();
+        pause_dark.dispose();
+        hp_potion.dispose();
+        teleport.dispose();
+        torch.dispose();
+        amonghero.dispose();
+        sheld.dispose();
+        shotedhero.dispose();
+        use.dispose();
     }
 }

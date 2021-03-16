@@ -33,7 +33,16 @@ public class Arrow {
     }
     public  void render(SpriteBatch batch, Res res, Configuration config){
 
-        batch.draw(res.arrow,((x + 3) * 16 * config.getScale()) - player.get_wX(), ((y + 2) * 16 * config.getScale())-player.get_wY(),8 * config.getScale(), 8 * config.getScale(), 16 * config.getScale(), 16 * config.getScale(), 1, 1, angle);
+        batch.draw(res.arrow,
+                ((x + 3) * 16 * config.getScale()) - player.get_wX(),
+                ((y + 2) * 16 * config.getScale())-player.get_wY(),
+                8 * config.getScale(),
+                8 * config.getScale(),
+                16 * config.getScale(),
+                16 * config.getScale(),
+                1,
+                1,
+                angle);
 
 
     }

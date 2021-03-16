@@ -25,10 +25,13 @@ public class Stair {
         this.player = player;
         this.next_path = next_path;
         this.end = end;
+
     }
 
     public void render(SpriteBatch batch, Res res, Configuration config) {
-        res.nextlv.setFlip(flip_x, false);
+        if(res.nextlv.isFlipX()!=flip_x) {
+            res.nextlv.flip(flip_x, false);
+        }
         batch.draw(res.nextlv, -player.get_wX() + (x + 3) * 16 * config.getScale(), -player.get_wY() + (y + 2) * 16 * config.getScale(), 16 * config.getScale(), 16 * config.getScale());
     }
 

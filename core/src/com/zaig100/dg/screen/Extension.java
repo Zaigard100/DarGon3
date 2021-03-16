@@ -38,12 +38,20 @@ public class Extension implements Screen {
 
         f1 = new Font().gFont(8* Main.getConfiguration().getScale(),"fonts/GFont.ttf");
 
+        Gdx.input.setCatchBackKey(true);
+
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)||Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
+            m.setScreen(new GameScreen(m));
+            Gdx.input.setCatchBackKey(false);
+        }
+
         if(pM.getList().size()>0) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
                 num++;

@@ -72,7 +72,7 @@ public class Render3D implements Screen {
         }else {
             System.out.println( "Sucsessfull");
         }
-        Gdx.input.setCursorCatched(true);
+        Gdx.input.setCatchBackKey(true);
 
     }
 
@@ -106,14 +106,18 @@ public class Render3D implements Screen {
             if (!m.isAndroid()) {
                 mx += (((float) Gdx.input.getX() - w / 2) / w);
                 my += (((float) Gdx.input.getY() - h / 2) / h);
+
+                if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
+                    Gdx.input.setCursorCatched(false);
+                }else {
+                    Gdx.input.setCursorCatched(true);
+                    Gdx.input.setCursorPosition(w/2, h/2);
+                }
+
             }else{
                 if(Gdx.input.isTouched()){
-
-                    mx += Gdx.input.getX() - atx;
-                    my += Gdx.input.getY() - aty;
-
-                    atx = Gdx.input.getX();
-                    aty = Gdx.input.getY();
+                    mx += (Gdx.input.getDeltaX())*delta*0.5;
+                    my += (Gdx.input.getDeltaY())*delta*0.5;
                 }
             }
         }
@@ -146,12 +150,7 @@ public class Render3D implements Screen {
         posy = posy + diry;
         posz = posz + dirz;
 
-        if(Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
-            Gdx.input.setCursorCatched(false);
-        }else {
-            Gdx.input.setCursorCatched(true);
-            Gdx.input.setCursorPosition(w/2, h/2);
-        }
+
 
         if((posx == posx1)&&(posy == posy1)&&(posz == posz1)&&(mx == mx1)&&(my == my1)) {
             updata = false;
@@ -174,7 +173,11 @@ public class Render3D implements Screen {
         f1.draw(batch, String.valueOf(Gdx.graphics.getFramesPerSecond()), 10,h-20);
         batch.end();
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) System.exit(0);
+        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)||Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            m.setScreen(new GameScreen(m));
+            Gdx.input.setCursorCatched(false);
+            Gdx.input.setCatchBackKey(false);
+        }
     }
 
     @Override
