@@ -1,7 +1,6 @@
 package com.zaig100.dg.utils;
 
 
-import com.badlogic.gdx.Gdx;
 import com.zaig100.dg.Main;
 
 import org.json.simple.JSONObject;
@@ -13,7 +12,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class PackManager {
@@ -37,21 +35,24 @@ public class PackManager {
         if (!destory.exists()) {
             destory.mkdir();
         }
-        for (int i = 0; i < Objects.requireNonNull(destory.list()).length; i++) {
-            if (new File(destory, destory.list()[i]).isDirectory()) {
-                if (new File(destory, destory.list()[i]+"/pack.json").exists()) {
-                    try {
-                        try {
-                            list.add((JSONObject) parser.parse(new InputStreamReader(new FileInputStream(new File(destory, destory.list()[i] + "/pack.json")))));
-                        } catch (IOException e) {
-                            e.printStackTrace();
+        if (destory.list() != null) {
+            if (destory.list().length > 0) {
+                for (int i = 0; i < destory.list().length; i++) {
+                    if (new File(destory, destory.list()[i]).isDirectory()) {
+                        if (new File(destory, destory.list()[i] + "/pack.json").exists()) {
+                            try {
+                                try {
+                                    list.add((JSONObject) parser.parse(new InputStreamReader(new FileInputStream(new File(destory, destory.list()[i] + "/pack.json")))));
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    } catch (ParseException e) {
-                        e.printStackTrace();
                     }
                 }
             }
-
         }
 
     }

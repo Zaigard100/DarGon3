@@ -1,1 +1,7 @@
-{"Music":10,"Scale":6.0,"Sound":80,"Debug":false,"Sensor":true}
+{
+  "Music": 50,
+  "Scale": 6.0,
+  "Sound": 50,
+  "Debug": false,
+  "Sensor": true
+}

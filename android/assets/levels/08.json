@@ -26,30 +26,12 @@
     
   ],
 
-  "crossbow_count": 0,
-  "crossbow": [
-    [-1,2,1,0,180]
-  ],
-
-  "flamethrower_count":0,
-  "flamethrower": [
-    [0,0,0,0,0]
-  ],
-
-  "teleport_count": 0,
-  "teleport": [
-    [9,9]
-  ],
 
   "hide_traps_count":5,
   "hide_traps": [
     [4,9],[4,5],[4,1],[5,3],[5,7]
   ],
 
-  "items_count": 0,
-  "items": [
-    [0,0,0]
-  ],
 
   "end": false,
   "nextlevelpath": "levels/09.json",

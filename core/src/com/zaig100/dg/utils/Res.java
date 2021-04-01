@@ -1,7 +1,6 @@
 package com.zaig100.dg.utils;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -55,16 +54,20 @@ public class  Res {
 
     public Texture joystick;
     public Texture use;
-/*
-    public Music mainmenu;
-    public Music ingame;
-    public Music settingmisc;
-*/
+    /*
+        public Music mainmenu;
+        public Music ingame;
+        public Music settingmisc;
+    */
     public Sound[] click = new Sound[3];
     public Sound wasted;
     public Sound lov;
 
     public Texture boards;
+
+    public Texture clvl2;
+    public Texture clvl1;
+    public Texture clvl0;
 
     Sprite spr = null;
 
@@ -73,26 +76,26 @@ public class  Res {
     /**
      * Resource Loading
      */
-    public void sprL(){
+    public void sprL() {
 
 
-        play_button = new Sprite(ui,0,0,32,32);
-        play_button_toched = new Sprite(ui,32,0,32,32);
+        play_button = new Sprite(ui, 0, 0, 32, 32);
+        play_button_toched = new Sprite(ui, 32, 0, 32, 32);
 
-        tutorial_button = new Sprite(ui,0,32,21,21);
-        tutorial_button_toched = new Sprite(ui,21,32,21,21);
+        tutorial_button = new Sprite(ui, 0, 32, 21, 21);
+        tutorial_button_toched = new Sprite(ui, 21, 32, 21, 21);
 
-        settings_button = new Sprite(ui,42,32,21,21);
-        settings_button_toched = new Sprite(ui,63,32,21,21);
+        settings_button = new Sprite(ui, 42, 32, 21, 21);
+        settings_button_toched = new Sprite(ui, 63, 32, 21, 21);
 
         nextlv = new TextureRegion(new Texture(Gdx.files.internal("texture/nextlevel.png")));
-        logo =  new Texture(Gdx.files.internal("texture/logo.png"));
+        logo = new Texture(Gdx.files.internal("texture/logo.png"));
         dark = new Texture(Gdx.files.internal("texture/Dark.png"));
 
         bag = new Texture(Gdx.files.internal("texture/bag.png"));
-        hp_potion =new Texture(Gdx.files.internal("texture/hp_potion.png"));
-        sheld =new Texture(Gdx.files.internal("texture/sheld.png"));
-        torch =new Texture(Gdx.files.internal("texture/torch_spritesheet.png"));
+        hp_potion = new Texture(Gdx.files.internal("texture/hp_potion.png"));
+        sheld = new Texture(Gdx.files.internal("texture/sheld.png"));
+        torch = new Texture(Gdx.files.internal("texture/torch_spritesheet.png"));
 
         teleport =new Texture(Gdx.files.internal("texture/teleporter.png"));
         damage = new Texture(Gdx.files.internal("texture/Damage.png"));
@@ -119,6 +122,9 @@ public class  Res {
         lov = Gdx.audio.newSound(Gdx.files.internal("sounds/lov.mp3"));
         boards = new Texture(Gdx.files.internal("texture/Dark.png"));
 
+        clvl2 = new Texture(Gdx.files.internal("texture/2_clvl.png"));
+        clvl1 = new Texture(Gdx.files.internal("texture/1_clvl.png"));
+        clvl0 = new Texture(Gdx.files.internal("texture/0_clvl.png"));
 
     }
 

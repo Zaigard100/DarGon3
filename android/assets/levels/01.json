@@ -26,32 +26,6 @@
 
   ],
 
-  "crossbow_count": 0,
-  "crossbow": [
-    [0,0,0]
-  ],
-
-  "flamethrower_count":0,
-  "flamethrower": [
-    [20,20,0,0,0]
-  ],
-
-  "teleport_count": 0,
-  "teleport": [
-    [11,11,11,11]
-  ],
-
-
-  "hide_traps_count":0,
-  "hide_traps": [
-    [11,11]
-  ],
-
-  "items_count": 0,
-  "items": [
-    [9,2,0]
-  ],
-
   "end": false,
   "nextlevelpath": "levels/02.json",
 

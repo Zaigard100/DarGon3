@@ -5,19 +5,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.zaig100.dg.Main;
 import com.zaig100.dg.utils.Font;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import javax.crypto.Cipher;
 
 
 public class Setting implements Screen {
@@ -33,7 +26,7 @@ public class Setting implements Screen {
     SpriteBatch batch;
 
     String[] line = new String[5];
-
+    Font font;
     BitmapFont f1;
 
     int num = 0;
@@ -57,10 +50,8 @@ public class Setting implements Screen {
         batch = new SpriteBatch();
 
         cam = new OrthographicCamera();
-        cam.translate(scrW/2, scrW/2, 0);
+        cam.translate(scrW / 2, scrW / 2, 0);
         viewport = new ScreenViewport(cam);
-
-        
 
 
         Scale = Main.getConfiguration().getScale();
@@ -69,7 +60,8 @@ public class Setting implements Screen {
         Sensor = Main.getConfiguration().isSensor();
         Debug = Main.getConfiguration().isDebug();
 
-        f1 = new Font().gFont(8* Main.getConfiguration().getScale(),"fonts/GFont.ttf");
+        font = new Font();
+        f1 = font.gFont(8 * Main.getConfiguration().getScale(), "fonts/GFont.ttf");
 
     }
 
@@ -269,6 +261,7 @@ public class Setting implements Screen {
     @Override
     public void dispose() {
         f1.dispose();
+        font.dispose();
         batch.dispose();
     }
 }

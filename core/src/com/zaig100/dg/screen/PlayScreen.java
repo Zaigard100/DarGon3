@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.zaig100.dg.Main;
 import com.zaig100.dg.objects.Crossbow;
 import com.zaig100.dg.objects.Flamefrower;
+import com.zaig100.dg.objects.FlimsyTile;
 import com.zaig100.dg.objects.HideTrap;
 import com.zaig100.dg.objects.Item;
 import com.zaig100.dg.objects.Map;
@@ -26,10 +27,8 @@ import com.zaig100.dg.objects.Teleport;
 import com.zaig100.dg.utils.Font;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.LevelReader;
-import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.Save;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Random;
@@ -63,6 +62,7 @@ public class PlayScreen implements Screen {
     static Flamefrower[] flame;
     Crossbow[] crossbow;
     Item[] item;
+    FlimsyTile[] flimsyTiles;
     
     static Joystick joystick;
 
@@ -177,23 +177,30 @@ public class PlayScreen implements Screen {
 
         }
 
-        if(lR.getItemsCount()>0){
+        if (lR.getItemsCount() > 0) {
             item = new Item[lR.getItemsCount()];
-            for(i =0;i<lR.getItemsCount();i++){
-                item[i] = new Item(lR.getItems()[0][i],lR.getItems()[1][i],lR.getItems()[2][i],player);
+            for (i = 0; i < lR.getItemsCount(); i++) {
+                item[i] = new Item(lR.getItems()[0][i], lR.getItems()[1][i], lR.getItems()[2][i], player);
+            }
+        }
+
+        if (lR.getFlimstTileCount() > 0) {
+            flimsyTiles = new FlimsyTile[lR.getFlimstTileCount()];
+            for (i = 0; i < lR.getFlimstTileCount(); i++) {
+                flimsyTiles[i] = new FlimsyTile(lR.getFlimsyTile()[0][i], lR.getFlimsyTile()[1][i], player);
             }
         }
         //Main.getRes().sprL();
 
-        cam.position.set(new Vector3(width/2,height/2,0));
+        cam.position.set(new Vector3(width / 2, height / 2, 0));
 
         try {
-            if(isPack){
-                save = new Save(m, packname,path);
-            }else {
-                save = new Save(m, "",path);
+            if (isPack) {
+                save = new Save(m, packname, path);
+            } else {
+                save = new Save(m, "", path);
             }
-            if(lR.isSave()){
+            if (lR.isSave()) {
                 save.setHp(player.getHp());
                 save.setPath(path);
                 save.setPotion(player.getPotion());
@@ -243,59 +250,69 @@ public class PlayScreen implements Screen {
                         if(!is_pause) hideTrap[i].frame(Main.getRes());
                     }
                 }
-                player.render(batch, Main.getRes());
-                if(lR.getFlamethrowerCount()>0) {
-                    for (i = 0; i < lR.getFlamethrowerCount(); i++) {
-                        if(!is_pause) flame[i].frame();
-                        flame[i].render(batch, Main.getRes(),Main.getConfiguration());
-                        if(!is_pause)  flame[i].tick(1.5f);
-                        if(!is_pause) flame[i].tick1(0.1f);
-                    }
-                }
-                if(lR.getCrossbowCount()>0) {
-                   for (i = 0; i < lR.getCrossbowCount(); i++) {
-                       if(!is_pause) crossbow[i].frame();
-                       crossbow[i].render(batch, Main.getRes(),Main.getConfiguration());
-                       if(!is_pause) crossbow[i].tick(1f);
-                   }
-                }
-
-                if(lR.getItemsCount()>0) {
-                    for (i = 0; i < lR.getItemsCount(); i++) {
-                        if(!is_pause) item[i].frame();
-                        item[i].render(batch, Main.getRes(),Main.getConfiguration());
-                    }
-                }
-
-                map.dark_render(batch, Main.getRes(),Main.getConfiguration());
-            if(!is_pause) {
-                player.render_bag(batch, Main.getRes(),f4,joystick);
-                if(start) f2.draw(batch,lR.getLevelName(),8*Main.getConfiguration().getScale(),4.5f*16*Main.getConfiguration().getScale());
+        player.render(batch, Main.getRes());
+        if (lR.getFlamethrowerCount() > 0) {
+            for (i = 0; i < lR.getFlamethrowerCount(); i++) {
+                if (!is_pause) flame[i].frame();
+                flame[i].render(batch, Main.getRes(), Main.getConfiguration());
+                if (!is_pause) flame[i].tick(1.5f);
+                if (!is_pause) flame[i].tick1(0.1f);
             }
-                if(player.getHp() <=0 && !is_pause ){
-                    if(fir1) Main.getRes().wasted.play(2.0f);
-                    fir1 = false;
-                    f1.draw(batch,"Wasted",2*16*Main.getConfiguration().getScale(),4.5f*16*Main.getConfiguration().getScale());
-                    f2.draw(batch,"Press Space",2*16*Main.getConfiguration().getScale(),0.5f*16*Main.getConfiguration().getScale());
-                    if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)||joystick.isUse()){
-                        m.setScreen(new GameScreen(m));
+        }
+        if (lR.getCrossbowCount() > 0) {
+            for (i = 0; i < lR.getCrossbowCount(); i++) {
+                if (!is_pause) crossbow[i].frame();
+                crossbow[i].render(batch, Main.getRes(), Main.getConfiguration());
+                if (!is_pause) crossbow[i].tick(1f);
+            }
+        }
 
-                    }
-                }
-                if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-                    is_pause = !is_pause;
-                }
-                if (Gdx.input.isKeyJustPressed(Input.Keys.F3)) {
-                    debag = !debag;
-                }
-                if(is_pause){
-                    batch.draw(Main.getRes().pause_dark,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-                    f1.draw(batch,"Pause",2.2f*16*Main.getConfiguration().getScale(),4.5f*16*Main.getConfiguration().getScale());
-                    pauseMenu();
+        if (lR.getItemsCount() > 0) {
+            for (i = 0; i < lR.getItemsCount(); i++) {
+                if (!is_pause) item[i].frame();
+                item[i].render(batch, Main.getRes(), Main.getConfiguration());
+            }
+        }
 
-                }
-                joystick.render(batch, Main.getRes());
-                if(debag) debugShow();
+        if (lR.getFlimstTileCount() > 0) {
+            for (i = 0; i < lR.getFlimstTileCount(); i++) {
+                if (!is_pause) flimsyTiles[i].frame();
+                if (!is_pause) flimsyTiles[i].tick(1.5f);
+
+                flimsyTiles[i].render(batch, Main.getRes(), Main.getConfiguration());
+            }
+        }
+
+        map.dark_render(batch, Main.getRes(), Main.getConfiguration());
+        if (!is_pause) {
+            player.render_bag(batch, Main.getRes(), f4, joystick);
+            if (start)
+                f2.draw(batch, lR.getLevelName(), 8 * Main.getConfiguration().getScale(), 4.5f * 16 * Main.getConfiguration().getScale());
+        }
+        if (player.getHp() <= 0 && !is_pause) {
+            if (fir1) Main.getRes().wasted.play(2.0f);
+            fir1 = false;
+            f1.draw(batch, "Wasted", 2 * 16 * Main.getConfiguration().getScale(), 4.5f * 16 * Main.getConfiguration().getScale());
+            f2.draw(batch, "Press Space", 2 * 16 * Main.getConfiguration().getScale(), 0.5f * 16 * Main.getConfiguration().getScale());
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || joystick.isUse()) {
+                m.setScreen(new GameScreen(m));
+
+            }
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            is_pause = !is_pause;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F3)) {
+            debag = !debag;
+        }
+        if (is_pause) {
+            batch.draw(Main.getRes().pause_dark, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            f1.draw(batch, "Pause", 2.2f * 16 * Main.getConfiguration().getScale(), 4.5f * 16 * Main.getConfiguration().getScale());
+            pauseMenu();
+
+        }
+        joystick.render(batch, Main.getRes());
+        if (debag) debugShow();
             batch.end();
         fbo.end();
         if(player.getX()!=lR.getSpawn()[0]||player.getY()!=lR.getSpawn()[1]) start = false;
@@ -454,6 +471,6 @@ public class PlayScreen implements Screen {
         f2.dispose();
         f3.dispose();
         f4.dispose();
-
+        font.dispose();
     }
 }

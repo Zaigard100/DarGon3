@@ -39,23 +39,10 @@
     [5,5,0,2,2],
     [5,5,0,2,3]
   ],
-
-  "teleport_count": 0,
-  "teleport": [
-    [9,10,0,10]
-  ],
-
   "hide_traps_count":2,
   "hide_traps": [
     [3,7],[3,2]
   ],
-  
-  "items_count":0,
-  "items":[
-    [1,11,0]
-  ],
-
-
   "end": true,
   "nextlevelpath": "end",
 

@@ -5,21 +5,18 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.Main;
 import com.zaig100.dg.objects.Player;
 import com.zaig100.dg.utils.Font;
 import com.zaig100.dg.utils.PackManager;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
 public class Extension implements Screen {
 
     Main m;
     PackManager pM;
 
+    Font font;
     BitmapFont f1;
 
     SpriteBatch batch = new SpriteBatch();
@@ -33,10 +30,11 @@ public class Extension implements Screen {
     @Override
     public void show() {
 
+        font = new Font();
 
         pM = new PackManager(m.isAndroid(),m);
 
-        f1 = new Font().gFont(8* Main.getConfiguration().getScale(),"fonts/GFont.ttf");
+        f1 = font.gFont(8 * Main.getConfiguration().getScale(), "fonts/GFont.ttf");
 
         Gdx.input.setCatchBackKey(true);
 
@@ -123,5 +121,6 @@ public class Extension implements Screen {
     public void dispose() {
         batch.dispose();
         f1.dispose();
+        font.dispose();
     }
 }

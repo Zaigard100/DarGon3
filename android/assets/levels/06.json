@@ -32,10 +32,6 @@
     [7,-1,0,1,270]
   ],
 
-  "flamethrower_count":0,
-  "flamethrower": [
-    [0,0,0,0,0]
-  ],
 
   "teleport_count": 1,
   "teleport": [

@@ -11,14 +11,12 @@ public class Map {
     int mapWidht,mapHeight;
     boolean isDark;
     int[][] map;
-    int[] win;
     int j;int i;
 
     public Map(int mapWidht , int mapHeight, int[][] map, boolean isDark){
         this.mapWidht = mapWidht;
         this.mapHeight = mapHeight;
         this.map = map;
-        this.win =win;
         this.isDark = isDark;
 
     }
@@ -85,14 +83,11 @@ public class Map {
     }
 
 
+    //public boolean isDark() { return isDark;}
 
-    public boolean isDark() {
-        return isDark;
-    }
 
-    public Map setDark(boolean dark) {
+    public void setDark(boolean dark) {
         isDark = dark;
-        return this;
     }
 
 }

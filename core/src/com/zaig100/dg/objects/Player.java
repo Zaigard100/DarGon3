@@ -8,80 +8,80 @@ import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
 
-import java.io.FileNotFoundException;
 import java.util.Random;
 
 public class Player {
 
-    int x;
-    int y;
-    int oldX;
-    int oldY;
-    int wX;
-    int wY;
-    int hp;
-    int potion;
-    int sheld;
-    int torch;
-    int stage=0;
-    float timer = 0,timer1 = 0;
-    boolean walked = false,walked_anim = false,flip = false,bag_opened=false;
-    int sx,sy;
-    int wasted_id = 0;
+    static int x;
+    static int y;
+    static int oldX;
+    static int oldY;
+    static int wX;
+    static int wY;
+    static int hp;
+    static int potion;
+    static int sheld;
+    static int torch;
+    static int stage = 0;
+    float timer = 0;
+    static boolean walked = false, walked_anim = false, flip = false, bag_opened = false;
+    static int sx, sy;
+    static int wasted_id = 0;
 
-    boolean[] slots = new boolean[3];
-    boolean isSheld= false;
+    static boolean[] slots = new boolean[3];
+    static boolean isSheld = false;
 
-    Configuration config;
-    Random random = new Random();
+    static Configuration config;
+    static Random random = new Random();
 
-    Map map;
-    float damgeScr=100;
-    private int getYP;
+    static Map map;
+    static float damgeScr = 100;
+    static private int getYP;
 
 
-    public Player(int x, int y, Map map, Configuration config){
-        this.x = x;
-        this.y = y;
-        this.oldX = x;
-        this.oldY = y;
-        this.wX = (int) (x * 16 * config.getScale());
-        this.wY = (int) (y * 16 * config.getScale());
-        this.hp = 4;
-        this.potion = 3;
-        this.sheld = 2;
-        this.torch = 1;
-        this.map =map;
-        this.config = config;
-    }
-    public Player(int x,int y,Map map,int hp,int potion,int sheld,int torch, Configuration config){
-        this.x = x;
-        this.y = y;
-        this.oldX = x;
-        this.oldY = y;
-        this.wX = x * 16 * (int)config.getScale();
-        this.wY = y * 16 * (int)config.getScale();
-        this.map =map;
-        this.potion =potion;
-        this.sheld = sheld;
-        this.torch = torch;
-        this.hp = hp;
-        this.config = config;
-
+    public Player(int x, int y, Map map, Configuration config) {
+        Player.x = x;
+        Player.y = y;
+        oldX = x;
+        oldY = y;
+        wX = (int) (x * 16 * config.getScale());
+        wY = (int) (y * 16 * config.getScale());
+        hp = 4;
+        Player.potion = 3;
+        Player.sheld = 2;
+        Player.torch = 1;
+        Player.map = map;
+        Player.config = config;
     }
 
-    public void render(SpriteBatch batch, Res res){
-        if(getHp()> 0) {
+    public Player(int x, int y, Map map, int hp, int potion, int sheld, int torch, Configuration config) {
+        Player.x = x;
+        Player.y = y;
+        oldX = x;
+        oldY = y;
+        wX = x * 16 * (int) config.getScale();
+        wY = y * 16 * (int) config.getScale();
+        Player.map = map;
+        Player.potion = potion;
+        Player.sheld = sheld;
+        Player.torch = torch;
+        Player.hp = hp;
+        Player.config = config;
+
+    }
+
+    public void render(SpriteBatch batch, Res res) {
+        if (getHp() > 0) {
             batch.draw(res.hero(flip, walked_anim, stage), 16 * config.getScale() * 3, 16 * config.getScale() * 2, 16 * config.getScale(), 16 * config.getScale());
-            if(isSheld) {
+            if (isSheld) {
                 if (flip) {
                     batch.draw(res.sheld, 16 * config.getScale() * 3.25f, 16 * config.getScale() * 2, 16 * config.getScale() * 0.75f, 16 * config.getScale() * 0.75f);
                 } else {
                     batch.draw(res.sheld, 16 * config.getScale() * 3, 16 * config.getScale() * 2, 16 * config.getScale() * 0.75f, 16 * config.getScale() * 0.75f);
                 }
             }
-            }else{
-            if(wasted_id==0){
+        } else {
+            if (wasted_id == 0) {
                 batch.draw(res.hero(flip, walked_anim, stage), 16 * config.getScale() * 3, 16 * config.getScale() * 2, 16 * config.getScale(), 16 * config.getScale());
             }
             if(wasted_id==1){
@@ -93,6 +93,7 @@ public class Player {
             if(wasted_id==3){
                 batch.draw(res.shotedhero, 16 * config.getScale() * 3, 16 * config.getScale() * 2, 16 * config.getScale(), 16 * config.getScale());
             }
+            //wasted_id == 4: Texture = null!!
         }
         if(damgeScr<0.5f){
             batch.draw(res.damage,0,0,112*config.getScale(),80*config.getScale());
@@ -270,24 +271,24 @@ public class Player {
         return map;
     }
 
-    public float getDamgeScr() {
-        return damgeScr;
-    }
+    //public float getDamgeScr() { return damgeScr; }
 
     public void setDamgeScr(float damgeScr, int id) {
-        this.damgeScr = damgeScr;
-        this.wasted_id = id;
+        Player.damgeScr = damgeScr;
+        wasted_id = id;
     }
 
-    public void setMap(Map map){
-        this.map = map;
+    public void setMap(Map map) {
+        Player.map = map;
     }
 
     public int getX() {
         return x;
     }
 
-    public void setX(int x){this.x= x;}
+    public void setX(int x) {
+        Player.x = x;
+    }
 
     public int getY() {
         return y;
@@ -301,7 +302,9 @@ public class Player {
 
     }
 
-    public void setY(int y){this.y= y;}
+    public void setY(int y) {
+        Player.y = y;
+    }
 
     public int get_wX() {
         return wX;
@@ -312,7 +315,7 @@ public class Player {
     }
 
     public void setHp(int hp) {
-        this.hp = hp;
+        Player.hp = hp;
     }
 
     public int getHp() {
@@ -323,21 +326,21 @@ public class Player {
         return  potion;
     }
     public  void setPotion(int potion){
-        this.potion=potion;
+        Player.potion = potion;
     }
 
     public int getSheld() {
         return sheld;
     }
     public  void setSheld(int sheld){
-        this.sheld=sheld;
+        Player.sheld = sheld;
     }
 
     public int getTorch() {
         return torch;
     }
     public void setTorch(int torch) {
-        this.torch = torch;
+        Player.torch = torch;
     }
 
 
@@ -346,9 +349,8 @@ public class Player {
         return isSheld;
     }
 
-    public Player setIsSheld(boolean sheld) {
+    public void setIsSheld(boolean sheld) {
         isSheld = sheld;
-        return this;
     }
 
 }

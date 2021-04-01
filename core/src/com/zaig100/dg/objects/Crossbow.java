@@ -1,6 +1,5 @@
 package com.zaig100.dg.objects;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
@@ -10,7 +9,7 @@ public class Crossbow {
     int x,y,arr_dx,arr_dy, angle;
     float timer=0;
     Arrow arr;
-    Player player;
+    static Player player;
     public Crossbow(int x,int y, int arr_dx,int arr_dy,int angel,Player player){
 
         this.x = x;
@@ -35,11 +34,6 @@ public class Crossbow {
 
     public void tick(float second){
         arr.tick(second);
-        timer+= Gdx.graphics.getDeltaTime();
-        if(timer>second) {
-
-            timer =0;
-        }
     }
 
 }

@@ -10,7 +10,7 @@ import com.zaig100.dg.utils.Res;
 public class Teleport {
     int x,y,tx,ty;
     boolean hide;
-    Player player;
+    static Player player;
 
     public  Teleport(int x,int y,int tx,int ty,Player player){
         this.x = x;

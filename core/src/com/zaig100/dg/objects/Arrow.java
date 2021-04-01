@@ -17,7 +17,7 @@ public class Arrow {
     float timer =0;
 
     Map map;
-    Player player;
+    static Player player;
     public Arrow(int crossbow_x,int crossbow_y,int dx, int dy,int angle,Player player){
 
         x = crossbow_x + dx;
