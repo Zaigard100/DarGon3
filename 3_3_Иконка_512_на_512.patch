@@ -1,0 +1,2073 @@
+Index: android/res/drawable-anydpi-v26/ic_launcher.xml
+===================================================================
+--- android/res/drawable-anydpi-v26/ic_launcher.xml	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/res/drawable-anydpi-v26/ic_launcher.xml	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
+@@ -1,6 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<adaptive-icon
+-        xmlns:android="http://schemas.android.com/apk/res/android">
+-    <background android:drawable="@color/ic_background_color"/>
+-    <foreground android:drawable="@drawable/ic_launcher_foreground"/>
+-</adaptive-icon>
+Index: android/res/drawable-anydpi-v26/ic_launcher_foreground.xml
+===================================================================
+--- android/res/drawable-anydpi-v26/ic_launcher_foreground.xml	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/res/drawable-anydpi-v26/ic_launcher_foreground.xml	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
+@@ -1,40 +0,0 @@
+-<vector xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:width="108dp"
+-    android:height="108dp"
+-    android:viewportWidth="108"
+-    android:viewportHeight="108">
+-  <path
+-      android:pathData="M22,48.667l2.987,0l0,10.667l-2.987,0z"
+-      android:fillColor="#000000"
+-      android:strokeColor="#00000000"
+-      android:fillAlpha="1"/>
+-  <path
+-      android:pathData="M26.907,52.72l2.987,0l0,6.613l-2.987,0z"
+-      android:fillColor="#000000"
+-      android:strokeColor="#00000000"
+-      android:fillAlpha="1"/>
+-  <path
+-      android:pathData="M26.907,48.667l2.987,0l0,2.56l-2.987,0z"
+-      android:fillColor="#000000"
+-      android:strokeColor="#00000000"
+-      android:fillAlpha="1"/>
+-  <path
+-      android:pathData="M31.813,48.667L31.813,52.72 31.813,55.067 31.813,56.767 31.813,59.333l2.992,0 2.117,0c1.654,0 2.998,-1.481 2.998,-3.307 0,-1.826 -1.344,-3.307 -2.998,-3.307l-2.117,0L34.805,48.667ZM34.805,55.067l1.269,0c0.469,0 0.848,0.384 0.848,0.853 0,0.469 -0.379,0.847 -0.848,0.847l-1.269,0z"
+-      android:fillColor="#000000"
+-      android:strokeColor="#00000000"
+-      android:fillAlpha="1"/>
+-  <path
+-      android:pathData="m44.192,48.667c-1.65,0 -2.992,1.481 -2.992,3.307 0,0.023 -0,0.044 0,0.067 0,0.004 -0,0.009 0,0.013l0,3.893c-0.001,0.027 0,0.053 0,0.08 0,1.826 1.341,3.307 2.992,3.307l2.112,0 0.247,0 2.739,0 0.247,0 2.112,0c1.651,0 2.992,-1.481 2.992,-3.307 0,-1.826 -1.341,-3.307 -2.992,-3.307l-1.199,0 -0.48,0 -2.372,0l0,2.347l2.372,0 0.48,0 0.353,0c0.468,0 0.846,0.384 0.846,0.853 0,0.469 -0.378,0.847 -0.846,0.847l-0.833,0 -0.433,0 -0.247,0 -2.739,0 -0.247,0 -0.433,0 -0.833,0c-0.459,0 -0.832,-0.363 -0.846,-0.82l0,-3.893 0,-0.013c0.021,-0.45 0.391,-0.807 0.846,-0.807l0.833,0 0.433,0 1.293,0l0,0.007L54.207,51.24L54.207,48.667l-4.917,0 -1.692,0 -1.293,0 -2.112,0z"
+-      android:fillColor="#e74a45"
+-      android:strokeColor="#00000000"
+-      android:fillAlpha="1"/>
+-  <path
+-      android:pathData="M56.133,48.667L56.133,51.238l5.406,0 1.859,0 1.105,0 0.43,0 0.827,0c0.452,0 0.82,0.356 0.84,0.806l0,0.013 0,3.891c-0.014,0.456 -0.384,0.819 -0.84,0.819l-0.827,0 -0.43,0 -1.899,0 -1.065,0 -2.442,0L59.098,52.724L56.133,52.724l0,4.044 0,1.752 0,0.813l5.406,0 1.065,0 1.899,0 2.098,0c1.639,0 2.971,-1.48 2.971,-3.305 0,-0.027 0.001,-0.053 0,-0.08L69.573,52.058c0,-0.004 -0,-0.009 0,-0.013 0,-0.022 0,-0.044 0,-0.067 0,-1.825 -1.332,-3.305 -2.971,-3.305l-2.098,0 -1.105,0l0,-0.007L56.133,48.667Z"
+-      android:fillColor="#e74a45"
+-      android:strokeColor="#00000000"
+-      android:fillAlpha="1"/>
+-  <path
+-      android:pathData="M69.572,48.667L73.72,48.667L77.787,52.733 81.853,48.667l4.147,0l-5.333,5.333 5.333,5.333L81.853,59.333L77.787,55.267 73.72,59.333l-4.147,0l5.333,-5.333z"
+-      android:fillColor="#e74a45"
+-      android:strokeColor="#00000000"/>
+-</vector>
+Index: core/src/com/zaig100/dg/objects/Player.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- core/src/com/zaig100/dg/objects/Player.java	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ core/src/com/zaig100/dg/objects/Player.java	(date 1617296569316)
+@@ -8,65 +8,64 @@
+ import com.zaig100.dg.utils.Joystick;
+ import com.zaig100.dg.utils.Res;
+ 
+-import java.io.FileNotFoundException;
+ import java.util.Random;
+ 
+ public class Player {
+ 
+-    int x;
+-    int y;
+-    int oldX;
+-    int oldY;
+-    int wX;
+-    int wY;
+-    int hp;
+-    int potion;
+-    int sheld;
+-    int torch;
+-    int stage=0;
+-    float timer = 0,timer1 = 0;
+-    boolean walked = false,walked_anim = false,flip = false,bag_opened=false;
+-    int sx,sy;
+-    int wasted_id = 0;
++    static int x;
++    static int y;
++    static int oldX;
++    static int oldY;
++    static int wX;
++    static int wY;
++    static int hp;
++    static int potion;
++    static int sheld;
++    static int torch;
++    static int stage = 0;
++    float timer = 0;
++    static boolean walked = false, walked_anim = false, flip = false, bag_opened = false;
++    static int sx, sy;
++    static int wasted_id = 0;
+ 
+-    boolean[] slots = new boolean[3];
+-    boolean isSheld= false;
++    static boolean[] slots = new boolean[3];
++    static boolean isSheld = false;
+ 
+-    Configuration config;
+-    Random random = new Random();
++    static Configuration config;
++    static Random random = new Random();
+ 
+-    Map map;
+-    float damgeScr=100;
+-    private int getYP;
++    static Map map;
++    static float damgeScr = 100;
++    static private int getYP;
+ 
+ 
+-    public Player(int x, int y, Map map, Configuration config){
+-        this.x = x;
+-        this.y = y;
+-        this.oldX = x;
+-        this.oldY = y;
+-        this.wX = (int) (x * 16 * config.getScale());
+-        this.wY = (int) (y * 16 * config.getScale());
+-        this.hp = 4;
+-        this.potion = 3;
+-        this.sheld = 2;
+-        this.torch = 1;
+-        this.map =map;
+-        this.config = config;
++    public Player(int x, int y, Map map, Configuration config) {
++        Player.x = x;
++        Player.y = y;
++        oldX = x;
++        oldY = y;
++        wX = (int) (x * 16 * config.getScale());
++        wY = (int) (y * 16 * config.getScale());
++        hp = 4;
++        Player.potion = 3;
++        Player.sheld = 2;
++        Player.torch = 1;
++        Player.map = map;
++        Player.config = config;
+     }
+-    public Player(int x,int y,Map map,int hp,int potion,int sheld,int torch, Configuration config){
+-        this.x = x;
+-        this.y = y;
+-        this.oldX = x;
+-        this.oldY = y;
+-        this.wX = x * 16 * (int)config.getScale();
+-        this.wY = y * 16 * (int)config.getScale();
+-        this.map =map;
+-        this.potion =potion;
+-        this.sheld = sheld;
+-        this.torch = torch;
+-        this.hp = hp;
+-        this.config = config;
++    public Player(int x,int y,Map map,int hp,int potion,int sheld,int torch, Configuration config) {
++        Player.x = x;
++        Player.y = y;
++        oldX = x;
++        oldY = y;
++        wX = x * 16 * (int) config.getScale();
++        wY = y * 16 * (int) config.getScale();
++        Player.map = map;
++        Player.potion = potion;
++        Player.sheld = sheld;
++        Player.torch = torch;
++        Player.hp = hp;
++        Player.config = config;
+ 
+     }
+ 
+@@ -93,6 +92,7 @@
+             if(wasted_id==3){
+                 batch.draw(res.shotedhero, 16 * config.getScale() * 3, 16 * config.getScale() * 2, 16 * config.getScale(), 16 * config.getScale());
+             }
++            //wasted_id == 4: Texture = null!!
+         }
+         if(damgeScr<0.5f){
+             batch.draw(res.damage,0,0,112*config.getScale(),80*config.getScale());
+@@ -270,24 +270,24 @@
+         return map;
+     }
+ 
+-    public float getDamgeScr() {
+-        return damgeScr;
+-    }
++    //public float getDamgeScr() { return damgeScr; }
+ 
+     public void setDamgeScr(float damgeScr, int id) {
+-        this.damgeScr = damgeScr;
+-        this.wasted_id = id;
++        Player.damgeScr = damgeScr;
++        wasted_id = id;
+     }
+ 
+-    public void setMap(Map map){
+-        this.map = map;
++    public void setMap(Map map) {
++        Player.map = map;
+     }
+ 
+     public int getX() {
+         return x;
+     }
+ 
+-    public void setX(int x){this.x= x;}
++    public void setX(int x) {
++        Player.x = x;
++    }
+ 
+     public int getY() {
+         return y;
+@@ -301,7 +301,9 @@
+ 
+     }
+ 
+-    public void setY(int y){this.y= y;}
++    public void setY(int y) {
++        Player.y = y;
++    }
+ 
+     public int get_wX() {
+         return wX;
+@@ -312,7 +314,7 @@
+     }
+ 
+     public void setHp(int hp) {
+-        this.hp = hp;
++        Player.hp = hp;
+     }
+ 
+     public int getHp() {
+@@ -323,21 +325,21 @@
+         return  potion;
+     }
+     public  void setPotion(int potion){
+-        this.potion=potion;
++        Player.potion = potion;
+     }
+ 
+     public int getSheld() {
+         return sheld;
+     }
+     public  void setSheld(int sheld){
+-        this.sheld=sheld;
++        Player.sheld = sheld;
+     }
+ 
+     public int getTorch() {
+         return torch;
+     }
+     public void setTorch(int torch) {
+-        this.torch = torch;
++        Player.torch = torch;
+     }
+ 
+ 
+@@ -346,9 +348,8 @@
+         return isSheld;
+     }
+ 
+-    public Player setIsSheld(boolean sheld) {
++    public void setIsSheld(boolean sheld) {
+         isSheld = sheld;
+-        return this;
+     }
+ 
+ }
+Index: core/src/com/zaig100/dg/objects/Crossbow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- core/src/com/zaig100/dg/objects/Crossbow.java	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ core/src/com/zaig100/dg/objects/Crossbow.java	(date 1616087974144)
+@@ -1,6 +1,5 @@
+ package com.zaig100.dg.objects;
+ 
+-import com.badlogic.gdx.Gdx;
+ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+ import com.zaig100.dg.utils.Configuration;
+ import com.zaig100.dg.utils.Res;
+@@ -10,7 +9,7 @@
+     int x,y,arr_dx,arr_dy, angle;
+     float timer=0;
+     Arrow arr;
+-    Player player;
++    static Player player;
+     public Crossbow(int x,int y, int arr_dx,int arr_dy,int angel,Player player){
+ 
+         this.x = x;
+@@ -35,11 +34,6 @@
+ 
+     public void tick(float second){
+         arr.tick(second);
+-        timer+= Gdx.graphics.getDeltaTime();
+-        if(timer>second) {
+-
+-            timer =0;
+-        }
+     }
+ 
+ }
+Index: core/src/com/zaig100/dg/objects/Map.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- core/src/com/zaig100/dg/objects/Map.java	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ core/src/com/zaig100/dg/objects/Map.java	(date 1617296569564)
+@@ -11,14 +11,12 @@
+     int mapWidht,mapHeight;
+     boolean isDark;
+     int[][] map;
+-    int[] win;
+     int j;int i;
+ 
+     public Map(int mapWidht , int mapHeight, int[][] map, boolean isDark){
+         this.mapWidht = mapWidht;
+         this.mapHeight = mapHeight;
+         this.map = map;
+-        this.win =win;
+         this.isDark = isDark;
+ 
+     }
+@@ -85,14 +83,11 @@
+     }
+ 
+ 
++    //public boolean isDark() { return isDark;}
+ 
+-    public boolean isDark() {
+-        return isDark;
+-    }
+ 
+-    public Map setDark(boolean dark) {
++    public void setDark(boolean dark) {
+         isDark = dark;
+-        return this;
+     }
+ 
+ }
+Index: core/src/com/zaig100/dg/objects/Teleport.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- core/src/com/zaig100/dg/objects/Teleport.java	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ core/src/com/zaig100/dg/objects/Teleport.java	(date 1616087974196)
+@@ -10,7 +10,7 @@
+ public class Teleport {
+     int x,y,tx,ty;
+     boolean hide;
+-    Player player;
++    static Player player;
+ 
+     public  Teleport(int x,int y,int tx,int ty,Player player){
+         this.x = x;
+Index: core/src/com/zaig100/dg/objects/Flamefrower.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- core/src/com/zaig100/dg/objects/Flamefrower.java	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ core/src/com/zaig100/dg/objects/Flamefrower.java	(date 1617296569611)
+@@ -8,9 +8,10 @@
+ public class Flamefrower {
+ 
+     int x, y, max, angle, stage;
+-    int flame_stage,anim_stage=0;
++    int flame_stage, anim_stage = 0;
+     float timer = 0, fire_timer = 0;
+-    Player player;
++    static Player player;
++    int dx, dy;
+ 
+     public Flamefrower(int x, int y, int max, int angle, Player player) {
+         this.x = x;
+@@ -19,6 +20,18 @@
+         this.max = max;
+         this.angle = angle;
+         this.player = player;
++        if (angle == 0) {
++            dx = 1;
++        }
++        if (angle == 1) {
++            dy = 1;
++        }
++        if (angle == 2) {
++            dx = -1;
++        }
++        if (angle == 3) {
++            dy = -1;
++        }
+     }
+ 
+     public Flamefrower(int x, int y, int stage, int max, int angle, Player player) {
+@@ -28,13 +41,6 @@
+         this.max = max;
+         this.angle = angle;
+         this.player = player;
+-    }
+-
+-    public void render(SpriteBatch batch, Res res, Configuration config) {
+-        batch.draw(res.flamethrowfer, (x + 3) * 16 * config.getScale() - player.get_wX(), (y + 2) * 16 * config.getScale() - player.get_wY(), 8 * config.getScale(), 8 * config.getScale(), 16 * config.getScale(), 16 * config.getScale(), 1, 1, 90 * angle);
+-        int dx, dy;
+-        dx = 0;
+-        dy = 0;
+         if (angle == 0) {
+             dx = 1;
+         }
+@@ -47,58 +53,29 @@
+         if (angle == 3) {
+             dy = -1;
+         }
++    }
++
++    public void render(SpriteBatch batch, Res res, Configuration config) {
++        batch.draw(res.flamethrowfer, (x + 3) * 16 * config.getScale() - player.get_wX(), (y + 2) * 16 * config.getScale() - player.get_wY(), 8 * config.getScale(), 8 * config.getScale(), 16 * config.getScale(), 16 * config.getScale(), 1, 1, 90 * angle);
++
+         flame_stage = 0;
+         while (flame_stage < stage) {
+ 
+ 
+             batch.draw(res.fire(anim_stage), ((x + dx * (flame_stage + 1)) + 3) * 16 * config.getScale() - player.get_wX(), ((y + dy * (flame_stage + 1)) + 2) * 16 * config.getScale() - player.get_wY(), 8 * config.getScale(), 8 * config.getScale(), 16 * config.getScale(), 16 * config.getScale(), 1, 1, 90 * (angle - 1));
+-
++            frame();
+             flame_stage++;
+         }
+     }
+ 
+     public void frame() {
+-
+-
+-
+-
+-        int dx, dy;
+-        dx = 0;
+-        dy = 0;
+-        if (angle == 0) {
+-            dx = 1;
+-        }
+-        if (angle == 1) {
+-            dy = 1;
+-        }
+-        if (angle == 2) {
+-            dx = -1;
+-        }
+-        if (angle == 3) {
+-            dy = -1;
+-        }
+-        flame_stage = 0;
+-        while (flame_stage < stage) {
+-
+             if ((player.getX() == x + ((flame_stage + 1) * dx)) && (player.getY() ==  y+ ((flame_stage + 1) * dy))) {
+-
+                 if(player.getHp()>0) {
+                     player.setHp(player.getHp()-4);
+                     player.setDamgeScr(0f,2);
+                 }
+             }
+-
+-            flame_stage++;
+-
+-        }
+-
+-
+-
+     }
+-
+-
+-
+-
+ 
+     public void tick(float second){
+         timer+= Gdx.graphics.getDeltaTime();
+Index: core/src/com/zaig100/dg/objects/Arrow.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- core/src/com/zaig100/dg/objects/Arrow.java	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ core/src/com/zaig100/dg/objects/Arrow.java	(date 1617006758518)
+@@ -17,7 +17,7 @@
+     float timer =0;
+ 
+     Map map;
+-    Player player;
++    static Player player;
+     public Arrow(int crossbow_x,int crossbow_y,int dx, int dy,int angle,Player player){
+ 
+         x = crossbow_x + dx;
+Index: core/src/com/zaig100/dg/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- core/src/com/zaig100/dg/Main.java	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ core/src/com/zaig100/dg/Main.java	(date 1617296569865)
+@@ -1,6 +1,10 @@
+ package com.zaig100.dg;
+ 
+ import com.badlogic.gdx.Game;
++import com.badlogic.gdx.Gdx;
++import com.badlogic.gdx.graphics.GL20;
++import com.badlogic.gdx.graphics.Texture;
++import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+ import com.zaig100.dg.screen.GameScreen;
+ import com.zaig100.dg.utils.Configuration;
+ import com.zaig100.dg.utils.Res;
+@@ -9,36 +13,66 @@
+ import java.io.IOException;
+ 
+ public class Main extends Game {
+-	static Res res;
+-	static boolean isAndroid;
+-	static File sd = null;
+-	static Configuration configuration;
+-	public Main(boolean isAndroid ){
+-		Main.isAndroid = isAndroid;
+-	}
+-	
+-	@Override
+-	public void create () { res = new Res(); res.sprL();
+-		try {
+-			configuration = new Configuration(this);
+-		} catch (IOException e) {
+-			e.printStackTrace();
+-		}
+-		setScreen(new GameScreen(this));
+-	}
++    static Res res;
++    static boolean isAndroid;
++    static File sd = null;
++    static Configuration configuration;
++    Texture tex;
++    SpriteBatch batch;
++    int wight, height;
++    boolean first = true;
++
++    public Main(boolean isAndroid) {
++        Main.isAndroid = isAndroid;
++    }
++
++    @Override
++    public void create() {
++        res = new Res();
++        wight = Gdx.graphics.getWidth();
++        height = Gdx.graphics.getHeight();
++        batch = new SpriteBatch();
++        tex = new Texture(Gdx.files.internal("zaigard.jpg"));
++        res.sprL();
++        try {
++            configuration = new Configuration(this);
++        } catch (IOException e) {
++            e.printStackTrace();
++        }
++    }
+ 
+-	@Override
+-	public void render () {
+-		super.render();
+-	}
++    @Override
++    public void render() {
++        if (first) {
++            Gdx.gl.glClearColor(0.8705882f, 0.890196f, 0.8745098f, 0);
++            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
++            batch.begin();
++            batch.draw(tex, wight / 2 - 150, height / 2 - 150, 300, 300);
++            batch.end();
++
++            if (Gdx.input.justTouched()) {
++                setScreen(new GameScreen(this));
++                first = false;
++            }
++        }
++        super.render();
++
++    }
++
++    @Override
++    public void dispose() {
++        super.dispose();
++        batch.dispose();
++        tex.dispose();
++    }
+ 
+-	public static Configuration getConfiguration() {
+-		return configuration;
+-	}
++    public static Configuration getConfiguration() {
++        return configuration;
++    }
+ 
+-	public static void setConfiguration(Configuration configuration) {
+-		Main.configuration = configuration;
+-	}
++    public static void setConfiguration(Configuration configuration) {
++        Main.configuration = configuration;
++    }
+ 
+ 	public boolean isAndroid() {
+ 		return isAndroid;
+Index: core/src/com/zaig100/dg/utils/Res.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- core/src/com/zaig100/dg/utils/Res.java	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ core/src/com/zaig100/dg/utils/Res.java	(date 1617296569717)
+@@ -1,7 +1,6 @@
+ package com.zaig100.dg.utils;
+ 
+ import com.badlogic.gdx.Gdx;
+-import com.badlogic.gdx.audio.Music;
+ import com.badlogic.gdx.audio.Sound;
+ import com.badlogic.gdx.graphics.Texture;
+ import com.badlogic.gdx.graphics.g2d.Sprite;
+@@ -60,12 +59,16 @@
+     public Music ingame;
+     public Music settingmisc;
+ */
+-    public Sound[] click = new Sound[3];
++public Sound[] click = new Sound[3];
+     public Sound wasted;
+     public Sound lov;
+ 
+     public Texture boards;
+ 
++    public Texture clvl2;
++    public Texture clvl1;
++    public Texture clvl0;
++
+     Sprite spr = null;
+ 
+     Sprite spr1;
+@@ -73,7 +76,7 @@
+     /**
+      * Resource Loading
+      */
+-    public void sprL(){
++    public void sprL() {
+ 
+ 
+         play_button = new Sprite(ui,0,0,32,32);
+@@ -119,6 +122,9 @@
+         lov = Gdx.audio.newSound(Gdx.files.internal("sounds/lov.mp3"));
+         boards = new Texture(Gdx.files.internal("texture/Dark.png"));
+ 
++        clvl2 = new Texture(Gdx.files.internal("texture/2_clvl.png"));
++        clvl1 = new Texture(Gdx.files.internal("texture/1_clvl.png"));
++        clvl0 = new Texture(Gdx.files.internal("texture/0_clvl.png"));
+ 
+     }
+ 
+Index: core/src/com/zaig100/dg/utils/LevelReader.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- core/src/com/zaig100/dg/utils/LevelReader.java	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ core/src/com/zaig100/dg/utils/LevelReader.java	(date 1617296569330)
+@@ -1,8 +1,6 @@
+ package com.zaig100.dg.utils;
+ 
+ 
+-
+-
+ import com.badlogic.gdx.Files;
+ import com.badlogic.gdx.Gdx;
+ 
+@@ -11,10 +9,7 @@
+ import org.json.simple.parser.JSONParser;
+ import org.json.simple.parser.ParseException;
+ 
+-import java.io.File;
+ import java.io.IOException;
+-
+-import java.io.InputStream;
+ import java.io.InputStreamReader;
+ import java.io.Reader;
+ import java.util.Iterator;
+@@ -40,24 +35,27 @@
+ 
+     Long[] Win = new Long[2];
+ 
+-    Long hide_traps_count;
++    Long hide_traps_count = Long.valueOf(0);
+     int[][] hide_traps;
+ 
+-    Long teleport_count;
++    Long teleport_count = Long.valueOf(0);
+     int[][] teleport;
+ 
+-    Long flamethrower_count;
++    Long flamethrower_count = Long.valueOf(0);
+     int[][] flamethrowfer;
+ 
+-    Long crossbow_count;
++    Long crossbow_count = Long.valueOf(0);
+     int[][] crossbow;
+ 
+-    Long items_count;
++    Long items_count = Long.valueOf(0);
+     int[][] items;
+ 
+-    Long stairs_count;
+-    int[][] stairs;
+-    String[] stairs_next_path;
++    Long flimsy_tile_count = Long.valueOf(0);
++    int[][] flimsy_tile;
++
++    //Long stairs_count;
++    //int[][] stairs;
++    //String[] stairs_next_path;
+ 
+     boolean end;
+     String nextpath;
+@@ -109,96 +107,122 @@
+             }
+         }
+ 
+-        hide_traps_count = (Long) jsonObject.get("hide_traps_count");
+-        hide_traps = new int[2][getHideTrapCount()];
+-        if (hide_traps_count == 0) {
++        if (jsonObject.get("hide_traps_count") != null && jsonObject.get("hide_traps") != null) {
++            hide_traps_count = (Long) jsonObject.get("hide_traps_count");
++            hide_traps = new int[2][getHideTrapCount()];
++            if (hide_traps_count == 0) {
+ 
+-        } else {
+-            jsonArray = (JSONArray) jsonObject.get("hide_traps");
+-            iterArr = jsonArray.iterator();
+-            for (int i = 0; i < getHideTrapCount(); i++) {
+-                jsonInArray = iterArr.next();
+-                iter = jsonInArray.iterator();
+-                for (int j = 0; j < 2; j++) {
+-                    num = (Long) iter.next();
+-                    // System.out.print(num+" ");
+-                    hide_traps[j][i] = num.intValue();
+-                }
+-                // System.out.println();
++            } else {
++                jsonArray = (JSONArray) jsonObject.get("hide_traps");
++                iterArr = jsonArray.iterator();
++                for (int i = 0; i < getHideTrapCount(); i++) {
++                    jsonInArray = iterArr.next();
++                    iter = jsonInArray.iterator();
++                    for (int j = 0; j < 2; j++) {
++                        num = (Long) iter.next();
++                        // System.out.print(num+" ");
++                        hide_traps[j][i] = num.intValue();
++                    }
++                    // System.out.println();
++                }
+             }
+         }
+-
+-        teleport_count = (Long) jsonObject.get("teleport_count");
+-        teleport = new int[4][getTeleportCount()];
+-        if (teleport_count == 0) {
++        if (jsonObject.get("teleport_count") != null && jsonObject.get("teleport") != null) {
++            teleport_count = (Long) jsonObject.get("teleport_count");
++            teleport = new int[4][getTeleportCount()];
++            if (teleport_count == 0) {
+ 
+-        } else {
+-            jsonArray = (JSONArray) jsonObject.get("teleport");
+-            iterArr = jsonArray.iterator();
+-            for (int i = 0; i < getTeleportCount(); i++) {
+-                jsonInArray = iterArr.next();
+-                iter = jsonInArray.iterator();
+-                for (int j = 0; j < 4; j++) {
+-                    num = (Long) iter.next();
+-                    // System.out.print(num+" ");
+-                    teleport[j][i] = num.intValue();
+-                }
+-                // System.out.println();
++            } else {
++                jsonArray = (JSONArray) jsonObject.get("teleport");
++                iterArr = jsonArray.iterator();
++                for (int i = 0; i < getTeleportCount(); i++) {
++                    jsonInArray = iterArr.next();
++                    iter = jsonInArray.iterator();
++                    for (int j = 0; j < 4; j++) {
++                        num = (Long) iter.next();
++                        // System.out.print(num+" ");
++                        teleport[j][i] = num.intValue();
++                    }
++                    // System.out.println();
++                }
+             }
+         }
+-
+-        flamethrower_count = (Long) jsonObject.get("flamethrower_count");
+-        flamethrowfer = new int[5][getFlamethrowerCount()];
+-        if (flamethrower_count == 0) {
++        if (jsonObject.get("flamethrower_count") != null && jsonObject.get("flamethrower") != null) {
++            flamethrower_count = (Long) jsonObject.get("flamethrower_count");
++            flamethrowfer = new int[5][getFlamethrowerCount()];
++            if (flamethrower_count == 0) {
+ 
+-        } else {
+-            jsonArray = (JSONArray) jsonObject.get("flamethrower");
+-            iterArr = jsonArray.iterator();
+-            for (int i = 0; i < getFlamethrowerCount(); i++) {
+-                jsonInArray = iterArr.next();
+-                iter = jsonInArray.iterator();
+-                for (int j = 0; j < 5; j++) {
+-                    num = (Long) iter.next();
+-                    //System.out.print(num+" ");
+-                    flamethrowfer[j][i] = num.intValue();
+-                }
+-                //System.out.println();
++            } else {
++                jsonArray = (JSONArray) jsonObject.get("flamethrower");
++                iterArr = jsonArray.iterator();
++                for (int i = 0; i < getFlamethrowerCount(); i++) {
++                    jsonInArray = iterArr.next();
++                    iter = jsonInArray.iterator();
++                    for (int j = 0; j < 5; j++) {
++                        num = (Long) iter.next();
++                        //System.out.print(num+" ");
++                        flamethrowfer[j][i] = num.intValue();
++                    }
++                    //System.out.println();
++                }
+             }
+         }
+-
+-        crossbow_count = (Long) jsonObject.get("crossbow_count");
+-        crossbow = new int[7][getCrossbowCount()];
+-        if (crossbow_count == 0) {
++        if (jsonObject.get("crossbow_count") != null && jsonObject.get("crossbow") != null) {
++            crossbow_count = (Long) jsonObject.get("crossbow_count");
++            crossbow = new int[7][getCrossbowCount()];
++            if (crossbow_count == 0) {
+ 
+-        } else {
+-            jsonArray = (JSONArray) jsonObject.get("crossbow");
+-            iterArr = jsonArray.iterator();
+-            for (int i = 0; i < getCrossbowCount(); i++) {
+-                jsonInArray = iterArr.next();
+-                iter = jsonInArray.iterator();
+-                for (int j = 0; j < 5; j++) {
+-                    num = (Long) iter.next();
+-                    //System.out.print(num+" ");
+-                    crossbow[j][i] = num.intValue();
+-                }
+-                //System.out.println();
++            } else {
++                jsonArray = (JSONArray) jsonObject.get("crossbow");
++                iterArr = jsonArray.iterator();
++                for (int i = 0; i < getCrossbowCount(); i++) {
++                    jsonInArray = iterArr.next();
++                    iter = jsonInArray.iterator();
++                    for (int j = 0; j < 5; j++) {
++                        num = (Long) iter.next();
++                        //System.out.print(num+" ");
++                        crossbow[j][i] = num.intValue();
++                    }
++                    //System.out.println();
++                }
+             }
+         }
+-        items_count = (Long) jsonObject.get("items_count");
+-        items = new int[3][getItemsCount()];
+-        if (!(items_count == 0))
+-            jsonArray = (JSONArray) jsonObject.get("items");
+-        iterArr = jsonArray.iterator();
+-        for (int i = 0; i < getItemsCount(); i++) {
+-            jsonInArray = iterArr.next();
+-            iter = jsonInArray.iterator();
+-            for (int j = 0; j < 3; j++) {
+-                num = (Long) iter.next();
+-                //System.out.print(num+" ");
+-                items[j][i] = num.intValue();
+-            }
+-            //System.out.println();
++        if (jsonObject.get("items_count") != null && jsonObject.get("items") != null) {
++            items_count = (Long) jsonObject.get("items_count");
++            items = new int[3][getItemsCount()];
++            if (!(items_count == 0))
++                jsonArray = (JSONArray) jsonObject.get("items");
++            iterArr = jsonArray.iterator();
++            for (int i = 0; i < getItemsCount(); i++) {
++                jsonInArray = iterArr.next();
++                iter = jsonInArray.iterator();
++                for (int j = 0; j < 3; j++) {
++                    num = (Long) iter.next();
++                    //System.out.print(num+" ");
++                    items[j][i] = num.intValue();
++                }
++                //System.out.println();
++            }
+         }
++
++        if (jsonObject.get("flimsy_tile_count") != null && jsonObject.get("flimsy_tile") != null) {
++            flimsy_tile_count = (Long) jsonObject.get("flimsy_tile_count");
++            flimsy_tile = new int[2][getFlimstTileCount()];
++            if (!(flimsy_tile_count == 0)) {
++                jsonArray = (JSONArray) jsonObject.get("flimsy_tile");
++                iterArr = jsonArray.iterator();
++                for (int i = 0; i < getFlimstTileCount(); i++) {
++                    jsonInArray = iterArr.next();
++                    iter = jsonInArray.iterator();
++                    for (int j = 0; j < 2; j++) {
++                        num = (Long) iter.next();
++                        //System.out.print(num+" ");
++                        flimsy_tile[j][i] = num.intValue();
++                    }
++                    //System.out.println();
++                }
++            }
++        }
+ 
+         end = (Boolean) jsonObject.get("end");
+         nextpath = (String) jsonObject.get("nextlevelpath");
+@@ -206,14 +230,33 @@
+         isSave = (Boolean) jsonObject.get("save");
+ 
+         System.out.println(height + " " + getHeight());
+-       // System.out.println(map[5][6]);
++        // System.out.println(map[5][6]);
+ 
+     }
+-    public int getItemsCount() { return items_count.intValue(); }
+-    public  int[][] getItems() {return  items;}
++
++    public int getFlimstTileCount() {
++        return flimsy_tile_count.intValue();
++    }
+ 
+-    public  int[][] getCrossbow() {return  crossbow;}
+-    public int getCrossbowCount() { return crossbow_count.intValue(); }
++    public int[][] getFlimsyTile() {
++        return flimsy_tile;
++    }
++
++    public int getItemsCount() {
++        return items_count.intValue();
++    }
++
++    public int[][] getItems() {
++        return items;
++    }
++
++    public int[][] getCrossbow() {
++        return crossbow;
++    }
++
++    public int getCrossbowCount() {
++        return crossbow_count.intValue();
++    }
+ 
+     public int[][] getFlamethrowfers() {
+         return flamethrowfer;
+Index: core/src/com/zaig100/dg/utils/PackManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- core/src/com/zaig100/dg/utils/PackManager.java	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ core/src/com/zaig100/dg/utils/PackManager.java	(date 1617296569344)
+@@ -1,7 +1,6 @@
+ package com.zaig100.dg.utils;
+ 
+ 
+-import com.badlogic.gdx.Gdx;
+ import com.zaig100.dg.Main;
+ 
+ import org.json.simple.JSONObject;
+@@ -13,7 +12,6 @@
+ import java.io.IOException;
+ import java.io.InputStreamReader;
+ import java.util.ArrayList;
+-import java.util.Objects;
+ 
+ 
+ public class PackManager {
+@@ -37,21 +35,24 @@
+         if (!destory.exists()) {
+             destory.mkdir();
+         }
+-        for (int i = 0; i < Objects.requireNonNull(destory.list()).length; i++) {
+-            if (new File(destory, destory.list()[i]).isDirectory()) {
+-                if (new File(destory, destory.list()[i]+"/pack.json").exists()) {
+-                    try {
+-                        try {
+-                            list.add((JSONObject) parser.parse(new InputStreamReader(new FileInputStream(new File(destory, destory.list()[i] + "/pack.json")))));
+-                        } catch (IOException e) {
+-                            e.printStackTrace();
+-                        }
+-                    } catch (ParseException e) {
+-                        e.printStackTrace();
++        if (destory.list() != null) {
++            if (destory.list().length > 0) {
++                for (int i = 0; i < destory.list().length; i++) {
++                    if (new File(destory, destory.list()[i]).isDirectory()) {
++                        if (new File(destory, destory.list()[i] + "/pack.json").exists()) {
++                            try {
++                                try {
++                                    list.add((JSONObject) parser.parse(new InputStreamReader(new FileInputStream(new File(destory, destory.list()[i] + "/pack.json")))));
++                                } catch (IOException e) {
++                                    e.printStackTrace();
++                                }
++                            } catch (ParseException e) {
++                                e.printStackTrace();
++                            }
++                        }
+                     }
+                 }
+             }
+-
+         }
+ 
+     }
+Index: android/assets/save.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/assets/save.json	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/assets/save.json	(date 1617296569825)
+@@ -1,1 +1,7 @@
+-{"Path":"levels\/01.json","Potion":3,"HP":4,"Sheld":2,"Torch":1}
+\ No newline at end of file
++{
++  "Path": "levels\/Test.json",
++  "Potion": 3,
++  "HP": 4,
++  "Sheld": 2,
++  "Torch": 1
++}
+\ No newline at end of file
+Index: android/assets/config.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/assets/config.json	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/assets/config.json	(date 1617296569403)
+@@ -1,1 +1,7 @@
+-{"Music":10,"Scale":6.0,"Sound":80,"Debug":false,"Sensor":true}
+\ No newline at end of file
++{
++  "Music": 50,
++  "Scale": 6.0,
++  "Sound": 50,
++  "Debug": false,
++  "Sensor": true
++}
+\ No newline at end of file
+Index: android/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/build.gradle	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/build.gradle	(date 1616863207817)
+@@ -21,7 +21,7 @@
+         minSdkVersion 14
+         targetSdkVersion 29
+         versionCode 1
+-        versionName "3.3"
++        versionName "3.3.1"
+     }
+     buildTypes {
+         release {
+Index: core/src/com/zaig100/dg/objects/FlimsyTile.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- core/src/com/zaig100/dg/objects/FlimsyTile.java	(date 1617296569645)
++++ core/src/com/zaig100/dg/objects/FlimsyTile.java	(date 1617296569645)
+@@ -0,0 +1,55 @@
++package com.zaig100.dg.objects;
++
++import com.badlogic.gdx.Gdx;
++import com.badlogic.gdx.graphics.g2d.SpriteBatch;
++import com.zaig100.dg.utils.Configuration;
++import com.zaig100.dg.utils.Res;
++
++public class FlimsyTile {
++
++    int x, y;
++    Player player;
++    int crashed_lvl;
++
++    float timer = 0;
++
++    public FlimsyTile(int x, int y, Player player) {
++        this.x = x;
++        this.y = y;
++        this.player = player;
++        crashed_lvl = 3;
++    }
++
++    public void render(SpriteBatch batch, Res res, Configuration config) {
++        if (crashed_lvl == 2) {
++            batch.draw(res.clvl2, x * 16 * config.getScale(), y * 16 * config.getScale(), 16 * config.getScale(), 16 * config.getScale());
++        }
++        if (crashed_lvl == 1) {
++            batch.draw(res.clvl1, x * 16 * config.getScale(), y * 16 * config.getScale(), 16 * config.getScale(), 16 * config.getScale());
++        }
++        if (crashed_lvl <= 0) {
++            batch.draw(res.clvl0, x * 16 * config.getScale(), y * 16 * config.getScale(), 16 * config.getScale(), 16 * config.getScale());
++        }
++    }
++
++    public void frame() {
++        if ((x == player.getX()) && (y == player.getY())) {
++            if (crashed_lvl <= 0) {
++                player.setDamgeScr(8, 4);
++            }
++        }
++    }
++
++
++    public void tick(float second) {
++        if ((x == player.getX()) && (y == player.getY())) {
++
++            if (timer < 0 && crashed_lvl > 0) {
++                crashed_lvl--;
++                timer = second;
++            }
++        }
++        timer -= Gdx.graphics.getDeltaTime();
++    }
++
++}
+Index: android/assets/levels/Test.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/assets/levels/Test.json	(date 1617296569512)
++++ android/assets/levels/Test.json	(date 1617296569512)
+@@ -0,0 +1,203 @@
++{
++  "LevelName": "Twins II",
++  "Widht": 12,
++  "Height": 12,
++  "Spawn": [
++    6,
++    3
++  ],
++  "spawn_x_flip": false,
++  "spawn_y_flip": false,
++  "Win": [
++    0,
++    5
++  ],
++  "map": [
++    [
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11
++    ],
++    [
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11
++    ],
++    [
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11
++    ],
++    [
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11
++    ],
++    [
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11
++    ],
++    [
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11
++    ],
++    [
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11
++    ],
++    [
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11
++    ],
++    [
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11
++    ],
++    [
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11
++    ],
++    [
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11
++    ],
++    [
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11,
++      11
++    ]
++  ],
++  "flimsy_tile_count": 3,
++  "flimsy_tile": [
++    [
++      4,
++      4
++    ],
++    [
++      5,
++      5
++    ],
++    [
++      6,
++      6
++    ]
++  ],
++  "end": true,
++  "nextlevelpath": "end",
++  "save": false
++}
+\ No newline at end of file
+Index: android/assets/levels/08.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/assets/levels/08.json	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/assets/levels/08.json	(date 1617009599986)
+@@ -26,30 +26,12 @@
+     
+   ],
+ 
+-  "crossbow_count": 0,
+-  "crossbow": [
+-    [-1,2,1,0,180]
+-  ],
+-
+-  "flamethrower_count":0,
+-  "flamethrower": [
+-    [0,0,0,0,0]
+-  ],
+-
+-  "teleport_count": 0,
+-  "teleport": [
+-    [9,9]
+-  ],
+ 
+   "hide_traps_count":5,
+   "hide_traps": [
+     [4,9],[4,5],[4,1],[5,3],[5,7]
+   ],
+ 
+-  "items_count": 0,
+-  "items": [
+-    [0,0,0]
+-  ],
+ 
+   "end": false,
+   "nextlevelpath": "levels/09.json",
+Index: android/src/com/zaig100/dg/AndroidLauncher.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/src/com/zaig100/dg/AndroidLauncher.java	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/src/com/zaig100/dg/AndroidLauncher.java	(date 1617296546341)
+@@ -5,12 +5,10 @@
+ 
+ import com.badlogic.gdx.backends.android.AndroidApplication;
+ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+-import com.zaig100.dg.Main;
+-import com.zaig100.dg.utils.Configuration;
+ 
+ public class AndroidLauncher extends AndroidApplication {
+ 	@Override
+-	protected void onCreate (Bundle savedInstanceState) {
++	protected void onCreate(Bundle savedInstanceState) {
+ 		super.onCreate(savedInstanceState);
+ 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
+ 
+Index: android/assets/levels/01.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/assets/levels/01.json	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/assets/levels/01.json	(date 1617008709610)
+@@ -26,32 +26,6 @@
+ 
+   ],
+ 
+-  "crossbow_count": 0,
+-  "crossbow": [
+-    [0,0,0]
+-  ],
+-
+-  "flamethrower_count":0,
+-  "flamethrower": [
+-    [20,20,0,0,0]
+-  ],
+-
+-  "teleport_count": 0,
+-  "teleport": [
+-    [11,11,11,11]
+-  ],
+-
+-
+-  "hide_traps_count":0,
+-  "hide_traps": [
+-    [11,11]
+-  ],
+-
+-  "items_count": 0,
+-  "items": [
+-    [9,2,0]
+-  ],
+-
+   "end": false,
+   "nextlevelpath": "levels/02.json",
+ 
+Index: android/assets/levels/05.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/assets/levels/05.json	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/assets/levels/05.json	(date 1617296569453)
+@@ -25,12 +25,6 @@
+ 
+     
+   ],
+-
+-  "crossbow_count": 0,
+-  "crossbow": [
+-    [0,0,0]
+-  ],
+-
+   "flamethrower_count":4,
+   "flamethrower": [
+     [8,10,1,2,3],
+@@ -39,21 +33,12 @@
+     [7,-1,1,3,1]
+   ],
+ 
+-  "teleport_count": 0,
+-  "teleport": [
+-    [5,0,0,14]
+-  ],
+ 
+   "hide_traps_count":1,
+   "hide_traps": [
+     [1,9]
+   ],
+ 
+-  "items_count": 0,
+-  "items": [
+-    [0,0,0]
+-  ],
+-
+   "end": false,
+   "nextlevelpath": "levels/06.json",
+ 
+Index: android/assets/levels/11.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/assets/levels/11.json	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/assets/levels/11.json	(date 1617009599768)
+@@ -35,20 +35,6 @@
+     [5,0,2,3,1]
+   ],
+ 
+-  "teleport_count": 0,
+-  "teleport": [
+-    [9,10,0,10]
+-  ],
+-
+-  "hide_traps_count":0,
+-  "hide_traps": [
+-    [0,4]
+-  ],
+-
+-  "items_count": 0,
+-  "items": [
+-    [0,0,0]
+-  ],
+ 
+   "end": false,
+   "nextlevelpath": "levels/12.json",
+Index: core/src/com/zaig100/dg/screen/PlayScreen.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- core/src/com/zaig100/dg/screen/PlayScreen.java	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ core/src/com/zaig100/dg/screen/PlayScreen.java	(date 1617296569698)
+@@ -17,6 +17,7 @@
+ import com.zaig100.dg.Main;
+ import com.zaig100.dg.objects.Crossbow;
+ import com.zaig100.dg.objects.Flamefrower;
++import com.zaig100.dg.objects.FlimsyTile;
+ import com.zaig100.dg.objects.HideTrap;
+ import com.zaig100.dg.objects.Item;
+ import com.zaig100.dg.objects.Map;
+@@ -26,10 +27,8 @@
+ import com.zaig100.dg.utils.Font;
+ import com.zaig100.dg.utils.Joystick;
+ import com.zaig100.dg.utils.LevelReader;
+-import com.zaig100.dg.utils.Res;
+ import com.zaig100.dg.utils.Save;
+ 
+-import java.io.File;
+ import java.io.FileNotFoundException;
+ import java.io.IOException;
+ import java.util.Random;
+@@ -63,6 +62,7 @@
+     static Flamefrower[] flame;
+     Crossbow[] crossbow;
+     Item[] item;
++    FlimsyTile[] flimsyTiles;
+     
+     static Joystick joystick;
+ 
+@@ -177,21 +177,28 @@
+ 
+         }
+ 
+-        if(lR.getItemsCount()>0){
++        if (lR.getItemsCount() > 0) {
+             item = new Item[lR.getItemsCount()];
+-            for(i =0;i<lR.getItemsCount();i++){
+-                item[i] = new Item(lR.getItems()[0][i],lR.getItems()[1][i],lR.getItems()[2][i],player);
++            for (i = 0; i < lR.getItemsCount(); i++) {
++                item[i] = new Item(lR.getItems()[0][i], lR.getItems()[1][i], lR.getItems()[2][i], player);
+             }
+         }
++
++        if (lR.getFlimstTileCount() > 0) {
++            flimsyTiles = new FlimsyTile[lR.getFlimstTileCount()];
++            for (i = 0; i < lR.getFlimstTileCount(); i++) {
++                flimsyTiles[i] = new FlimsyTile(lR.getFlimsyTile()[0][i], lR.getFlimsyTile()[1][i], player);
++            }
++        }
+         //Main.getRes().sprL();
+ 
+-        cam.position.set(new Vector3(width/2,height/2,0));
++        cam.position.set(new Vector3(width / 2, height / 2, 0));
+ 
+         try {
+-            if(isPack){
+-                save = new Save(m, packname,path);
+-            }else {
+-                save = new Save(m, "",path);
++            if (isPack) {
++                save = new Save(m, packname, path);
++            } else {
++                save = new Save(m, "", path);
+             }
+             if(lR.isSave()){
+                 save.setHp(player.getHp());
+@@ -260,22 +267,32 @@
+                    }
+                 }
+ 
+-                if(lR.getItemsCount()>0) {
+-                    for (i = 0; i < lR.getItemsCount(); i++) {
+-                        if(!is_pause) item[i].frame();
+-                        item[i].render(batch, Main.getRes(),Main.getConfiguration());
+-                    }
+-                }
++        if (lR.getItemsCount() > 0) {
++            for (i = 0; i < lR.getItemsCount(); i++) {
++                if (!is_pause) item[i].frame();
++                item[i].render(batch, Main.getRes(), Main.getConfiguration());
++            }
++        }
+ 
+-                map.dark_render(batch, Main.getRes(),Main.getConfiguration());
+-            if(!is_pause) {
+-                player.render_bag(batch, Main.getRes(),f4,joystick);
+-                if(start) f2.draw(batch,lR.getLevelName(),8*Main.getConfiguration().getScale(),4.5f*16*Main.getConfiguration().getScale());
+-            }
+-                if(player.getHp() <=0 && !is_pause ){
+-                    if(fir1) Main.getRes().wasted.play(2.0f);
+-                    fir1 = false;
+-                    f1.draw(batch,"Wasted",2*16*Main.getConfiguration().getScale(),4.5f*16*Main.getConfiguration().getScale());
++        if (lR.getFlimstTileCount() > 0) {
++            for (i = 0; i < lR.getFlimstTileCount(); i++) {
++                if (!is_pause) flimsyTiles[i].frame();
++                if (!is_pause) flimsyTiles[i].tick(1.5f);
++
++                flimsyTiles[i].render(batch, Main.getRes(), Main.getConfiguration());
++            }
++        }
++
++        map.dark_render(batch, Main.getRes(), Main.getConfiguration());
++        if (!is_pause) {
++            player.render_bag(batch, Main.getRes(), f4, joystick);
++            if (start)
++                f2.draw(batch, lR.getLevelName(), 8 * Main.getConfiguration().getScale(), 4.5f * 16 * Main.getConfiguration().getScale());
++        }
++        if (player.getHp() <= 0 && !is_pause) {
++            if (fir1) Main.getRes().wasted.play(2.0f);
++            fir1 = false;
++            f1.draw(batch, "Wasted", 2 * 16 * Main.getConfiguration().getScale(), 4.5f * 16 * Main.getConfiguration().getScale());
+                     f2.draw(batch,"Press Space",2*16*Main.getConfiguration().getScale(),0.5f*16*Main.getConfiguration().getScale());
+                     if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)||joystick.isUse()){
+                         m.setScreen(new GameScreen(m));
+@@ -454,6 +471,6 @@
+         f2.dispose();
+         f3.dispose();
+         f4.dispose();
+-
++        font.dispose();
+     }
+ }
+Index: android/assets/levels/09.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/assets/levels/09.json	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/assets/levels/09.json	(date 1617009600174)
+@@ -65,10 +65,6 @@
+     [2,24],[13,25],[22,16],[22,4],[7,1]
+   ],
+ 
+-  "items_count": 0,
+-  "items": [
+-    [0,0,0]
+-  ],
+ 
+   "end": false,
+   "nextlevelpath": "levels/10.json",
+Index: core/src/com/zaig100/dg/screen/Extension.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- core/src/com/zaig100/dg/screen/Extension.java	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ core/src/com/zaig100/dg/screen/Extension.java	(date 1617296569900)
+@@ -5,21 +5,18 @@
+ import com.badlogic.gdx.Screen;
+ import com.badlogic.gdx.graphics.GL20;
+ import com.badlogic.gdx.graphics.g2d.BitmapFont;
+-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+ import com.zaig100.dg.Main;
+ import com.zaig100.dg.objects.Player;
+ import com.zaig100.dg.utils.Font;
+ import com.zaig100.dg.utils.PackManager;
+ 
+-import java.io.FileNotFoundException;
+-import java.io.IOException;
+-
+ public class Extension implements Screen {
+ 
+     Main m;
+     PackManager pM;
+ 
++    Font font;
+     BitmapFont f1;
+ 
+     SpriteBatch batch = new SpriteBatch();
+@@ -33,10 +30,11 @@
+     @Override
+     public void show() {
+ 
++        font = new Font();
+ 
+         pM = new PackManager(m.isAndroid(),m);
+ 
+-        f1 = new Font().gFont(8* Main.getConfiguration().getScale(),"fonts/GFont.ttf");
++        f1 = font.gFont(8 * Main.getConfiguration().getScale(), "fonts/GFont.ttf");
+ 
+         Gdx.input.setCatchBackKey(true);
+ 
+@@ -123,5 +121,6 @@
+     public void dispose() {
+         batch.dispose();
+         f1.dispose();
++        font.dispose();
+     }
+ }
+Index: android/assets/levels/02.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/assets/levels/02.json	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/assets/levels/02.json	(date 1617009600064)
+@@ -25,21 +25,6 @@
+     
+   ],
+ 
+-  "crossbow_count": 0,
+-  "crossbow": [
+-    [0,0,0]
+-  ],
+-
+-  "flamethrower_count":0,
+-  "flamethrower": [
+-    [20,20,0,0,0]
+-  ],
+-
+-  "teleport_count": 0,
+-  "teleport": [
+-    [11,11,11,11]
+-  ],
+-
+   "hide_traps_count":4,
+   "hide_traps": [
+     [2,5],
+@@ -48,10 +33,6 @@
+     [9,7]
+   ],
+ 
+-  "items_count": 0,
+-  "items": [
+-    [0,0,0]
+-  ],
+ 
+   "end": false,
+   "nextlevelpath": "levels/03.json",
+Index: android/assets/levels/06.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/assets/levels/06.json	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/assets/levels/06.json	(date 1617009600018)
+@@ -32,10 +32,6 @@
+     [7,-1,0,1,270]
+   ],
+ 
+-  "flamethrower_count":0,
+-  "flamethrower": [
+-    [0,0,0,0,0]
+-  ],
+ 
+   "teleport_count": 1,
+   "teleport": [
+Index: android/assets/levels/12.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/assets/levels/12.json	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/assets/levels/12.json	(date 1617296569757)
+@@ -49,12 +49,6 @@
+   "hide_traps": [
+     [3,7],[3,2]
+   ],
+-
+-  "items_count": 0,
+-  "items": [
+-    [0,0,0]
+-  ],
+-
+   "end": false,
+   "nextlevelpath": "levels/13.json",
+ 
+Index: core/src/com/zaig100/dg/screen/Setting.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- core/src/com/zaig100/dg/screen/Setting.java	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ core/src/com/zaig100/dg/screen/Setting.java	(date 1617296569417)
+@@ -5,20 +5,13 @@
+ import com.badlogic.gdx.Screen;
+ import com.badlogic.gdx.graphics.GL20;
+ import com.badlogic.gdx.graphics.OrthographicCamera;
+-import com.badlogic.gdx.graphics.Pixmap;
+ import com.badlogic.gdx.graphics.g2d.BitmapFont;
+ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+-import com.badlogic.gdx.graphics.glutils.FrameBuffer;
+ import com.badlogic.gdx.utils.viewport.ScreenViewport;
+ import com.badlogic.gdx.utils.viewport.Viewport;
+ import com.zaig100.dg.Main;
+ import com.zaig100.dg.utils.Font;
+ 
+-import java.io.FileNotFoundException;
+-import java.io.IOException;
+-
+-import javax.crypto.Cipher;
+-
+ 
+ public class Setting implements Screen {
+ 
+@@ -33,7 +26,7 @@
+     SpriteBatch batch;
+ 
+     String[] line = new String[5];
+-
++    Font font;
+     BitmapFont f1;
+ 
+     int num = 0;
+@@ -60,16 +53,15 @@
+         cam.translate(scrW/2, scrW/2, 0);
+         viewport = new ScreenViewport(cam);
+ 
+-        
+ 
+-
+         Scale = Main.getConfiguration().getScale();
+         Music = Main.getConfiguration().getMusic();
+         Sound = Main.getConfiguration().getSound();
+         Sensor = Main.getConfiguration().isSensor();
+         Debug = Main.getConfiguration().isDebug();
+ 
+-        f1 = new Font().gFont(8* Main.getConfiguration().getScale(),"fonts/GFont.ttf");
++        font = new Font();
++        f1 = font.gFont(8 * Main.getConfiguration().getScale(), "fonts/GFont.ttf");
+ 
+     }
+ 
+@@ -269,6 +261,7 @@
+     @Override
+     public void dispose() {
+         f1.dispose();
++        font.dispose();
+         batch.dispose();
+     }
+ }
+Index: android/assets/levels/13.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/assets/levels/13.json	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/assets/levels/13.json	(date 1617296569807)
+@@ -39,23 +39,10 @@
+     [5,5,0,2,2],
+     [5,5,0,2,3]
+   ],
+-
+-  "teleport_count": 0,
+-  "teleport": [
+-    [9,10,0,10]
+-  ],
+-
+   "hide_traps_count":2,
+   "hide_traps": [
+     [3,7],[3,2]
+   ],
+-  
+-  "items_count":0,
+-  "items":[
+-    [1,11,0]
+-  ],
+-
+-
+   "end": true,
+   "nextlevelpath": "end",
+ 
+Index: android/assets/levels/03.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/assets/levels/03.json	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/assets/levels/03.json	(date 1617009600033)
+@@ -25,15 +25,6 @@
+     
+   ],
+ 
+-  "crossbow_count": 0,
+-  "crossbow": [
+-    [0,0,0]
+-  ],
+-
+-  "flamethrower_count":0,
+-  "flamethrower": [
+-    [20,20,0,0,0]
+-  ],
+ 
+   "teleport_count": 2,
+   "teleport": [
+Index: android/assets/levels/10.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/assets/levels/10.json	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/assets/levels/10.json	(date 1617009599643)
+@@ -42,16 +42,6 @@
+     [7,5,0,5,3],
+   ],
+ 
+-  "teleport_count": 0,
+-  "teleport": [
+-    [9,10,0,10]
+-  ],
+-
+-  "hide_traps_count":0,
+-  "hide_traps": [
+-    [2,24],[13,25],[22,16],[22,4],[7,1]
+-  ],
+-
+   "items_count": 4,
+   "items": [
+     [9,10,3],[8,10,2],[7,10,1],[6,10,0]
+Index: android/assets/levels/07.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/assets/levels/07.json	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/assets/levels/07.json	(date 1617009599815)
+@@ -27,16 +27,6 @@
+     
+   ],
+ 
+-  "crossbow_count": 0,
+-  "crossbow": [
+-    [-1,2,1,0,180]
+-  ],
+-
+-  "flamethrower_count":0,
+-  "flamethrower": [
+-    [0,0,0,0,0]
+-  ],
+-
+   "teleport_count": 33,
+   "teleport": [
+     [0,10,1,9],[2,10,5,5],[4,10,1,1],[6,10,9,5],[8,10,5,9],[10,10,9,5],
+@@ -47,15 +37,7 @@
+     [0,0,9,9],[2,0,9,1],[4,0,9,1],[6,0,5,9],          [10,0,1,9]
+   ],
+ 
+-  "hide_traps_count":0,
+-  "hide_traps": [
+-    [7,4]
+-  ],
+ 
+-  "items_count": 0,
+-  "items": [
+-    [0,0,0]
+-  ],
+ 
+   "end": false,
+   "nextlevelpath": "levels/08.json",
+Index: android/assets/levels/04.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/assets/levels/04.json	(revision b5122db6b08478beb1a9845ffb7fb9b71397298d)
++++ android/assets/levels/04.json	(date 1617009600002)
+@@ -31,16 +31,6 @@
+     
+   ],
+ 
+-  "crossbow_count": 0,
+-  "crossbow": [
+-    [0,0,0]
+-  ],
+-
+-  "flamethrower_count":0,
+-  "flamethrower": [
+-    [8,10,0,2,3]
+-  ],
+-
+   "teleport_count": 5,
+   "teleport": [
+     [5,0,0,14],
+@@ -58,10 +48,6 @@
+     [0,8]
+   ],
+ 
+-  "items_count": 0,
+-  "items": [
+-    [0,0,0]
+-  ],
+ 
+   "end": false,
+   "nextlevelpath": "levels/05.json",
+diff --git android/assets/texture/2_clvl.png android/assets/texture/2_clvl.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..b25da4daeb4f412810ed7c32adade0d82bff8d23
+GIT binary patch
+literal 103
+zc%17D@N?(olHy`uVBq!ia0vp^0wB!61|;P_|4#%`dY&$hAr^wk2@<SNS{!&SXC+jz
+zxf!1b+mzdu*>cffy@2cDY^UeKsV7z_RkbiMcr~-cJ~wf_1Judj>FVdQ&MBb@0Q0~d
+AC;$Ke
+
+diff --git android/assets/zaigard.jpg android/assets/zaigard.jpg
+new file mode 100644
+index 0000000000000000000000000000000000000000..50fb09ed1897a402922825e5c645a657190d5bef
+GIT binary patch
+literal 9177
+zc%1E-Yitx%6vyv8_Nj4M3W&tSP(W8PL}*nc)sYra(4;B8{bB)?$`=DZ3MQtdpvZnf
+zL`Crf?TT9cAQnZTArUGnl4$q6EoxG%l)@KEx5e(J-SJL$cV_O)y?5@mK^nr8ZP~f=
+zIKOlL=iD=Q<PNzDOj^El*;2r90C4aJ$bWze_)WL*yud4)C<we@6Kyt|D2g__!)~)V
+z?4oFQ*&R-0v)Ns4m(#6$Q7)1_l^5YZCp^np@FpJtUMFA8R|{M*;JuvS<>X`FCTOQE
+zYZ%CF94{#LI9={*lmj>*sJ7z{I4}wD9Aps%g#?bi0mp&pwN0Kmf3dx&YNexi-IN8J
+zb~HI>mA4$7x+2s!yJXe+2A6x<_0w;dG3Vx6e7D|KdgontFT7__#gYe>KKRhG<&Qr0
+z_!Cb)_4G5VpL_m=H8n4;efgDFU#s1)@%7DH-h6B8+uQu_?tJh44|aX{(eA(}dq4f`
+z^X4zU-2ctD2fq9M;Gx#GACLX?^DoDLJrRyXWAQ{s=gCulcmH#`=S=U}a~JxP1A`a;
+z9ZIDYv%S!4UK9n<p_t9_wF;M4w9TAvpS-xrv2tBe@q$gxDdjtwT8_GAm8|HSx@vvM
+zJ#BXBsW}%E%SR1ov%6tThO2gKX8#35V3SXRYXuI5Q1Ai?WZHZIe@|Ig!0!XPk01w$
+zBO&5Qm^cz4jzozgG2%#^IFh)^bA|8-=iR<QYvmHS6F{Vl^4Iu*K*;`~`~1GIR{su9
+ztd}k;Qr>t-g*SX+1L19(_$=Kz&8TKzaAYujtuOGyJgK=7Qa#%o@DCr%G%1$lKT>Cp
+z-?uMXdAj?u;UNhSCm4}Htd|;RK&;K}_iHgrWgtiYP^M*ce9t*Je%Mo%b;6q6@LQF%
+zYdZ_0j&D4S`1|Pabg}8RL)*KO!R-AK2nrG`5~haO;P*9ptS}9Tg<uK><>5&6s*6)#
+z*gy%8yani3CII}ka)dgn^YG^Tk~QgiEip%=fPe1rHfeu(&Ng1PF+myAl2T1Xq`Vpd
+zk>q28G(`-<sgGDpGs&1`SqU>ol$eDK1=f^>G+6xAqSRc|WK}pY3YK7#DjAx!i$Mw{
+znVLwGse>b#zOtkoqr@=IaskGv6Ok(o6n`}Xqb`ca-FYoVEus@MO?wEIA-cqh$^dMV
+ztPvQAp9Qmybx?*U&mGvA>X3mGn%?TUF&k;K?lSc?FhHJr^%IeWxUC8h8QiKZ$2KV#
+zY<=;GXiQtvaA&kAwNM7N5bscXwTeGd2OZMio!&x=e%==XM(vm|Z>O{#WKH9|p!UQT
+zv#`dk%nKg03BWl*#ny*eVAO&6AharHWp3dEY~v85O*SE73ZK0W8gwQ(a=TL7=^~A=
+zlq9nh&`8I+6raqK{*0s!LqDdWEv4-jH^To87Ns`m62jzx9JNG!s3R43)$+ZIpdowO
+z2fiLP`z820Q!o8ilIEZVLuCUVIn1Kv2)<mA6oDS}PA@#DP6{6}mIi$4$0@bV=nAB^
+z1xZ0K&o*uONCcG=wP>{I(?HVsgQ9DKH1e|O%ld<MLsbHlrrqk17+dOsrb@0!{^JvH
+zSEDESNLD2T``XRT3Y$o*RCfpJ7J5d+DD@BL8nymeJ&@|Dfq`6C9YPp0+sqXcBbQNT
+zRP-d*ph;=<EP$<paatWrV4G2uGFM4yI%V((Z#XVY@|@wm5t9B8G2on{mc}u!S&+k#
+zO(K$M280l!n8L>6u%!fF52KXe<M`D?h_g(B39@BD%Q$KUg*fG?cQ?5J8*$tNh8k_Q
+z#T`=;U{^oN4Wcd352z3bVlYzbI}UuTBb2$%njWil{MwH}$5?vAbW_>Xb>3_R9n*uW
+zku7YoOI5hVdKW3$7-mY2Q_G_!+)KO0hcr6O*p(QS(rTY>Dk@+#T8-j(-+!>I^5sC0
+zWm%O&*WXsaxTJ<<@UX|Yh-=I|S{qHSyyIcT<|!MiiGcZi0`sECrRPFcYS|ut5uN?t
+j@8$}O7YS&hylNZ^4mJlS4idd1Ku4~=4Zf0i1iAA+Ek!8W
+
+diff --git android/assets/texture/0_clvl.png android/assets/texture/0_clvl.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..3ed9626184991443da689434af7fd4427844f240
+GIT binary patch
+literal 93
+zc%17D@N?(olHy`uVBq!ia0vp^0wB!61|;P_|4#%`DxNNmAr^wkDG3Qb_>ZJ8t8FTE
+qGVPN(aKJ!{ZE+&QDL&@;d<?!0jPkcvGSmXqGkCiCxvX<aXaWGQ`4=t#
+
+diff --git android/assets/texture/1_clvl.png android/assets/texture/1_clvl.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..a7d9ab18d5aec824e5da38c40ec37027a5d24293
+GIT binary patch
+literal 160
+zc%17D@N?(olHy`uVBq!ia0vp^0wB!61|;P_|4#%`>7Fi*Ar^vrd!xA;9C(<;&%b@>
+znyA2=DOmHy-|Xd**w@Y5?Qh<ky4&X7s|R}fx4NAE)t`EZWf{-D45pJ8f&!QqoRUBH
+zck29w{2yNIXi&78TI05Sh0`zn3t@M<kLmA{_gA$@eLU%Z8++AN{^nZ7OkSXs44$rj
+JF6*2UngBrYK2-n!
+
