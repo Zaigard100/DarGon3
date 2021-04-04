@@ -152,7 +152,7 @@ public class GameRenderer {
         //BUTTON DRAW END
 
         //LOGO DRAW BEGIN
-        batch.draw(res.logo,12*16/8*Main.getConfiguration().getScale() ,3.75f*16*8/8*Main.getConfiguration().getScale() - 16*8/2/8*Main.getConfiguration().getScale(), 408 * 1.25f/8*Main.getConfiguration().getScale() ,125 * 1.25f/8*Main.getConfiguration().getScale());
+        batch.draw(res.logo, 12 * 16 / 8 * Main.getConfiguration().getScale(), 3.85f * 16 * 8 / 8 * Main.getConfiguration().getScale() - 16 * 8 / 2 / 8 * Main.getConfiguration().getScale(), 408 * 1.25f / 8 * Main.getConfiguration().getScale(), 125 * 1f / 8 * Main.getConfiguration().getScale());
         //LOGO DRAW END
 
         if(isPres){
