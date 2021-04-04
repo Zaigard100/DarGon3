@@ -12,6 +12,7 @@ public class Flamefrower {
     float timer = 0, fire_timer = 0;
     static Player player;
     int dx, dy;
+    int timst = 0;
 
     public Flamefrower(int x, int y, int max, int angle, Player player) {
         this.x = x;
@@ -69,12 +70,16 @@ public class Flamefrower {
     }
 
     public void frame() {
-            if ((player.getX() == x + ((flame_stage + 1) * dx)) && (player.getY() ==  y+ ((flame_stage + 1) * dy))) {
-                if(player.getHp()>0) {
-                    player.setHp(player.getHp()-4);
-                    player.setDamgeScr(0f,2);
+        timst = 0;
+        while (timst < flame_stage) {
+            if ((player.getX() == x + ((timst + dx) * dx)) && (player.getY() == y + ((timst + dy) * dy))) {
+                if (player.getHp() > 0) {
+                    player.setHp(0);
+                    player.setDamgeScr(0f, 2);
                 }
             }
+            timst++;
+        }
     }
 
     public void tick(float second){

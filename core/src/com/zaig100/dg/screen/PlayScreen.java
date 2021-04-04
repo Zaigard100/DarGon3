@@ -228,28 +228,39 @@ public class PlayScreen implements Screen {
                 is_pause = !is_pause;
                 sensor_timer=0;
             }
-        }else{
+        } else {
             sensor_timer = 0;
         }
         fbo.begin();
         batch.setProjectionMatrix(cam.combined);
-            batch.begin();
+        batch.begin();
 
-                Gdx.gl.glClearColor(0, 0, 0, 1);
-                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-                map.render(batch, Main.getRes(),player.get_wX(),player.get_wY(),player,Main.getConfiguration());
-                stair.render(batch, Main.getRes(),Main.getConfiguration());
-                if(lR.getTeleportCount()>0) {
-                    for (i = 0; i < lR.getTeleportCount(); i++) {
-                        if(!is_pause) tp[i].frame(joystick);
-                        tp[i].render(batch, Main.getRes(),Main.getConfiguration());
-                    }
-                }
-                if(lR.getHideTrapCount()>0) {
-                    for (i = 0; i < lR.getHideTrapCount()-1; i++) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        map.render(batch, Main.getRes(), player.get_wX(), player.get_wY(), player, Main.getConfiguration());
+
+        if (lR.getFlimstTileCount() > 0) {
+            for (i = 0; i < lR.getFlimstTileCount(); i++) {
+                if (!is_pause) flimsyTiles[i].frame();
+                if (!is_pause) flimsyTiles[i].tick(1.5f);
+
+                flimsyTiles[i].render(batch, Main.getRes(), Main.getConfiguration());
+            }
+        }
+
+        stair.render(batch, Main.getRes(), Main.getConfiguration());
+        if (lR.getTeleportCount() > 0) {
+            for (i = 0; i < lR.getTeleportCount(); i++) {
+                if (!is_pause) tp[i].frame(joystick);
+                tp[i].render(batch, Main.getRes(), Main.getConfiguration());
+            }
+        }
+        if (lR.getHideTrapCount() > 0) {
+            for (i = 0; i < lR.getHideTrapCount() - 1; i++) {
                         if(!is_pause) hideTrap[i].frame(Main.getRes());
                     }
                 }
+
         player.render(batch, Main.getRes());
         if (lR.getFlamethrowerCount() > 0) {
             for (i = 0; i < lR.getFlamethrowerCount(); i++) {
@@ -271,15 +282,6 @@ public class PlayScreen implements Screen {
             for (i = 0; i < lR.getItemsCount(); i++) {
                 if (!is_pause) item[i].frame();
                 item[i].render(batch, Main.getRes(), Main.getConfiguration());
-            }
-        }
-
-        if (lR.getFlimstTileCount() > 0) {
-            for (i = 0; i < lR.getFlimstTileCount(); i++) {
-                if (!is_pause) flimsyTiles[i].frame();
-                if (!is_pause) flimsyTiles[i].tick(1.5f);
-
-                flimsyTiles[i].render(batch, Main.getRes(), Main.getConfiguration());
             }
         }
 

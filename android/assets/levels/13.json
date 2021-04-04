@@ -34,18 +34,47 @@
 
   "flamethrower_count":4,
   "flamethrower": [
-    [5,5,0,2,0],
-    [5,5,0,2,1],
-    [5,5,0,2,2],
-    [5,5,0,2,3]
+    [
+      5,
+      5,
+      0,
+      2,
+      0
+    ],
+    [
+      5,
+      5,
+      0,
+      2,
+      1
+    ],
+    [
+      5,
+      5,
+      0,
+      2,
+      2
+    ],
+    [
+      5,
+      5,
+      0,
+      2,
+      3
+    ]
   ],
-  "hide_traps_count":2,
+  "hide_traps_count": 2,
   "hide_traps": [
-    [3,7],[3,2]
+    [
+      3,
+      7
+    ],
+    [
+      3,
+      2
+    ]
   ],
-  "end": true,
-  "nextlevelpath": "end",
-
+  "end": false,
+  "nextlevelpath": "levels/14.json",
   "save": false
-
 }
