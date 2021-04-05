@@ -198,6 +198,9 @@ public class  Res {
         ingame.dispose();
         settingmisc.dispose();
 */
+        clvl0.dispose();
+        clvl1.dispose();
+        clvl2.dispose();
         wasted.dispose();
         click[0].dispose();
         click[1].dispose();

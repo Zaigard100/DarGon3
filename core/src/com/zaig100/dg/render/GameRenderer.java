@@ -172,8 +172,11 @@ public class GameRenderer {
             mY = Gdx.graphics.getHeight()-Gdx.input.getY()- sy/2;
             if(mX>0&&mX<16*Main.getConfiguration().getScale()){
                 if(mY>4*16*Main.getConfiguration().getScale()&&mY<5*16*Main.getConfiguration().getScale()){
-                    if((Main.getConfiguration().getScale() == 6.0f)&&(Main.getConfiguration().getMusic()==10)&&(Main.getConfiguration().getSound()==80)){
+                    if ((Main.getConfiguration().getScale() == 6.0f) && (Main.getConfiguration().getMusic() == 10) && (Main.getConfiguration().getSound() == 80)) {
                         m.setScreen(new Render3D(m));
+                    }
+                    if ((Main.getConfiguration().getMusic() == 20) && (Main.getConfiguration().getSound() == 50)) {
+                        m.setScreen(new PlayScreen(m, "levels/Test.json", new Player(0, 0, null, Main.getConfiguration()), false));
                     }
                 }
             }

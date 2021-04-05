@@ -39,6 +39,7 @@ public class Main extends Game {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Start");
     }
 
     @Override
@@ -64,6 +65,7 @@ public class Main extends Game {
         super.dispose();
         batch.dispose();
         tex.dispose();
+        res.dispose();
     }
 
     public static Configuration getConfiguration() {
