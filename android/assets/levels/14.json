@@ -121,7 +121,7 @@
       4
     ]
   ],
-  "end": true,
-  "nextlevelpath": "end",
+  "end": false,
+  "nextlevelpath": "levels/15.json",
   "save": false
 }

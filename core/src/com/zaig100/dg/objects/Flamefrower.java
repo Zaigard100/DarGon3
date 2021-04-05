@@ -72,7 +72,7 @@ public class Flamefrower {
     public void frame() {
         timst = 0;
         while (timst < flame_stage) {
-            if ((player.getX() == x + ((timst + dx) * dx)) && (player.getY() == y + ((timst + dy) * dy))) {
+            if ((player.getX() == x + ((timst + 1) * dx)) && (player.getY() == y + ((timst + 1) * dy))) {
                 if (player.getHp() > 0) {
                     player.setHp(0);
                     player.setDamgeScr(0f, 2);
