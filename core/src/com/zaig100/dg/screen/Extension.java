@@ -36,7 +36,7 @@ public class Extension implements Screen {
 
         f1 = font.gFont(8 * Main.getConfiguration().getScale(), "fonts/GFont.ttf");
 
-        Gdx.input.setCatchBackKey(true);
+        Gdx.input.setCatchBackKey(false);
 
     }
 
@@ -47,7 +47,7 @@ public class Extension implements Screen {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)||Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
             m.setScreen(new GameScreen(m));
-            Gdx.input.setCatchBackKey(false);
+            Gdx.input.setCatchBackKey(true);
         }
 
         if(pM.getList().size()>0) {

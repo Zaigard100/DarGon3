@@ -72,7 +72,7 @@ public class Render3D implements Screen {
         }else {
             System.out.println( "Sucsessfull");
         }
-        Gdx.input.setCatchBackKey(true);
+        Gdx.input.setCatchBackKey(false);
 
     }
 
@@ -176,7 +176,7 @@ public class Render3D implements Screen {
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)||Gdx.input.isKeyPressed(Input.Keys.BACK)){
             m.setScreen(new GameScreen(m));
             Gdx.input.setCursorCatched(false);
-            Gdx.input.setCatchBackKey(false);
+            Gdx.input.setCatchBackKey(true);
         }
     }
 
