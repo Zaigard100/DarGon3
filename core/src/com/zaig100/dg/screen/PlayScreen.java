@@ -355,13 +355,17 @@ public class PlayScreen implements Screen {
 
     void debugShow(){
         line = "Debag:";
-        f3.draw(batch,line,10,5f * 16 * Main.getConfiguration().getScale()-10);
-        line = "FPS:"+Gdx.graphics.getFramesPerSecond();
-        f3.draw(batch,line,10,5f * 16 * Main.getConfiguration().getScale()-25);
-        line = "X:"+player.getX() + "  Y:"+player.getY();
-        f3.draw(batch,line,10,5f * 16 * Main.getConfiguration().getScale()-40);
-        line = "WX:"+player.get_wX() + "  WY:"+player.get_wY();
-        f3.draw(batch,line,10,5f * 16 * Main.getConfiguration().getScale()-55);
+        f3.draw(batch, line, 10, 5f * 16 * Main.getConfiguration().getScale() - 10);
+        line = "FPS:" + Gdx.graphics.getFramesPerSecond();
+        f3.draw(batch, line, 10, 5f * 16 * Main.getConfiguration().getScale() - 25);
+        line = "X:" + player.getX() + "  Y:" + player.getY();
+        f3.draw(batch, line, 10, 5f * 16 * Main.getConfiguration().getScale() - 40);
+        line = "WX:" + player.get_wX() + "  WY:" + player.get_wY();
+        f3.draw(batch, line, 10, 5f * 16 * Main.getConfiguration().getScale() - 55);
+        line = "JavaHeap:" + (((int) Gdx.app.getJavaHeap()) / (8 * 1024)) + " KB";
+        f3.draw(batch, line, 10, 5f * 16 * Main.getConfiguration().getScale() - 70);
+        line = "NativeHeap:" + (((int) Gdx.app.getNativeHeap()) / (8 * 1024)) + " KB";
+        f3.draw(batch, line, 10, 5f * 16 * Main.getConfiguration().getScale() - 85);
     }
 
 
