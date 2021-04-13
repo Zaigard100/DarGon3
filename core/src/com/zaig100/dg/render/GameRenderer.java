@@ -79,10 +79,10 @@ public class GameRenderer {
         //BACKGRAUND BEGIN
         for (int i = 0; i <9; i++) {
             for (int j = 0; j <9; j++) {
-                if (map[j][i]==11) {
+                if (map[j][i] == 11) {
                     batch.draw(res.tile(0, 0), (j - 2) * 16 * 8 / 8 * Main.getConfiguration().getScale(), (i - 4) * 16 * 8 / 8 * Main.getConfiguration().getScale(), 16 * 8 / 8 * Main.getConfiguration().getScale(), 16 * 8 / 8 * Main.getConfiguration().getScale());//backgraund
                 }
-                if (map[j][i]==12) {
+                if (map[j][i] == 12) {
                     batch.draw(res.tile(1, 1), (j - 2) * 16 * 8 / 8 * Main.getConfiguration().getScale(), (i - 4) * 16 * 8 / 8 * Main.getConfiguration().getScale(), 16 * 8 / 8 * Main.getConfiguration().getScale(), 16 * 8 / 8 * Main.getConfiguration().getScale());//backgraund
                 }
                 if (map[j][i] == 13) {
@@ -156,6 +156,7 @@ public class GameRenderer {
 
         //LOGO DRAW BEGIN
         batch.draw(res.logo, 12 * 16 / 8 * Main.getConfiguration().getScale(), 3.85f * 16 * 8 / 8 * Main.getConfiguration().getScale() - 16 * 8 / 2 / 8 * Main.getConfiguration().getScale(), 408 * 1.25f / 8 * Main.getConfiguration().getScale(), 125 * 1f / 8 * Main.getConfiguration().getScale());
+        batch.draw(res.vk, 4 * Main.getConfiguration().getScale(), 4 * Main.getConfiguration().getScale(), 8 * Main.getConfiguration().getScale(), 8 * Main.getConfiguration().getScale());
         //LOGO DRAW END
 
         if(isPres){
@@ -174,6 +175,12 @@ public class GameRenderer {
             mX = Gdx.input.getX() - sx / 2;
             mY = Gdx.graphics.getHeight() - Gdx.input.getY() - sy / 2;
 
+            if (mX > 4 * Main.getConfiguration().getScale() && mX < 12 * Main.getConfiguration().getScale()) {
+                if (mY > 4 * Main.getConfiguration().getScale() && mY < 12 * Main.getConfiguration().getScale()) {
+                    Gdx.net.openURI("https://vk.com/dargonzaig100");
+                }
+            }
+
             if (mX > 6 * 16 * Main.getConfiguration().getScale() && mX < 7 * 16 * Main.getConfiguration().getScale()) {
                 if (mY > 0 && mY < 16 * Main.getConfiguration().getScale()) {
                     Gdx.app.exit();
@@ -191,23 +198,23 @@ public class GameRenderer {
             }
             if ((mY > 109 / 6 * Main.getConfiguration().getScale()) && (mY < 239 / 6 * Main.getConfiguration().getScale())) {
                 if ((mX > 116 / 8 * Main.getConfiguration().getScale()) && (mX < 276 / 8 * Main.getConfiguration().getScale())) {
-                    tick =0;
+                    tick = 0;
                     b_Tutorial = true;
                     res.click[random.nextInt(2)].play(Main.getConfiguration().getSound());
                     //isPres =true;
                 }
             }
-            if ((mY > 75/6*Main.getConfiguration().getScale() ) && (mY < 256/6*Main.getConfiguration().getScale())) {
-                if ((mX < 576/8*Main.getConfiguration().getScale() * 1) && (mX > 320/8*Main.getConfiguration().getScale() * 1)) {
-                    tick =0;
+            if ((mY > 75 / 6 * Main.getConfiguration().getScale()) && (mY < 256 / 6 * Main.getConfiguration().getScale())) {
+                if ((mX < 576 / 8 * Main.getConfiguration().getScale() * 1) && (mX > 320 / 8 * Main.getConfiguration().getScale() * 1)) {
+                    tick = 0;
                     b_Play = true;
                     res.click[random.nextInt(2)].play(Main.getConfiguration().getSound());
                     // isPres =true;
                 }
             }
-            if ((mY > 109/6*Main.getConfiguration().getScale() * 1) && (mY < 239/6*Main.getConfiguration().getScale() * 1)) {
-                if ((mX > 616/8*Main.getConfiguration().getScale() * 1) && (mX < 789/8*Main.getConfiguration().getScale() * 1)) {
-                    tick =0;
+            if ((mY > 109 / 6 * Main.getConfiguration().getScale() * 1) && (mY < 239 / 6 * Main.getConfiguration().getScale() * 1)) {
+                if ((mX > 616 / 8 * Main.getConfiguration().getScale() * 1) && (mX < 789 / 8 * Main.getConfiguration().getScale() * 1)) {
+                    tick = 0;
                     b_Settings = true;
                     res.click[random.nextInt(2)].play(Main.getConfiguration().getSound());
                     // isPres =true;

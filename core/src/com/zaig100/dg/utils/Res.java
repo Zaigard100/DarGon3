@@ -44,6 +44,8 @@ public class  Res {
 
     public TextureRegion arrow;
 
+    public Texture vk;
+
     Sprite hero;
 
     public Texture amonghero;
@@ -108,8 +110,11 @@ public class  Res {
 
         pause_dark = new Texture(Gdx.files.internal("texture/resume.png"));
 
-        joystick =new Texture(Gdx.files.internal("texture/Joystick.png"));
+        joystick = new Texture(Gdx.files.internal("texture/Joystick.png"));
         use = new Texture(Gdx.files.internal("texture/use.png"));
+
+        vk = new Texture(Gdx.files.internal("texture/vk.png"));
+
 /*
         mainmenu = Gdx.audio.newMusic(Gdx.files.internal("sounds/mainmenu.mp3"));
         ingame = Gdx.audio.newMusic(Gdx.files.internal("sounds/ingame.mp3"));
