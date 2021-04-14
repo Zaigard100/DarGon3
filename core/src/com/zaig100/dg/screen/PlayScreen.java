@@ -83,28 +83,33 @@ public class PlayScreen implements Screen {
     
     public PlayScreen(Main m,String path,Player p,boolean isPack){
         this.m = m;
-        this.path=path;
+        this.path = path;
         this.player = p;
-        this.isPack= isPack;
+        this.isPack = isPack;
+        width = Gdx.graphics.getWidth();
+        height = Gdx.graphics.getHeight();
+        batch = new SpriteBatch();
+        fbo = new FrameBuffer(Pixmap.Format.RGB888, width, height, false);
+        fbo2 = new FrameBuffer(Pixmap.Format.RGB888, width, height, false);
     }
 
-    public PlayScreen(Main m, String path, Player p, boolean isPack, String packname, String derectory){
+    public PlayScreen(Main m, String path, Player p, boolean isPack, String packname, String derectory) {
         this.m = m;
-        this.path=path;
+        this.path = path;
         this.player = p;
-        this.isPack= isPack;
+        this.isPack = isPack;
         this.packname = packname;
         this.derectory = derectory;
+        width = Gdx.graphics.getWidth();
+        height = Gdx.graphics.getHeight();
+        batch = new SpriteBatch();
+        fbo = new FrameBuffer(Pixmap.Format.RGB888, width, height, false);
+        fbo2 = new FrameBuffer(Pixmap.Format.RGB888, width, height, false);
     }
 
     @Override
     public void show() {
         random = new Random();
-        width = Gdx.graphics.getWidth();
-        height = Gdx.graphics.getHeight();
-        batch = new SpriteBatch();
-        fbo = new FrameBuffer(Pixmap.Format.RGB888,width,height,false);
-        fbo2 = new FrameBuffer(Pixmap.Format.RGB888,width,height,false);
         cam = new OrthographicCamera(width,height);
         viewport = new ScreenViewport(cam);
         font = new Font();
@@ -321,9 +326,17 @@ public class PlayScreen implements Screen {
 
         if(!is_pause) player.tick(0.1f);
         if (isPack) {
-            stair.frame_isPack(m, Main.getRes(), joystick, isPack,packname,derectory);
+            stair.frame_isPack(m, Main.getRes(), joystick, isPack, packname, derectory);
+            if (stair.isExit()) {
+                dispose();
+                m.setScreen(new PlayScreen(m, stair.getNext_path(), player, isPack, packname, derectory));
+            }
         }else {
             stair.frame(m, Main.getRes(), joystick, isPack);
+            if (stair.isExit()) {
+                dispose();
+                m.setScreen(new PlayScreen(m, stair.getNext_path(), player, isPack));
+            }
         }
         frame = new Sprite(fbo.getColorBufferTexture());
 
@@ -387,6 +400,7 @@ public class PlayScreen implements Screen {
             f2.draw(batch, " Load save", 2.2f * 16 * Main.getConfiguration().getScale(), 1.5f * 16 * Main.getConfiguration().getScale());
             f2.draw(batch, " Exit(Hold)", 2.2f * 16 * Main.getConfiguration().getScale(), 0.5f * 16 * Main.getConfiguration().getScale());
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)||joystick.isUse()) {
+                dispose();
                 m.setScreen(new GameScreen(m));
             }
         }
@@ -396,6 +410,7 @@ public class PlayScreen implements Screen {
             f2.draw(batch, ">Load save<", 2.2f * 16 * Main.getConfiguration().getScale(), 1.5f * 16 * Main.getConfiguration().getScale());
             f2.draw(batch, " Exit(Hold)", 2.2f * 16 * Main.getConfiguration().getScale(), 0.5f * 16 * Main.getConfiguration().getScale());
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || joystick.isUse()) {
+                dispose();
                 if (isPack) {
                     m.setScreen(new PlayScreen(m, save.getsPath(), new Player(0, 0, null, save.getHp(), save.getPotion(), save.getSheld(), save.getTorch(), Main.getConfiguration()), isPack, packname, derectory));
                 } else
@@ -470,6 +485,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void dispose() {
+        System.out.println("123");
         batch.dispose();
         fbo.dispose();
         fbo2.dispose();

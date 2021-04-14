@@ -1,7 +1,7 @@
 {
-  "Music": 20,
+  "Music": 10,
   "Scale": 6.0,
-  "Sound": 50,
+  "Sound": 80,
   "Debug": false,
   "Sensor": true
 }

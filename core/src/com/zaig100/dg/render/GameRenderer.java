@@ -6,10 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.Main;
 import com.zaig100.dg.objects.Player;
-import com.zaig100.dg.screen.Extension;
 import com.zaig100.dg.screen.PlayScreen;
 import com.zaig100.dg.screen.Render3D;
-import com.zaig100.dg.screen.Setting;
 import com.zaig100.dg.utils.LevelReader;
 import com.zaig100.dg.utils.Res;
 
@@ -33,20 +31,21 @@ public class GameRenderer {
     boolean b_Play = false;
     boolean b_Settings = false;
     boolean b_Tutorial = false;
-    boolean isPres= false;
+    boolean isPres = false;
 
     int[] spawn = new int[2];
     int[] win = new int[2];
 
+    boolean isExit = false;
+    int button = 0;
 
-
-    int i1=0;
-    int i2=0;
-    int i3=0;
+    int i1 = 0;
+    int i2 = 0;
+    int i3 = 0;
 
     Random random = new Random();
 
-    void start(){
+    void start() {
         b_Play = false;
         b_Settings = false;
         b_Tutorial = false;
@@ -116,6 +115,8 @@ public class GameRenderer {
                 b_Tutorial = false;
                 b_Play = false;
                 b_Settings = false;
+                isExit = true;
+                button = 2;
                 m.setScreen(new PlayScreen(m, "levels/01.json", new Player(0, 0, null, Main.getConfiguration()), false));
             } else {
                 tick++;
@@ -126,11 +127,13 @@ public class GameRenderer {
             }
         if (b_Tutorial) {
             batch.draw(res.tutorial_button_toched, 14 * 8/8*Main.getConfiguration().getScale(), 5 * 16 * 4/8*Main.getConfiguration().getScale() - 21 * 4/8*Main.getConfiguration().getScale() - 32 * 3/8*Main.getConfiguration().getScale(), 21 * 8/8*Main.getConfiguration().getScale(), 21 * 8/8*Main.getConfiguration().getScale());
-            if(tick <120){
-                b_Tutorial =false;
+            if(tick <120) {
+                b_Tutorial = false;
                 b_Play = false;
                 b_Settings = false;
-                m.setScreen(new Extension(m));
+                isExit = true;
+                button = 1;
+
             }else {
                 tick++;
             }
@@ -139,11 +142,12 @@ public class GameRenderer {
 
         if(b_Settings) {
             batch.draw(res.settings_button_toched,7 * 16 * 8/8*Main.getConfiguration().getScale() - 21 * 8/8*Main.getConfiguration().getScale() - 14 * 8/8*Main.getConfiguration().getScale(),  5 * 16 * 4/8*Main.getConfiguration().getScale() - 21 * 4/8*Main.getConfiguration().getScale() - 32 * 3/8*Main.getConfiguration().getScale(), 21 * 8/8*Main.getConfiguration().getScale(), 21 * 8/8*Main.getConfiguration().getScale());
-            if(tick <120){
-                b_Tutorial =false;
+            if(tick <120) {
+                b_Tutorial = false;
                 b_Play = false;
                 b_Settings = false;
-                m.setScreen(new Setting(m));
+                isExit = true;
+                button = 3;
             }else {
                 tick++;
             }
@@ -158,10 +162,6 @@ public class GameRenderer {
         batch.draw(res.logo, 12 * 16 / 8 * Main.getConfiguration().getScale(), 3.85f * 16 * 8 / 8 * Main.getConfiguration().getScale() - 16 * 8 / 2 / 8 * Main.getConfiguration().getScale(), 408 * 1.25f / 8 * Main.getConfiguration().getScale(), 125 * 1f / 8 * Main.getConfiguration().getScale());
         batch.draw(res.vk, 4 * Main.getConfiguration().getScale(), 4 * Main.getConfiguration().getScale(), 8 * Main.getConfiguration().getScale(), 8 * Main.getConfiguration().getScale());
         //LOGO DRAW END
-
-        if(isPres){
-            shiftAnim(batch,res,true);
-        }
 
         batch.end();
     }
@@ -223,11 +223,13 @@ public class GameRenderer {
         }
     }
 
-    void shiftAnim(SpriteBatch batch, Res res,boolean left){
-
-
+    public boolean isExit() {
+        return isExit;
     }
 
+    public int getButton() {
+        return button;
+    }
 }
 
 

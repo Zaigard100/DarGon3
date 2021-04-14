@@ -39,6 +39,7 @@ public class Setting implements Screen {
 
     public Setting(Main m){
         this.m = m;
+        batch = new SpriteBatch();
     }
 
     @Override
@@ -47,7 +48,6 @@ public class Setting implements Screen {
 
         scrH = Gdx.graphics.getHeight();
         scrW = Gdx.graphics.getWidth();
-        batch = new SpriteBatch();
 
         cam = new OrthographicCamera();
         cam.translate(scrW / 2, scrW / 2, 0);
@@ -217,6 +217,7 @@ public class Setting implements Screen {
                 if(!Gdx.graphics.isFullscreen()&&!m.isAndroid()) {
                     Gdx.graphics.setWindowedMode((int)( 16*7*Scale), (int)( 16*5*Scale));
                 }
+            dispose();
             m.setScreen(new GameScreen(m));
             //Gdx.app.exit();
         }

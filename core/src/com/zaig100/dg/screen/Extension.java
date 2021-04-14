@@ -19,12 +19,13 @@ public class Extension implements Screen {
     Font font;
     BitmapFont f1;
 
-    SpriteBatch batch = new SpriteBatch();
+    SpriteBatch batch;
 
     int num = 0;
 
     public Extension(Main m){
         this.m = m;
+        batch = new SpriteBatch();
     }
 
     @Override
@@ -36,7 +37,7 @@ public class Extension implements Screen {
 
         f1 = font.gFont(8 * Main.getConfiguration().getScale(), "fonts/GFont.ttf");
 
-        Gdx.input.setCatchBackKey(false);
+        Gdx.input.setCatchBackKey(true);
 
     }
 
@@ -46,8 +47,9 @@ public class Extension implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)||Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
+            dispose();
             m.setScreen(new GameScreen(m));
-            Gdx.input.setCatchBackKey(true);
+            Gdx.input.setCatchBackKey(false);
         }
 
         if(pM.getList().size()>0) {

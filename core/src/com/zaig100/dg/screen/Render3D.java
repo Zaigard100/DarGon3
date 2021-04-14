@@ -45,6 +45,7 @@ public class Render3D implements Screen {
 
     public Render3D(Main m) {
         this.m = m;
+        batch = new SpriteBatch();
     }
 
     @Override
@@ -59,7 +60,6 @@ public class Render3D implements Screen {
 
         timestart = TimeUtils.millis();
         WinSpr = new Sprite();
-        batch = new SpriteBatch();
         fram = new FrameBuffer(Format.RGB888,w,h,false);
         wind = new Texture(Gdx.graphics.getWidth(),Gdx.graphics.getHeight(),Format.RGBA8888);
         //wind.bind(0);
@@ -72,7 +72,7 @@ public class Render3D implements Screen {
         }else {
             System.out.println( "Sucsessfull");
         }
-        Gdx.input.setCatchBackKey(false);
+        Gdx.input.setCatchBackKey(true);
 
     }
 
@@ -174,9 +174,10 @@ public class Render3D implements Screen {
         batch.end();
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)||Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            dispose();
             m.setScreen(new GameScreen(m));
             Gdx.input.setCursorCatched(false);
-            Gdx.input.setCatchBackKey(true);
+            Gdx.input.setCatchBackKey(false);
         }
     }
 
