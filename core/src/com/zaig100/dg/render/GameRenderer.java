@@ -8,6 +8,7 @@ import com.zaig100.dg.Main;
 import com.zaig100.dg.objects.Player;
 import com.zaig100.dg.screen.PlayScreen;
 import com.zaig100.dg.screen.Render3D;
+import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.LevelReader;
 import com.zaig100.dg.utils.Res;
 
@@ -56,21 +57,20 @@ public class GameRenderer {
      * Render Menu
      *
      * @param batch  batch
-     * @param res    Res Class
      * @param widht  Width Screen
      * @param height Height Screen
      */
-    public void renderMenu(SpriteBatch batch, Res res, int widht, int height) {
+    public void renderMenu(SpriteBatch batch, int widht, int height) {
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 
         if (Gdx.input.isKeyPressed(Input.Keys.F11)) {
-            if(!Gdx.graphics.isFullscreen()) {
+            if (!Gdx.graphics.isFullscreen()) {
                 Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
-            }else{
-                Gdx.graphics.setWindowedMode((int)( 16*7*Main.getConfiguration().getScale()), (int)( 16*5*Main.getConfiguration().getScale()));
+            } else {
+                Gdx.graphics.setWindowedMode((int) (16 * 7 * Configuration.getScale()), (int) (16 * 5 * Configuration.getScale()));
             }
         }
 
@@ -79,36 +79,36 @@ public class GameRenderer {
         for (int i = 0; i <9; i++) {
             for (int j = 0; j <9; j++) {
                 if (map[j][i] == 11) {
-                    batch.draw(res.tile(0, 0), (j - 2) * 16 * 8 / 8 * Main.getConfiguration().getScale(), (i - 4) * 16 * 8 / 8 * Main.getConfiguration().getScale(), 16 * 8 / 8 * Main.getConfiguration().getScale(), 16 * 8 / 8 * Main.getConfiguration().getScale());//backgraund
+                    batch.draw(Res.tile(0, 0), (j - 2) * 16 * 8 / 8 * Configuration.getScale(), (i - 4) * 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale());//backgraund
                 }
                 if (map[j][i] == 12) {
-                    batch.draw(res.tile(1, 1), (j - 2) * 16 * 8 / 8 * Main.getConfiguration().getScale(), (i - 4) * 16 * 8 / 8 * Main.getConfiguration().getScale(), 16 * 8 / 8 * Main.getConfiguration().getScale(), 16 * 8 / 8 * Main.getConfiguration().getScale());//backgraund
+                    batch.draw(Res.tile(1, 1), (j - 2) * 16 * 8 / 8 * Configuration.getScale(), (i - 4) * 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale());//backgraund
                 }
                 if (map[j][i] == 13) {
-                    batch.draw(res.tile(2, 0), (j - 2) * 16 * 8 / 8 * Main.getConfiguration().getScale(), (i - 4) * 16 * 8 / 8 * Main.getConfiguration().getScale(), 16 * 8 / 8 * Main.getConfiguration().getScale(), 16 * 8 / 8 * Main.getConfiguration().getScale());//backgraund
+                    batch.draw(Res.tile(2, 0), (j - 2) * 16 * 8 / 8 * Configuration.getScale(), (i - 4) * 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale());//backgraund
                 }
                 if (map[j][i] == 14) {
-                    batch.draw(res.tile(1, 0), (j - 2) * 16 * 8 / 8 * Main.getConfiguration().getScale(), (i - 4) * 16 * 8 / 8 * Main.getConfiguration().getScale(), 16 * 8 / 8 * Main.getConfiguration().getScale(), 16 * 8 / 8 * Main.getConfiguration().getScale());//backgraund
+                    batch.draw(Res.tile(1, 0), (j - 2) * 16 * 8 / 8 * Configuration.getScale(), (i - 4) * 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale());//backgraund
                 }
                 if (map[j][i] == 15) {
-                    batch.draw(res.tile(2, 1), (j - 2) * 16 * 8 / 8 * Main.getConfiguration().getScale(), (i - 4) * 16 * 8 / 8 * Main.getConfiguration().getScale(), 16 * 8 / 8 * Main.getConfiguration().getScale(), 16 * 8 / 8 * Main.getConfiguration().getScale());//backgraund
+                    batch.draw(Res.tile(2, 1), (j - 2) * 16 * 8 / 8 * Configuration.getScale(), (i - 4) * 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale());//backgraund
                 }
                 if (map[j][i] == 16) {
-                    batch.draw(res.tile(3, 0), (j - 2) * 16 * 8 / 8 * Main.getConfiguration().getScale(), (i - 4) * 16 * 8 / 8 * Main.getConfiguration().getScale(), 16 * 8 / 8 * Main.getConfiguration().getScale(), 16 * 8 / 8 * Main.getConfiguration().getScale());//backgraund
+                    batch.draw(Res.tile(3, 0), (j - 2) * 16 * 8 / 8 * Configuration.getScale(), (i - 4) * 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale());//backgraund
                 }
                 if (map[j][i] == 18) {
-                    batch.draw(res.tile(4, 1), (j - 2) * 16 * 8 / 8 * Main.getConfiguration().getScale(), (i - 4) * 16 * 8 / 8 * Main.getConfiguration().getScale(), 16 * 8 / 8 * Main.getConfiguration().getScale(), 16 * 8 / 8 * Main.getConfiguration().getScale());//backgraund
+                    batch.draw(Res.tile(4, 1), (j - 2) * 16 * 8 / 8 * Configuration.getScale(), (i - 4) * 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale());//backgraund
                 }
             }
         }
-        batch.draw(res.nextlv, 6 * 16 * Main.getConfiguration().getScale(), 0, 16 * Main.getConfiguration().getScale(), 16 * Main.getConfiguration().getScale());
+        batch.draw(Res.nextlv, 6 * 16 * Configuration.getScale(), 0, 16 * Configuration.getScale(), 16 * Configuration.getScale());
 
 
         //BACKGRAUND END
 
         //BUTTON DRAW BEGIN
         if (b_Play) {
-            batch.draw(res.play_button_toched, 7 * 16 * 4 / 8 * Main.getConfiguration().getScale() - 32 * 4 / 8 * Main.getConfiguration().getScale(), 5 * 16 * 4 / 8 * Main.getConfiguration().getScale() - 32 * 4 / 8 * Main.getConfiguration().getScale() - 32 * 3 / 8 * Main.getConfiguration().getScale(), 32 * 8 / 8 * Main.getConfiguration().getScale(), 32 * 8 / 8 * Main.getConfiguration().getScale());
+            batch.draw(Res.play_button_toched, 7 * 16 * 4 / 8 * Configuration.getScale() - 32 * 4 / 8 * Configuration.getScale(), 5 * 16 * 4 / 8 * Configuration.getScale() - 32 * 4 / 8 * Configuration.getScale() - 32 * 3 / 8 * Configuration.getScale(), 32 * 8 / 8 * Configuration.getScale(), 32 * 8 / 8 * Configuration.getScale());
 
 
             if (tick < 120) {
@@ -117,16 +117,16 @@ public class GameRenderer {
                 b_Settings = false;
                 isExit = true;
                 button = 2;
-                m.setScreen(new PlayScreen(m, "levels/01.json", new Player(0, 0, null, Main.getConfiguration()), false));
+                m.setScreen(new PlayScreen(m, "levels/01.json", new Player(0, 0, null), false));
             } else {
                 tick++;
             }
 
         } else {
-            batch.draw(res.play_button, 7 * 16 * 4/8*Main.getConfiguration().getScale() - 32 * 4/8*Main.getConfiguration().getScale(), 5 * 16 * 4/8*Main.getConfiguration().getScale() - 32 * 4/8*Main.getConfiguration().getScale() - 32 * 3/8*Main.getConfiguration().getScale(), 32 * 8/8*Main.getConfiguration().getScale(), 32 * 8/8*Main.getConfiguration().getScale());//play button
+            batch.draw(Res.play_button, 7 * 16 * 4 / 8 * Configuration.getScale() - 32 * 4 / 8 * Configuration.getScale(), 5 * 16 * 4 / 8 * Configuration.getScale() - 32 * 4 / 8 * Configuration.getScale() - 32 * 3 / 8 * Configuration.getScale(), 32 * 8 / 8 * Configuration.getScale(), 32 * 8 / 8 * Configuration.getScale());//play button
             }
         if (b_Tutorial) {
-            batch.draw(res.tutorial_button_toched, 14 * 8/8*Main.getConfiguration().getScale(), 5 * 16 * 4/8*Main.getConfiguration().getScale() - 21 * 4/8*Main.getConfiguration().getScale() - 32 * 3/8*Main.getConfiguration().getScale(), 21 * 8/8*Main.getConfiguration().getScale(), 21 * 8/8*Main.getConfiguration().getScale());
+            batch.draw(Res.tutorial_button_toched, 14 * 8 / 8 * Configuration.getScale(), 5 * 16 * 4 / 8 * Configuration.getScale() - 21 * 4 / 8 * Configuration.getScale() - 32 * 3 / 8 * Configuration.getScale(), 21 * 8 / 8 * Configuration.getScale(), 21 * 8 / 8 * Configuration.getScale());
             if(tick <120) {
                 b_Tutorial = false;
                 b_Play = false;
@@ -138,29 +138,29 @@ public class GameRenderer {
                 tick++;
             }
         } else
-            batch.draw(res.tutorial_button, 14 * 8/8*Main.getConfiguration().getScale(), 5 * 16 * 4/8*Main.getConfiguration().getScale() - 21 * 4/8*Main.getConfiguration().getScale() - 32 * 3/8*Main.getConfiguration().getScale(), 21 * 8/8*Main.getConfiguration().getScale(), 21 * 8/8*Main.getConfiguration().getScale());//tutorial
+            batch.draw(Res.tutorial_button, 14 * 8 / 8 * Configuration.getScale(), 5 * 16 * 4 / 8 * Configuration.getScale() - 21 * 4 / 8 * Configuration.getScale() - 32 * 3 / 8 * Configuration.getScale(), 21 * 8 / 8 * Configuration.getScale(), 21 * 8 / 8 * Configuration.getScale());//tutorial
 
         if(b_Settings) {
-            batch.draw(res.settings_button_toched,7 * 16 * 8/8*Main.getConfiguration().getScale() - 21 * 8/8*Main.getConfiguration().getScale() - 14 * 8/8*Main.getConfiguration().getScale(),  5 * 16 * 4/8*Main.getConfiguration().getScale() - 21 * 4/8*Main.getConfiguration().getScale() - 32 * 3/8*Main.getConfiguration().getScale(), 21 * 8/8*Main.getConfiguration().getScale(), 21 * 8/8*Main.getConfiguration().getScale());
-            if(tick <120) {
+            batch.draw(Res.settings_button_toched, 7 * 16 * 8 / 8 * Configuration.getScale() - 21 * 8 / 8 * Configuration.getScale() - 14 * 8 / 8 * Configuration.getScale(), 5 * 16 * 4 / 8 * Configuration.getScale() - 21 * 4 / 8 * Configuration.getScale() - 32 * 3 / 8 * Configuration.getScale(), 21 * 8 / 8 * Configuration.getScale(), 21 * 8 / 8 * Configuration.getScale());
+            if (tick < 120) {
                 b_Tutorial = false;
                 b_Play = false;
                 b_Settings = false;
                 isExit = true;
                 button = 3;
-            }else {
+            } else {
                 tick++;
             }
-        }else{
-            batch.draw(res.settings_button, 7 * 16 * 8/8*Main.getConfiguration().getScale() - 21 * 8/8*Main.getConfiguration().getScale() - 14 * 8/8*Main.getConfiguration().getScale(), 5 * 16 * 4/8*Main.getConfiguration().getScale() - 21 * 4/8*Main.getConfiguration().getScale() - 32 * 3/8*Main.getConfiguration().getScale(), 21 * 8/8*Main.getConfiguration().getScale(), 21 * 8/8*Main.getConfiguration().getScale());//settings
+        } else {
+            batch.draw(Res.settings_button, 7 * 16 * 8 / 8 * Configuration.getScale() - 21 * 8 / 8 * Configuration.getScale() - 14 * 8 / 8 * Configuration.getScale(), 5 * 16 * 4 / 8 * Configuration.getScale() - 21 * 4 / 8 * Configuration.getScale() - 32 * 3 / 8 * Configuration.getScale(), 21 * 8 / 8 * Configuration.getScale(), 21 * 8 / 8 * Configuration.getScale());//settings
         }
 
 
         //BUTTON DRAW END
 
         //LOGO DRAW BEGIN
-        batch.draw(res.logo, 12 * 16 / 8 * Main.getConfiguration().getScale(), 3.85f * 16 * 8 / 8 * Main.getConfiguration().getScale() - 16 * 8 / 2 / 8 * Main.getConfiguration().getScale(), 408 * 1.25f / 8 * Main.getConfiguration().getScale(), 125 * 1f / 8 * Main.getConfiguration().getScale());
-        batch.draw(res.vk, 4 * Main.getConfiguration().getScale(), 4 * Main.getConfiguration().getScale(), 8 * Main.getConfiguration().getScale(), 8 * Main.getConfiguration().getScale());
+        batch.draw(Res.logo, 12 * 16 / 8 * Configuration.getScale(), 3.85f * 16 * 8 / 8 * Configuration.getScale() - 16 * 8 / 2 / 8 * Configuration.getScale(), 408 * 1.25f / 8 * Configuration.getScale(), 125 * 1f / 8 * Configuration.getScale());
+        batch.draw(Res.vk, 4 * Configuration.getScale(), 4 * Configuration.getScale(), 8 * Configuration.getScale(), 8 * Configuration.getScale());
         //LOGO DRAW END
 
         batch.end();
@@ -175,48 +175,48 @@ public class GameRenderer {
             mX = Gdx.input.getX() - sx / 2;
             mY = Gdx.graphics.getHeight() - Gdx.input.getY() - sy / 2;
 
-            if (mX > 4 * Main.getConfiguration().getScale() && mX < 12 * Main.getConfiguration().getScale()) {
-                if (mY > 4 * Main.getConfiguration().getScale() && mY < 12 * Main.getConfiguration().getScale()) {
+            if (mX > 4 * Configuration.getScale() && mX < 12 * Configuration.getScale()) {
+                if (mY > 4 * Configuration.getScale() && mY < 12 * Configuration.getScale()) {
                     Gdx.net.openURI("https://vk.com/dargonzaig100");
                 }
             }
 
-            if (mX > 6 * 16 * Main.getConfiguration().getScale() && mX < 7 * 16 * Main.getConfiguration().getScale()) {
-                if (mY > 0 && mY < 16 * Main.getConfiguration().getScale()) {
+            if (mX > 6 * 16 * Configuration.getScale() && mX < 7 * 16 * Configuration.getScale()) {
+                if (mY > 0 && mY < 16 * Configuration.getScale()) {
                     Gdx.app.exit();
                 }
             }
-            if (mX > 0 && mX < 16 * Main.getConfiguration().getScale()) {
-                if (mY > 4 * 16 * Main.getConfiguration().getScale() && mY < 5 * 16 * Main.getConfiguration().getScale()) {
-                    if ((Main.getConfiguration().getScale() == 6.0f) && (Main.getConfiguration().getMusic() == 10) && (Main.getConfiguration().getSound() == 80)) {
+            if (mX > 0 && mX < 16 * Configuration.getScale()) {
+                if (mY > 4 * 16 * Configuration.getScale() && mY < 5 * 16 * Configuration.getScale()) {
+                    if ((Configuration.getScale() == 6.0f) && (Configuration.getMusic() == 10) && (Configuration.getSound() == 80)) {
                         m.setScreen(new Render3D(m));
                     }
-                    if ((Main.getConfiguration().getMusic() == 20) && (Main.getConfiguration().getSound() == 50)) {
-                        m.setScreen(new PlayScreen(m, "levels/Test.json", new Player(0, 0, null, Main.getConfiguration()), false));
+                    if ((Configuration.getMusic() == 20) && (Configuration.getSound() == 50)) {
+                        m.setScreen(new PlayScreen(m, "levels/Test.json", new Player(0, 0, null), false));
                     }
                 }
             }
-            if ((mY > 109 / 6 * Main.getConfiguration().getScale()) && (mY < 239 / 6 * Main.getConfiguration().getScale())) {
-                if ((mX > 116 / 8 * Main.getConfiguration().getScale()) && (mX < 276 / 8 * Main.getConfiguration().getScale())) {
+            if ((mY > 109 / 6 * Configuration.getScale()) && (mY < 239 / 6 * Configuration.getScale())) {
+                if ((mX > 116 / 8 * Configuration.getScale()) && (mX < 276 / 8 * Configuration.getScale())) {
                     tick = 0;
                     b_Tutorial = true;
-                    res.click[random.nextInt(2)].play(Main.getConfiguration().getSound());
+                    res.click[random.nextInt(2)].play(Configuration.getSound());
                     //isPres =true;
                 }
             }
-            if ((mY > 75 / 6 * Main.getConfiguration().getScale()) && (mY < 256 / 6 * Main.getConfiguration().getScale())) {
-                if ((mX < 576 / 8 * Main.getConfiguration().getScale() * 1) && (mX > 320 / 8 * Main.getConfiguration().getScale() * 1)) {
+            if ((mY > 75 / 6 * Configuration.getScale()) && (mY < 256 / 6 * Configuration.getScale())) {
+                if ((mX < 576 / 8 * Configuration.getScale() * 1) && (mX > 320 / 8 * Configuration.getScale() * 1)) {
                     tick = 0;
                     b_Play = true;
-                    res.click[random.nextInt(2)].play(Main.getConfiguration().getSound());
+                    res.click[random.nextInt(2)].play(Configuration.getSound());
                     // isPres =true;
                 }
             }
-            if ((mY > 109 / 6 * Main.getConfiguration().getScale() * 1) && (mY < 239 / 6 * Main.getConfiguration().getScale() * 1)) {
-                if ((mX > 616 / 8 * Main.getConfiguration().getScale() * 1) && (mX < 789 / 8 * Main.getConfiguration().getScale() * 1)) {
+            if ((mY > 109 / 6 * Configuration.getScale() * 1) && (mY < 239 / 6 * Configuration.getScale() * 1)) {
+                if ((mX > 616 / 8 * Configuration.getScale() * 1) && (mX < 789 / 8 * Configuration.getScale() * 1)) {
                     tick = 0;
                     b_Settings = true;
-                    res.click[random.nextInt(2)].play(Main.getConfiguration().getSound());
+                    res.click[random.nextInt(2)].play(Configuration.getSound());
                     // isPres =true;
                 }
             }

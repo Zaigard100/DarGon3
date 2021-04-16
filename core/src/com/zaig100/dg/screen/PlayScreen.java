@@ -24,9 +24,11 @@ import com.zaig100.dg.objects.Map;
 import com.zaig100.dg.objects.Player;
 import com.zaig100.dg.objects.Stair;
 import com.zaig100.dg.objects.Teleport;
+import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Font;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.LevelReader;
+import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.Save;
 
 import java.io.FileNotFoundException;
@@ -110,18 +112,18 @@ public class PlayScreen implements Screen {
     @Override
     public void show() {
         random = new Random();
-        cam = new OrthographicCamera(width,height);
+        cam = new OrthographicCamera(width, height);
         viewport = new ScreenViewport(cam);
         font = new Font();
 
-        
-        joystick = new Joystick(Main.getConfiguration());
 
-        debag = Main.getConfiguration().isDebug();
+        joystick = new Joystick();
 
-        f1 = font.gFont(10*Main.getConfiguration().getScale(),"fonts/GFont.ttf");
-        f2 = font.gFont(6*Main.getConfiguration().getScale(),"fonts/GFont.ttf");
-        f4 = font.gFont(3*Main.getConfiguration().getScale(),"fonts/GFont.ttf");
+        debag = Configuration.isDebug();
+
+        f1 = font.gFont(10 * Main.getConfiguration().getScale(), "fonts/GFont.ttf");
+        f2 = font.gFont(6 * Main.getConfiguration().getScale(), "fonts/GFont.ttf");
+        f4 = font.gFont(3 * Main.getConfiguration().getScale(), "fonts/GFont.ttf");
         f3 = new BitmapFont();
         f3.setColor(Color.WHITE);
         if (isPack) {
@@ -144,13 +146,13 @@ public class PlayScreen implements Screen {
         player.setY(lR.getSpawn()[1]);
         player.wCordNormalize();
         player.setMap(map);
-        stair = new Stair(lR.getWin()[0],lR.getWin()[1],lR.isSpawnFlipX(),lR.getNextpath(),lR.isEnd(),player);
+        stair = new Stair(lR.getWin()[0], lR.getWin()[1], lR.isSpawnFlipX(), lR.getNextpath(), lR.isEnd());
         if(lR.getTeleportCount()>0){
 
             tp = new Teleport[lR.getTeleportCount()];
 
             for(i =0;i<lR.getTeleportCount();i++){
-                tp[i] = new Teleport(lR.getTeleport()[0][i],lR.getTeleport()[1][i],lR.getTeleport()[2][i],lR.getTeleport()[3][i],player);
+                tp[i] = new Teleport(lR.getTeleport()[0][i], lR.getTeleport()[1][i], lR.getTeleport()[2][i], lR.getTeleport()[3][i]);
             }
 
         }
@@ -159,7 +161,7 @@ public class PlayScreen implements Screen {
             hideTrap = new HideTrap[lR.getHideTrapCount()];
 
             for(i =0;i<lR.getHideTrapCount()-1;i++){
-                hideTrap[i] = new HideTrap(lR.getHideTraps()[0][i],lR.getHideTraps()[1][i],player);
+                hideTrap[i] = new HideTrap(lR.getHideTraps()[0][i], lR.getHideTraps()[1][i]);
             }
 
         }
@@ -168,7 +170,7 @@ public class PlayScreen implements Screen {
             flame = new Flamefrower[lR.getFlamethrowerCount()];
 
             for(i =0;i<lR.getFlamethrowerCount();i++){
-                flame[i] = new Flamefrower(lR.getFlamethrowfers()[0][i],lR.getFlamethrowfers()[1][i],lR.getFlamethrowfers()[2][i],lR.getFlamethrowfers()[3][i],lR.getFlamethrowfers()[4][i],player);
+                flame[i] = new Flamefrower(lR.getFlamethrowfers()[0][i], lR.getFlamethrowfers()[1][i], lR.getFlamethrowfers()[2][i], lR.getFlamethrowfers()[3][i], lR.getFlamethrowfers()[4][i]);
             }
 
         }
@@ -177,7 +179,7 @@ public class PlayScreen implements Screen {
             crossbow = new Crossbow[lR.getCrossbowCount()];
 
             for(i =0;i<lR.getCrossbowCount();i++){
-                crossbow[i] = new Crossbow(lR.getCrossbow()[0][i],lR.getCrossbow()[1][i],lR.getCrossbow()[2][i],lR.getCrossbow()[3][i],lR.getCrossbow()[4][i],player);
+                crossbow[i] = new Crossbow(lR.getCrossbow()[0][i], lR.getCrossbow()[1][i], lR.getCrossbow()[2][i], lR.getCrossbow()[3][i], lR.getCrossbow()[4][i]);
             }
 
         }
@@ -185,14 +187,14 @@ public class PlayScreen implements Screen {
         if (lR.getItemsCount() > 0) {
             item = new Item[lR.getItemsCount()];
             for (i = 0; i < lR.getItemsCount(); i++) {
-                item[i] = new Item(lR.getItems()[0][i], lR.getItems()[1][i], lR.getItems()[2][i], player);
+                item[i] = new Item(lR.getItems()[0][i], lR.getItems()[1][i], lR.getItems()[2][i]);
             }
         }
 
         if (lR.getFlimstTileCount() > 0) {
             flimsyTiles = new FlimsyTile[lR.getFlimstTileCount()];
             for (i = 0; i < lR.getFlimstTileCount(); i++) {
-                flimsyTiles[i] = new FlimsyTile(lR.getFlimsyTile()[0][i], lR.getFlimsyTile()[1][i], player);
+                flimsyTiles[i] = new FlimsyTile(lR.getFlimsyTile()[0][i], lR.getFlimsyTile()[1][i]);
             }
         }
         //Main.getRes().sprL();
@@ -242,35 +244,35 @@ public class PlayScreen implements Screen {
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        map.render(batch, Main.getRes(), player.get_wX(), player.get_wY(), player, Main.getConfiguration());
+        map.render(batch);
 
         if (lR.getFlimstTileCount() > 0) {
             for (i = 0; i < lR.getFlimstTileCount(); i++) {
                 if (!is_pause) flimsyTiles[i].frame();
                 if (!is_pause) flimsyTiles[i].tick(1.5f);
 
-                flimsyTiles[i].render(batch, Main.getRes(), Main.getConfiguration());
+                flimsyTiles[i].render(batch);
             }
         }
 
-        stair.render(batch, Main.getRes(), Main.getConfiguration());
+        stair.render(batch);
         if (lR.getTeleportCount() > 0) {
             for (i = 0; i < lR.getTeleportCount(); i++) {
                 if (!is_pause) tp[i].frame(joystick);
-                tp[i].render(batch, Main.getRes(), Main.getConfiguration());
+                tp[i].render(batch);
             }
         }
         if (lR.getHideTrapCount() > 0) {
             for (i = 0; i < lR.getHideTrapCount() - 1; i++) {
-                        if(!is_pause) hideTrap[i].frame(Main.getRes());
+                if (!is_pause) hideTrap[i].frame();
                     }
                 }
 
-        player.render(batch, Main.getRes());
+        player.render(batch);
         if (lR.getFlamethrowerCount() > 0) {
             for (i = 0; i < lR.getFlamethrowerCount(); i++) {
                 if (!is_pause) flame[i].frame();
-                flame[i].render(batch, Main.getRes(), Main.getConfiguration());
+                flame[i].render(batch);
                 if (!is_pause) flame[i].tick(1.5f);
                 if (!is_pause) flame[i].tick1(0.1f);
             }
@@ -278,7 +280,7 @@ public class PlayScreen implements Screen {
         if (lR.getCrossbowCount() > 0) {
             for (i = 0; i < lR.getCrossbowCount(); i++) {
                 if (!is_pause) crossbow[i].frame();
-                crossbow[i].render(batch, Main.getRes(), Main.getConfiguration());
+                crossbow[i].render(batch);
                 if (!is_pause) crossbow[i].tick(1f);
             }
         }
@@ -286,21 +288,21 @@ public class PlayScreen implements Screen {
         if (lR.getItemsCount() > 0) {
             for (i = 0; i < lR.getItemsCount(); i++) {
                 if (!is_pause) item[i].frame();
-                item[i].render(batch, Main.getRes(), Main.getConfiguration());
+                item[i].render(batch);
             }
         }
 
-        map.dark_render(batch, Main.getRes(), Main.getConfiguration());
+        map.dark_render(batch);
         if (!is_pause) {
-            player.render_bag(batch, Main.getRes(), f4, joystick);
+            Player.render_bag(batch, f4, joystick);
             if (start)
-                f2.draw(batch, lR.getLevelName(), 8 * Main.getConfiguration().getScale(), 4.5f * 16 * Main.getConfiguration().getScale());
+                f2.draw(batch, lR.getLevelName(), 8 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
         }
-        if (player.getHp() <= 0 && !is_pause) {
-            if (fir1) Main.getRes().wasted.play(2.0f);
+        if (Player.getHp() <= 0 && !is_pause) {
+            if (fir1) Res.wasted.play(2.0f);
             fir1 = false;
-            f1.draw(batch, "Wasted", 2 * 16 * Main.getConfiguration().getScale(), 4.5f * 16 * Main.getConfiguration().getScale());
-            f2.draw(batch, "Press Space", 2 * 16 * Main.getConfiguration().getScale(), 0.5f * 16 * Main.getConfiguration().getScale());
+            f1.draw(batch, "Wasted", 2 * 16 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
+            f2.draw(batch, "Press Space", 2 * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || joystick.isUse()) {
                 m.setScreen(new GameScreen(m));
 
@@ -313,26 +315,26 @@ public class PlayScreen implements Screen {
             debag = !debag;
         }
         if (is_pause) {
-            batch.draw(Main.getRes().pause_dark, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            f1.draw(batch, "Pause", 2.2f * 16 * Main.getConfiguration().getScale(), 4.5f * 16 * Main.getConfiguration().getScale());
+            batch.draw(Res.pause_dark, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            f1.draw(batch, "Pause", 2.2f * 16 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
             pauseMenu();
 
         }
-        joystick.render(batch, Main.getRes());
+        joystick.render(batch);
         if (debag) debugShow();
             batch.end();
         fbo.end();
-        if(player.getX()!=lR.getSpawn()[0]||player.getY()!=lR.getSpawn()[1]) start = false;
+        if (Player.getX() != lR.getSpawn()[0] || Player.getY() != lR.getSpawn()[1]) start = false;
 
-        if(!is_pause) player.tick(0.1f);
+        if (!is_pause) Player.tick(0.1f);
         if (isPack) {
-            stair.frame_isPack(m, Main.getRes(), joystick, isPack, packname, derectory);
+            stair.frame_isPack(m, joystick, isPack, packname, derectory);
             if (stair.isExit()) {
                 dispose();
                 m.setScreen(new PlayScreen(m, stair.getNext_path(), player, isPack, packname, derectory));
             }
-        }else {
-            stair.frame(m, Main.getRes(), joystick, isPack);
+        } else {
+            stair.frame(m, joystick, isPack);
             if (stair.isExit()) {
                 dispose();
                 m.setScreen(new PlayScreen(m, stair.getNext_path(), player, isPack));
@@ -351,85 +353,85 @@ public class PlayScreen implements Screen {
         fbo2.end();
 
         frame = new Sprite(fbo2.getColorBufferTexture());
-        frame.setPosition((scrW-16*7*Main.getConfiguration().getScale())/2,(scrH-16*5*Main.getConfiguration().getScale())/2);
+        frame.setPosition((scrW - 16 * 7 * Configuration.getScale()) / 2, (scrH - 16 * 5 * Configuration.getScale()) / 2);
 
         cam.update();
 
         batch.begin();
 
-            batch.draw(Main.getRes().boards,0,0,16*7*Main.getConfiguration().getScale()*10,16*5*Main.getConfiguration().getScale()*10);
+        batch.draw(Res.boards, 0, 0, 16 * 7 * Configuration.getScale() * 10, 16 * 5 * Configuration.getScale() * 10);
             if(is_pause) {
-                batch.draw(Main.getRes().pause_dark, 0, 0, 16 * 7 * Main.getConfiguration().getScale() * 10, 16 * 5 * Main.getConfiguration().getScale() * 10);
+                batch.draw(Res.pause_dark, 0, 0, 16 * 7 * Configuration.getScale() * 10, 16 * 5 * Configuration.getScale() * 10);
             }
             frame.draw(batch);
 
         batch.end();
     }
 
-    void debugShow(){
+    void debugShow() {
         line = "Debag:";
-        f3.draw(batch, line, 10, 5f * 16 * Main.getConfiguration().getScale() - 10);
+        f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 10);
         line = "FPS:" + Gdx.graphics.getFramesPerSecond();
-        f3.draw(batch, line, 10, 5f * 16 * Main.getConfiguration().getScale() - 25);
-        line = "X:" + player.getX() + "  Y:" + player.getY();
-        f3.draw(batch, line, 10, 5f * 16 * Main.getConfiguration().getScale() - 40);
-        line = "WX:" + player.get_wX() + "  WY:" + player.get_wY();
-        f3.draw(batch, line, 10, 5f * 16 * Main.getConfiguration().getScale() - 55);
+        f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 25);
+        line = "X:" + Player.getX() + "  Y:" + Player.getY();
+        f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 40);
+        line = "WX:" + Player.get_wX() + "  WY:" + Player.get_wY();
+        f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 55);
         line = "JavaHeap:" + (((int) Gdx.app.getJavaHeap()) / (8 * 1024)) + " KB";
-        f3.draw(batch, line, 10, 5f * 16 * Main.getConfiguration().getScale() - 70);
+        f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 70);
         line = "NativeHeap:" + (((int) Gdx.app.getNativeHeap()) / (8 * 1024)) + " KB";
-        f3.draw(batch, line, 10, 5f * 16 * Main.getConfiguration().getScale() - 85);
+        f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 85);
     }
 
 
 
     void pauseMenu(){
-        joystick.frame((int)(scrW-16*7*Main.getConfiguration().getScale())/2,(int)(scrH-16*5*Main.getConfiguration().getScale())/2);
+        joystick.frame((int) (scrW - 16 * 7 * Configuration.getScale()) / 2, (int) (scrH - 16 * 5 * Configuration.getScale()) / 2);
         if(menu==0) {
-            f2.draw(batch, ">Resume<", 2.2f * 16 * Main.getConfiguration().getScale(), 3.5f * 16 * Main.getConfiguration().getScale());
-            f2.draw(batch, " Main menu", 2.2f * 16 * Main.getConfiguration().getScale(), 2.5f * 16 * Main.getConfiguration().getScale());
-            f2.draw(batch, " Load save", 2.2f * 16 * Main.getConfiguration().getScale(), 1.5f * 16 * Main.getConfiguration().getScale());
-            f2.draw(batch, " Exit(Hold)", 2.2f * 16 * Main.getConfiguration().getScale(), 0.5f * 16 * Main.getConfiguration().getScale());
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)||joystick.isUse()) {
+            f2.draw(batch, ">Resume<", 2.2f * 16 * Configuration.getScale(), 3.5f * 16 * Configuration.getScale());
+            f2.draw(batch, " Main menu", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
+            f2.draw(batch, " Load save", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
+            f2.draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || joystick.isUse()) {
                 is_pause = false;
             }
         }
         if(menu==1) {
-            f2.draw(batch, " Resume", 2.2f * 16 * Main.getConfiguration().getScale(), 3.5f * 16 * Main.getConfiguration().getScale());
-            f2.draw(batch, ">Main menu<", 2.2f * 16 * Main.getConfiguration().getScale(), 2.5f * 16 * Main.getConfiguration().getScale());
-            f2.draw(batch, " Load save", 2.2f * 16 * Main.getConfiguration().getScale(), 1.5f * 16 * Main.getConfiguration().getScale());
-            f2.draw(batch, " Exit(Hold)", 2.2f * 16 * Main.getConfiguration().getScale(), 0.5f * 16 * Main.getConfiguration().getScale());
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)||joystick.isUse()) {
+            f2.draw(batch, " Resume", 2.2f * 16 * Configuration.getScale(), 3.5f * 16 * Configuration.getScale());
+            f2.draw(batch, ">Main menu<", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
+            f2.draw(batch, " Load save", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
+            f2.draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || joystick.isUse()) {
                 dispose();
                 m.setScreen(new GameScreen(m));
             }
         }
         if(menu==2) {
-            f2.draw(batch, " Resume", 2.2f * 16 * Main.getConfiguration().getScale(), 3.5f * 16 * Main.getConfiguration().getScale());
-            f2.draw(batch, " Main menu", 2.2f * 16 * Main.getConfiguration().getScale(), 2.5f * 16 * Main.getConfiguration().getScale());
-            f2.draw(batch, ">Load save<", 2.2f * 16 * Main.getConfiguration().getScale(), 1.5f * 16 * Main.getConfiguration().getScale());
-            f2.draw(batch, " Exit(Hold)", 2.2f * 16 * Main.getConfiguration().getScale(), 0.5f * 16 * Main.getConfiguration().getScale());
+            f2.draw(batch, " Resume", 2.2f * 16 * Configuration.getScale(), 3.5f * 16 * Configuration.getScale());
+            f2.draw(batch, " Main menu", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
+            f2.draw(batch, ">Load save<", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
+            f2.draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || joystick.isUse()) {
                 dispose();
                 if (isPack) {
-                    m.setScreen(new PlayScreen(m, save.getsPath(), new Player(0, 0, null, save.getHp(), save.getPotion(), save.getSheld(), save.getTorch(), Main.getConfiguration()), isPack, packname, derectory));
+                    m.setScreen(new PlayScreen(m, save.getsPath(), new Player(0, 0, null, save.getHp(), save.getPotion(), save.getSheld(), save.getTorch()), isPack, packname, derectory));
                 } else
-                    m.setScreen(new PlayScreen(m, save.getsPath(), new Player(0, 0, null, save.getHp(), save.getPotion(), save.getSheld(), save.getTorch(), Main.getConfiguration()), isPack));
+                    m.setScreen(new PlayScreen(m, save.getsPath(), new Player(0, 0, null, save.getHp(), save.getPotion(), save.getSheld(), save.getTorch()), isPack));
             }
 
         }
 
         if(menu==3) {
-            f2.draw(batch, " Resume", 2.2f * 16 * Main.getConfiguration().getScale(), 3.5f * 16 * Main.getConfiguration().getScale());
-            f2.draw(batch, " Main menu", 2.2f * 16 * Main.getConfiguration().getScale(), 2.5f * 16 * Main.getConfiguration().getScale());
-            f2.draw(batch, " Load save", 2.2f * 16 * Main.getConfiguration().getScale(), 1.5f * 16 * Main.getConfiguration().getScale());
-            f2.draw(batch, ">Exit(Hold)<", 2.2f * 16 * Main.getConfiguration().getScale(), 0.5f * 16 * Main.getConfiguration().getScale());
-            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)||joystick.isUse()) {
-                exit_timer+= Gdx.graphics.getDeltaTime();
-                if(exit_timer > 1.0f){
+            f2.draw(batch, " Resume", 2.2f * 16 * Configuration.getScale(), 3.5f * 16 * Configuration.getScale());
+            f2.draw(batch, " Main menu", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
+            f2.draw(batch, " Load save", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
+            f2.draw(batch, ">Exit(Hold)<", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || joystick.isUse()) {
+                exit_timer += Gdx.graphics.getDeltaTime();
+                if (exit_timer > 1.0f) {
                     System.exit(0);
                 }
-            }else{
+            } else {
                 exit_timer = 0;
             }
         }else{
@@ -458,15 +460,17 @@ public class PlayScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
+        fbo.dispose();
+        fbo2.dispose();
         int ry = height - PlayScreen.height;
         int rx = width - PlayScreen.width;
         scrW = width;
         scrH = height;
         viewport.update(width, height);
-        cam.translate(rx/2, ry/2, cam.position.z);
+        cam.translate(rx / 2, ry / 2, cam.position.z);
         cam.update();
-        fbo = new FrameBuffer(Pixmap.Format.RGB888,width,height,false);
-        fbo2 = new FrameBuffer(Pixmap.Format.RGB888,width,height,false);
+        fbo = new FrameBuffer(Pixmap.Format.RGB888, width, height, false);
+        fbo2 = new FrameBuffer(Pixmap.Format.RGB888, width, height, false);
     }
 
     @Override

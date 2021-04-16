@@ -14,32 +14,32 @@ public class Arrow {
     int dx;
     int dy;
     int angle;
-    float timer =0;
+    float timer = 0;
 
     Map map;
-    static Player player;
-    public Arrow(int crossbow_x,int crossbow_y,int dx, int dy,int angle,Player player){
+
+    //static Player player;
+    public Arrow(int crossbow_x, int crossbow_y, int dx, int dy, int angle) {
 
         x = crossbow_x + dx;
         y = crossbow_y + dy;
-        this.crossbow_x =crossbow_x;
+        this.crossbow_x = crossbow_x;
         this.crossbow_y = crossbow_y;
         this.dx = dx;
         this.dy = dy;
         this.angle = angle;
-        map = player.map;
-        this.player =player;
 
     }
-    public  void render(SpriteBatch batch, Res res, Configuration config){
 
-        batch.draw(res.arrow,
-                ((x + 3) * 16 * config.getScale()) - player.get_wX(),
-                ((y + 2) * 16 * config.getScale())-player.get_wY(),
-                8 * config.getScale(),
-                8 * config.getScale(),
-                16 * config.getScale(),
-                16 * config.getScale(),
+    public void render(SpriteBatch batch) {
+
+        batch.draw(Res.arrow,
+                ((x + 3) * 16 * Configuration.getScale()) - Player.get_wX(),
+                ((y + 2) * 16 * Configuration.getScale()) - Player.get_wY(),
+                8 * Configuration.getScale(),
+                8 * Configuration.getScale(),
+                16 * Configuration.getScale(),
+                16 * Configuration.getScale(),
                 1,
                 1,
                 angle);
@@ -47,19 +47,19 @@ public class Arrow {
 
     }
 
-    public void frame(){
+    public void frame() {
 
-        if((x == player.getX())&&(y == player.getY())){
-            if(player.getHp()>0) {
-                if(player.isSheld()){
-                    player.setHp(player.getHp() - 1);
-                }else {
-                    player.setHp(player.getHp() - 2);
+        if ((x == Player.getX()) && (y == Player.getY())) {
+            if (Player.getHp() > 0) {
+                if (Player.isSheld()) {
+                    Player.setHp(Player.getHp() - 1);
+                } else {
+                    Player.setHp(Player.getHp() - 2);
                 }
-                player.setDamgeScr(0f,3);
+                Player.setDamgeScr(0f, 3);
             }
-            x = crossbow_x ;
-            y = crossbow_y ;
+            x = crossbow_x;
+            y = crossbow_y;
         }
 
     }

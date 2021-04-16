@@ -8,27 +8,24 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Joystick {
 
     int getY;
-    boolean up,right,down,left,use,Sensor,bag;
-    int pointX,pointY,deltaX,deltaY;
+    boolean up, right, down, left, use, Sensor, bag;
+    int pointX, pointY, deltaX, deltaY;
 
-    Configuration conf;
 
-    public Joystick(Configuration conf) {
-
-        this.conf=conf;
+    public Joystick() {
         this.Sensor = Sensor;
 
     }
 
-    public void render(SpriteBatch batch,Res res){
-        if(conf.isSensor()) {
-            batch.draw(res.use, pointX-conf.getScale()-(int)((Gdx.graphics.getWidth() -16*7*conf.getScale())/2), pointY-conf.getScale()-(int)((Gdx.graphics.getHeight() -16*5*conf.getScale())/2), 2f * conf.getScale(), 2 * conf.getScale());
+    public void render(SpriteBatch batch) {
+        if (Configuration.isSensor()) {
+            batch.draw(Res.use, pointX - Configuration.getScale() - (int) ((Gdx.graphics.getWidth() - 16 * 7 * Configuration.getScale()) / 2), pointY - Configuration.getScale() - (int) ((Gdx.graphics.getHeight() - 16 * 5 * Configuration.getScale()) / 2), 2f * Configuration.getScale(), 2 * Configuration.getScale());
             //batch.draw(res.use, 6 * 16 * conf.getScale() - 0.8f * 16 * conf.getScale() / 2, 1.25f * 16 * conf.getScale() - 0.8f * 16 * conf.getScale() / 2, 0.8f * 16 * conf.getScale(), 0.8f * 16 * conf.getScale());
         }
     }
 
-    public void frame(int sx,int sy) {
-        if (conf.isSensor()) {
+    public void frame(int sx, int sy) {
+        if (Configuration.isSensor()) {
             left = false;
             right = false;
             down = false;
@@ -45,16 +42,16 @@ public class Joystick {
                 deltaX = Gdx.input.getX()-pointX;
                 deltaY = getY-pointY;
                 if(pointX<Gdx.graphics.getWidth()/2) {
-                    if (deltaX > 8 * conf.getScale()) {
+                    if (deltaX > 8 * Configuration.getScale()) {
                         right = true;
                     }
-                    if (deltaX < -8*conf.getScale()) {
+                    if (deltaX < -8 * Configuration.getScale()) {
                         left = true;
                     }
-                    if (deltaY > 8 * conf.getScale()) {
+                    if (deltaY > 8 * Configuration.getScale()) {
                         up = true;
                     }
-                    if (deltaY < -8 * conf.getScale()) {
+                    if (deltaY < -8 * Configuration.getScale()) {
                         down = true;
                     }
                 }
@@ -62,8 +59,8 @@ public class Joystick {
                     use = true;
                 }
                 if (Gdx.input.justTouched()) {
-                    if ((Gdx.input.getX()-sx > 6 * 16 * conf.getScale()) && (Gdx.input.getX()-sx < 7 * 16 * conf.getScale())) {
-                        if ((getY-sy > 4 * 16 * conf.getScale()) && (getY-sy < 5 * 16 * conf.getScale())) {
+                    if ((Gdx.input.getX() - sx > 6 * 16 * Configuration.getScale()) && (Gdx.input.getX() - sx < 7 * 16 * Configuration.getScale())) {
+                        if ((getY - sy > 4 * 16 * Configuration.getScale()) && (getY - sy < 5 * 16 * Configuration.getScale())) {
                             bag = true;
                         }
                     }

@@ -13,51 +13,49 @@ public class Stair {
 
     int x, y;
     boolean flip_x, end;
-    Player player;
     String next_path;
     boolean isExit = false;
 
 
-    public Stair(int x, int y, boolean flip_x, String next_path, boolean end, Player player) {
+    public Stair(int x, int y, boolean flip_x, String next_path, boolean end) {
         this.x = x;
         this.y = y;
         this.flip_x = flip_x;
-        this.player = player;
         this.next_path = next_path;
         this.end = end;
 
     }
 
-    public void render(SpriteBatch batch, Res res, Configuration config) {
-        if(res.nextlv.isFlipX()!=flip_x) {
-            res.nextlv.flip(flip_x, false);
+    public void render(SpriteBatch batch) {
+        if (Res.nextlv.isFlipX() != flip_x) {
+            Res.nextlv.flip(flip_x, false);
         }
-        batch.draw(res.nextlv, -player.get_wX() + (x + 3) * 16 * config.getScale(), -player.get_wY() + (y + 2) * 16 * config.getScale(), 16 * config.getScale(), 16 * config.getScale());
+        batch.draw(Res.nextlv, -Player.get_wX() + (x + 3) * 16 * Configuration.getScale(), -Player.get_wY() + (y + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
     }
 
-    public void frame(Main m, Res res, Joystick joystick, boolean isPack) {
-        joystick.frame(0,0);
+    public void frame(Main m, Joystick joystick, boolean isPack) {
+        joystick.frame(0, 0);
         if ((Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) || (joystick.isUse())) {
-            if ((x == player.getX()) && (y == player.getY())) {
+            if ((x == Player.getX()) && (y == Player.getY())) {
                 if (end) {
                     m.getScreen().dispose();
                     m.setScreen(new GameScreen(m));
                 } else {
-                    player.setIsSheld(false);
+                    Player.setIsSheld(false);
                     isExit = true;
                 }
             }
         }
     }
 
-    public void frame_isPack(Main m, Res res, Joystick joystick, boolean isPack, String packname, String derectory) {
-        joystick.frame(0,0);
+    public void frame_isPack(Main m, Joystick joystick, boolean isPack, String packname, String derectory) {
+        joystick.frame(0, 0);
         if ((Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) || (joystick.isUse())) {
-            if ((x == player.getX()) && (y == player.getY())) {
+            if ((x == Player.getX()) && (y == Player.getY())) {
                 if (end) {
                     m.setScreen(new GameScreen(m));
                 } else {
-                    player.setIsSheld(false);
+                    Player.setIsSheld(false);
                     isExit = true;
                 }
             }

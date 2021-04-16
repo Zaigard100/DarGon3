@@ -23,7 +23,7 @@ public class Player {
     static int sheld;
     static int torch;
     static int stage = 0;
-    float timer = 0;
+    static float timer = 0;
     static boolean walked = false, walked_anim = false, flip = false, bag_opened = false;
     static int sx, sy;
     static int wasted_id = 0;
@@ -31,7 +31,6 @@ public class Player {
     static boolean[] slots = new boolean[3];
     static boolean isSheld = false;
 
-    static Configuration config;
     static Random random = new Random();
 
     static Map map;
@@ -39,101 +38,99 @@ public class Player {
     static private int getYP;
 
 
-    public Player(int x, int y, Map map, Configuration config) {
+    public Player(int x, int y, Map map) {
         Player.x = x;
         Player.y = y;
-        oldX = x;
-        oldY = y;
-        wX = (int) (x * 16 * config.getScale());
-        wY = (int) (y * 16 * config.getScale());
-        hp = 4;
+        Player.oldX = x;
+        Player.oldY = y;
+        Player.wX = (int) (x * 16 * Configuration.getScale());
+        Player.wY = (int) (y * 16 * Configuration.getScale());
+        Player.hp = 4;
         Player.potion = 3;
         Player.sheld = 2;
         Player.torch = 1;
         Player.map = map;
-        Player.config = config;
     }
 
-    public Player(int x, int y, Map map, int hp, int potion, int sheld, int torch, Configuration config) {
+    public Player(int x, int y, Map map, int hp, int potion, int sheld, int torch) {
         Player.x = x;
         Player.y = y;
-        oldX = x;
-        oldY = y;
-        wX = x * 16 * (int) config.getScale();
-        wY = y * 16 * (int) config.getScale();
+        Player.oldX = x;
+        Player.oldY = y;
+        Player.wX = x * 16 * (int) Configuration.getScale();
+        Player.wY = y * 16 * (int) Configuration.getScale();
         Player.map = map;
         Player.potion = potion;
         Player.sheld = sheld;
         Player.torch = torch;
         Player.hp = hp;
-        Player.config = config;
 
     }
 
-    public void render(SpriteBatch batch, Res res) {
+    static public void render(SpriteBatch batch) {
         if (getHp() > 0) {
-            batch.draw(res.hero(flip, walked_anim, stage), 16 * config.getScale() * 3, 16 * config.getScale() * 2, 16 * config.getScale(), 16 * config.getScale());
+            batch.draw(Res.hero(flip, walked_anim, stage), 16 * Configuration.getScale() * 3, 16 * Configuration.getScale() * 2, 16 * Configuration.getScale(), 16 * Configuration.getScale());
             if (isSheld) {
                 if (flip) {
-                    batch.draw(res.sheld, 16 * config.getScale() * 3.25f, 16 * config.getScale() * 2, 16 * config.getScale() * 0.75f, 16 * config.getScale() * 0.75f);
+                    batch.draw(Res.sheld, 16 * Configuration.getScale() * 3.25f, 16 * Configuration.getScale() * 2, 16 * Configuration.getScale() * 0.75f, 16 * Configuration.getScale() * 0.75f);
                 } else {
-                    batch.draw(res.sheld, 16 * config.getScale() * 3, 16 * config.getScale() * 2, 16 * config.getScale() * 0.75f, 16 * config.getScale() * 0.75f);
+                    batch.draw(Res.sheld, 16 * Configuration.getScale() * 3, 16 * Configuration.getScale() * 2, 16 * Configuration.getScale() * 0.75f, 16 * Configuration.getScale() * 0.75f);
                 }
             }
         } else {
             if (wasted_id == 0) {
-                batch.draw(res.hero(flip, walked_anim, stage), 16 * config.getScale() * 3, 16 * config.getScale() * 2, 16 * config.getScale(), 16 * config.getScale());
+                batch.draw(Res.hero(flip, walked_anim, stage), 16 * Configuration.getScale() * 3, 16 * Configuration.getScale() * 2, 16 * Configuration.getScale(), 16 * Configuration.getScale());
             }
             if(wasted_id==1){
-                batch.draw(res.amonghero, 16 * config.getScale() * 3, 16 * config.getScale() * 2, 16 * config.getScale(), 16 * config.getScale());
+                batch.draw(Res.amonghero, 16 * Configuration.getScale() * 3, 16 * Configuration.getScale() * 2, 16 * Configuration.getScale(), 16 * Configuration.getScale());
             }
-            if(wasted_id==2){
-                batch.draw(res.firedhero, 16 * config.getScale() * 3, 16 * config.getScale() * 2, 16 * config.getScale(), 16 * config.getScale());
+            if (wasted_id == 2) {
+                batch.draw(Res.firedhero, 16 * Configuration.getScale() * 3, 16 * Configuration.getScale() * 2, 16 * Configuration.getScale(), 16 * Configuration.getScale());
             }
-            if(wasted_id==3){
-                batch.draw(res.shotedhero, 16 * config.getScale() * 3, 16 * config.getScale() * 2, 16 * config.getScale(), 16 * config.getScale());
+            if (wasted_id == 3) {
+                batch.draw(Res.shotedhero, 16 * Configuration.getScale() * 3, 16 * Configuration.getScale() * 2, 16 * Configuration.getScale(), 16 * Configuration.getScale());
             }
             //wasted_id == 4: Texture = null!!
         }
-        if(damgeScr<0.5f){
-            batch.draw(res.damage,0,0,112*config.getScale(),80*config.getScale());
+        if (damgeScr < 0.5f) {
+            batch.draw(Res.damage, 0, 0, 112 * Configuration.getScale(), 80 * Configuration.getScale());
             damgeScr = damgeScr + Gdx.graphics.getDeltaTime();
         }
     }
 
-    public void render_bag (SpriteBatch batch, Res res, BitmapFont font,Joystick joystick){
-        batch.draw(res.bag, 6 * 16 * config.getScale(), 4 * 16 * config.getScale(), 16 * config.getScale(), 16 * config.getScale());
-        if(bag_opened) {
+    static public void render_bag(SpriteBatch batch, BitmapFont font, Joystick joystick) {
+        batch.draw(Res.bag, 6 * 16 * Configuration.getScale(), 4 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+        if (bag_opened) {
             bag_use(joystick);
             if (hp > 0) {
-                batch.draw(res.HP(hp), 6 * 16 * config.getScale(), 3 * 16 * config.getScale(), 16 * config.getScale(), 16 * config.getScale());
+                batch.draw(Res.HP(hp), 6 * 16 * Configuration.getScale(), 3 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
             }
-            batch.draw(res.hp_potion, 6 * 16 * config.getScale(), 2 * 16 * config.getScale(), 16 * config.getScale(), 16 * config.getScale());
-                font.draw(batch,String.valueOf(potion),6 * 16 * config.getScale(), 2*16 * config.getScale()+4*config.getScale());
-            batch.draw(res.sheld, 6 * 16 * config.getScale(), 1 * 16 * config.getScale(), 16 * config.getScale(), 16 * config.getScale());
-                font.draw(batch,String.valueOf(sheld),6 * 16 * config.getScale(), 1*16 * config.getScale()+4*config.getScale());
-            batch.draw(res.torch, 6 * 16 * config.getScale(), 0 * 16 * config.getScale(), 16 * config.getScale(), 16 * config.getScale());
-                font.draw(batch,String.valueOf(torch),6 * 16 * config.getScale(), 0*16 * config.getScale()+4*config.getScale());
+            batch.draw(Res.hp_potion, 6 * 16 * Configuration.getScale(), 2 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+            font.draw(batch, String.valueOf(potion), 6 * 16 * Configuration.getScale(), 2 * 16 * Configuration.getScale() + 4 * Configuration.getScale());
+            batch.draw(Res.sheld, 6 * 16 * Configuration.getScale(), 1 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+            font.draw(batch, String.valueOf(sheld), 6 * 16 * Configuration.getScale(), 1 * 16 * Configuration.getScale() + 4 * Configuration.getScale());
+            batch.draw(Res.torch, 6 * 16 * Configuration.getScale(), 0 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+            font.draw(batch, String.valueOf(torch), 6 * 16 * Configuration.getScale(), 0 * 16 * Configuration.getScale() + 4 * Configuration.getScale());
         }
     }
 
 
-    public void frame(Joystick joystick){
-        joystick.frame((int)((Gdx.graphics.getWidth()-16*7*config.getScale())/2),(int)((Gdx.graphics.getHeight()-16*5*config.getScale())/2));
-        if(hp>0) {
-            if ((Gdx.input.isKeyPressed(Input.Keys.W))||(joystick.isUp())) {
+    static public void frame(Joystick joystick) {
+        joystick.frame((int) ((Gdx.graphics.getWidth() - 16 * 7 * Configuration.getScale()) / 2), (int) ((Gdx.graphics.getHeight() - 16 * 5 * Configuration.getScale()) / 2));
+        if (hp > 0) {
+            if ((Gdx.input.isKeyPressed(Input.Keys.W)) || (joystick.isUp())) {
                 if (!walked) {
                     oldY = y + 1;
                     // System.out.println("W");
                 }
             }
-            if ((Gdx.input.isKeyPressed(Input.Keys.S))||(joystick.isDown())) {
+            if ((Gdx.input.isKeyPressed(Input.Keys.S)) || (joystick.isDown())) {
                 if (!walked) {
                     oldY = y - 1;
                     //System.out.println("S");
                 }
             }
-            if ((Gdx.input.isKeyPressed(Input.Keys.A))||(joystick.isLeft())) {
+            if ((Gdx.input.isKeyPressed(Input.Keys.A)) || (joystick.isLeft())) {
                 if (!walked) {
                     oldX = x - 1;
                     // System.out.println("A");
@@ -153,95 +150,94 @@ public class Player {
             bag_opened = !bag_opened;
         }
 
-        if(map.isGround(oldX,oldY)) {
+        if (map.isGround(oldX, oldY)) {
 
-                x = oldX;
-                y = oldY;
+            x = oldX;
+            y = oldY;
 
-        }else {
+        } else {
 
-                oldX = x;
-                oldY = y;
+            oldX = x;
+            oldY = y;
 
         }
 
-            if(wX != x * 16 * config.getScale()) {
-                if(wX > x * 16 * config.getScale()) {
-                    wX = (int) (wX - config.getScale());
-                    flip = true;
-                }
-                if(wX < x * 16 * config.getScale()) {
-                    wX = (int) (wX + config.getScale());
-                    flip = false;
-                }
-
+        if (wX != x * 16 * Configuration.getScale()) {
+            if (wX > x * 16 * Configuration.getScale()) {
+                wX = (int) (wX - Configuration.getScale());
+                flip = true;
+            }
+            if (wX < x * 16 * Configuration.getScale()) {
+                wX = (int) (wX + Configuration.getScale());
+                flip = false;
             }
 
-            if(wY != y * 16 * config.getScale()) {
-                if (wY > y * 16 * config.getScale()) {
-                    wY = (int) (wY - config.getScale() );
-                }
-                if (wY < y * 16 * config.getScale()) {
-                    wY = (int) (wY + config.getScale() );
-                }
+        }
+
+        if (wY != y * 16 * Configuration.getScale()) {
+            if (wY > y * 16 * Configuration.getScale()) {
+                wY = (int) (wY - Configuration.getScale());
             }
-
-            if((wX != x * 16 * config.getScale())||(wY != y * 16 * config.getScale())) {
-
-                walked = true;
-                walked_anim = true;
-            }else {
-
-                walked = false;
-                walked_anim = (Gdx.input.isKeyPressed(Input.Keys.W)) || (Gdx.input.isKeyPressed(Input.Keys.S)) || (Gdx.input.isKeyPressed(Input.Keys.A)) || (Gdx.input.isKeyPressed(Input.Keys.D)) || (joystick.isJoystick() && !joystick.isUse());
+            if (wY < y * 16 * Configuration.getScale()) {
+                wY = (int) (wY + Configuration.getScale());
             }
-            if((hp<=0)){
-                walked_anim = false;
-            }
+        }
 
+        if ((wX != x * 16 * Configuration.getScale()) || (wY != y * 16 * Configuration.getScale())) {
+
+            walked = true;
+            walked_anim = true;
+        } else {
+
+            walked = false;
+            walked_anim = (Gdx.input.isKeyPressed(Input.Keys.W)) || (Gdx.input.isKeyPressed(Input.Keys.S)) || (Gdx.input.isKeyPressed(Input.Keys.A)) || (Gdx.input.isKeyPressed(Input.Keys.D)) || (joystick.isJoystick() && !joystick.isUse());
+        }
+        if ((hp <= 0)) {
+            walked_anim = false;
+        }
 
 
     }
 
-    public void tick(float second){
-        timer+=Gdx.graphics.getDeltaTime();
-        if(timer>=second) {
+    static public void tick(float second) {
+        timer += Gdx.graphics.getDeltaTime();
+        if (timer >= second) {
             if (stage > 4) {
                 stage = 0;
             }
             stage++;
-            timer =0;
+            timer = 0;
         }
     }
 
-    public void teleport(int tx,int ty){
+    static public void teleport(int tx, int ty) {
         x = tx;
         y = ty;
         oldX = x;
         oldY = y;
-        wX = (int) (x * 16 * config.getScale());
-        wY = (int) (y * 16 * config.getScale());
+        wX = (int) (x * 16 * Configuration.getScale());
+        wY = (int) (y * 16 * Configuration.getScale());
     }
 
 
-    void bag_use(Joystick joystick){
-        sx = (int)((Gdx.graphics.getWidth() -16*7*config.getScale())/2);
-        sy = (int)((Gdx.graphics.getHeight()-16*5*config.getScale())/2);
-        slots[0]=false;
-        slots[1]=false;
-        slots[2]=false;
-        if(Gdx.input.justTouched()){
-            getYP = Gdx.graphics.getHeight()-Gdx.input.getY();
-            if ((Gdx.input.getX()-sx > 6*16 * config.getScale()) && (Gdx.input.getX()-sx <7*16  * config.getScale())) {
-                if ((getYP-sy > 2*16 * config.getScale()) && (getYP-sy < 3*16 * config.getScale())) {
+    static void bag_use(Joystick joystick) {
+        sx = (int) ((Gdx.graphics.getWidth() - 16 * 7 * Configuration.getScale()) / 2);
+        sy = (int) ((Gdx.graphics.getHeight() - 16 * 5 * Configuration.getScale()) / 2);
+        slots[0] = false;
+        slots[1] = false;
+        slots[2] = false;
+        if (Gdx.input.justTouched()) {
+            getYP = Gdx.graphics.getHeight() - Gdx.input.getY();
+            if ((Gdx.input.getX() - sx > 6 * 16 * Configuration.getScale()) && (Gdx.input.getX() - sx < 7 * 16 * Configuration.getScale())) {
+                if ((getYP - sy > 2 * 16 * Configuration.getScale()) && (getYP - sy < 3 * 16 * Configuration.getScale())) {
                     joystick.setUse(false);
                     slots[0] = true;
                 }
-                if ((getYP-sy > 1*16 * config.getScale()) && (getYP-sy < 2*16 * config.getScale())) {
+                if ((getYP - sy > 1 * 16 * Configuration.getScale()) && (getYP - sy < 2 * 16 * Configuration.getScale())) {
                     joystick.setUse(false);
                     slots[1] = true;
                 }
-                if ((getYP-sy > 0*16 * config.getScale()) && (getYP-sy < 1*16 * config.getScale())) {
+                if ((getYP - sy > 0 * 16 * Configuration.getScale()) && (getYP - sy < 1 * 16 * Configuration.getScale())) {
                     joystick.setUse(false);
                     slots[2] = true;
                 }
@@ -267,89 +263,91 @@ public class Player {
         }
     }
 
-    public Map getMap() {
+    static public Map getMap() {
         return map;
     }
 
     //public float getDamgeScr() { return damgeScr; }
 
-    public void setDamgeScr(float damgeScr, int id) {
+    static public void setDamgeScr(float damgeScr, int id) {
         Player.damgeScr = damgeScr;
         wasted_id = id;
     }
 
-    public void setMap(Map map) {
+    static public void setMap(Map map) {
         Player.map = map;
     }
 
-    public int getX() {
+    static public int getX() {
         return x;
     }
 
-    public void setX(int x) {
+    static public void setX(int x) {
         Player.x = x;
     }
 
-    public int getY() {
+    static public int getY() {
         return y;
     }
 
-    public void wCordNormalize() {
+    static public void wCordNormalize() {
         oldX = x;
         oldY = y;
-        wX = (int) (x * 16 * config.getScale());
-        wY = (int) (y * 16 * config.getScale());
+        wX = (int) (x * 16 * Configuration.getScale());
+        wY = (int) (y * 16 * Configuration.getScale());
 
     }
 
-    public void setY(int y) {
+    static public void setY(int y) {
         Player.y = y;
     }
 
-    public int get_wX() {
+    static public int get_wX() {
         return wX;
     }
 
-    public int get_wY() {
+    static public int get_wY() {
         return wY;
     }
 
-    public void setHp(int hp) {
+    static public void setHp(int hp) {
         Player.hp = hp;
     }
 
-    public int getHp() {
+    static public int getHp() {
         return hp;
     }
 
-    public  int getPotion(){
-        return  potion;
+    static public int getPotion() {
+        return potion;
     }
-    public  void setPotion(int potion){
+
+    static public void setPotion(int potion) {
         Player.potion = potion;
     }
 
-    public int getSheld() {
+    static public int getSheld() {
         return sheld;
     }
-    public  void setSheld(int sheld){
+
+    static public void setSheld(int sheld) {
         Player.sheld = sheld;
     }
 
-    public int getTorch() {
+    static public int getTorch() {
         return torch;
     }
-    public void setTorch(int torch) {
+
+    static public void setTorch(int torch) {
         Player.torch = torch;
     }
 
 
-
-    public boolean isSheld() {
+    static public boolean isSheld() {
         return isSheld;
     }
 
-    public void setIsSheld(boolean sheld) {
+    static public void setIsSheld(boolean sheld) {
         isSheld = sheld;
     }
 

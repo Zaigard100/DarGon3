@@ -8,36 +8,34 @@ import com.zaig100.dg.utils.Res;
 public class FlimsyTile {
 
     int x, y;
-    static Player player;
     int crashed_lvl;
 
     float timer = 0;
 
-    public FlimsyTile(int x, int y, Player player) {
+    public FlimsyTile(int x, int y) {
         this.x = x;
         this.y = y;
-        this.player = player;
         crashed_lvl = 3;
     }
 
-    public void render(SpriteBatch batch, Res res, Configuration config) {
+    public void render(SpriteBatch batch) {
         if (crashed_lvl == 2) {
-            batch.draw(res.clvl2, ((x + 3) * 16 * config.getScale()) - player.get_wX(), ((y + 2) * 16 * config.getScale()) - player.get_wY(), 16 * config.getScale(), 16 * config.getScale());
+            batch.draw(Res.clvl2, ((x + 3) * 16 * Configuration.getScale()) - Player.get_wX(), ((y + 2) * 16 * Configuration.getScale()) - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
         }
         if (crashed_lvl == 1) {
-            batch.draw(res.clvl1, ((x + 3) * 16 * config.getScale()) - player.get_wX(), ((y + 2) * 16 * config.getScale()) - player.get_wY(), 16 * config.getScale(), 16 * config.getScale());
+            batch.draw(Res.clvl1, ((x + 3) * 16 * Configuration.getScale()) - Player.get_wX(), ((y + 2) * 16 * Configuration.getScale()) - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
         }
         if (crashed_lvl <= 0) {
-            batch.draw(res.clvl0, ((x + 3) * 16 * config.getScale()) - player.get_wX(), ((y + 2) * 16 * config.getScale()) - player.get_wY(), 16 * config.getScale(), 16 * config.getScale());
+            batch.draw(Res.clvl0, ((x + 3) * 16 * Configuration.getScale()) - Player.get_wX(), ((y + 2) * 16 * Configuration.getScale()) - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
         }
     }
 
     public void frame() {
-        if ((x == player.getX()) && (y == player.getY())) {
-            if (player.getHp() > 0) {
+        if ((x == Player.getX()) && (y == Player.getY())) {
+            if (Player.getHp() > 0) {
                 if (crashed_lvl < 1) {
-                    player.setHp(0);
-                    player.setDamgeScr(0f, 4);
+                    Player.setHp(0);
+                    Player.setDamgeScr(0f, 4);
                 }
             }
         }
@@ -45,8 +43,8 @@ public class FlimsyTile {
 
 
     public void tick(float second) {
-        if ((x == player.getX()) && (y == player.getY())) {
-            if (player.getHp() > 0) {
+        if ((x == Player.getX()) && (y == Player.getY())) {
+            if (Player.getHp() > 0) {
                 if (timer < 0 && crashed_lvl > 0) {
                     crashed_lvl--;
                     timer = second;

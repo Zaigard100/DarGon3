@@ -79,7 +79,7 @@ public class Extension implements Screen {
         batch.end();
         if(pM.getList().size()>0) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-                m.setScreen(new PlayScreen(m, (String) pM.getList().get(num).get("FirstLevel"), new Player(0, 0, null, Main.getConfiguration()), true, (String) pM.getList().get(num).get("PackName"), pM.getDestory().getPath()));
+                m.setScreen(new PlayScreen(m, (String) pM.getList().get(num).get("FirstLevel"), new Player(0, 0, null), true, (String) pM.getList().get(num).get("PackName"), pM.getDestory().getPath()));
             }
         }
     }
@@ -94,7 +94,7 @@ public class Extension implements Screen {
                     num++;
                 }
             }else{
-                m.setScreen(new PlayScreen(m,(String)pM.getList().get(num).get("FirstLevel"),new Player(0,0,null,Main.getConfiguration()),true,(String)pM.getList().get(num).get("PackName"),pM.getDestory().getPath()));
+                m.setScreen(new PlayScreen(m, (String) pM.getList().get(num).get("FirstLevel"), new Player(0, 0, null), true, (String) pM.getList().get(num).get("PackName"), pM.getDestory().getPath()));
             }
         }
     }

@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.zaig100.dg.Main;
 import com.zaig100.dg.objects.Player;
 import com.zaig100.dg.render.GameRenderer;
+import com.zaig100.dg.utils.Res;
 
 import java.io.IOException;
 
@@ -72,7 +73,7 @@ public class GameScreen implements Screen {
         fbo.begin();
         cam.update();
         batch.setProjectionMatrix(cam.combined);
-        gRend.renderMenu(batch, Main.getRes(), scrW, scrH);
+        gRend.renderMenu(batch, scrW, scrH);
         gRend.sensor(Main.getRes(), (int) (scrW - 16 * 7 * Main.getConfiguration().getScale()), (int) (scrH - 16 * 5 * Main.getConfiguration().getScale()));
         fbo.end();
 
@@ -90,7 +91,7 @@ public class GameScreen implements Screen {
                     break;
                 case 2:
                     dispose();
-                    m.setScreen(new PlayScreen(m, "levels/01.json", new Player(0, 0, null, Main.getConfiguration()), false));
+                    m.setScreen(new PlayScreen(m, "levels/01.json", new Player(0, 0, null), false));
                     break;
                 case 3:
                     dispose();
@@ -110,14 +111,13 @@ public class GameScreen implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         frame = new Sprite(fbo2.getColorBufferTexture());
-        frame.setPosition(0,0);
-
+        frame.setPosition(0, 0);
 
 
         batch.begin();
 
-            batch.draw(m.getRes().pause_dark,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-            frame.draw(batch);
+        batch.draw(Res.pause_dark, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        frame.draw(batch);
 
         batch.end();
     }

@@ -8,37 +8,35 @@ import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
 
 public class Teleport {
-    int x,y,tx,ty;
+    int x, y, tx, ty;
     boolean hide;
-    static Player player;
 
-    public  Teleport(int x,int y,int tx,int ty,Player player){
+    public Teleport(int x, int y, int tx, int ty) {
         this.x = x;
         this.y = y;
         this.tx = tx;
         this.ty = ty;
         this.hide = true;
-        this.player = player;
     }
-    public  Teleport(int x,int y,int tx,int ty,boolean hide,Player player){
+
+    public Teleport(int x, int y, int tx, int ty, boolean hide) {
         this.x = x;
         this.y = y;
         this.tx = tx;
         this.ty = ty;
         this.hide = hide;
-        this.player = player;
     }
 
 
-
-    public void render(SpriteBatch batch, Res res, Configuration config){
-        batch.draw(res.teleport,((x + 3) * 16 * config.getScale()) - player.get_wX(), ((y + 2) * 16 * config.getScale())-player.get_wY(), 16 * config.getScale(), 16 * config.getScale());
+    public void render(SpriteBatch batch) {
+        batch.draw(Res.teleport, ((x + 3) * 16 * Configuration.getScale()) - Player.get_wX(), ((y + 2) * 16 * Configuration.getScale()) - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
     }
+
     public void frame(Joystick joystick) {
-        joystick.frame(0,0);
-        if((player.getX() == x)&&(player.getY() == y)){
-            if ((Gdx.input.isKeyJustPressed(Input.Keys.SPACE))||(joystick.isUse())) {
-                player.teleport(tx, ty);
+        joystick.frame(0, 0);
+        if ((Player.getX() == x) && (Player.getY() == y)) {
+            if ((Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) || (joystick.isUse())) {
+                Player.teleport(tx, ty);
             }
         }
     }

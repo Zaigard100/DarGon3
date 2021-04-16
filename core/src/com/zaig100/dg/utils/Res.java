@@ -8,226 +8,225 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import java.util.Calendar;
 
-public class  Res {
+public class Res {
 
-    int num;
+    static int num;
 
-    final Calendar c = Calendar.getInstance();
-    int month = c.get(Calendar.MONTH);
-    int day = c.get(Calendar.DAY_OF_MONTH);
+    static final Calendar c = Calendar.getInstance();
+    static int month = c.get(Calendar.MONTH);
+    static int day = c.get(Calendar.DAY_OF_MONTH);
 
-    public Texture ui = new Texture(Gdx.files.internal("texture/UI.png"));
-    public Texture tileset = new Texture(Gdx.files.internal("texture/TileSet.png"));
-    public Texture logo;
+    static public Texture ui = new Texture(Gdx.files.internal("texture/UI.png"));
+    static public Texture tileset = new Texture(Gdx.files.internal("texture/TileSet.png"));
+    static public Texture logo;
 
-    public TextureRegion play_button;
-    public TextureRegion play_button_toched;
+    static public TextureRegion play_button;
+    static public TextureRegion play_button_toched;
 
-    public TextureRegion tutorial_button;
-    public TextureRegion tutorial_button_toched;
+    static public TextureRegion tutorial_button;
+    static public TextureRegion tutorial_button_toched;
 
-    public TextureRegion settings_button;
-    public TextureRegion settings_button_toched;
+    static public TextureRegion settings_button;
+    static public TextureRegion settings_button_toched;
 
-    public TextureRegion nextlv;
-    public Texture dark;
+    static public TextureRegion nextlv;
+    static public Texture dark;
 
-    public Texture bag;
-    public Texture hp_potion;
-    public Texture sheld;
-    public Texture torch;
+    static public Texture bag;
+    static public Texture hp_potion;
+    static public Texture sheld;
+    static public Texture torch;
 
-    public Texture teleport;
-    public Texture damage;
+    static public Texture teleport;
+    static public Texture damage;
 
-    public TextureRegion flamethrowfer;
+    static public TextureRegion flamethrowfer;
 
-    public TextureRegion arrow;
+    static public TextureRegion arrow;
 
-    public Texture vk;
+    static public Texture vk;
 
-    Sprite hero;
+    static Sprite hero;
 
-    public Texture amonghero;
-    public Texture firedhero;
-    public Texture shotedhero;
+    static public Texture amonghero;
+    static public Texture firedhero;
+    static public Texture shotedhero;
 
-    public Texture pause_dark;
+    static public Texture pause_dark;
 
-    public Texture joystick;
-    public Texture use;
+    static public Texture joystick;
+    static public Texture use;
     /*
         public Music mainmenu;
         public Music ingame;
         public Music settingmisc;
     */
-    public Sound[] click = new Sound[3];
-    public Sound wasted;
-    public Sound lov;
+    static public Sound[] click = new Sound[3];
+    static public Sound wasted;
+    static public Sound lov;
 
-    public Texture boards;
+    static public Texture boards;
 
-    public Texture clvl2;
-    public Texture clvl1;
-    public Texture clvl0;
+    static public Texture clvl2;
+    static public Texture clvl1;
+    static public Texture clvl0;
 
-    Sprite spr = null;
+    static Sprite spr = null;
 
-    Sprite spr1;
+    static Sprite spr1;
 
     /**
      * Resource Loading
      */
-    public void sprL() {
+    static public void sprL() {
 
 
-        play_button = new Sprite(ui, 0, 0, 32, 32);
-        play_button_toched = new Sprite(ui, 32, 0, 32, 32);
+        Res.play_button = new Sprite(ui, 0, 0, 32, 32);
+        Res.play_button_toched = new Sprite(ui, 32, 0, 32, 32);
 
-        tutorial_button = new Sprite(ui, 0, 32, 21, 21);
-        tutorial_button_toched = new Sprite(ui, 21, 32, 21, 21);
+        Res.tutorial_button = new Sprite(ui, 0, 32, 21, 21);
+        Res.tutorial_button_toched = new Sprite(ui, 21, 32, 21, 21);
 
-        settings_button = new Sprite(ui, 42, 32, 21, 21);
-        settings_button_toched = new Sprite(ui, 63, 32, 21, 21);
+        Res.settings_button = new Sprite(ui, 42, 32, 21, 21);
+        Res.settings_button_toched = new Sprite(ui, 63, 32, 21, 21);
 
-        nextlv = new TextureRegion(new Texture(Gdx.files.internal("texture/nextlevel.png")));
-        logo = new Texture(Gdx.files.internal("texture/logo.png"));
-        dark = new Texture(Gdx.files.internal("texture/Dark.png"));
+        Res.nextlv = new TextureRegion(new Texture(Gdx.files.internal("texture/nextlevel.png")));
+        Res.logo = new Texture(Gdx.files.internal("texture/logo.png"));
+        Res.dark = new Texture(Gdx.files.internal("texture/Dark.png"));
 
-        bag = new Texture(Gdx.files.internal("texture/bag.png"));
-        hp_potion = new Texture(Gdx.files.internal("texture/hp_potion.png"));
-        sheld = new Texture(Gdx.files.internal("texture/sheld.png"));
-        torch = new Texture(Gdx.files.internal("texture/torch_spritesheet.png"));
+        Res.bag = new Texture(Gdx.files.internal("texture/bag.png"));
+        Res.hp_potion = new Texture(Gdx.files.internal("texture/hp_potion.png"));
+        Res.sheld = new Texture(Gdx.files.internal("texture/sheld.png"));
+        Res.torch = new Texture(Gdx.files.internal("texture/torch_spritesheet.png"));
 
-        teleport =new Texture(Gdx.files.internal("texture/teleporter.png"));
-        damage = new Texture(Gdx.files.internal("texture/Damage.png"));
-        flamethrowfer = new TextureRegion(new Texture(Gdx.files.internal("texture/flamethrower.png")));
-        arrow = new TextureRegion(new Texture(Gdx.files.internal("texture/arrow.png")));
+        Res.teleport = new Texture(Gdx.files.internal("texture/teleporter.png"));
+        Res.damage = new Texture(Gdx.files.internal("texture/Damage.png"));
+        Res.flamethrowfer = new TextureRegion(new Texture(Gdx.files.internal("texture/flamethrower.png")));
+        Res.arrow = new TextureRegion(new Texture(Gdx.files.internal("texture/arrow.png")));
 
-        amonghero = new Texture(Gdx.files.internal("texture/amonghero.png"));
-        firedhero = new Texture(Gdx.files.internal("texture/firedhero.png"));
-        shotedhero = new Texture(Gdx.files.internal("texture/shotedhero.png"));
+        Res.amonghero = new Texture(Gdx.files.internal("texture/amonghero.png"));
+        Res.firedhero = new Texture(Gdx.files.internal("texture/firedhero.png"));
+        Res.shotedhero = new Texture(Gdx.files.internal("texture/shotedhero.png"));
 
-        pause_dark = new Texture(Gdx.files.internal("texture/resume.png"));
+        Res.pause_dark = new Texture(Gdx.files.internal("texture/resume.png"));
 
-        joystick = new Texture(Gdx.files.internal("texture/Joystick.png"));
-        use = new Texture(Gdx.files.internal("texture/use.png"));
+        Res.joystick = new Texture(Gdx.files.internal("texture/Joystick.png"));
+        Res.use = new Texture(Gdx.files.internal("texture/use.png"));
 
-        vk = new Texture(Gdx.files.internal("texture/vk.png"));
+        Res.vk = new Texture(Gdx.files.internal("texture/vk.png"));
 
 /*
         mainmenu = Gdx.audio.newMusic(Gdx.files.internal("sounds/mainmenu.mp3"));
         ingame = Gdx.audio.newMusic(Gdx.files.internal("sounds/ingame.mp3"));
         settingmisc = Gdx.audio.newMusic(Gdx.files.internal("sounds/settings.mp3"));
 */
-        click[0] = Gdx.audio.newSound(Gdx.files.internal("sounds/click.mp3"));
-        click[1] = Gdx.audio.newSound(Gdx.files.internal("sounds/click1.mp3"));
-        click[2] = Gdx.audio.newSound(Gdx.files.internal("sounds/click2.mp3"));
-        wasted = Gdx.audio.newSound(Gdx.files.internal("sounds/wasted.mp3"));
-        lov = Gdx.audio.newSound(Gdx.files.internal("sounds/lov.mp3"));
-        boards = new Texture(Gdx.files.internal("texture/Dark.png"));
+        Res.click[0] = Gdx.audio.newSound(Gdx.files.internal("sounds/click.mp3"));
+        Res.click[1] = Gdx.audio.newSound(Gdx.files.internal("sounds/click1.mp3"));
+        Res.click[2] = Gdx.audio.newSound(Gdx.files.internal("sounds/click2.mp3"));
+        Res.wasted = Gdx.audio.newSound(Gdx.files.internal("sounds/wasted.mp3"));
+        Res.lov = Gdx.audio.newSound(Gdx.files.internal("sounds/lov.mp3"));
+        Res.boards = new Texture(Gdx.files.internal("texture/Dark.png"));
 
-        clvl2 = new Texture(Gdx.files.internal("texture/2_clvl.png"));
-        clvl1 = new Texture(Gdx.files.internal("texture/1_clvl.png"));
-        clvl0 = new Texture(Gdx.files.internal("texture/0_clvl.png"));
-
-    }
-
-    public Sprite crossbow(boolean stage){
-
-
-        if(stage){
-            num =0;
-        }else{
-            num = 1;
-        }
-        return new Sprite(new Texture(Gdx.files.internal("texture/crossbow.png")),16*num,0,16,16);
+        Res.clvl2 = new Texture(Gdx.files.internal("texture/2_clvl.png"));
+        Res.clvl1 = new Texture(Gdx.files.internal("texture/1_clvl.png"));
+        Res.clvl0 = new Texture(Gdx.files.internal("texture/0_clvl.png"));
 
     }
 
+    static public Sprite crossbow(boolean stage) {
 
-    public Sprite fire(int stage){
-         spr1 =  new Sprite(new Texture(Gdx.files.internal("texture/Fire.png")),16*stage,0,16,16);
 
-        return spr1;
+        if (stage) {
+            Res.num = 0;
+        } else {
+            Res.num = 1;
+        }
+        return new Sprite(new Texture(Gdx.files.internal("texture/crossbow.png")), 16 * num, 0, 16, 16);
+
     }
 
 
+    static public Sprite fire(int stage) {
+        Res.spr1 = new Sprite(new Texture(Gdx.files.internal("texture/Fire.png")), 16 * stage, 0, 16, 16);
 
-    public Sprite HP(int count){
-
-
-        if(count <= 0){
-            spr = null;
-        }
-        if(count == 1){
-            spr = new Sprite(new Texture(Gdx.files.internal("texture/НP_1.png")),0,0,16,16);
-        }
-        if(count == 2){
-            spr = new Sprite(new Texture(Gdx.files.internal("texture/НP_2.png")),0,0,16,16);
-        }
-        if(count == 3){
-            spr = new Sprite(new Texture(Gdx.files.internal("texture/НP_3.png")),0,0,16,16);
-        }
-        if(count >= 4){
-            spr = new Sprite(new Texture(Gdx.files.internal("texture/НP_4.png")),0,0,16,16);
-        }
-
-        return spr;
+        return Res.spr1;
     }
 
-    public  Sprite hero(boolean flip,boolean walked,int stage){
-        if(!walked) {
-            hero = new Sprite(new Texture(Gdx.files.internal("texture/idle.png")), stage * 16, 0, 16, 16);
-        }else {
-            hero = new Sprite(new Texture(Gdx.files.internal("texture/run.png")), stage * 16, 0, 16, 16);
+
+    static public Sprite HP(int count) {
+
+
+        if (count <= 0) {
+            Res.spr = null;
         }
-        if((month==11&&day==31)||(month==0&&day<=7)){
-            hero =new Sprite(new Texture(Gdx.files.internal("texture/NGSprite.png")), stage * 16, 0, 16, 16);
+        if (count == 1) {
+            Res.spr = new Sprite(new Texture(Gdx.files.internal("texture/НP_1.png")), 0, 0, 16, 16);
         }
-        hero.flip(flip,false);
-        return hero;
+        if (count == 2) {
+            Res.spr = new Sprite(new Texture(Gdx.files.internal("texture/НP_2.png")), 0, 0, 16, 16);
+        }
+        if (count == 3) {
+            Res.spr = new Sprite(new Texture(Gdx.files.internal("texture/НP_3.png")), 0, 0, 16, 16);
+        }
+        if (count >= 4) {
+            Res.spr = new Sprite(new Texture(Gdx.files.internal("texture/НP_4.png")), 0, 0, 16, 16);
+        }
+
+        return Res.spr;
+    }
+
+    static public Sprite hero(boolean flip, boolean walked, int stage) {
+        if (!walked) {
+            Res.hero = new Sprite(new Texture(Gdx.files.internal("texture/idle.png")), stage * 16, 0, 16, 16);
+        } else {
+            Res.hero = new Sprite(new Texture(Gdx.files.internal("texture/run.png")), stage * 16, 0, 16, 16);
+        }
+        if ((Res.month == 11 && Res.day == 31) || (Res.month == 0 && Res.day <= 7)) {
+            Res.hero = new Sprite(new Texture(Gdx.files.internal("texture/NGSprite.png")), stage * 16, 0, 16, 16);
+        }
+        Res.hero.flip(flip, false);
+        return Res.hero;
     }
 
     /**
      * @return Return tile
      */
-    public Sprite tile(int x,int y){
-        return new Sprite(tileset,x*16,y*16,16,16);
+    static public Sprite tile(int x, int y) {
+        return new Sprite(Res.tileset, x * 16, y * 16, 16, 16);
     }
 
 
-    public void dispose() {
+    static public void dispose() {
 /*
         mainmenu.dispose();
         ingame.dispose();
         settingmisc.dispose();
 */
-        clvl0.dispose();
-        clvl1.dispose();
-        clvl2.dispose();
-        wasted.dispose();
-        click[0].dispose();
-        click[1].dispose();
-        click[2].dispose();
-        wasted.dispose();
-        lov.dispose();
-        ui.dispose();
-        tileset.dispose();
-        logo.dispose();
-        bag.dispose();
-        boards.dispose();
-        damage.dispose();
-        dark.dispose();
-        firedhero.dispose();
-        joystick.dispose();
-        pause_dark.dispose();
-        hp_potion.dispose();
-        teleport.dispose();
-        torch.dispose();
-        amonghero.dispose();
-        sheld.dispose();
-        shotedhero.dispose();
-        use.dispose();
+        Res.clvl0.dispose();
+        Res.clvl1.dispose();
+        Res.clvl2.dispose();
+        Res.wasted.dispose();
+        Res.click[0].dispose();
+        Res.click[1].dispose();
+        Res.click[2].dispose();
+        Res.wasted.dispose();
+        Res.lov.dispose();
+        Res.ui.dispose();
+        Res.tileset.dispose();
+        Res.logo.dispose();
+        Res.bag.dispose();
+        Res.boards.dispose();
+        Res.damage.dispose();
+        Res.dark.dispose();
+        Res.firedhero.dispose();
+        Res.joystick.dispose();
+        Res.pause_dark.dispose();
+        Res.hp_potion.dispose();
+        Res.teleport.dispose();
+        Res.torch.dispose();
+        Res.amonghero.dispose();
+        Res.sheld.dispose();
+        Res.shotedhero.dispose();
+        Res.use.dispose();
     }
 }

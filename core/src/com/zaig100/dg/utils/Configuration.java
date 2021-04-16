@@ -9,7 +9,6 @@ import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,22 +16,22 @@ import java.io.Reader;
 
 public class Configuration {
 
-    File conf;
+    static File conf;
 
-    JSONObject jsonObject;
+    static JSONObject jsonObject;
 
-    float Scale = 6;
-    int Music = 50;
-    int Sound = 50;
-    boolean sensor = true;
-    boolean debug = false;
+    static float Scale = 6;
+    static int Music = 50;
+    static int Sound = 50;
+    static boolean sensor = true;
+    static boolean debug = false;
 
     public Configuration(Main m) throws IOException {
 
-        if(m.isAndroid()){
+        if (m.isAndroid()) {
             conf = Gdx.files.local("DGConfig.json").file();
-        }else {
-            conf = new File(new File(".").getAbsoluteFile(),"config.json");
+        } else {
+            conf = new File(new File(".").getAbsoluteFile(), "config.json");
         }
         JSONParser jsonParser = new JSONParser();
 
@@ -58,31 +57,31 @@ public class Configuration {
         in.close();
     }
 
-    void load(){
+    static void load() {
         try {
             Scale = ((Double) jsonObject.get("Scale")).floatValue();
             Music = ((Long) jsonObject.get("Music")).intValue();
             Sound = ((Long) jsonObject.get("Sound")).intValue();
             sensor = ((Boolean) jsonObject.get("Sensor")).booleanValue();
             debug = ((Boolean) jsonObject.get("Debug")).booleanValue();
-        }catch(NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
     }
 
-    public void save(File f){
+    static public void save(File f) {
         jsonObject.put("Scale", new Float(Scale));
         jsonObject.put("Music", new Integer(Music));
         jsonObject.put("Sound", new Integer(Sound));
         jsonObject.put("Sensor", new Boolean(sensor));
         jsonObject.put("Debug", new Boolean(debug));
 
-        try{
+        try {
             FileWriter file = new FileWriter(f);
             file.write(jsonObject.toJSONString());
             file.flush();
             file.close();
-        } catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
 
@@ -99,48 +98,48 @@ public class Configuration {
 
     }
 
-    public float getScale() {
+    static public float getScale() {
         return Scale;
     }
 
-    public void setScale(float scale) {
+    static public void setScale(float scale) {
         Scale = scale;
     }
 
-    public int getMusic() {
+    static public int getMusic() {
         return Music;
     }
 
-    public void setMusic(int music) {
+    static public void setMusic(int music) {
         Music = music;
     }
 
-    public int getSound() {
+    static public int getSound() {
         return Sound;
     }
 
-    public void setSound(int sound) {
+    static public void setSound(int sound) {
         Sound = sound;
     }
 
-    public File getConf(){
+    static public File getConf() {
         return conf;
     }
 
-    public boolean isSensor() {
+    static public boolean isSensor() {
         return sensor;
     }
 
-    public void setSensor(boolean sensor) {
-        this.sensor = sensor;
+    static public void setSensor(boolean sensor) {
+        Configuration.sensor = sensor;
     }
 
-    public boolean isDebug() {
+    static public boolean isDebug() {
         return debug;
     }
 
-    public void setDebug(boolean debug) {
-        this.debug = debug;
+    static public void setDebug(boolean debug) {
+        Configuration.debug = debug;
     }
 
 }
