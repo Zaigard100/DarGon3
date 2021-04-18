@@ -16,8 +16,6 @@ public class Arrow {
     int angle;
     float timer = 0;
 
-    Map map;
-
     //static Player player;
     public Arrow(int crossbow_x, int crossbow_y, int dx, int dy, int angle) {
 
@@ -43,7 +41,6 @@ public class Arrow {
                 1,
                 1,
                 angle);
-
 
     }
 
@@ -71,7 +68,7 @@ public class Arrow {
             x+=dx;
             y+=dy;
 
-            if (((x < 0) || (x >= map.getMapWidht())) || ((y < 0) || (y >= map.getMapHeight()))) {
+            if (((x < 0) || (x >= Player.getMap().getMapWidht())) || ((y < 0) || (y >= Player.getMap().getMapHeight()))) {
                 x = crossbow_x + dx;
                 y = crossbow_y + dy;
             }
@@ -80,8 +77,9 @@ public class Arrow {
         }
     }
 
-    public boolean last(){
-        return ((x < 0) || (x+dx >= map.getMapWidht())) || ((y < 0) || (y+dy >= map.getMapHeight()));
+    public boolean last() {
+        return ((x < 0) || (x + dx >= Player.getMap().getMapWidht())) || ((y < 0) || (y + dy >= Player.getMap().getMapHeight()));
+
     }
 
 }

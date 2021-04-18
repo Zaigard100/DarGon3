@@ -96,6 +96,7 @@ public class Player {
             batch.draw(Res.damage, 0, 0, 112 * Configuration.getScale(), 80 * Configuration.getScale());
             damgeScr = damgeScr + Gdx.graphics.getDeltaTime();
         }
+
     }
 
     static public void render_bag(SpriteBatch batch, BitmapFont font, Joystick joystick) {

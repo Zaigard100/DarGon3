@@ -115,10 +115,7 @@ public class PlayScreen implements Screen {
         cam = new OrthographicCamera(width, height);
         viewport = new ScreenViewport(cam);
         font = new Font();
-
-
         joystick = new Joystick();
-
         debag = Configuration.isDebug();
 
         f1 = font.gFont(10 * Main.getConfiguration().getScale(), "fonts/GFont.ttf");
