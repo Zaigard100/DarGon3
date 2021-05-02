@@ -42,6 +42,7 @@ public class Res {
 
     static public TextureRegion flamethrowfer;
 
+
     static public TextureRegion arrow;
 
     static public Texture vk;
@@ -71,9 +72,17 @@ public class Res {
     static public Texture clvl1;
     static public Texture clvl0;
 
+    static public Texture run;
+    static public Texture idle;
+    static public Texture NGSprite;
+    static public Texture HP1, HP2, HP3, HP4;
+
     static Sprite spr = null;
 
     static Sprite spr1;
+
+    static Texture crossbowT;
+    static Texture fireT;
 
     /**
      * Resource Loading
@@ -131,6 +140,15 @@ public class Res {
         Res.clvl1 = new Texture(Gdx.files.internal("texture/1_clvl.png"));
         Res.clvl0 = new Texture(Gdx.files.internal("texture/0_clvl.png"));
 
+        Res.run = new Texture(Gdx.files.internal("texture/run.png"));
+        Res.idle = new Texture(Gdx.files.internal("texture/idle.png"));
+        Res.NGSprite = new Texture(Gdx.files.internal("texture/NGSprite.png"));
+        Res.HP1 = new Texture(Gdx.files.internal("texture/НP_1.png"));
+        Res.HP2 = new Texture(Gdx.files.internal("texture/НP_2.png"));
+        Res.HP3 = new Texture(Gdx.files.internal("texture/НP_3.png"));
+        Res.HP4 = new Texture(Gdx.files.internal("texture/НP_4.png"));
+        Res.crossbowT = new Texture(Gdx.files.internal("texture/crossbow.png"));
+        Res.fireT = new Texture(Gdx.files.internal("texture/Fire.png"));
     }
 
     static public Sprite crossbow(boolean stage) {
@@ -141,13 +159,13 @@ public class Res {
         } else {
             Res.num = 1;
         }
-        return new Sprite(new Texture(Gdx.files.internal("texture/crossbow.png")), 16 * num, 0, 16, 16);
+        return new Sprite(crossbowT, 16 * num, 0, 16, 16);
 
     }
 
 
     static public Sprite fire(int stage) {
-        Res.spr1 = new Sprite(new Texture(Gdx.files.internal("texture/Fire.png")), 16 * stage, 0, 16, 16);
+        Res.spr1 = new Sprite(fireT, 16 * stage, 0, 16, 16);
 
         return Res.spr1;
     }
@@ -160,16 +178,16 @@ public class Res {
             Res.spr = null;
         }
         if (count == 1) {
-            Res.spr = new Sprite(new Texture(Gdx.files.internal("texture/НP_1.png")), 0, 0, 16, 16);
+            Res.spr = new Sprite(HP1, 0, 0, 16, 16);
         }
         if (count == 2) {
-            Res.spr = new Sprite(new Texture(Gdx.files.internal("texture/НP_2.png")), 0, 0, 16, 16);
+            Res.spr = new Sprite(HP2, 0, 0, 16, 16);
         }
         if (count == 3) {
-            Res.spr = new Sprite(new Texture(Gdx.files.internal("texture/НP_3.png")), 0, 0, 16, 16);
+            Res.spr = new Sprite(HP3, 0, 0, 16, 16);
         }
         if (count >= 4) {
-            Res.spr = new Sprite(new Texture(Gdx.files.internal("texture/НP_4.png")), 0, 0, 16, 16);
+            Res.spr = new Sprite(HP4, 0, 0, 16, 16);
         }
 
         return Res.spr;
@@ -177,12 +195,12 @@ public class Res {
 
     static public Sprite hero(boolean flip, boolean walked, int stage) {
         if (!walked) {
-            Res.hero = new Sprite(new Texture(Gdx.files.internal("texture/idle.png")), stage * 16, 0, 16, 16);
+            Res.hero = new Sprite(idle, stage * 16, 0, 16, 16);
         } else {
-            Res.hero = new Sprite(new Texture(Gdx.files.internal("texture/run.png")), stage * 16, 0, 16, 16);
+            Res.hero = new Sprite(run, stage * 16, 0, 16, 16);
         }
         if ((Res.month == 11 && Res.day == 31) || (Res.month == 0 && Res.day <= 7)) {
-            Res.hero = new Sprite(new Texture(Gdx.files.internal("texture/NGSprite.png")), stage * 16, 0, 16, 16);
+            Res.hero = new Sprite(NGSprite, stage * 16, 0, 16, 16);
         }
         Res.hero.flip(flip, false);
         return Res.hero;
@@ -228,5 +246,15 @@ public class Res {
         Res.sheld.dispose();
         Res.shotedhero.dispose();
         Res.use.dispose();
+        Res.NGSprite.dispose();
+        ;
+        Res.idle.dispose();
+        Res.run.dispose();
+        Res.HP1.dispose();
+        Res.HP2.dispose();
+        Res.HP3.dispose();
+        Res.HP4.dispose();
+        Res.crossbowT.dispose();
+        Res.fireT.dispose();
     }
 }
