@@ -366,7 +366,7 @@ public class PlayScreen implements Screen {
     }
 
     void debugShow() {
-        line = "Debag:";
+        line = "Debug:";
         f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 10);
         line = "FPS:" + Gdx.graphics.getFramesPerSecond();
         f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 25);

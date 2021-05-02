@@ -143,8 +143,8 @@ public class Setting implements Screen {
         }
 
         batch.begin();
-            f1.draw(batch, "Sentings :",10, 5 * 16 * Main.getConfiguration().getScale() -10);
-            f1.draw(batch, line[0], 10, 5 * 16 * Main.getConfiguration().getScale()- (12 * Main.getConfiguration().getScale()) -10);
+        f1.draw(batch, "Settings :", 10, 5 * 16 * Main.getConfiguration().getScale() - 10);
+        f1.draw(batch, line[0], 10, 5 * 16 * Main.getConfiguration().getScale() - (12 * Main.getConfiguration().getScale()) - 10);
             f1.draw(batch, line[1], 10, 5 * 16 * Main.getConfiguration().getScale()- (25 * Main.getConfiguration().getScale()) -10);
             f1.draw(batch, line[2], 10, 5 * 16 * Main.getConfiguration().getScale()- (37 * Main.getConfiguration().getScale()) -10);
             f1.draw(batch, line[3], 10, 5 * 16 * Main.getConfiguration().getScale()- (49 * Main.getConfiguration().getScale()) -10);
