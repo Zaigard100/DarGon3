@@ -14,7 +14,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.zaig100.dg.Main;
 import com.zaig100.dg.objects.Player;
 import com.zaig100.dg.utils.Configuration;
-import com.zaig100.dg.utils.LevelRead;
 import com.zaig100.dg.utils.LevelReader;
 import com.zaig100.dg.utils.Res;
 
@@ -28,7 +27,6 @@ public class GameScreen implements Screen {
     static Main m;
     Sprite frame;
     LevelReader lR;
-    LevelRead lR2;
     static int height;
     static int width;
     static int scrW, scrH;
@@ -50,7 +48,6 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
         try {
             lR = new LevelReader("levels/01.json", false);
-            lR2 = new LevelRead("levels/Test2.json", false);
             map = lR.getMap();
         } catch (IOException e) {
             e.printStackTrace();

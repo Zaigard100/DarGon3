@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 
 public class LevelRead {
@@ -162,27 +161,7 @@ public class LevelRead {
         }
     }
 
-    @Override
-    public String toString() {
-        return "LevelRead{" +
-                ", map=" + Arrays.toString(map) +
-                ", wight=" + wight +
-                ", height=" + height +
-                ", SpawnX=" + SpawnX +
-                ", SpawnY=" + SpawnY +
-                ", levelname='" + levelname + '\'' +
-                ", flipX=" + flipX +
-                ", flipY=" + flipY +
-                ", isSave=" + isSave +
-                ", hide_trap=" + hide_trap +
-                ", teleport=" + teleport +
-                ", stair=" + stair +
-                ", item=" + item +
-                ", flimsy_tile=" + flimsy_tile +
-                ", flamefrower=" + flamefrower +
-                ", crosbow=" + crosbow +
-                '}';
-    }
+
 }
 
 class HideTrapC {
