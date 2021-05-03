@@ -11,6 +11,7 @@ import com.zaig100.dg.utils.Res;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 public class Main extends Game {
     static Res res;
@@ -21,6 +22,7 @@ public class Main extends Game {
     SpriteBatch batch;
     int wight, height;
     boolean first = true;
+    Random random = new Random();
 
     public Main(boolean isAndroid) {
         Main.isAndroid = isAndroid;
