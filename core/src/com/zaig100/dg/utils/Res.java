@@ -10,7 +10,8 @@ import java.util.Calendar;
 
 public class Res {
 
-    static int num;
+    static public int num, i = -1;
+    public static boolean end = false;
 
     static final Calendar c = Calendar.getInstance();
     static int month = c.get(Calendar.MONTH);
@@ -88,67 +89,93 @@ public class Res {
      * Resource Loading
      */
     static public void sprL() {
-
-
-        Res.play_button = new Sprite(ui, 0, 0, 32, 32);
-        Res.play_button_toched = new Sprite(ui, 32, 0, 32, 32);
-
-        Res.tutorial_button = new Sprite(ui, 0, 32, 21, 21);
-        Res.tutorial_button_toched = new Sprite(ui, 21, 32, 21, 21);
-
-        Res.settings_button = new Sprite(ui, 42, 32, 21, 21);
-        Res.settings_button_toched = new Sprite(ui, 63, 32, 21, 21);
-
-        Res.nextlv = new TextureRegion(new Texture(Gdx.files.internal("texture/nextlevel.png")));
-        Res.logo = new Texture(Gdx.files.internal("texture/logo.png"));
-        Res.dark = new Texture(Gdx.files.internal("texture/Dark.png"));
-
-        Res.bag = new Texture(Gdx.files.internal("texture/bag.png"));
-        Res.hp_potion = new Texture(Gdx.files.internal("texture/hp_potion.png"));
-        Res.sheld = new Texture(Gdx.files.internal("texture/sheld.png"));
-        Res.torch = new Texture(Gdx.files.internal("texture/torch_spritesheet.png"));
-
-        Res.teleport = new Texture(Gdx.files.internal("texture/teleporter.png"));
-        Res.damage = new Texture(Gdx.files.internal("texture/Damage.png"));
-        Res.flamethrowfer = new TextureRegion(new Texture(Gdx.files.internal("texture/flamethrower.png")));
-        Res.arrow = new TextureRegion(new Texture(Gdx.files.internal("texture/arrow.png")));
-
-        Res.amonghero = new Texture(Gdx.files.internal("texture/amonghero.png"));
-        Res.firedhero = new Texture(Gdx.files.internal("texture/firedhero.png"));
-        Res.shotedhero = new Texture(Gdx.files.internal("texture/shotedhero.png"));
-
-        Res.pause_dark = new Texture(Gdx.files.internal("texture/resume.png"));
-
-        Res.joystick = new Texture(Gdx.files.internal("texture/Joystick.png"));
-        Res.use = new Texture(Gdx.files.internal("texture/use.png"));
-
-        Res.vk = new Texture(Gdx.files.internal("texture/vk.png"));
-
+        if (!end) i++;
+        switch (i) {
+            case 0:
+                Res.play_button = new Sprite(ui, 0, 0, 32, 32);
+                Res.play_button_toched = new Sprite(ui, 32, 0, 32, 32);
+                break;
+            case 1:
+                Res.tutorial_button = new Sprite(ui, 0, 32, 21, 21);
+                Res.tutorial_button_toched = new Sprite(ui, 21, 32, 21, 21);
+                break;
+            case 2:
+                Res.settings_button = new Sprite(ui, 42, 32, 21, 21);
+                Res.settings_button_toched = new Sprite(ui, 63, 32, 21, 21);
+                break;
+            case 3:
+                Res.nextlv = new TextureRegion(new Texture(Gdx.files.internal("texture/nextlevel.png")));
+                Res.logo = new Texture(Gdx.files.internal("texture/logo.png"));
+                Res.dark = new Texture(Gdx.files.internal("texture/Dark.png"));
+                break;
+            case 4:
+                Res.bag = new Texture(Gdx.files.internal("texture/bag.png"));
+                Res.hp_potion = new Texture(Gdx.files.internal("texture/hp_potion.png"));
+                Res.sheld = new Texture(Gdx.files.internal("texture/sheld.png"));
+                Res.torch = new Texture(Gdx.files.internal("texture/torch_spritesheet.png"));
+                break;
+            case 5:
+                Res.teleport = new Texture(Gdx.files.internal("texture/teleporter.png"));
+                Res.damage = new Texture(Gdx.files.internal("texture/Damage.png"));
+                Res.flamethrowfer = new TextureRegion(new Texture(Gdx.files.internal("texture/flamethrower.png")));
+                Res.arrow = new TextureRegion(new Texture(Gdx.files.internal("texture/arrow.png")));
+                break;
+            case 6:
+                Res.amonghero = new Texture(Gdx.files.internal("texture/amonghero.png"));
+                Res.firedhero = new Texture(Gdx.files.internal("texture/firedhero.png"));
+                Res.shotedhero = new Texture(Gdx.files.internal("texture/shotedhero.png"));
+                break;
+            case 7:
+                Res.pause_dark = new Texture(Gdx.files.internal("texture/resume.png"));
+                break;
+            case 8:
+                Res.joystick = new Texture(Gdx.files.internal("texture/Joystick.png"));
+                Res.use = new Texture(Gdx.files.internal("texture/use.png"));
+                break;
+            case 9:
+                Res.vk = new Texture(Gdx.files.internal("texture/vk.png"));
+                break;
 /*
-        mainmenu = Gdx.audio.newMusic(Gdx.files.internal("sounds/mainmenu.mp3"));
-        ingame = Gdx.audio.newMusic(Gdx.files.internal("sounds/ingame.mp3"));
-        settingmisc = Gdx.audio.newMusic(Gdx.files.internal("sounds/settings.mp3"));
+            mainmenu = Gdx.audio.newMusic(Gdx.files.internal("sounds/mainmenu.mp3"));
+            ingame = Gdx.audio.newMusic(Gdx.files.internal("sounds/ingame.mp3"));
+            settingmisc = Gdx.audio.newMusic(Gdx.files.internal("sounds/settings.mp3"));
 */
-        Res.click[0] = Gdx.audio.newSound(Gdx.files.internal("sounds/click.mp3"));
-        Res.click[1] = Gdx.audio.newSound(Gdx.files.internal("sounds/click1.mp3"));
-        Res.click[2] = Gdx.audio.newSound(Gdx.files.internal("sounds/click2.mp3"));
-        Res.wasted = Gdx.audio.newSound(Gdx.files.internal("sounds/wasted.mp3"));
-        Res.lov = Gdx.audio.newSound(Gdx.files.internal("sounds/lov.mp3"));
-        Res.boards = new Texture(Gdx.files.internal("texture/Dark.png"));
+            case 10:
+                Res.click[0] = Gdx.audio.newSound(Gdx.files.internal("sounds/click.mp3"));
+                Res.click[1] = Gdx.audio.newSound(Gdx.files.internal("sounds/click1.mp3"));
+                Res.click[2] = Gdx.audio.newSound(Gdx.files.internal("sounds/click2.mp3"));
+                break;
+            case 11:
+                Res.wasted = Gdx.audio.newSound(Gdx.files.internal("sounds/wasted.mp3"));
+                Res.lov = Gdx.audio.newSound(Gdx.files.internal("sounds/lov.mp3"));
+                Res.boards = new Texture(Gdx.files.internal("texture/Dark.png"));
+                break;
+            case 12:
+                Res.clvl2 = new Texture(Gdx.files.internal("texture/2_clvl.png"));
+                Res.clvl1 = new Texture(Gdx.files.internal("texture/1_clvl.png"));
+                Res.clvl0 = new Texture(Gdx.files.internal("texture/0_clvl.png"));
+                break;
+            case 13:
+                Res.run = new Texture(Gdx.files.internal("texture/run.png"));
+                Res.idle = new Texture(Gdx.files.internal("texture/idle.png"));
+                Res.NGSprite = new Texture(Gdx.files.internal("texture/NGSprite.png"));
+                break;
+            case 14:
+                Res.HP1 = new Texture(Gdx.files.internal("texture/НP_1.png"));
+                Res.HP2 = new Texture(Gdx.files.internal("texture/НP_2.png"));
+                Res.HP3 = new Texture(Gdx.files.internal("texture/НP_3.png"));
+                Res.HP4 = new Texture(Gdx.files.internal("texture/НP_4.png"));
+                break;
+            case 15:
+                Res.crossbowT = new Texture(Gdx.files.internal("texture/crossbow.png"));
+                Res.fireT = new Texture(Gdx.files.internal("texture/Fire.png"));
+                break;
+            case 16:
+                end = true;
+                break;
+        }
 
-        Res.clvl2 = new Texture(Gdx.files.internal("texture/2_clvl.png"));
-        Res.clvl1 = new Texture(Gdx.files.internal("texture/1_clvl.png"));
-        Res.clvl0 = new Texture(Gdx.files.internal("texture/0_clvl.png"));
 
-        Res.run = new Texture(Gdx.files.internal("texture/run.png"));
-        Res.idle = new Texture(Gdx.files.internal("texture/idle.png"));
-        Res.NGSprite = new Texture(Gdx.files.internal("texture/NGSprite.png"));
-        Res.HP1 = new Texture(Gdx.files.internal("texture/НP_1.png"));
-        Res.HP2 = new Texture(Gdx.files.internal("texture/НP_2.png"));
-        Res.HP3 = new Texture(Gdx.files.internal("texture/НP_3.png"));
-        Res.HP4 = new Texture(Gdx.files.internal("texture/НP_4.png"));
-        Res.crossbowT = new Texture(Gdx.files.internal("texture/crossbow.png"));
-        Res.fireT = new Texture(Gdx.files.internal("texture/Fire.png"));
     }
 
     static public Sprite crossbow(boolean stage) {

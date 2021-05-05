@@ -479,11 +479,11 @@ public class PlayScreen implements Screen {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
             menu--;
-            Main.getRes().click[random.nextInt(2)].play(Main.getConfiguration().getSound());
+            Res.click[random.nextInt(2)].play(Main.getConfiguration().getSound());
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.S)||(!joystick.isUse()&&Gdx.input.justTouched())) {
             menu++;
-            Main.getRes().click[random.nextInt(2)].play(Main.getConfiguration().getSound());
+            Res.click[random.nextInt(2)].play(Main.getConfiguration().getSound());
         }
 
         if(menu>=4){
