@@ -14,10 +14,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.zaig100.dg.Main;
 import com.zaig100.dg.objects.Player;
 import com.zaig100.dg.utils.Configuration;
-import com.zaig100.dg.utils.LevelReader;
+import com.zaig100.dg.utils.LevelRead;
 import com.zaig100.dg.utils.Res;
 
-import java.io.IOException;
 import java.util.Random;
 
 public class GameScreen implements Screen {
@@ -26,12 +25,13 @@ public class GameScreen implements Screen {
     OrthographicCamera cam;
     static Main m;
     Sprite frame;
-    LevelReader lR;
+    LevelRead lR;
     static int height;
     static int width;
     static int scrW, scrH;
     Viewport viewport;
-    int[][] map;
+    int[] map;
+    int wW, hW;
     int ry, rx;
     Random random = new Random();
     int tick = 0;
@@ -46,12 +46,10 @@ public class GameScreen implements Screen {
     public GameScreen(Main m) {
         GameScreen.m = m;
         batch = new SpriteBatch();
-        try {
-            lR = new LevelReader("levels/01.json", false);
-            map = lR.getMap();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        lR = new LevelRead("levels/01.json", false);
+        map = lR.getMap();
+        wW = lR.getWight();
+        hW = lR.getHeight();
         width = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();
         fbo = new FrameBuffer(Pixmap.Format.RGB888, width, height, false);
@@ -141,25 +139,25 @@ public class GameScreen implements Screen {
     private void backgraund() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (map[j][i] == 11) {
+                if (map[j + wW * i] == 11) {
                     batch.draw(Res.tile(0, 0), (j - 2) * 16 * 8 / 8 * Configuration.getScale(), (i - 4) * 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale());//backgraund
                 }
-                if (map[j][i] == 12) {
+                if (map[j + wW * i] == 12) {
                     batch.draw(Res.tile(1, 1), (j - 2) * 16 * 8 / 8 * Configuration.getScale(), (i - 4) * 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale());//backgraund
                 }
-                if (map[j][i] == 13) {
+                if (map[j + wW * i] == 13) {
                     batch.draw(Res.tile(2, 0), (j - 2) * 16 * 8 / 8 * Configuration.getScale(), (i - 4) * 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale());//backgraund
                 }
-                if (map[j][i] == 14) {
+                if (map[j + wW * i] == 14) {
                     batch.draw(Res.tile(1, 0), (j - 2) * 16 * 8 / 8 * Configuration.getScale(), (i - 4) * 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale());//backgraund
                 }
-                if (map[j][i] == 15) {
+                if (map[j + wW * i] == 15) {
                     batch.draw(Res.tile(2, 1), (j - 2) * 16 * 8 / 8 * Configuration.getScale(), (i - 4) * 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale());//backgraund
                 }
-                if (map[j][i] == 16) {
+                if (map[j + wW * i] == 16) {
                     batch.draw(Res.tile(3, 0), (j - 2) * 16 * 8 / 8 * Configuration.getScale(), (i - 4) * 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale());//backgraund
                 }
-                if (map[j][i] == 18) {
+                if (map[j + wW * i] == 18) {
                     batch.draw(Res.tile(4, 1), (j - 2) * 16 * 8 / 8 * Configuration.getScale(), (i - 4) * 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale(), 16 * 8 / 8 * Configuration.getScale());//backgraund
                 }
             }

@@ -1,17 +1,10 @@
 {
   "LevelName": "Eich",
-  "Widht": 8,
-  "Height": 8,
   "Spawn": [
     7,
     7
   ],
-  "spawn_x_flip": false,
-  "spawn_y_flip": false,
-  "Win": [
-    4,
-    7
-  ],
+  "isDark": true,
   "map": [
     [
       10,
@@ -94,34 +87,45 @@
       11
     ]
   ],
-  "flimsy_tile_count": 6,
-  "flimsy_tile": [
-    [
-      2,
-      3
-    ],
-    [
-      0,
-      0
-    ],
-    [
-      1,
-      0
-    ],
-    [
-      3,
-      1
-    ],
-    [
-      7,
-      0
-    ],
-    [
-      6,
-      4
-    ]
+  "FlimsyTile": [
+    {
+      "X": 2,
+      "Y": 3,
+      "Stage": 0
+    },
+    {
+      "X": 0,
+      "Y": 0,
+      "Stage": 0
+    },
+    {
+      "X": 1,
+      "Y": 0,
+      "Stage": 0
+    },
+    {
+      "X": 3,
+      "Y": 1,
+      "Stage": 0
+    },
+    {
+      "X": 7,
+      "Y": 0,
+      "Stage": 0
+    },
+    {
+      "X": 6,
+      "Y": 4,
+      "Stage": 0
+    }
   ],
-  "end": false,
-  "nextlevelpath": "levels/15.json",
+  "Stair": [
+    {
+      "X": 4,
+      "Y": 7,
+      "FlipX": false,
+      "Next": "levels/15.json"
+    }
+  ],
   "save": false
 }

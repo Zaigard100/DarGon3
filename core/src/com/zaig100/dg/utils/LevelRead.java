@@ -2,6 +2,13 @@ package com.zaig100.dg.utils;
 
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
+import com.zaig100.dg.utils.contain.CrossbowC;
+import com.zaig100.dg.utils.contain.FlamefrowerC;
+import com.zaig100.dg.utils.contain.FlimsyTileC;
+import com.zaig100.dg.utils.contain.HideTrapC;
+import com.zaig100.dg.utils.contain.ItemC;
+import com.zaig100.dg.utils.contain.StairC;
+import com.zaig100.dg.utils.contain.TeleportC;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -21,23 +28,20 @@ public class LevelRead {
     JSONArray jsonArray;
     Iterator iter;
     Reader in;
-    long time;
-
     int[] map;
     int wight, height, SpawnX, SpawnY;
     String levelname;
-    boolean flipX, flipY, isSave;
-
-    ArrayList<HideTrapC> hide_trap = new ArrayList<>();
-    ArrayList<TeleportC> teleport = new ArrayList<>();
-    ArrayList<StairC> stair = new ArrayList<>();
-    ArrayList<ItemC> item = new ArrayList<>();
-    ArrayList<FlimsyTileC> flimsy_tile = new ArrayList<>();
-    ArrayList<FlamefrowerC> flamefrower = new ArrayList<>();
-    ArrayList<CrossbowC> crosbow = new ArrayList<>();
+    boolean isSave, isDark;
+    boolean isHideTrap, isTeleport, isStair, isItem, isFlimsyTile, isFlamefrower, isCrossbow;
+    ArrayList<com.zaig100.dg.utils.contain.HideTrapC> hide_trap = new ArrayList<>();
+    ArrayList<com.zaig100.dg.utils.contain.TeleportC> teleport = new ArrayList<>();
+    ArrayList<com.zaig100.dg.utils.contain.StairC> stair = new ArrayList<>();
+    ArrayList<com.zaig100.dg.utils.contain.ItemC> item = new ArrayList<>();
+    ArrayList<com.zaig100.dg.utils.contain.FlimsyTileC> flimsy_tile = new ArrayList<>();
+    ArrayList<com.zaig100.dg.utils.contain.FlamefrowerC> flamefrower = new ArrayList<>();
+    ArrayList<com.zaig100.dg.utils.contain.CrossbowC> crosbow = new ArrayList<>();
 
     public LevelRead(String path, boolean isPack) {
-        time = System.currentTimeMillis();
         if (isPack) {
             in = new InputStreamReader(Gdx.files.getFileHandle(path, Files.FileType.Absolute).read());
         } else {
@@ -54,8 +58,6 @@ public class LevelRead {
         levelname = (String) jsonObject.get("LevelName");
         SpawnX = ((Long) ((JSONArray) jsonObject.get("Spawn")).get(0)).intValue();
         SpawnY = ((Long) ((JSONArray) jsonObject.get("Spawn")).get(1)).intValue();
-        flipX = (Boolean) jsonObject.get("spawn_x_flip");
-        flipY = (Boolean) jsonObject.get("spawn_y_flip");
 
         map_read();
         hide_trap_read();
@@ -68,8 +70,6 @@ public class LevelRead {
 
         isSave = (Boolean) jsonObject.get("save");
 
-        System.out.println(System.currentTimeMillis() - time);
-
     }
 
     private void map_read() {
@@ -79,57 +79,64 @@ public class LevelRead {
         map = new int[wight * height];
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < wight; j++) {
-                map[i * wight + j] = ((Long) ((JSONArray) jsonArray.get(i)).get(j)).intValue();
+                map[(height - i - 1) * wight + j] = ((Long) ((JSONArray) jsonArray.get(i)).get(j)).intValue();
             }
         }
     }
 
     private void hide_trap_read() {
-        if (jsonObject.get("HideTraps") != null) {
-            jsonArray = (JSONArray) jsonObject.get("HideTraps");
+        isHideTrap = jsonObject.get("HideTrap") != null;
+        if (isHideTrap) {
+            System.out.println("122");
+            jsonArray = (JSONArray) jsonObject.get("HideTrap");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
-                hide_trap.add(new HideTrapC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue()));
+                hide_trap.add(new com.zaig100.dg.utils.contain.HideTrapC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue()));
+
             }
         }
     }
 
     private void telepotr_read() {
-        if (jsonObject.get("Teleport") != null) {
+        isTeleport = jsonObject.get("Teleport") != null;
+        if (isTeleport) {
             jsonArray = (JSONArray) jsonObject.get("Teleport");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
-                teleport.add(new TeleportC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("TX")).intValue(), ((Long) JO.get("TY")).intValue()));
+                teleport.add(new com.zaig100.dg.utils.contain.TeleportC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("TX")).intValue(), ((Long) JO.get("TY")).intValue()));
             }
         }
     }
 
     private void stair_read() {
-        if (jsonObject.get("Stair") != null) {
+        isStair = jsonObject.get("Stair") != null;
+        if (isStair) {
             jsonArray = (JSONArray) jsonObject.get("Stair");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
-                stair.add(new StairC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (String) JO.get("Next")));
+                stair.add(new StairC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Boolean) JO.get("FlipX")), (String) JO.get("Next")));
             }
         }
     }
 
     private void item_read() {
-        if (jsonObject.get("Item") != null) {
+        isItem = jsonObject.get("Item") != null;
+        if (isItem) {
             jsonArray = (JSONArray) jsonObject.get("Item");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
-                item.add(new ItemC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("ID")).intValue()));
+                item.add(new com.zaig100.dg.utils.contain.ItemC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("ID")).intValue()));
             }
         }
     }
 
     private void flimsy_tile_read() {
-        if (jsonObject.get("FlimsyTile") != null) {
+        isFlimsyTile = jsonObject.get("FlimsyTile") != null;
+        if (isFlimsyTile) {
             jsonArray = (JSONArray) jsonObject.get("FlimsyTile");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
@@ -140,201 +147,115 @@ public class LevelRead {
     }
 
     private void flamefrower_read() {
-        if (jsonObject.get("Flamefrower") != null) {
+        isFlamefrower = jsonObject.get("Flamefrower") != null;
+        if (isFlamefrower) {
             jsonArray = (JSONArray) jsonObject.get("Flamefrower");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
-                flamefrower.add(new FlamefrowerC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Stage")).intValue(), ((Long) JO.get("Max")).intValue(), ((Long) JO.get("Rot")).intValue()));
+                flamefrower.add(new com.zaig100.dg.utils.contain.FlamefrowerC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Stage")).intValue(), ((Long) JO.get("Max")).intValue(), ((Long) JO.get("Rot")).intValue()));
             }
         }
     }
 
     private void crossbow_read() {
-        if (jsonObject.get("Crossbow") != null) {
+        isCrossbow = jsonObject.get("Crossbow") != null;
+        if (isCrossbow) {
             jsonArray = (JSONArray) jsonObject.get("Crossbow");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
-                crosbow.add(new CrossbowC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("DX")).intValue(), ((Long) JO.get("DY")).intValue(), ((Long) JO.get("Angle")).intValue()));
+                crosbow.add(new com.zaig100.dg.utils.contain.CrossbowC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("DX")).intValue(), ((Long) JO.get("DY")).intValue(), ((Long) JO.get("Angle")).intValue()));
             }
         }
     }
 
-
-}
-
-class HideTrapC {
-    int x, y;
-
-    public HideTrapC(int x, int y) {
-        this.x = x;
-        this.y = y;
+    public int[] getMap() {
+        return map;
     }
 
-    public int getX() {
-        return x;
+    public int getWight() {
+        return wight;
     }
 
-    public int getY() {
-        return y;
-    }
-}
-
-class TeleportC {
-    int x, y, tx, ty;
-
-    public TeleportC(int x, int y, int tx, int ty) {
-        this.x = x;
-        this.y = y;
-        this.tx = tx;
-        this.ty = ty;
+    public int getHeight() {
+        return height;
     }
 
-    public int getX() {
-        return x;
+    public int getSpawnX() {
+        return SpawnX;
     }
 
-    public int getY() {
-        return y;
+    public int getSpawnY() {
+        return SpawnY;
     }
 
-    public int getTx() {
-        return tx;
+    public String getLevelname() {
+        return levelname;
     }
 
-    public int getTy() {
-        return ty;
-    }
-}
-
-class StairC {
-    int x, y;
-    String next;
-
-    public StairC(int x, int y, String next) {
-        this.x = x;
-        this.y = y;
-        this.next = next;
+    public boolean isSave() {
+        return isSave;
     }
 
-    public int getX() {
-        return x;
+    public boolean isDark() {
+        return isDark;
     }
 
-    public int getY() {
-        return y;
+    public ArrayList<HideTrapC> getHide_trap() {
+        return hide_trap;
     }
 
-    public String getNext() {
-        return next;
-    }
-}
-
-class ItemC {
-    int x, y, id;
-
-    public ItemC(int x, int y, int id) {
-        this.x = x;
-        this.y = y;
-        this.id = id;
+    public ArrayList<TeleportC> getTeleport() {
+        return teleport;
     }
 
-    public int getX() {
-        return x;
+    public ArrayList<StairC> getStair() {
+        return stair;
     }
 
-    public int getY() {
-        return y;
+    public ArrayList<ItemC> getItem() {
+        return item;
     }
 
-    public int getId() {
-        return id;
+    public ArrayList<FlimsyTileC> getFlimsy_tile() {
+        return flimsy_tile;
+    }
+
+    public ArrayList<FlamefrowerC> getFlamefrower() {
+        return flamefrower;
+    }
+
+    public ArrayList<CrossbowC> getCrosbow() {
+        return crosbow;
+    }
+
+    public boolean isHideTrap() {
+        return isHideTrap;
+    }
+
+    public boolean isTeleport() {
+        return isTeleport;
+    }
+
+    public boolean isStair() {
+        return isStair;
+    }
+
+    public boolean isItem() {
+        return isItem;
+    }
+
+    public boolean isFlimsyTile() {
+        return isFlimsyTile;
+    }
+
+    public boolean isFlamefrower() {
+        return isFlamefrower;
+    }
+
+    public boolean isCrossbow() {
+        return isCrossbow;
     }
 }
 
-class FlimsyTileC {
-    int x, y, stage;
-
-    public FlimsyTileC(int x, int y, int stage) {
-        this.x = x;
-        this.y = y;
-        this.stage = stage;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getStage() {
-        return stage;
-    }
-}
-
-class FlamefrowerC {
-    int x, y, stage, max, rot;
-
-    public FlamefrowerC(int x, int y, int stage, int max, int rot) {
-        this.x = x;
-        this.y = y;
-        this.stage = stage;
-        this.max = max;
-        this.rot = rot;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getStage() {
-        return stage;
-    }
-
-    public int getMax() {
-        return max;
-    }
-
-    public int getRot() {
-        return rot;
-    }
-}
-
-class CrossbowC {
-    int x, y, dx, dy, angle;
-
-    public CrossbowC(int x, int y, int dx, int dy, int angle) {
-        this.x = x;
-        this.y = y;
-        this.dx = dx;
-        this.dy = dy;
-        this.angle = angle;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getDx() {
-        return dx;
-    }
-
-    public int getDy() {
-        return dy;
-    }
-
-    public int getAngle() {
-        return angle;
-    }
-}

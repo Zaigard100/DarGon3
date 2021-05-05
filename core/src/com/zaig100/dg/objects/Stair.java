@@ -37,7 +37,7 @@ public class Stair {
         joystick.frame(0, 0);
         if ((Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) || (joystick.isUse())) {
             if ((x == Player.getX()) && (y == Player.getY())) {
-                if (end) {
+                if (end || next_path == "END" || next_path == null) {
                     m.getScreen().dispose();
                     m.setScreen(new GameScreen(m));
                 } else {
@@ -52,7 +52,7 @@ public class Stair {
         joystick.frame(0, 0);
         if ((Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) || (joystick.isUse())) {
             if ((x == Player.getX()) && (y == Player.getY())) {
-                if (end) {
+                if (end || next_path == "END" || next_path == null) {
                     m.setScreen(new GameScreen(m));
                 } else {
                     Player.setIsSheld(false);

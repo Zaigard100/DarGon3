@@ -10,11 +10,11 @@ public class Map {
 
     int mapWidht,mapHeight;
     boolean isDark;
-    int[][] map;
+    int[] map;
     int j;
     int i;
 
-    public Map(int mapWidht, int mapHeight, int[][] map, boolean isDark) {
+    public Map(int mapWidht, int mapHeight, int[] map, boolean isDark) {
         this.mapWidht = mapWidht;
         this.mapHeight = mapHeight;
         this.map = map;
@@ -26,7 +26,7 @@ public class Map {
         if ((oldX >= mapWidht) || (oldY >= mapHeight) || (oldX < 0) || (oldY < 0)) {
             return false;
         } else {
-            return map[oldX][oldY] == 11;
+            return map[oldX + oldY * mapWidht] == 11;
         }
     }
 
@@ -35,31 +35,31 @@ public class Map {
         for (i = Player.getY() - 4; i < Player.getY() + 4; i++) {
             for (j = Player.getX() - 5; j < Player.getX() + 5; j++) {
                 if (i >= 0 && i < mapHeight && j >= 0 && j < mapWidht) {
-                    if (map[j][i] == 11) {
+                    if (map[j + mapWidht * i] == 11) {
                         batch.draw(Res.tile(0, 0), -Player.wX + (j + 3) * 16 * Configuration.getScale(), -Player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
                     }
-                    if (map[j][i] == 12) {
+                    if (map[j + mapWidht * i] == 12) {
                         batch.draw(Res.tile(1, 1), -Player.wX + (j + 3) * 16 * Configuration.getScale(), -Player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
                     }
-                    if (map[j][i] == 13) {
+                    if (map[j + mapWidht * i] == 13) {
                         batch.draw(Res.tile(2, 0), -Player.wX + (j + 3) * 16 * Configuration.getScale(), -Player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
                     }
-                    if (map[j][i] == 14) {
+                    if (map[j + mapWidht * i] == 14) {
                         batch.draw(Res.tile(1, 0), -Player.wX + (j + 3) * 16 * Configuration.getScale(), -Player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
                     }
-                    if (map[j][i] == 15) {
+                    if (map[j + mapWidht * i] == 15) {
                         batch.draw(Res.tile(2, 1), -Player.wX + (j + 3) * 16 * Configuration.getScale(), -Player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
                     }
-                    if (map[j][i] == 16) {
+                    if (map[j + mapWidht * i] == 16) {
                         batch.draw(Res.tile(3, 0), -Player.wX + (j + 3) * 16 * Configuration.getScale(), -Player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
                     }
-                    if (map[j][i] == 17) {
+                    if (map[j + mapWidht * i] == 17) {
                         batch.draw(Res.tile(3, 1), -Player.wX + (j + 3) * 16 * Configuration.getScale(), -Player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
                     }
-                    if (map[j][i] == 18) {
+                    if (map[j + mapWidht * i] == 18) {
                         batch.draw(Res.tile(4, 1), -Player.wX + (j + 3) * 16 * Configuration.getScale(), -Player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
                     }
-                    if (map[j][i] == 19) {
+                    if (map[j + mapWidht * i] == 19) {
                         batch.draw(Res.tile(4, 0), -Player.wX + (j + 3) * 16 * Configuration.getScale(), -Player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
                     }
                 }
@@ -84,7 +84,9 @@ public class Map {
     }
 
 
-    //public boolean isDark() { return isDark;}
+    public boolean isDark() {
+        return isDark;
+    }
 
 
     public void setDark(boolean dark) {

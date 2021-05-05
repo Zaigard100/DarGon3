@@ -27,12 +27,21 @@ import com.zaig100.dg.objects.Teleport;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Font;
 import com.zaig100.dg.utils.Joystick;
-import com.zaig100.dg.utils.LevelReader;
+import com.zaig100.dg.utils.LevelRead;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.Save;
+import com.zaig100.dg.utils.contain.CrossbowC;
+import com.zaig100.dg.utils.contain.FlamefrowerC;
+import com.zaig100.dg.utils.contain.FlimsyTileC;
+import com.zaig100.dg.utils.contain.HideTrapC;
+import com.zaig100.dg.utils.contain.ItemC;
+import com.zaig100.dg.utils.contain.StairC;
+import com.zaig100.dg.utils.contain.TeleportC;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 public class PlayScreen implements Screen {
@@ -42,48 +51,64 @@ public class PlayScreen implements Screen {
     OrthographicCamera cam;
     Main m;
     Sprite frame;
-    static LevelReader lR;
+    static LevelRead lR;
     static Font font;
     static Random random;
     static BitmapFont f1,f2,f3,f4;
     static int height;
     static int width;
 
-    static int scrW,scrH;
-    String path,line;
+    static int scrW, scrH;
+    String path, line;
 
     static Map map;
     Player player;
-    static Stair stair;
     int hp;
 
     int menu = 0;
 
-    static Teleport[] tp;
-    HideTrap[] hideTrap;
-    static Flamefrower[] flame;
-    Crossbow[] crossbow;
-    Item[] item;
-    FlimsyTile[] flimsyTiles;
-    
+    ArrayList<Stair> stair = new ArrayList<>();
+    StairC stairС;
+    Stair stairIntr;
+    ArrayList<Teleport> tp = new ArrayList<>();
+    TeleportC teleportC;
+    Teleport teleporterIntr;
+    ArrayList<HideTrap> hideTrap = new ArrayList<>();
+    HideTrapC hideTrapC;
+    HideTrap hideTrapIntr;
+    ArrayList<Flamefrower> flame = new ArrayList<>();
+    FlamefrowerC flamefrowerС;
+    Flamefrower flamefrowerIntr;
+    ArrayList<Crossbow> crossbow = new ArrayList<>();
+    CrossbowC crossbowC;
+    Crossbow crossbowIntr;
+    ArrayList<Item> item = new ArrayList<>();
+    ItemC itemC;
+    Item itemIntr;
+    ArrayList<FlimsyTile> flimsyTiles = new ArrayList<>();
+    FlimsyTileC flimsyTileC;
+    FlimsyTile flimsyTileTntr;
+
     static Joystick joystick;
 
     Save save;
     boolean start = true;
 
-    boolean is_pause = false,debag = false;
-    float exit_timer = 0,sensor_timer =0f;
+    boolean is_pause = false, debag = false;
+    float exit_timer = 0, sensor_timer = 0f;
 
     boolean fir1 = true;
     int i;
 
     Viewport viewport;
 
+    Iterator iter;
+
     boolean isPack;
     String packname = "";
     String derectory = "";
-    
-    public PlayScreen(Main m,String path,Player p,boolean isPack){
+
+    public PlayScreen(Main m, String path, Player p, boolean isPack) {
         this.m = m;
         this.path = path;
         this.player = p;
@@ -123,74 +148,72 @@ public class PlayScreen implements Screen {
         f3 = new BitmapFont();
         f3.setColor(Color.WHITE);
         if (isPack) {
-            try {
-                lR = new LevelReader(derectory + path, isPack);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }else {
-            try {
-                lR = new LevelReader(path, isPack);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            lR = new LevelRead(derectory + path, isPack);
+        } else {
+            lR = new LevelRead(path, isPack);
         }
 
 
-        map = new Map(lR.getWidht(),lR.getHeight(),lR.getMap(),true);
-        player.setX(lR.getSpawn()[0]);
-        player.setY(lR.getSpawn()[1]);
+        map = new Map(lR.getWight(), lR.getHeight(), lR.getMap(), true);
+        player.setX(lR.getSpawnX());
+        player.setY(lR.getSpawnY());
         player.wCordNormalize();
         player.setMap(map);
-        stair = new Stair(lR.getWin()[0], lR.getWin()[1], lR.isSpawnFlipX(), lR.getNextpath(), lR.isEnd());
-        if(lR.getTeleportCount()>0){
+        map.setDark(!lR.isDark());
 
-            tp = new Teleport[lR.getTeleportCount()];
-
-            for(i =0;i<lR.getTeleportCount();i++){
-                tp[i] = new Teleport(lR.getTeleport()[0][i], lR.getTeleport()[1][i], lR.getTeleport()[2][i], lR.getTeleport()[3][i]);
-            }
-
-        }
-        if(lR.getHideTrapCount()>0){
-
-            hideTrap = new HideTrap[lR.getHideTrapCount()];
-
-            for(i =0;i<lR.getHideTrapCount()-1;i++){
-                hideTrap[i] = new HideTrap(lR.getHideTraps()[0][i], lR.getHideTraps()[1][i]);
-            }
-
-        }
-        if(lR.getFlamethrowerCount()>0){
-
-            flame = new Flamefrower[lR.getFlamethrowerCount()];
-
-            for(i =0;i<lR.getFlamethrowerCount();i++){
-                flame[i] = new Flamefrower(lR.getFlamethrowfers()[0][i], lR.getFlamethrowfers()[1][i], lR.getFlamethrowfers()[2][i], lR.getFlamethrowfers()[3][i], lR.getFlamethrowfers()[4][i]);
-            }
-
-        }
-        if(lR.getCrossbowCount()>0){
-
-            crossbow = new Crossbow[lR.getCrossbowCount()];
-
-            for(i =0;i<lR.getCrossbowCount();i++){
-                crossbow[i] = new Crossbow(lR.getCrossbow()[0][i], lR.getCrossbow()[1][i], lR.getCrossbow()[2][i], lR.getCrossbow()[3][i], lR.getCrossbow()[4][i]);
+        if (lR.isStair()) {
+            iter = lR.getStair().iterator();
+            while (iter.hasNext()) {
+                stairС = (StairC) iter.next();
+                stair.add(new Stair(stairС.getX(), stairС.getY(), stairС.getFlipX(), stairС.getNext(), stairС.isEnd()));
             }
 
         }
 
-        if (lR.getItemsCount() > 0) {
-            item = new Item[lR.getItemsCount()];
-            for (i = 0; i < lR.getItemsCount(); i++) {
-                item[i] = new Item(lR.getItems()[0][i], lR.getItems()[1][i], lR.getItems()[2][i]);
+        if (lR.isTeleport()) {
+            iter = lR.getTeleport().iterator();
+            while (iter.hasNext()) {
+                teleportC = (TeleportC) iter.next();
+                tp.add(new Teleport(teleportC.getX(), teleportC.getY(), teleportC.getTx(), teleportC.getTy()));
+            }
+
+        }
+        if (lR.isHideTrap()) {
+            iter = lR.getHide_trap().iterator();
+            while (iter.hasNext()) {
+                hideTrapC = (HideTrapC) iter.next();
+                hideTrap.add(new HideTrap(hideTrapC.getX(), hideTrapC.getY()));
+            }
+        }
+        if (lR.isFlamefrower()) {
+            iter = lR.getFlamefrower().iterator();
+            while (iter.hasNext()) {
+                flamefrowerС = (FlamefrowerC) iter.next();
+                flame.add(new Flamefrower(flamefrowerС.getX(), flamefrowerС.getY(), flamefrowerС.getStage(), flamefrowerС.getMax(), flamefrowerС.getRot()));
+            }
+
+        }
+        if (lR.isCrossbow()) {
+            iter = lR.getCrosbow().iterator();
+            while (iter.hasNext()) {
+                crossbowC = (CrossbowC) iter.next();
+                crossbow.add(new Crossbow(crossbowC.getX(), crossbowC.getY(), crossbowC.getDx(), crossbowC.getDy(), crossbowC.getAngle()));
             }
         }
 
-        if (lR.getFlimstTileCount() > 0) {
-            flimsyTiles = new FlimsyTile[lR.getFlimstTileCount()];
-            for (i = 0; i < lR.getFlimstTileCount(); i++) {
-                flimsyTiles[i] = new FlimsyTile(lR.getFlimsyTile()[0][i], lR.getFlimsyTile()[1][i]);
+        if (lR.isItem()) {
+            iter = lR.getItem().iterator();
+            while (iter.hasNext()) {
+                itemC = (ItemC) iter.next();
+                item.add(new Item(itemC.getX(), itemC.getY(), itemC.getId()));
+            }
+        }
+
+        if (lR.isFlimsyTile()) {
+            iter = lR.getFlimsy_tile().iterator();
+            while (iter.hasNext()) {
+                flimsyTileC = (FlimsyTileC) iter.next();
+                flimsyTiles.add(new FlimsyTile(flimsyTileC.getX(), flimsyTileC.getY()));
             }
         }
         //Main.getRes().sprL();
@@ -242,49 +265,53 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         map.render(batch);
 
-        if (lR.getFlimstTileCount() > 0) {
-            for (i = 0; i < lR.getFlimstTileCount(); i++) {
-                if (!is_pause) flimsyTiles[i].frame();
-                if (!is_pause) flimsyTiles[i].tick(1.5f);
-
-                flimsyTiles[i].render(batch);
+        if (lR.isFlimsyTile()) {
+            for (i = 0; i < flimsyTiles.size(); i++) {
+                if (!is_pause) flimsyTiles.get(i).tick(1f);
+                flimsyTiles.get(i).render(batch);
+                if (!is_pause) flimsyTiles.get(i).frame();
             }
         }
 
-        stair.render(batch);
-        if (lR.getTeleportCount() > 0) {
-            for (i = 0; i < lR.getTeleportCount(); i++) {
-                if (!is_pause) tp[i].frame(joystick);
-                tp[i].render(batch);
+        if (lR.isStair()) {
+            for (i = 0; i < stair.size(); i++) {
+                stair.get(i).render(batch);
+                if (!is_pause) stair.get(i).frame(m, joystick, isPack);
             }
         }
-        if (lR.getHideTrapCount() > 0) {
-            for (i = 0; i < lR.getHideTrapCount() - 1; i++) {
-                if (!is_pause) hideTrap[i].frame();
-                    }
-                }
 
+        if (lR.isTeleport()) {
+            for (i = 0; i < tp.size(); i++) {
+                tp.get(i).render(batch);
+                if (!is_pause) tp.get(i).frame(joystick);
+            }
+        }
+        if (lR.isHideTrap()) {
+            for (i = 0; i < hideTrap.size(); i++) {
+                if (!is_pause) hideTrap.get(i).frame();
+            }
+        }
+        if (lR.isItem()) {
+            for (i = 0; i < item.size(); i++) {
+                item.get(i).render(batch);
+                if (!is_pause) item.get(i).frame();
+            }
+        }
         player.render(batch);
-        if (lR.getFlamethrowerCount() > 0) {
-            for (i = 0; i < lR.getFlamethrowerCount(); i++) {
-                if (!is_pause) flame[i].frame();
-                flame[i].render(batch);
-                if (!is_pause) flame[i].tick(1.5f);
-                if (!is_pause) flame[i].tick1(0.1f);
-            }
-        }
-        if (lR.getCrossbowCount() > 0) {
-            for (i = 0; i < lR.getCrossbowCount(); i++) {
-                if (!is_pause) crossbow[i].frame();
-                crossbow[i].render(batch);
-                if (!is_pause) crossbow[i].tick(1f);
-            }
-        }
 
-        if (lR.getItemsCount() > 0) {
-            for (i = 0; i < lR.getItemsCount(); i++) {
-                if (!is_pause) item[i].frame();
-                item[i].render(batch);
+        if (lR.isFlamefrower()) {
+            for (i = 0; i < flame.size(); i++) {
+                if (!is_pause) flame.get(i).tick(1.5f);
+                if (!is_pause) flame.get(i).tick1(0.1f);
+                flame.get(i).render(batch);
+                if (!is_pause) flame.get(i).frame();
+            }
+        }
+        if (lR.isCrossbow()) {
+            for (i = 0; i < crossbow.size(); i++) {
+                if (!is_pause) crossbow.get(i).tick(1.5f);
+                crossbow.get(i).render(batch);
+                if (!is_pause) crossbow.get(i).frame();
             }
         }
 
@@ -292,7 +319,7 @@ public class PlayScreen implements Screen {
         if (!is_pause) {
             Player.render_bag(batch, f4, joystick);
             if (start)
-                f2.draw(batch, lR.getLevelName(), 8 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
+                f2.draw(batch, lR.getLevelname(), 8 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
         }
         if (Player.getHp() <= 0 && !is_pause) {
             if (fir1) Res.wasted.play(2.0f);
@@ -320,22 +347,37 @@ public class PlayScreen implements Screen {
         if (debag) debugShow();
             batch.end();
         fbo.end();
-        if (Player.getX() != lR.getSpawn()[0] || Player.getY() != lR.getSpawn()[1]) start = false;
+        if (Player.getX() != lR.getSpawnX() || Player.getY() != lR.getSpawnY()) start = false;
 
         if (!is_pause) Player.tick(0.1f);
         if (isPack) {
-            stair.frame_isPack(m, joystick, isPack, packname, derectory);
-            if (stair.isExit()) {
-                dispose();
-                m.setScreen(new PlayScreen(m, stair.getNext_path(), player, isPack, packname, derectory));
+            if (lR.isStair()) {
+                for (i = 0; i < stair.size() - 1; i++) {
+                    stair.get(i).frame_isPack(m, joystick, isPack, packname, derectory);
+                    if (stair.get(i).isExit()) {
+                        dispose();
+                        m.setScreen(new PlayScreen(m, stair.get(i).getNext_path(), player, isPack, packname, derectory));
+                    }
+
+                }
             }
         } else {
-            stair.frame(m, joystick, isPack);
-            if (stair.isExit()) {
-                dispose();
-                m.setScreen(new PlayScreen(m, stair.getNext_path(), player, isPack));
+            if (lR.isStair()) {
+                for (i = 0; i < stair.size() - 1; i++) {
+                }
+                stair.get(i).frame(m, joystick, isPack);
+                if (stair.get(i).isExit()) {
+                    System.out.println(stairС.isEnd());
+                    dispose();
+                    if (stair.get(i).getNext_path() == null || stair.get(i).getNext_path() == "END") {
+                        m.setScreen(new GameScreen(m));
+                    } else {
+                        m.setScreen(new PlayScreen(m, stair.get(i).getNext_path(), player, isPack));
+                    }
+                }
             }
         }
+
         frame = new Sprite(fbo.getColorBufferTexture());
 
 
@@ -363,6 +405,7 @@ public class PlayScreen implements Screen {
 
         batch.end();
     }
+
 
     void debugShow() {
         line = "Debug:";
