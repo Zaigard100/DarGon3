@@ -124,7 +124,8 @@
       "X": 4,
       "Y": 7,
       "FlipX": false,
-      "Next": "levels/15.json"
+      "Next": "levels/15.json",
+      "End": false
     }
   ],
   "save": false

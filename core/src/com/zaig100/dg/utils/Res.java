@@ -77,6 +77,7 @@ public class Res {
     static public Texture idle;
     static public Texture NGSprite;
     static public Texture HP1, HP2, HP3, HP4;
+    static public Texture spinney;
 
     static Sprite spr = null;
 
@@ -134,6 +135,7 @@ public class Res {
                 break;
             case 9:
                 Res.vk = new Texture(Gdx.files.internal("texture/vk.png"));
+                Res.spinney = new Texture(Gdx.files.internal("texture/spinney.png"));
                 break;
 /*
             mainmenu = Gdx.audio.newMusic(Gdx.files.internal("sounds/mainmenu.mp3"));

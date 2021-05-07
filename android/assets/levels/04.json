@@ -320,8 +320,8 @@
       "X": 7,
       "Y": 7,
       "FlipX": false,
-      ,
-      "Next": "levels/05.json"
+      "Next": "levels/05.json",
+      "End": false
     }
   ],
   "save": false

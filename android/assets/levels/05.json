@@ -168,7 +168,8 @@
       "X": 9,
       "Y": 1,
       "FlipX": false,
-      "Next": "levels/06.json"
+      "Next": "levels/06.json",
+      "End": false
     }
   ],
   "save": true

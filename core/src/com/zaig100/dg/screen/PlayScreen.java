@@ -22,6 +22,7 @@ import com.zaig100.dg.objects.HideTrap;
 import com.zaig100.dg.objects.Item;
 import com.zaig100.dg.objects.Map;
 import com.zaig100.dg.objects.Player;
+import com.zaig100.dg.objects.Spinney;
 import com.zaig100.dg.objects.Stair;
 import com.zaig100.dg.objects.Teleport;
 import com.zaig100.dg.utils.Configuration;
@@ -35,6 +36,7 @@ import com.zaig100.dg.utils.contain.FlamefrowerC;
 import com.zaig100.dg.utils.contain.FlimsyTileC;
 import com.zaig100.dg.utils.contain.HideTrapC;
 import com.zaig100.dg.utils.contain.ItemC;
+import com.zaig100.dg.utils.contain.SpinneyC;
 import com.zaig100.dg.utils.contain.StairC;
 import com.zaig100.dg.utils.contain.TeleportC;
 
@@ -69,25 +71,20 @@ public class PlayScreen implements Screen {
 
     ArrayList<Stair> stair = new ArrayList<>();
     StairC stairС;
-    Stair stairIntr;
     ArrayList<Teleport> tp = new ArrayList<>();
     TeleportC teleportC;
-    Teleport teleporterIntr;
     ArrayList<HideTrap> hideTrap = new ArrayList<>();
     HideTrapC hideTrapC;
-    HideTrap hideTrapIntr;
     ArrayList<Flamefrower> flame = new ArrayList<>();
     FlamefrowerC flamefrowerС;
-    Flamefrower flamefrowerIntr;
     ArrayList<Crossbow> crossbow = new ArrayList<>();
     CrossbowC crossbowC;
-    Crossbow crossbowIntr;
     ArrayList<Item> item = new ArrayList<>();
     ItemC itemC;
-    Item itemIntr;
     ArrayList<FlimsyTile> flimsyTiles = new ArrayList<>();
     FlimsyTileC flimsyTileC;
-    FlimsyTile flimsyTileTntr;
+    ArrayList<Spinney> spinney = new ArrayList<>();
+    SpinneyC spinneyC;
 
     static Joystick joystick;
 
@@ -142,7 +139,7 @@ public class PlayScreen implements Screen {
         font = new Font();
         joystick = new Joystick();
         debag = Configuration.isDebug();
-        f1 = font.gFont(10 * Main.getConfiguration().getScale(), "fonts/GFont.ttf");
+        f1 = font.gFont(11 * Main.getConfiguration().getScale(), "fonts/GFont.ttf");
         f2 = font.gFont(6 * Main.getConfiguration().getScale(), "fonts/GFont.ttf");
         f4 = font.gFont(3 * Main.getConfiguration().getScale(), "fonts/GFont.ttf");
         f3 = new BitmapFont();
@@ -213,9 +210,18 @@ public class PlayScreen implements Screen {
             iter = lR.getFlimsy_tile().iterator();
             while (iter.hasNext()) {
                 flimsyTileC = (FlimsyTileC) iter.next();
-                flimsyTiles.add(new FlimsyTile(flimsyTileC.getX(), flimsyTileC.getY()));
+                flimsyTiles.add(new FlimsyTile(flimsyTileC.getX(), flimsyTileC.getY(), flimsyTileC.getStage()));
             }
         }
+
+        if (lR.isSpinney()) {
+            iter = lR.getSpinney().iterator();
+            while (iter.hasNext()) {
+                spinneyC = (SpinneyC) iter.next();
+                spinney.add(new Spinney(spinneyC.getX(), spinneyC.getY(), spinneyC.getWight(), spinneyC.getHeight()));
+            }
+        }
+
         //Main.getRes().sprL();
 
         cam.position.set(new Vector3(width / 2, height / 2, 0));
@@ -265,6 +271,105 @@ public class PlayScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         map.render(batch);
 
+        object_update();
+
+        map.dark_render(batch);
+        if (!is_pause) {
+            Player.render_bag(batch, f4, joystick);
+            if (start)
+                f2.draw(batch, lR.getLevelname(), 8 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
+        }
+        if (Player.getHp() <= 0 && !is_pause) {
+            wasted_render();
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            is_pause = !is_pause;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F3)) {
+            debag = !debag;
+        }
+        if (is_pause) {
+            pauseMenu();
+
+        }
+        joystick.render(batch);
+        if (debag) debugShow();
+            batch.end();
+        fbo.end();
+        if (Player.getX() != lR.getSpawnX() || Player.getY() != lR.getSpawnY()) start = false;
+
+        if (!is_pause) Player.tick(0.1f);
+        if (isPack) {
+            if (lR.isStair()) {
+                for (i = 0; i < stair.size(); i++) {
+                    stair.get(i).frame_isPack(m, joystick, isPack, packname, derectory);
+                    if (stair.get(i).isExit()) {
+                        dispose();
+                        if (stair.get(i).isEnd()) {
+                            m.setScreen(new GameScreen(m));
+                        } else {
+                            m.setScreen(new PlayScreen(m, stair.get(i).getNext_path(), player, isPack, packname, derectory));
+                        }
+                    }
+                }
+            }
+        } else {
+            if (lR.isStair()) {
+                for (i = 0; i < stair.size(); i++) {
+                    stair.get(i).frame(m, joystick, isPack);
+                    if (stair.get(i).isExit()) {
+                        System.out.println(stairС.isEnd());
+                        dispose();
+                        if (stair.get(i).isEnd()) {
+                            m.setScreen(new GameScreen(m));
+                        } else {
+                            m.setScreen(new PlayScreen(m, stair.get(i).getNext_path(), player, isPack));
+                        }
+                    }
+                }
+            }
+        }
+
+        frame = new Sprite(fbo.getColorBufferTexture());
+
+
+        fbo2.begin();
+        batch.begin();
+
+        frame.draw(batch);
+        //frame.setPosition(space/2,0);
+
+        batch.end();
+        fbo2.end();
+
+        frame = new Sprite(fbo2.getColorBufferTexture());
+        frame.setPosition((scrW - 16 * 7 * Configuration.getScale()) / 2, (scrH - 16 * 5 * Configuration.getScale()) / 2);
+
+        cam.update();
+
+        batch.begin();
+
+        batch.draw(Res.boards, 0, 0, 16 * 7 * Configuration.getScale() * 10, 16 * 5 * Configuration.getScale() * 10);
+        if (is_pause) {
+            batch.draw(Res.pause_dark, 0, 0, 16 * 7 * Configuration.getScale() * 10, 16 * 5 * Configuration.getScale() * 10);
+        }
+        frame.draw(batch);
+
+        batch.end();
+    }
+
+    private void wasted_render() {
+        if (fir1) Res.wasted.play(2.0f);
+        fir1 = false;
+        f1.draw(batch, "Wasted", 2 * 16 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
+        f2.draw(batch, "Press Space", 2 * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || joystick.isUse()) {
+            m.setScreen(new GameScreen(m));
+
+        }
+    }
+
+    private void object_update() {
         if (lR.isFlimsyTile()) {
             for (i = 0; i < flimsyTiles.size(); i++) {
                 if (!is_pause) flimsyTiles.get(i).tick(1f);
@@ -314,98 +419,12 @@ public class PlayScreen implements Screen {
                 if (!is_pause) crossbow.get(i).frame();
             }
         }
-
-        map.dark_render(batch);
-        if (!is_pause) {
-            Player.render_bag(batch, f4, joystick);
-            if (start)
-                f2.draw(batch, lR.getLevelname(), 8 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
-        }
-        if (Player.getHp() <= 0 && !is_pause) {
-            if (fir1) Res.wasted.play(2.0f);
-            fir1 = false;
-            f1.draw(batch, "Wasted", 2 * 16 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
-            f2.draw(batch, "Press Space", 2 * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || joystick.isUse()) {
-                m.setScreen(new GameScreen(m));
-
+        if (lR.isSpinney()) {
+            for (i = 0; i < spinney.size(); i++) {
+                spinney.get(i).render(batch);
             }
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            is_pause = !is_pause;
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.F3)) {
-            debag = !debag;
-        }
-        if (is_pause) {
-            batch.draw(Res.pause_dark, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-            f1.draw(batch, "Pause", 2.2f * 16 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
-            pauseMenu();
-
-        }
-        joystick.render(batch);
-        if (debag) debugShow();
-            batch.end();
-        fbo.end();
-        if (Player.getX() != lR.getSpawnX() || Player.getY() != lR.getSpawnY()) start = false;
-
-        if (!is_pause) Player.tick(0.1f);
-        if (isPack) {
-            if (lR.isStair()) {
-                for (i = 0; i < stair.size() - 1; i++) {
-                    stair.get(i).frame_isPack(m, joystick, isPack, packname, derectory);
-                    if (stair.get(i).isExit()) {
-                        dispose();
-                        m.setScreen(new PlayScreen(m, stair.get(i).getNext_path(), player, isPack, packname, derectory));
-                    }
-
-                }
-            }
-        } else {
-            if (lR.isStair()) {
-                for (i = 0; i < stair.size() - 1; i++) {
-                }
-                stair.get(i).frame(m, joystick, isPack);
-                if (stair.get(i).isExit()) {
-                    System.out.println(stairС.isEnd());
-                    dispose();
-                    if (stair.get(i).getNext_path() == null || stair.get(i).getNext_path() == "END") {
-                        m.setScreen(new GameScreen(m));
-                    } else {
-                        m.setScreen(new PlayScreen(m, stair.get(i).getNext_path(), player, isPack));
-                    }
-                }
-            }
-        }
-
-        frame = new Sprite(fbo.getColorBufferTexture());
-
-
-        fbo2.begin();
-        batch.begin();
-
-        frame.draw(batch);
-        //frame.setPosition(space/2,0);
-
-        batch.end();
-        fbo2.end();
-
-        frame = new Sprite(fbo2.getColorBufferTexture());
-        frame.setPosition((scrW - 16 * 7 * Configuration.getScale()) / 2, (scrH - 16 * 5 * Configuration.getScale()) / 2);
-
-        cam.update();
-
-        batch.begin();
-
-        batch.draw(Res.boards, 0, 0, 16 * 7 * Configuration.getScale() * 10, 16 * 5 * Configuration.getScale() * 10);
-            if(is_pause) {
-                batch.draw(Res.pause_dark, 0, 0, 16 * 7 * Configuration.getScale() * 10, 16 * 5 * Configuration.getScale() * 10);
-            }
-            frame.draw(batch);
-
-        batch.end();
     }
-
 
     void debugShow() {
         line = "Debug:";
@@ -424,9 +443,12 @@ public class PlayScreen implements Screen {
 
 
 
-    void pauseMenu(){
+    void pauseMenu() {
         joystick.frame((int) (scrW - 16 * 7 * Configuration.getScale()) / 2, (int) (scrH - 16 * 5 * Configuration.getScale()) / 2);
-        if(menu==0) {
+
+        batch.draw(Res.pause_dark, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        f1.draw(batch, "Pause", 2.2f * 16 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
+        if (menu == 0) {
             f2.draw(batch, ">Resume<", 2.2f * 16 * Configuration.getScale(), 3.5f * 16 * Configuration.getScale());
             f2.draw(batch, " Main menu", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
             f2.draw(batch, " Load save", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
@@ -435,7 +457,7 @@ public class PlayScreen implements Screen {
                 is_pause = false;
             }
         }
-        if(menu==1) {
+        if (menu == 1) {
             f2.draw(batch, " Resume", 2.2f * 16 * Configuration.getScale(), 3.5f * 16 * Configuration.getScale());
             f2.draw(batch, ">Main menu<", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
             f2.draw(batch, " Load save", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
@@ -503,6 +525,8 @@ public class PlayScreen implements Screen {
         fbo2.dispose();
         int ry = height - PlayScreen.height;
         int rx = width - PlayScreen.width;
+        this.width = width;
+        this.height = height;
         scrW = width;
         scrH = height;
         viewport.update(width, height);
@@ -514,7 +538,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void pause() {
-
+        is_pause = true;
     }
 
     @Override

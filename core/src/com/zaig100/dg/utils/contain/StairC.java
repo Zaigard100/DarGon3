@@ -5,11 +5,12 @@ public class StairC {
     String next;
     boolean flipX, isEnd = false;
 
-    public StairC(int x, int y, boolean flipX, String next) {
+    public StairC(int x, int y, boolean flipX, String next, boolean end) {
         this.x = x;
         this.y = y;
         this.flipX = flipX;
         this.next = next;
+        isEnd = end;
         if (next == null || next == "END") {
             isEnd = true;
         }

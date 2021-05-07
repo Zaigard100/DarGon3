@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.Main;
-import com.zaig100.dg.screen.GameScreen;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
@@ -37,13 +36,9 @@ public class Stair {
         joystick.frame(0, 0);
         if ((Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) || (joystick.isUse())) {
             if ((x == Player.getX()) && (y == Player.getY())) {
-                if (end || next_path == "END" || next_path == null) {
-                    m.getScreen().dispose();
-                    m.setScreen(new GameScreen(m));
-                } else {
                     Player.setIsSheld(false);
                     isExit = true;
-                }
+
             }
         }
     }
@@ -52,12 +47,8 @@ public class Stair {
         joystick.frame(0, 0);
         if ((Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) || (joystick.isUse())) {
             if ((x == Player.getX()) && (y == Player.getY())) {
-                if (end || next_path == "END" || next_path == null) {
-                    m.setScreen(new GameScreen(m));
-                } else {
                     Player.setIsSheld(false);
                     isExit = true;
-                }
             }
         }
     }
@@ -69,4 +60,9 @@ public class Stair {
     public boolean isExit() {
         return isExit;
     }
+
+    public boolean isEnd() {
+        return end;
+    }
+
 }

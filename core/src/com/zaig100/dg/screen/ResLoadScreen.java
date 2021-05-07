@@ -20,7 +20,6 @@ public class ResLoadScreen implements Screen {
     BitmapFont font;
     Texture zaigard, progresbar;
     GlyphLayout load_layout, press_layout;
-    String progres_msg;
     float tick_timer = 0;
     float color_a = 1;
     byte color_dr = -1;
@@ -31,8 +30,6 @@ public class ResLoadScreen implements Screen {
 
     @Override
     public void show() {
-        wight = Gdx.graphics.getWidth();
-        height = Gdx.graphics.getHeight();
         batch = new SpriteBatch();
 
         font = new BitmapFont();
@@ -87,7 +84,8 @@ public class ResLoadScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        this.wight = width;
+        this.height = height;
     }
 
     @Override
@@ -107,6 +105,9 @@ public class ResLoadScreen implements Screen {
 
     @Override
     public void dispose() {
-
+        batch.dispose();
+        font.dispose();
+        zaigard.dispose();
+        progresbar.dispose();
     }
 }

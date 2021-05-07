@@ -23,12 +23,12 @@ public class GameScreen implements Screen {
     FrameBuffer fbo, fbo2;
     SpriteBatch batch;
     OrthographicCamera cam;
-    static Main m;
+    Main m;
     Sprite frame;
     LevelRead lR;
-    static int height;
-    static int width;
-    static int scrW, scrH;
+    int height;
+    int width;
+    int scrW, scrH;
     Viewport viewport;
     int[] map;
     int wW, hW;
@@ -44,7 +44,7 @@ public class GameScreen implements Screen {
     int button = 0;
 
     public GameScreen(Main m) {
-        GameScreen.m = m;
+        this.m = m;
         batch = new SpriteBatch();
         lR = new LevelRead("levels/01.json", false);
         map = lR.getMap();
@@ -96,7 +96,6 @@ public class GameScreen implements Screen {
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         if (isExit) {
             switch (button) {
                 case 1:
@@ -116,7 +115,7 @@ public class GameScreen implements Screen {
 
         fbo2.begin();
         batch.begin();
-
+        batch.draw(Res.boards, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         frame.setPosition((scrW - 16 * 7 * Main.getConfiguration().getScale()) / 2, -(scrH - 16 * 5 * Main.getConfiguration().getScale()) / 2);
         frame.draw(batch);
 
@@ -130,7 +129,6 @@ public class GameScreen implements Screen {
 
         batch.begin();
 
-        batch.draw(Res.pause_dark, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         frame.draw(batch);
 
         batch.end();

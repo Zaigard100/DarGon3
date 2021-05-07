@@ -150,8 +150,8 @@
       "X": 8,
       "Y": 0,
       "FlipX": false,
-      ,
-      "Next": "levels/03.json"
+      "Next": "levels/03.json",
+      "End": false
     }
   ],
   "save": false

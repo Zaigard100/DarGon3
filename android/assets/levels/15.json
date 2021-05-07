@@ -179,7 +179,8 @@
     {
       "X": 2,
       "Y": 7,
-      "FlipX": false
+      "FlipX": false,
+      "End": false
     }
   ],
   "save": false

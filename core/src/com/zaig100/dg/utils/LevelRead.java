@@ -7,6 +7,7 @@ import com.zaig100.dg.utils.contain.FlamefrowerC;
 import com.zaig100.dg.utils.contain.FlimsyTileC;
 import com.zaig100.dg.utils.contain.HideTrapC;
 import com.zaig100.dg.utils.contain.ItemC;
+import com.zaig100.dg.utils.contain.SpinneyC;
 import com.zaig100.dg.utils.contain.StairC;
 import com.zaig100.dg.utils.contain.TeleportC;
 
@@ -32,7 +33,7 @@ public class LevelRead {
     int wight, height, SpawnX, SpawnY;
     String levelname;
     boolean isSave, isDark;
-    boolean isHideTrap, isTeleport, isStair, isItem, isFlimsyTile, isFlamefrower, isCrossbow;
+    boolean isHideTrap, isTeleport, isStair, isItem, isFlimsyTile, isFlamefrower, isCrossbow, isSpinney;
     ArrayList<com.zaig100.dg.utils.contain.HideTrapC> hide_trap = new ArrayList<>();
     ArrayList<com.zaig100.dg.utils.contain.TeleportC> teleport = new ArrayList<>();
     ArrayList<com.zaig100.dg.utils.contain.StairC> stair = new ArrayList<>();
@@ -40,6 +41,7 @@ public class LevelRead {
     ArrayList<com.zaig100.dg.utils.contain.FlimsyTileC> flimsy_tile = new ArrayList<>();
     ArrayList<com.zaig100.dg.utils.contain.FlamefrowerC> flamefrower = new ArrayList<>();
     ArrayList<com.zaig100.dg.utils.contain.CrossbowC> crosbow = new ArrayList<>();
+    ArrayList<SpinneyC> spinney = new ArrayList<>();
 
     public LevelRead(String path, boolean isPack) {
         if (isPack) {
@@ -67,6 +69,7 @@ public class LevelRead {
         flimsy_tile_read();
         flamefrower_read();
         crossbow_read();
+        spinney_read();
 
         isSave = (Boolean) jsonObject.get("save");
 
@@ -117,7 +120,7 @@ public class LevelRead {
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
-                stair.add(new StairC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Boolean) JO.get("FlipX")), (String) JO.get("Next")));
+                stair.add(new StairC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Boolean) JO.get("FlipX")), (String) JO.get("Next"), (Boolean) JO.get("End")));
             }
         }
     }
@@ -166,6 +169,18 @@ public class LevelRead {
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
                 crosbow.add(new com.zaig100.dg.utils.contain.CrossbowC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("DX")).intValue(), ((Long) JO.get("DY")).intValue(), ((Long) JO.get("Angle")).intValue()));
+            }
+        }
+    }
+
+    private void spinney_read() {
+        isSpinney = jsonObject.get("Spinney") != null;
+        if (isSpinney) {
+            jsonArray = (JSONArray) jsonObject.get("Spinney");
+            iter = jsonArray.iterator();
+            while (iter.hasNext()) {
+                JO = (JSONObject) iter.next();
+                spinney.add(new com.zaig100.dg.utils.contain.SpinneyC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Widht")).intValue(), ((Long) JO.get("Height")).intValue()));
             }
         }
     }
@@ -230,6 +245,10 @@ public class LevelRead {
         return crosbow;
     }
 
+    public ArrayList<SpinneyC> getSpinney() {
+        return spinney;
+    }
+
     public boolean isHideTrap() {
         return isHideTrap;
     }
@@ -256,6 +275,10 @@ public class LevelRead {
 
     public boolean isCrossbow() {
         return isCrossbow;
+    }
+
+    public boolean isSpinney() {
+        return isSpinney;
     }
 }
 

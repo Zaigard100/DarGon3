@@ -515,7 +515,8 @@
       "X": 21,
       "Y": 21,
       "FlipX": false,
-      "Next": "levels/10.json"
+      "Next": "levels/10.json",
+      "End": false
     }
   ],
   "save": false

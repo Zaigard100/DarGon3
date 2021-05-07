@@ -1,8 +1,8 @@
 {
   "LevelName": "TEST",
   "Spawn": [
-    0,
-    0
+    2,
+    2
   ],
   "map": [
     [
@@ -69,13 +69,15 @@
     {
       "X": 1,
       "Y": 2,
-      "FlipX": false
+      "FlipX": false,
+      "End": false
     },
     {
       "Y": 3,
       "Next": "levels/01.json",
       "X": 1,
-      "FlipX": false
+      "FlipX": false,
+      "End": false
     }
   ],
   "Item": [
@@ -87,20 +89,35 @@
   ],
   "Flamefrower": [
     {
-      "X": 1,
-      "Y": -1,
+      "X": -1,
+      "Y": 4,
       "Stage": 1,
-      "Max": 2,
-      "Rot": 3
+      "Max": 3,
+      "Rot": 0
     }
   ],
   "Crossbow": [
     {
-      "X": 1,
-      "Y": -1,
-      "DX": 1,
+      "X": 5,
+      "Y": 1,
+      "DX": -1,
       "DY": 1,
-      "Angle": 225
+      "Angle": -45
+    }
+  ],
+  "Spinney": [
+    {
+      "X": 3,
+      "Y": 2,
+      "Widht": 2,
+      "Height": 3
+    }
+  ],
+  "FlimsyTile": [
+    {
+      "X": 0,
+      "Y": 2,
+      "Stage": 2
     }
   ],
   "save": false

@@ -12,10 +12,10 @@ public class FlimsyTile {
 
     float timer = 0;
 
-    public FlimsyTile(int x, int y) {
+    public FlimsyTile(int x, int y, int stage) {
         this.x = x;
         this.y = y;
-        crashed_lvl = 3;
+        crashed_lvl = 3 - stage;
     }
 
     public void render(SpriteBatch batch) {
