@@ -31,7 +31,7 @@ public class Configuration {
         if (m.isAndroid()) {
             conf = Gdx.files.local("DGConfig.json").file();
         } else {
-            conf = new File(new File(".").getAbsoluteFile(), "config.json");
+            conf = new File(new File("").getAbsoluteFile(), "DGconfig.json");
         }
         JSONParser jsonParser = new JSONParser();
 

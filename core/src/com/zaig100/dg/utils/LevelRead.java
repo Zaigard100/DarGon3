@@ -7,6 +7,7 @@ import com.zaig100.dg.utils.contain.FlamefrowerC;
 import com.zaig100.dg.utils.contain.FlimsyTileC;
 import com.zaig100.dg.utils.contain.HideTrapC;
 import com.zaig100.dg.utils.contain.ItemC;
+import com.zaig100.dg.utils.contain.SpikeC;
 import com.zaig100.dg.utils.contain.SpinneyC;
 import com.zaig100.dg.utils.contain.StairC;
 import com.zaig100.dg.utils.contain.TeleportC;
@@ -33,7 +34,7 @@ public class LevelRead {
     int wight, height, SpawnX, SpawnY;
     String levelname;
     boolean isSave, isDark;
-    boolean isHideTrap, isTeleport, isStair, isItem, isFlimsyTile, isFlamefrower, isCrossbow, isSpinney;
+    boolean isHideTrap, isTeleport, isStair, isItem, isFlimsyTile, isFlamefrower, isCrossbow, isSpinney, isSpike;
     ArrayList<com.zaig100.dg.utils.contain.HideTrapC> hide_trap = new ArrayList<>();
     ArrayList<com.zaig100.dg.utils.contain.TeleportC> teleport = new ArrayList<>();
     ArrayList<com.zaig100.dg.utils.contain.StairC> stair = new ArrayList<>();
@@ -42,6 +43,7 @@ public class LevelRead {
     ArrayList<com.zaig100.dg.utils.contain.FlamefrowerC> flamefrower = new ArrayList<>();
     ArrayList<com.zaig100.dg.utils.contain.CrossbowC> crosbow = new ArrayList<>();
     ArrayList<SpinneyC> spinney = new ArrayList<>();
+    ArrayList<SpikeC> spike = new ArrayList<com.zaig100.dg.utils.contain.SpikeC>();
 
     public LevelRead(String path, boolean isPack) {
         if (isPack) {
@@ -70,6 +72,7 @@ public class LevelRead {
         flamefrower_read();
         crossbow_read();
         spinney_read();
+        spike_read();
 
         isSave = (Boolean) jsonObject.get("save");
 
@@ -185,6 +188,18 @@ public class LevelRead {
         }
     }
 
+    private void spike_read() {
+        isSpike = jsonObject.get("Spike") != null;
+        if (isSpinney) {
+            jsonArray = (JSONArray) jsonObject.get("Spike");
+            iter = jsonArray.iterator();
+            while (iter.hasNext()) {
+                JO = (JSONObject) iter.next();
+                spike.add(new com.zaig100.dg.utils.contain.SpikeC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (Boolean) JO.get("Active")));
+            }
+        }
+    }
+
     public int[] getMap() {
         return map;
     }
@@ -249,6 +264,10 @@ public class LevelRead {
         return spinney;
     }
 
+    public ArrayList<SpikeC> getSpike() {
+        return spike;
+    }
+
     public boolean isHideTrap() {
         return isHideTrap;
     }
@@ -279,6 +298,10 @@ public class LevelRead {
 
     public boolean isSpinney() {
         return isSpinney;
+    }
+
+    public boolean isSpike() {
+        return isSpike;
     }
 }
 

@@ -48,11 +48,15 @@ public class Res {
 
     static public Texture vk;
 
+    static public Texture spike_0;
+    static public Texture spike_1;
+
     static Sprite hero;
 
     static public Texture amonghero;
     static public Texture firedhero;
     static public Texture shotedhero;
+    static public Texture spikedhero;
 
     static public Texture pause_dark;
 
@@ -125,6 +129,7 @@ public class Res {
                 Res.amonghero = new Texture(Gdx.files.internal("texture/amonghero.png"));
                 Res.firedhero = new Texture(Gdx.files.internal("texture/firedhero.png"));
                 Res.shotedhero = new Texture(Gdx.files.internal("texture/shotedhero.png"));
+                Res.spikedhero = new Texture(Gdx.files.internal("texture/spikedhero.png"));
                 break;
             case 7:
                 Res.pause_dark = new Texture(Gdx.files.internal("texture/resume.png"));
@@ -173,6 +178,10 @@ public class Res {
                 Res.fireT = new Texture(Gdx.files.internal("texture/Fire.png"));
                 break;
             case 16:
+                Res.spike_0 = new Texture(Gdx.files.internal("texture/spike0.png"));
+                Res.spike_1 = new Texture(Gdx.files.internal("texture/spike1.png"));
+                break;
+            case 17:
                 end = true;
                 break;
         }

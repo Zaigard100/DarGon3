@@ -22,6 +22,7 @@ import com.zaig100.dg.objects.HideTrap;
 import com.zaig100.dg.objects.Item;
 import com.zaig100.dg.objects.Map;
 import com.zaig100.dg.objects.Player;
+import com.zaig100.dg.objects.Spike;
 import com.zaig100.dg.objects.Spinney;
 import com.zaig100.dg.objects.Stair;
 import com.zaig100.dg.objects.Teleport;
@@ -36,6 +37,7 @@ import com.zaig100.dg.utils.contain.FlamefrowerC;
 import com.zaig100.dg.utils.contain.FlimsyTileC;
 import com.zaig100.dg.utils.contain.HideTrapC;
 import com.zaig100.dg.utils.contain.ItemC;
+import com.zaig100.dg.utils.contain.SpikeC;
 import com.zaig100.dg.utils.contain.SpinneyC;
 import com.zaig100.dg.utils.contain.StairC;
 import com.zaig100.dg.utils.contain.TeleportC;
@@ -85,6 +87,8 @@ public class PlayScreen implements Screen {
     FlimsyTileC flimsyTileC;
     ArrayList<Spinney> spinney = new ArrayList<>();
     SpinneyC spinneyC;
+    ArrayList<Spike> spike = new ArrayList<>();
+    SpikeC spikeC;
 
     static Joystick joystick;
 
@@ -219,6 +223,14 @@ public class PlayScreen implements Screen {
             while (iter.hasNext()) {
                 spinneyC = (SpinneyC) iter.next();
                 spinney.add(new Spinney(spinneyC.getX(), spinneyC.getY(), spinneyC.getWight(), spinneyC.getHeight()));
+            }
+        }
+
+        if (lR.isSpike()) {
+            iter = lR.getSpike().iterator();
+            while (iter.hasNext()) {
+                spikeC = (SpikeC) iter.next();
+                spike.add(new Spike(spikeC.getX(), spikeC.getY(), spikeC.isActive()));
             }
         }
 
@@ -394,6 +406,13 @@ public class PlayScreen implements Screen {
         if (lR.isHideTrap()) {
             for (i = 0; i < hideTrap.size(); i++) {
                 if (!is_pause) hideTrap.get(i).frame();
+            }
+        }
+        if (lR.isSpike()) {
+            for (i = 0; i < spike.size(); i++) {
+                if (!is_pause) spike.get(i).frame();
+                if (!is_pause) spike.get(i).tick(1.5f);
+                spike.get(i).render(batch);
             }
         }
         if (lR.isItem()) {

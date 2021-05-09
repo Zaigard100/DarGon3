@@ -35,7 +35,7 @@ public class FlimsyTile {
             if (Player.getHp() > 0) {
                 if (crashed_lvl < 1) {
                     Player.setHp(0);
-                    Player.setDamgeScr(0f, 4);
+                    Player.setDamgeScr(0f, -1);
                 }
             }
         }

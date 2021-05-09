@@ -120,5 +120,17 @@
       "Stage": 2
     }
   ],
+  "Spike": [
+    {
+      "X": 3,
+      "Y": 0,
+      "Active": false
+    },
+    {
+      "X": 4,
+      "Y": 0,
+      "Active": false
+    }
+  ],
   "save": false
 }

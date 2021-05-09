@@ -2,8 +2,6 @@ package com.zaig100.dg.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.zaig100.dg.Main;
-import com.zaig100.dg.objects.Map;
-import com.zaig100.dg.objects.Player;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -11,7 +9,6 @@ import org.json.simple.parser.ParseException;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -34,7 +31,7 @@ public class Save {
         if(m.isAndroid()){
             conf = Gdx.files.local("save"+pack+".json").file();
         }else {
-            conf = new File(new File(".").getAbsoluteFile(),"save"+pack+".json");
+            conf = new File(new File("").getAbsoluteFile(), "save" + pack + ".json");
         }
 
         JSONParser jsonParser = new JSONParser();
