@@ -44,6 +44,40 @@ public class FlimsyTile extends Obj {
         tick(1f);
     }
 
+    @Override
+    public void tag_activate(String func) {
+        switch (func.split(">")[0]) {
+            case "X":
+                if (func.split(">")[1] == "++") {
+                    x++;
+                } else if (func.split(">")[1] == "--") {
+                    x--;
+                } else {
+                    x = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "Y":
+                if (func.split(">")[1] == "++") {
+                    y++;
+                } else if (func.split(">")[1] == "--") {
+                    y--;
+                } else {
+                    y = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "Stage":
+                if (func.split(">")[1] == "++") {
+                    crashed_lvl--;
+                } else if (func.split(">")[1] == "--") {
+                    crashed_lvl++;
+                } else {
+                    crashed_lvl = 3 - Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+
+        }
+    }
+
 
     public void tick(float second) {
         if ((x == Player.getX()) && (y == Player.getY())) {

@@ -37,7 +37,6 @@ public class Flamefrower extends Obj {
         this.stage = stage;
         this.max = max;
         this.angle = angle;
-        //this.player = player;
         if (angle == 0) {
             dx = 1;
         }
@@ -80,12 +79,66 @@ public class Flamefrower extends Obj {
         tick1(0.2f);
     }
 
-    public void tick(float second){
-        timer+= Gdx.graphics.getDeltaTime();
-        if(timer>=second) {
+    @Override
+    public void tag_activate(String func) {
+        switch (func.split(">")[0]) {
+            case "X":
+                if (func.split(">")[1] == "++") {
+                    x++;
+                } else if (func.split(">")[1] == "--") {
+                    x--;
+                } else {
+                    x = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "Y":
+                if (func.split(">")[1] == "++") {
+                    y++;
+                } else if (func.split(">")[1] == "--") {
+                    y--;
+                } else {
+                    y = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "Angle":
+                if (func.split(">")[1] == "++") {
+                    angle++;
+                } else if (func.split(">")[1] == "--") {
+                    angle--;
+                } else {
+                    angle = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "Stage":
+                if (func.split(">")[1] == "++") {
+                    stage++;
+                } else if (func.split(">")[1] == "--") {
+                    stage--;
+                } else {
+                    stage = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+        }
+        if (angle == 0) {
+            dx = 1;
+        }
+        if (angle == 1) {
+            dy = 1;
+        }
+        if (angle == 2) {
+            dx = -1;
+        }
+        if (angle == 3) {
+            dy = -1;
+        }
+    }
+
+    public void tick(float second) {
+        timer += Gdx.graphics.getDeltaTime();
+        if (timer >= second) {
 
             stage++;
-            timer =0;
+            timer = 0;
             if (stage > max) {
                 stage = 0;
             }

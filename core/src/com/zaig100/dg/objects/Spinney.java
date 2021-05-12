@@ -26,4 +26,46 @@ public class Spinney extends Obj {
 
     }
 
+    @Override
+    public void tag_activate(String func) {
+        switch (func.split(">")[0]) {
+            case "X":
+                if (func.split(">")[1] == "++") {
+                    x++;
+                } else if (func.split(">")[1] == "--") {
+                    x--;
+                } else {
+                    x = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "Y":
+                if (func.split(">")[1] == "++") {
+                    y++;
+                } else if (func.split(">")[1] == "--") {
+                    y--;
+                } else {
+                    y = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "Wight":
+                if (func.split(">")[1] == "++") {
+                    wight++;
+                } else if (func.split(">")[1] == "--") {
+                    wight--;
+                } else {
+                    wight = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "Height":
+                if (func.split(">")[1] == "++") {
+                    height++;
+                } else if (func.split(">")[1] == "--") {
+                    height--;
+                } else {
+                    height = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+        }
+    }
+
 }

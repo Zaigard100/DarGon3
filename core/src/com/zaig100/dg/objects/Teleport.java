@@ -41,4 +41,53 @@ public class Teleport extends Obj {
             }
         }
     }
+
+    @Override
+    public void tag_activate(String func) {
+        switch (func.split(">")[0]) {
+            case "X":
+                if (func.split(">")[1] == "++") {
+                    x++;
+                } else if (func.split(">")[1] == "--") {
+                    x--;
+                } else {
+                    x = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "Y":
+                if (func.split(">")[1] == "++") {
+                    y++;
+                } else if (func.split(">")[1] == "--") {
+                    y--;
+                } else {
+                    y = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "TX":
+                if (func.split(">")[1] == "++") {
+                    tx++;
+                } else if (func.split(">")[1] == "--") {
+                    tx--;
+                } else {
+                    tx = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "TY":
+                if (func.split(">")[1] == "++") {
+                    ty++;
+                } else if (func.split(">")[1] == "--") {
+                    ty--;
+                } else {
+                    ty = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "Hide":
+                if (func.split(">")[1] == "++" || func.split(">")[1] == "--") {
+                    hide = !hide;
+                } else {
+                    hide = Boolean.parseBoolean((func.split(">")[1]));
+                }
+                break;
+        }
+    }
 }

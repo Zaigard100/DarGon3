@@ -45,6 +45,37 @@ public class Spike extends Obj {
         tick(1.5f);
     }
 
+    @Override
+    public void tag_activate(String func) {
+        switch (func.split(">")[0]) {
+            case "X":
+                if (func.split(">")[1] == "++") {
+                    x++;
+                } else if (func.split(">")[1] == "--") {
+                    x--;
+                } else {
+                    x = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "Y":
+                if (func.split(">")[1] == "++") {
+                    y++;
+                } else if (func.split(">")[1] == "--") {
+                    y--;
+                } else {
+                    y = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "Active":
+                if (func.split(">")[1] == "++" || func.split(">")[1] == "--") {
+                    active = !active;
+                } else {
+                    active = Boolean.parseBoolean(func.split(">")[1]);
+                }
+                break;
+        }
+    }
+
 
     public void tick(float second) {
         if (trigered) {

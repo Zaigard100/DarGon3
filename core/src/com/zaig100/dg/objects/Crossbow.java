@@ -33,5 +33,56 @@ public class Crossbow extends Obj {
         arr.frame();
     }
 
+    @Override
+    public void tag_activate(String func) {
+        switch (func.split(">")[0]) {
+            case "X":
+                if (func.split(">")[1] == "++") {
+                    x++;
+                } else if (func.split(">")[1] == "--") {
+                    x--;
+                } else {
+                    x = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "Y":
+                if (func.split(">")[1] == "++") {
+                    y++;
+                } else if (func.split(">")[1] == "--") {
+                    y--;
+                } else {
+                    y = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "DX":
+                if (func.split(">")[1] == "++") {
+                    arr_dx++;
+                } else if (func.split(">")[1] == "--") {
+                    arr_dx--;
+                } else {
+                    arr_dx = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "DY":
+                if (func.split(">")[1] == "++") {
+                    arr_dy++;
+                } else if (func.split(">")[1] == "--") {
+                    arr_dy--;
+                } else {
+                    arr_dy = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "Angle":
+                if (func.split(">")[1] == "++") {
+                    angle++;
+                } else if (func.split(">")[1] == "--") {
+                    angle--;
+                } else {
+                    angle = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+        }
+    }
+
 
 }

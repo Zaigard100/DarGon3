@@ -39,6 +39,47 @@ public class Stair extends Obj {
         }
     }
 
+    @Override
+    public void tag_activate(String func) {
+        switch (func.split(">")[0]) {
+            case "x":
+                if (func.split(">")[1] == "++") {
+                    x++;
+                } else if (func.split(">")[1] == "--") {
+                    x--;
+                } else {
+                    x = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "y":
+                if (func.split(">")[1] == "++") {
+                    y++;
+                } else if (func.split(">")[1] == "--") {
+                    y--;
+                } else {
+                    y = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "End":
+                if (func.split(">")[1] == "++" || func.split(">")[1] == "--") {
+                    end = !end;
+                } else {
+                    end = Boolean.parseBoolean((func.split(">")[1]));
+                }
+                break;
+            case "FlipX":
+                if (func.split(">")[1] == "++" || func.split(">")[1] == "--") {
+                    flip_x = !flip_x;
+                } else {
+                    flip_x = Boolean.parseBoolean((func.split(">")[1]));
+                }
+                break;
+            case "Next":
+                next_path = func.split(">")[1];
+                break;
+        }
+    }
+
     public String getNext_path() {
         return next_path;
     }
