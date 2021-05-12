@@ -5,14 +5,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
 
-public class Spike {
-    int x, y;
+public class Spike extends Obj {
     boolean active, trigered;
     private float timer, timer1;
 
-    public Spike(int x, int y, boolean active) {
-        this.x = x;
-        this.y = y;
+    public Spike(int x, int y, boolean active, String tag) {
+        super(x, y, tag);
         this.active = active;
     }
 
@@ -44,6 +42,7 @@ public class Spike {
                 }
             }
         }
+        tick(1.5f);
     }
 
 

@@ -31,19 +31,20 @@ public class LevelRead {
     Iterator iter;
     Reader in;
     int[] map;
-    int wight, height, SpawnX, SpawnY;
+    int wight, height, SpawnX, SpawnY, i;
     String levelname;
     boolean isSave, isDark;
     boolean isHideTrap, isTeleport, isStair, isItem, isFlimsyTile, isFlamefrower, isCrossbow, isSpinney, isSpike;
-    ArrayList<com.zaig100.dg.utils.contain.HideTrapC> hide_trap = new ArrayList<>();
-    ArrayList<com.zaig100.dg.utils.contain.TeleportC> teleport = new ArrayList<>();
-    ArrayList<com.zaig100.dg.utils.contain.StairC> stair = new ArrayList<>();
-    ArrayList<com.zaig100.dg.utils.contain.ItemC> item = new ArrayList<>();
-    ArrayList<com.zaig100.dg.utils.contain.FlimsyTileC> flimsy_tile = new ArrayList<>();
-    ArrayList<com.zaig100.dg.utils.contain.FlamefrowerC> flamefrower = new ArrayList<>();
-    ArrayList<com.zaig100.dg.utils.contain.CrossbowC> crosbow = new ArrayList<>();
+    ArrayList<HideTrapC> hide_trap = new ArrayList<>();
+    ArrayList<TeleportC> teleport = new ArrayList<>();
+    ArrayList<StairC> stair = new ArrayList<>();
+    ArrayList<ItemC> item = new ArrayList<>();
+    ArrayList<FlimsyTileC> flimsy_tile = new ArrayList<>();
+    ArrayList<FlamefrowerC> flamefrower = new ArrayList<>();
+    ArrayList<CrossbowC> crosbow = new ArrayList<>();
     ArrayList<SpinneyC> spinney = new ArrayList<>();
-    ArrayList<SpikeC> spike = new ArrayList<com.zaig100.dg.utils.contain.SpikeC>();
+    ArrayList<SpikeC> spike = new ArrayList<>();
+
 
     public LevelRead(String path, boolean isPack) {
         if (isPack) {
@@ -91,111 +92,155 @@ public class LevelRead {
     }
 
     private void hide_trap_read() {
-        isHideTrap = jsonObject.get("HideTrap") != null;
-        if (isHideTrap) {
+        if (jsonObject.get("HideTrap") != null) {
+            i = 0;
             System.out.println("122");
             jsonArray = (JSONArray) jsonObject.get("HideTrap");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
-                hide_trap.add(new com.zaig100.dg.utils.contain.HideTrapC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue()));
-
+                if ((String) JO.get("Tag") != null) {
+                    hide_trap.add(new com.zaig100.dg.utils.contain.HideTrapC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (String) JO.get("Tag")));
+                } else {
+                    hide_trap.add(new com.zaig100.dg.utils.contain.HideTrapC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), "HT" + i));
+                }
+                i++;
             }
         }
     }
 
     private void telepotr_read() {
-        isTeleport = jsonObject.get("Teleport") != null;
-        if (isTeleport) {
+        if (jsonObject.get("Teleport") != null) {
+            i = 0;
             jsonArray = (JSONArray) jsonObject.get("Teleport");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
-                teleport.add(new com.zaig100.dg.utils.contain.TeleportC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("TX")).intValue(), ((Long) JO.get("TY")).intValue()));
+                if ((String) JO.get("Tag") != null) {
+                    teleport.add(new com.zaig100.dg.utils.contain.TeleportC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("TX")).intValue(), ((Long) JO.get("TY")).intValue(), (String) JO.get("Tag")));
+                } else {
+                    teleport.add(new com.zaig100.dg.utils.contain.TeleportC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("TX")).intValue(), ((Long) JO.get("TY")).intValue(), "Tp" + i));
+                }
+                i++;
             }
         }
     }
 
     private void stair_read() {
-        isStair = jsonObject.get("Stair") != null;
-        if (isStair) {
+        if (jsonObject.get("Stair") != null) {
+            i = 0;
             jsonArray = (JSONArray) jsonObject.get("Stair");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
-                stair.add(new StairC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Boolean) JO.get("FlipX")), (String) JO.get("Next"), (Boolean) JO.get("End")));
+                if ((String) JO.get("Tag") != null) {
+                    stair.add(new StairC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Boolean) JO.get("FlipX")), (String) JO.get("Next"), (Boolean) JO.get("End"), (String) JO.get("Tag")));
+                } else {
+                    stair.add(new StairC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Boolean) JO.get("FlipX")), (String) JO.get("Next"), (Boolean) JO.get("End"), "St" + i));
+                }
+                i++;
             }
         }
     }
 
     private void item_read() {
-        isItem = jsonObject.get("Item") != null;
-        if (isItem) {
+        if (jsonObject.get("Item") != null) {
+            i = 0;
             jsonArray = (JSONArray) jsonObject.get("Item");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
-                item.add(new com.zaig100.dg.utils.contain.ItemC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("ID")).intValue()));
+                if ((String) JO.get("Tag") != null) {
+                    item.add(new com.zaig100.dg.utils.contain.ItemC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("ID")).intValue(), (String) JO.get("Tag")));
+                } else {
+                    item.add(new com.zaig100.dg.utils.contain.ItemC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("ID")).intValue(), "I" + i));
+                }
+                i++;
             }
         }
     }
 
     private void flimsy_tile_read() {
-        isFlimsyTile = jsonObject.get("FlimsyTile") != null;
-        if (isFlimsyTile) {
+        if (jsonObject.get("FlimsyTile") != null) {
+            i = 0;
             jsonArray = (JSONArray) jsonObject.get("FlimsyTile");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
-                flimsy_tile.add(new FlimsyTileC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Stage")).intValue()));
+                if ((String) JO.get("Tag") != null) {
+                    flimsy_tile.add(new FlimsyTileC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Stage")).intValue(), (String) JO.get("Tag")));
+                } else {
+                    flimsy_tile.add(new FlimsyTileC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Stage")).intValue(), "FT" + i));
+                }
+                i++;
             }
         }
     }
 
     private void flamefrower_read() {
-        isFlamefrower = jsonObject.get("Flamefrower") != null;
-        if (isFlamefrower) {
+        if (jsonObject.get("Flamefrower") != null) {
+            i = 0;
             jsonArray = (JSONArray) jsonObject.get("Flamefrower");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
-                flamefrower.add(new com.zaig100.dg.utils.contain.FlamefrowerC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Stage")).intValue(), ((Long) JO.get("Max")).intValue(), ((Long) JO.get("Rot")).intValue()));
+                if ((String) JO.get("Tag") != null) {
+                    flamefrower.add(new com.zaig100.dg.utils.contain.FlamefrowerC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Stage")).intValue(), ((Long) JO.get("Max")).intValue(), ((Long) JO.get("Rot")).intValue(), (String) JO.get("Tag")));
+                } else {
+                    flamefrower.add(new com.zaig100.dg.utils.contain.FlamefrowerC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Stage")).intValue(), ((Long) JO.get("Max")).intValue(), ((Long) JO.get("Rot")).intValue(), "Ff" + i));
+                }
+                i++;
             }
         }
     }
 
     private void crossbow_read() {
-        isCrossbow = jsonObject.get("Crossbow") != null;
-        if (isCrossbow) {
+        if (jsonObject.get("Crossbow") != null) {
+            i = 0;
             jsonArray = (JSONArray) jsonObject.get("Crossbow");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
-                crosbow.add(new com.zaig100.dg.utils.contain.CrossbowC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("DX")).intValue(), ((Long) JO.get("DY")).intValue(), ((Long) JO.get("Angle")).intValue()));
+                if ((String) JO.get("Tag") != null) {
+                    crosbow.add(new com.zaig100.dg.utils.contain.CrossbowC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("DX")).intValue(), ((Long) JO.get("DY")).intValue(), ((Long) JO.get("Angle")).intValue(), (String) JO.get("Tag")));
+                } else {
+                    crosbow.add(new com.zaig100.dg.utils.contain.CrossbowC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("DX")).intValue(), ((Long) JO.get("DY")).intValue(), ((Long) JO.get("Angle")).intValue(), "Cb" + i));
+                }
+                i++;
             }
         }
     }
 
     private void spinney_read() {
-        isSpinney = jsonObject.get("Spinney") != null;
-        if (isSpinney) {
+        if (jsonObject.get("Spinney") != null) {
+            i = 0;
             jsonArray = (JSONArray) jsonObject.get("Spinney");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
-                spinney.add(new com.zaig100.dg.utils.contain.SpinneyC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Widht")).intValue(), ((Long) JO.get("Height")).intValue()));
+                if ((String) JO.get("Tag") != null) {
+                    spinney.add(new com.zaig100.dg.utils.contain.SpinneyC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Widht")).intValue(), ((Long) JO.get("Height")).intValue(), (String) JO.get("Tag")));
+                } else {
+                    spinney.add(new com.zaig100.dg.utils.contain.SpinneyC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Widht")).intValue(), ((Long) JO.get("Height")).intValue(), "Sn" + i));
+                }
+                i++;
             }
         }
     }
 
     private void spike_read() {
-        isSpike = jsonObject.get("Spike") != null;
-        if (isSpinney) {
+        if (jsonObject.get("Spike") != null) {
+            i = 0;
             jsonArray = (JSONArray) jsonObject.get("Spike");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
-                spike.add(new com.zaig100.dg.utils.contain.SpikeC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (Boolean) JO.get("Active")));
+                if ((String) JO.get("Tag") != null) {
+                    spike.add(new com.zaig100.dg.utils.contain.SpikeC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (Boolean) JO.get("Active"), (String) JO.get("Tag")));
+                } else {
+                    spike.add(new com.zaig100.dg.utils.contain.SpikeC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (Boolean) JO.get("Active"), "Sk" + i));
+                }
+                i++;
             }
         }
     }
@@ -266,42 +311,6 @@ public class LevelRead {
 
     public ArrayList<SpikeC> getSpike() {
         return spike;
-    }
-
-    public boolean isHideTrap() {
-        return isHideTrap;
-    }
-
-    public boolean isTeleport() {
-        return isTeleport;
-    }
-
-    public boolean isStair() {
-        return isStair;
-    }
-
-    public boolean isItem() {
-        return isItem;
-    }
-
-    public boolean isFlimsyTile() {
-        return isFlimsyTile;
-    }
-
-    public boolean isFlamefrower() {
-        return isFlamefrower;
-    }
-
-    public boolean isCrossbow() {
-        return isCrossbow;
-    }
-
-    public boolean isSpinney() {
-        return isSpinney;
-    }
-
-    public boolean isSpike() {
-        return isSpike;
     }
 }
 

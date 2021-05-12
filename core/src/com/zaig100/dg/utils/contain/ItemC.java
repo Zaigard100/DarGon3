@@ -1,20 +1,11 @@
 package com.zaig100.dg.utils.contain;
 
-public class ItemC {
-    int x, y, id;
+public class ItemC extends ObjC {
+    int id;
 
-    public ItemC(int x, int y, int id) {
-        this.x = x;
-        this.y = y;
+    public ItemC(int x, int y, int id, String tag) {
+        super(x, y, tag);
         this.id = id;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
     }
 
     public int getId() {

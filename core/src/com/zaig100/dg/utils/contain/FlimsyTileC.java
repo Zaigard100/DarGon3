@@ -1,20 +1,11 @@
 package com.zaig100.dg.utils.contain;
 
-public class FlimsyTileC {
-    int x, y, stage;
+public class FlimsyTileC extends ObjC {
+    int stage;
 
-    public FlimsyTileC(int x, int y, int stage) {
-        this.x = x;
-        this.y = y;
+    public FlimsyTileC(int x, int y, int stage, String tag) {
+        super(x, y, tag);
         this.stage = stage;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
     }
 
     public int getStage() {

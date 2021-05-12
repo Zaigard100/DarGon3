@@ -1,21 +1,12 @@
 package com.zaig100.dg.utils.contain;
 
-public class TeleportC {
-    int x, y, tx, ty;
+public class TeleportC extends ObjC {
+    int tx, ty;
 
-    public TeleportC(int x, int y, int tx, int ty) {
-        this.x = x;
-        this.y = y;
+    public TeleportC(int x, int y, int tx, int ty, String tag) {
+        super(x, y, tag);
         this.tx = tx;
         this.ty = ty;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
     }
 
     public int getTx() {

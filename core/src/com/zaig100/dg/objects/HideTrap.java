@@ -1,18 +1,24 @@
 package com.zaig100.dg.objects;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Res;
 
-public class HideTrap {
-    int x, y;
+public class HideTrap extends Obj {
     boolean active;
 
-    public HideTrap(int x, int y) {
+    public HideTrap(int x, int y, String tag) {
+        super(x, y, tag);
         this.x = x;
         this.y = y;
         this.active = true;
     }
 
-    public HideTrap(int x, int y, boolean active) {
+    @Override
+    public void render(SpriteBatch batch) {
+    }
+
+    public HideTrap(int x, int y, boolean active, String tag) {
+        super(x, y, tag);
         this.x = x;
         this.y = y;
         this.active = active;

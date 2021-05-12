@@ -5,22 +5,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
 
-public class Flamefrower {
+public class Flamefrower extends Obj {
 
-    int x, y, max, angle, stage;
+    int max, angle, stage;
     int flame_stage, anim_stage = 0;
     float timer = 0, fire_timer = 0;
-    //static Player player;
     int dx, dy;
     int timst = 0;
 
-    public Flamefrower(int x, int y, int max, int angle) {
-        this.x = x;
-        this.y = y;
+    public Flamefrower(int x, int y, int max, int angle, String tag) {
+        super(x, y, tag);
         this.stage = 0;
         this.max = max;
         this.angle = angle;
-        //this.player = player;
         if (angle == 0) {
             dx = 1;
         }
@@ -35,9 +32,8 @@ public class Flamefrower {
         }
     }
 
-    public Flamefrower(int x, int y, int stage, int max, int angle) {
-        this.x = x;
-        this.y = y;
+    public Flamefrower(int x, int y, int stage, int max, int angle, String tag) {
+        super(x, y, tag);
         this.stage = stage;
         this.max = max;
         this.angle = angle;
@@ -80,6 +76,8 @@ public class Flamefrower {
             }
             timst++;
         }
+        tick(2f);
+        tick1(0.2f);
     }
 
     public void tick(float second){

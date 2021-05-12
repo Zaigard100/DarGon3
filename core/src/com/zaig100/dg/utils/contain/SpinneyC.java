@@ -1,21 +1,12 @@
 package com.zaig100.dg.utils.contain;
 
-public class SpinneyC {
-    int x, y, wight, height;
+public class SpinneyC extends ObjC {
+    int wight, height;
 
-    public SpinneyC(int x, int y, int wight, int height) {
-        this.x = x;
-        this.y = y;
+    public SpinneyC(int x, int y, int wight, int height, String tag) {
+        super(x, y, tag);
         this.wight = wight;
         this.height = height;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
     }
 
     public int getWight() {

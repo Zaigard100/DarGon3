@@ -5,14 +5,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
 
-public class FlimsyTile {
+public class FlimsyTile extends Obj {
+
 
     int x, y;
     int crashed_lvl;
 
     float timer = 0;
 
-    public FlimsyTile(int x, int y, int stage) {
+    public FlimsyTile(int x, int y, int stage, String tag) {
+        super(x, y, tag);
         this.x = x;
         this.y = y;
         crashed_lvl = 3 - stage;
@@ -39,6 +41,7 @@ public class FlimsyTile {
                 }
             }
         }
+        tick(1f);
     }
 
 

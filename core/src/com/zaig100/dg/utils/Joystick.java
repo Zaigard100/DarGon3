@@ -7,24 +7,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Joystick {
 
-    int getY;
-    boolean up, right, down, left, use, Sensor, bag;
-    int pointX, pointY, deltaX, deltaY;
+    static int getY;
+    static boolean up, right, down, left, use, Sensor, bag;
+    static int pointX, pointY, deltaX, deltaY;
 
 
-    public Joystick() {
-        this.Sensor = Sensor;
-
-    }
-
-    public void render(SpriteBatch batch) {
+    public static void render(SpriteBatch batch) {
         if (Configuration.isSensor()) {
             batch.draw(Res.use, pointX - Configuration.getScale() - (int) ((Gdx.graphics.getWidth() - 16 * 7 * Configuration.getScale()) / 2), pointY - Configuration.getScale() - (int) ((Gdx.graphics.getHeight() - 16 * 5 * Configuration.getScale()) / 2), 2f * Configuration.getScale(), 2 * Configuration.getScale());
             //batch.draw(res.use, 6 * 16 * conf.getScale() - 0.8f * 16 * conf.getScale() / 2, 1.25f * 16 * conf.getScale() - 0.8f * 16 * conf.getScale() / 2, 0.8f * 16 * conf.getScale(), 0.8f * 16 * conf.getScale());
         }
     }
 
-    public void frame(int sx, int sy) {
+    public static void frame(int sx, int sy) {
         if (Configuration.isSensor()) {
             left = false;
             right = false;
@@ -69,33 +64,35 @@ public class Joystick {
         }
     }
 
-    public boolean isJoystick() {
-        return up||down||left||right||use;
+    public static boolean isJoystick() {
+        return up || down || left || right || use;
     }
 
-    public boolean isBag(){ return bag;}
+    public static boolean isBag() {
+        return bag;
+    }
 
-    public boolean isUp() {
+    public static boolean isUp() {
         return up;
     }
 
-    public boolean isRight() {
+    public static boolean isRight() {
         return right;
     }
 
-    public boolean isDown() {
+    public static boolean isDown() {
         return down;
     }
 
-    public boolean isLeft() {
+    public static boolean isLeft() {
         return left;
     }
 
-    public boolean isUse() {
+    public static boolean isUse() {
         return use;
     }
 
-    public void setUse(boolean is) {
+    public static void setUse(boolean is) {
         use = is;
     }
 }

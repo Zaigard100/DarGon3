@@ -105,10 +105,10 @@ public class Player {
 
     }
 
-    static public void render_bag(SpriteBatch batch, BitmapFont font, Joystick joystick) {
+    static public void render_bag(SpriteBatch batch, BitmapFont font) {
         batch.draw(Res.bag, 6 * 16 * Configuration.getScale(), 4 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
         if (bag_opened) {
-            bag_use(joystick);
+            bag_use();
             if (hp > 0) {
                 batch.draw(Res.HP(hp), 6 * 16 * Configuration.getScale(), 3 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
             }
@@ -122,39 +122,38 @@ public class Player {
     }
 
 
-    static public void frame(Joystick joystick) {
-        joystick.frame((int) ((Gdx.graphics.getWidth() - 16 * 7 * Configuration.getScale()) / 2), (int) ((Gdx.graphics.getHeight() - 16 * 5 * Configuration.getScale()) / 2));
+    static public void frame() {
         if (hp > 0) {
-            if ((Gdx.input.isKeyPressed(Input.Keys.W)) || (joystick.isUp())) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.TAB) || Joystick.isBag()) {
+                System.out.println(bag_opened);
+                Joystick.setUse(false);
+                bag_opened = !bag_opened;
+            }
+            if ((Gdx.input.isKeyPressed(Input.Keys.W)) || (Joystick.isUp())) {
                 if (!walked) {
                     oldY = y + 1;
                     // System.out.println("W");
                 }
             }
-            if ((Gdx.input.isKeyPressed(Input.Keys.S)) || (joystick.isDown())) {
+            if ((Gdx.input.isKeyPressed(Input.Keys.S)) || (Joystick.isDown())) {
                 if (!walked) {
                     oldY = y - 1;
                     //System.out.println("S");
                 }
             }
-            if ((Gdx.input.isKeyPressed(Input.Keys.A)) || (joystick.isLeft())) {
+            if ((Gdx.input.isKeyPressed(Input.Keys.A)) || (Joystick.isLeft())) {
                 if (!walked) {
                     oldX = x - 1;
                     // System.out.println("A");
                 }
 
             }
-            if ((Gdx.input.isKeyPressed(Input.Keys.D))||(joystick.isRight())) {
+            if ((Gdx.input.isKeyPressed(Input.Keys.D)) || (Joystick.isRight())) {
                 if (!walked) {
-                    oldX =x + 1;
+                    oldX = x + 1;
                     // System.out.println("D");
                 }
             }
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.TAB)||joystick.isBag()) {
-            joystick.setUse(false);
-            bag_opened = !bag_opened;
         }
 
         if (map.isGround(oldX, oldY)) {
@@ -197,7 +196,7 @@ public class Player {
         } else {
 
             walked = false;
-            walked_anim = (Gdx.input.isKeyPressed(Input.Keys.W)) || (Gdx.input.isKeyPressed(Input.Keys.S)) || (Gdx.input.isKeyPressed(Input.Keys.A)) || (Gdx.input.isKeyPressed(Input.Keys.D)) || (joystick.isJoystick() && !joystick.isUse());
+            walked_anim = (Gdx.input.isKeyPressed(Input.Keys.W)) || (Gdx.input.isKeyPressed(Input.Keys.S)) || (Gdx.input.isKeyPressed(Input.Keys.A)) || (Gdx.input.isKeyPressed(Input.Keys.D)) || (Joystick.isJoystick() && !Joystick.isUse());
         }
         if ((hp <= 0)) {
             walked_anim = false;
@@ -227,7 +226,7 @@ public class Player {
     }
 
 
-    static void bag_use(Joystick joystick) {
+    static void bag_use() {
         sx = (int) ((Gdx.graphics.getWidth() - 16 * 7 * Configuration.getScale()) / 2);
         sy = (int) ((Gdx.graphics.getHeight() - 16 * 5 * Configuration.getScale()) / 2);
         slots[0] = false;
@@ -237,15 +236,15 @@ public class Player {
             getYP = Gdx.graphics.getHeight() - Gdx.input.getY();
             if ((Gdx.input.getX() - sx > 6 * 16 * Configuration.getScale()) && (Gdx.input.getX() - sx < 7 * 16 * Configuration.getScale())) {
                 if ((getYP - sy > 2 * 16 * Configuration.getScale()) && (getYP - sy < 3 * 16 * Configuration.getScale())) {
-                    joystick.setUse(false);
+                    Joystick.setUse(false);
                     slots[0] = true;
                 }
                 if ((getYP - sy > 1 * 16 * Configuration.getScale()) && (getYP - sy < 2 * 16 * Configuration.getScale())) {
-                    joystick.setUse(false);
+                    Joystick.setUse(false);
                     slots[1] = true;
                 }
                 if ((getYP - sy > 0 * 16 * Configuration.getScale()) && (getYP - sy < 1 * 16 * Configuration.getScale())) {
-                    joystick.setUse(false);
+                    Joystick.setUse(false);
                     slots[2] = true;
                 }
             }

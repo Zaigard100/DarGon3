@@ -6,15 +6,14 @@ import com.zaig100.dg.utils.Res;
 
 import java.util.Random;
 
-public class Item {
+public class Item extends Obj {
 
-    int x,y;
+
     int itemId;
     boolean active;
 
-    public Item(int x, int y, int itemId) {
-        this.x = x;
-        this.y = y;
+    public Item(int x, int y, int itemId, String tag) {
+        super(x, y, tag);
         this.itemId = itemId;
         this.active = true;
         if (itemId == 0) {
