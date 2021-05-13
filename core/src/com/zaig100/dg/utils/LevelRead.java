@@ -2,6 +2,7 @@ package com.zaig100.dg.utils;
 
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
+import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.CrossbowC;
 import com.zaig100.dg.utils.contain.FlamefrowerC;
 import com.zaig100.dg.utils.contain.FlimsyTileC;
@@ -27,14 +28,14 @@ public class LevelRead {
 
     JSONParser jsonParser = new JSONParser();
     JSONObject jsonObject, JO;
-    JSONArray jsonArray;
-    Iterator iter;
+    JSONArray jsonArray, JA;
+    Iterator iter, Ir;
     Reader in;
     int[] map;
+    String[] func;
     int wight, height, SpawnX, SpawnY, i;
     String levelname;
     boolean isSave, isDark;
-    boolean isHideTrap, isTeleport, isStair, isItem, isFlimsyTile, isFlamefrower, isCrossbow, isSpinney, isSpike;
     ArrayList<HideTrapC> hide_trap = new ArrayList<>();
     ArrayList<TeleportC> teleport = new ArrayList<>();
     ArrayList<StairC> stair = new ArrayList<>();
@@ -44,6 +45,7 @@ public class LevelRead {
     ArrayList<CrossbowC> crosbow = new ArrayList<>();
     ArrayList<SpinneyC> spinney = new ArrayList<>();
     ArrayList<SpikeC> spike = new ArrayList<>();
+    ArrayList<ButtonС> button = new ArrayList<>();
 
 
     public LevelRead(String path, boolean isPack) {
@@ -74,6 +76,7 @@ public class LevelRead {
         crossbow_read();
         spinney_read();
         spike_read();
+        button_read();
 
         isSave = (Boolean) jsonObject.get("save");
 
@@ -245,6 +248,28 @@ public class LevelRead {
         }
     }
 
+    private void button_read() {
+        if (jsonObject.get("Button") != null) {
+            i = 0;
+            jsonArray = (JSONArray) jsonObject.get("Button");
+            iter = jsonArray.iterator();
+            while (iter.hasNext()) {
+                JO = (JSONObject) iter.next();
+                JA = (JSONArray) JO.get("Function");
+                func = new String[JA.size()];
+                for (int j = 0; j < func.length; j++) {
+                    func[j] = (String) JA.get(j);
+                }
+                if ((String) JO.get("Tag") != null) {
+                    button.add(new com.zaig100.dg.utils.contain.ButtonС(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), func, (String) JO.get("Tag")));
+                } else {
+                    button.add(new com.zaig100.dg.utils.contain.ButtonС(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), func, "Bt" + i));
+                }
+                i++;
+            }
+        }
+    }
+
     public int[] getMap() {
         return map;
     }
@@ -311,6 +336,10 @@ public class LevelRead {
 
     public ArrayList<SpikeC> getSpike() {
         return spike;
+    }
+
+    public ArrayList<ButtonС> getButton() {
+        return button;
     }
 }
 

@@ -69,17 +69,62 @@
   ],
   "Stair": [
     {
-      "X": 1,
-      "Y": 2,
+      "X": 10,
+      "Y": 20,
       "FlipX": false,
-      "End": false
+      "End": false,
+      "Tag": "Stair1"
     },
     {
-      "Y": 3,
+      "Y": 30,
       "Next": "levels/01.json",
-      "X": 1,
+      "X": 10,
       "FlipX": false,
-      "End": false
+      "End": false,
+      "Tag": "Stair2"
+    }
+  ],
+  "Button": [
+    {
+      "X": 0,
+      "Y": 0,
+      "Function": [
+        "Stair1:X>1",
+        "Stair1:Y>2",
+        "Stair2:X>1",
+        "Stair2:Y>3",
+        "A:X>9",
+        "A:Y>9",
+        "B:X>1",
+        "B:Y>0"
+      ],
+      "Tag": "A"
+    },
+    {
+      "X": 10,
+      "Y": 10,
+      "Function": [
+        "Stair1:Y>1",
+        "Stair2:Y>2",
+        "C:X>0",
+        "C:Y>0",
+        "B:X>9",
+        "B:Y>9"
+      ],
+      "Tag": "B"
+    },
+    {
+      "X": 10,
+      "Y": 10,
+      "Function": [
+        "Stair1:Y>2",
+        "Stair2:Y>3",
+        "B:X>1",
+        "B:Y>0",
+        "C:X>9",
+        "C:Y>9"
+      ],
+      "Tag": "C"
     }
   ],
   "Item": [

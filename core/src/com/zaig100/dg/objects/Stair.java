@@ -41,7 +41,7 @@ public class Stair extends Obj {
     @Override
     public void tag_activate(String func) {
         switch (func.split(">")[0]) {
-            case "x":
+            case "X":
                 if (func.split(">")[1] == "++") {
                     x++;
                 } else if (func.split(">")[1] == "--") {
@@ -50,7 +50,7 @@ public class Stair extends Obj {
                     x = Integer.parseInt((func.split(">")[1]));
                 }
                 break;
-            case "y":
+            case "Y":
                 if (func.split(">")[1] == "++") {
                     y++;
                 } else if (func.split(">")[1] == "--") {

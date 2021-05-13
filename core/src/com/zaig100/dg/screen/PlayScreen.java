@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.zaig100.dg.Main;
+import com.zaig100.dg.objects.Button;
 import com.zaig100.dg.objects.Crossbow;
 import com.zaig100.dg.objects.Flamefrower;
 import com.zaig100.dg.objects.FlimsyTile;
@@ -33,6 +34,7 @@ import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.LevelRead;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.Save;
+import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.CrossbowC;
 import com.zaig100.dg.utils.contain.FlamefrowerC;
 import com.zaig100.dg.utils.contain.FlimsyTileC;
@@ -43,7 +45,6 @@ import com.zaig100.dg.utils.contain.SpinneyC;
 import com.zaig100.dg.utils.contain.StairC;
 import com.zaig100.dg.utils.contain.TeleportC;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -83,6 +84,7 @@ public class PlayScreen implements Screen {
     FlimsyTileC flimsyTileC;
     SpinneyC spinneyC;
     SpikeC spikeC;
+    ButtonС buttonC;
 
     Save save;
     boolean start = true;
@@ -134,9 +136,9 @@ public class PlayScreen implements Screen {
         viewport = new ScreenViewport(cam);
         font = new Font();
         debag = Configuration.isDebug();
-        f1 = font.gFont(11 * Main.getConfiguration().getScale(), "fonts/GFont.ttf");
-        f2 = font.gFont(6 * Main.getConfiguration().getScale(), "fonts/GFont.ttf");
-        f4 = font.gFont(3 * Main.getConfiguration().getScale(), "fonts/GFont.ttf");
+        f1 = font.gFont(11 * Configuration.getScale(), "fonts/GFont.ttf");
+        f2 = font.gFont(6 * Configuration.getScale(), "fonts/GFont.ttf");
+        f4 = font.gFont(3 * Configuration.getScale(), "fonts/GFont.ttf");
         f3 = new BitmapFont();
         f3.setColor(Color.WHITE);
         if (isPack) {
@@ -155,15 +157,13 @@ public class PlayScreen implements Screen {
                 save = new Save(m, "", path);
             }
             if (lR.isSave()) {
-                save.setHp(player.getHp());
+                save.setHp(Player.getHp());
                 save.setPath(path);
-                save.setPotion(player.getPotion());
-                save.setSheld(player.getSheld());
-                save.setTorch(player.getTorch());
+                save.setPotion(Player.getPotion());
+                save.setSheld(Player.getSheld());
+                save.setTorch(Player.getTorch());
                 save.save(save.getConf());
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -291,10 +291,10 @@ public class PlayScreen implements Screen {
 
     private void object_load() {
         map = new Map(lR.getWight(), lR.getHeight(), lR.getMap(), true);
-        player.setX(lR.getSpawnX());
-        player.setY(lR.getSpawnY());
-        player.wCordNormalize();
-        player.setMap(map);
+        Player.setX(lR.getSpawnX());
+        Player.setY(lR.getSpawnY());
+        Player.wCordNormalize();
+        Player.setMap(map);
         map.setDark(!lR.isDark());
 
 
@@ -351,10 +351,36 @@ public class PlayScreen implements Screen {
             objectsU.add(new Spike(spikeC.getX(), spikeC.getY(), spikeC.isActive(), spikeC.getTag()));
         }
 
+        iter = lR.getButton().iterator();
+        while (iter.hasNext()) {
+            buttonC = (ButtonС) iter.next();
+            objectsU.add((new Button(buttonC.getX(), buttonC.getY(), buttonC.getFunc(), buttonC.getTag()).setPlayScreen(this)));
+        }
+
     }
 
-    private void object_update() {
-
+    public void doFunc(String func) {
+        if (stair.size() > 0) {
+            for (i = 0; i < stair.size(); i++) {
+                if (stair.get(i).getTag().equals(func.split(":")[0])) {
+                    stair.get(i).tag_activate(func.split(":")[1]);
+                }
+            }
+        }
+        if (objectsU.size() > 0) {
+            for (i = 0; i < objectsU.size(); i++) {
+                if (objectsU.get(i).getTag().equals(func.split(":")[0])) {
+                    objectsU.get(i).tag_activate(func.split(":")[1]);
+                }
+            }
+        }
+        if (objectsO.size() > 0) {
+            for (i = 0; i < objectsO.size(); i++) {
+                if (objectsO.get(i).getTag().equals(func.split(":")[0])) {
+                    objectsO.get(i).tag_activate(func.split(":")[1]);
+                }
+            }
+        }
     }
 
     void debugShow() {
@@ -430,11 +456,11 @@ public class PlayScreen implements Screen {
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
             menu--;
-            Res.click[random.nextInt(2)].play(Main.getConfiguration().getSound());
+            Res.click[random.nextInt(2)].play(Configuration.getSound());
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.S) || (!Joystick.isUse() && Gdx.input.justTouched())) {
             menu++;
-            Res.click[random.nextInt(2)].play(Main.getConfiguration().getSound());
+            Res.click[random.nextInt(2)].play(Configuration.getSound());
         }
 
         if(menu>=4){
@@ -454,8 +480,8 @@ public class PlayScreen implements Screen {
         fbo2.dispose();
         int ry = height - PlayScreen.height;
         int rx = width - PlayScreen.width;
-        this.width = width;
-        this.height = height;
+        PlayScreen.width = width;
+        PlayScreen.height = height;
         scrW = width;
         scrH = height;
         viewport.update(width, height);

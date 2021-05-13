@@ -51,6 +51,8 @@ public class Res {
     static public Texture spike_0;
     static public Texture spike_1;
 
+    static public Texture button;
+
     static Sprite hero;
 
     static public Texture amonghero;
@@ -133,6 +135,7 @@ public class Res {
                 break;
             case 7:
                 Res.pause_dark = new Texture(Gdx.files.internal("texture/resume.png"));
+                Res.button = new Texture(Gdx.files.internal("texture/button.png"));
                 break;
             case 8:
                 Res.joystick = new Texture(Gdx.files.internal("texture/Joystick.png"));
