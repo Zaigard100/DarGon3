@@ -1,5 +1,6 @@
 package com.zaig100.dg.objects;
 
+<<<<<<< HEAD
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,6 +13,12 @@ public class Button extends Obj {
     String[] func;
     PlayScreen PS;
     boolean active = true;
+=======
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+public class Button extends Obj {
+    String[] func;
+>>>>>>> origin/main
 
     public Button(int x, int y, String[] func, String tag) {
         super(x, y, tag);
@@ -20,12 +27,17 @@ public class Button extends Obj {
 
     @Override
     public void render(SpriteBatch batch) {
+<<<<<<< HEAD
         batch.draw(Res.button, ((x + 3) * 16 * Configuration.getScale()) - Player.get_wX(), ((y + 2) * 16 * Configuration.getScale()) - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+=======
+
+>>>>>>> origin/main
     }
 
     @Override
     public void frame() {
 
+<<<<<<< HEAD
         Joystick.frame(0, 0);
         if ((Player.getX() == x) && (Player.getY() == y) && active) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
@@ -46,10 +58,13 @@ public class Button extends Obj {
     public Button setPlayScreen(PlayScreen PS) {
         this.PS = PS;
         return this;
+=======
+>>>>>>> origin/main
     }
 
     @Override
     public void tag_activate(String func) {
+<<<<<<< HEAD
         switch (func.split(">")[0]) {
             case "X":
                 if (func.split(">")[1] == "++") {
@@ -73,3 +88,8 @@ public class Button extends Obj {
     }
 }
 
+=======
+
+    }
+}
+>>>>>>> origin/main
