@@ -44,6 +44,19 @@ public class FlimsyTile extends Obj {
         tick(1f);
     }
 
+
+    public void tick(float second) {
+        if ((x == Player.getX()) && (y == Player.getY())) {
+            if (Player.getHp() > 0) {
+                if (timer < 0 && crashed_lvl > 0) {
+                    crashed_lvl--;
+                    timer = second;
+                }
+            }
+        }
+        timer -= Gdx.graphics.getDeltaTime();
+    }
+
     @Override
     public void tag_activate(String func) {
         switch (func.split(">")[0]) {
@@ -78,17 +91,5 @@ public class FlimsyTile extends Obj {
         }
     }
 
-
-    public void tick(float second) {
-        if ((x == Player.getX()) && (y == Player.getY())) {
-            if (Player.getHp() > 0) {
-                if (timer < 0 && crashed_lvl > 0) {
-                    crashed_lvl--;
-                    timer = second;
-                }
-            }
-        }
-        timer -= Gdx.graphics.getDeltaTime();
-    }
 
 }

@@ -37,6 +37,7 @@ public class Flamefrower extends Obj {
         this.stage = stage;
         this.max = max;
         this.angle = angle;
+        //this.player = player;
         if (angle == 0) {
             dx = 1;
         }
@@ -77,6 +78,30 @@ public class Flamefrower extends Obj {
         }
         tick(2f);
         tick1(0.2f);
+    }
+
+    public void tick(float second) {
+        timer += Gdx.graphics.getDeltaTime();
+        if (timer >= second) {
+
+            stage++;
+            timer = 0;
+            if (stage > max) {
+                stage = 0;
+            }
+        }
+    }
+
+    public void tick1(float second) {
+        fire_timer += Gdx.graphics.getDeltaTime();
+        if (fire_timer >= second) {
+
+            anim_stage++;
+            fire_timer = 0;
+            if (anim_stage > 1) {
+                anim_stage = 0;
+            }
+        }
     }
 
     @Override
@@ -130,30 +155,6 @@ public class Flamefrower extends Obj {
         }
         if (angle == 3) {
             dy = -1;
-        }
-    }
-
-    public void tick(float second) {
-        timer += Gdx.graphics.getDeltaTime();
-        if (timer >= second) {
-
-            stage++;
-            timer = 0;
-            if (stage > max) {
-                stage = 0;
-            }
-        }
-    }
-
-    public void tick1(float second) {
-        fire_timer += Gdx.graphics.getDeltaTime();
-        if (fire_timer >= second) {
-
-            anim_stage++;
-            fire_timer = 0;
-            if (anim_stage > 1) {
-                anim_stage = 0;
-            }
         }
     }
 

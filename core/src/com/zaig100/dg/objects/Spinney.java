@@ -25,7 +25,6 @@ public class Spinney extends Obj {
     public void frame() {
 
     }
-
     @Override
     public void tag_activate(String func) {
         switch (func.split(">")[0]) {
@@ -67,5 +66,4 @@ public class Spinney extends Obj {
                 break;
         }
     }
-
 }

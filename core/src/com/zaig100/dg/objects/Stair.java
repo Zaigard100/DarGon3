@@ -38,7 +38,6 @@ public class Stair extends Obj {
             }
         }
     }
-
     @Override
     public void tag_activate(String func) {
         switch (func.split(">")[0]) {
@@ -79,7 +78,6 @@ public class Stair extends Obj {
                 break;
         }
     }
-
     public String getNext_path() {
         return next_path;
     }

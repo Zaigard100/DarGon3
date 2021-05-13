@@ -45,6 +45,29 @@ public class Spike extends Obj {
         tick(1.5f);
     }
 
+
+    public void tick(float second) {
+        if (trigered) {
+            if (timer > second && !active) {
+                active = true;
+                timer = 0;
+                timer1 = 0;
+                trigered = false;
+            } else {
+                timer += Gdx.graphics.getDeltaTime();
+            }
+
+        } else {
+            if (timer1 > 2 * second && active) {
+                active = false;
+                timer1 = 0;
+                timer = 0;
+            } else {
+                timer1 += Gdx.graphics.getDeltaTime();
+            }
+        }
+    }
+
     @Override
     public void tag_activate(String func) {
         switch (func.split(">")[0]) {
@@ -73,29 +96,6 @@ public class Spike extends Obj {
                     active = Boolean.parseBoolean(func.split(">")[1]);
                 }
                 break;
-        }
-    }
-
-
-    public void tick(float second) {
-        if (trigered) {
-            if (timer > second && !active) {
-                active = true;
-                timer = 0;
-                timer1 = 0;
-                trigered = false;
-            } else {
-                timer += Gdx.graphics.getDeltaTime();
-            }
-
-        } else {
-            if (timer1 > 2 * second && active) {
-                active = false;
-                timer1 = 0;
-                timer = 0;
-            } else {
-                timer1 += Gdx.graphics.getDeltaTime();
-            }
         }
     }
 

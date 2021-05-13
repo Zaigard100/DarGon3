@@ -83,6 +83,4 @@ public class Crossbow extends Obj {
                 break;
         }
     }
-
-
 }
