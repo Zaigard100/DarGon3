@@ -144,12 +144,13 @@ public class Flamefrower extends Obj {
             }
         }
     }
-    public void tick1(float second){
-        fire_timer+= Gdx.graphics.getDeltaTime();
-        if(fire_timer>=second) {
+
+    public void tick1(float second) {
+        fire_timer += Gdx.graphics.getDeltaTime();
+        if (fire_timer >= second) {
 
             anim_stage++;
-            fire_timer =0;
+            fire_timer = 0;
             if (anim_stage > 1) {
                 anim_stage = 0;
             }

@@ -491,23 +491,28 @@
   "HideTrap": [
     {
       "X": 2,
-      "Y": 24
+      "Y": 24,
+      "Active": true
     },
     {
       "X": 13,
-      "Y": 25
+      "Y": 25,
+      "Active": true
     },
     {
       "X": 22,
-      "Y": 16
+      "Y": 16,
+      "Active": true
     },
     {
       "X": 22,
-      "Y": 22
+      "Y": 22,
+      "Active": true
     },
     {
       "X": 7,
-      "Y": 1
+      "Y": 1,
+      "Active": true
     }
   ],
   "Stair": [

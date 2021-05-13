@@ -278,41 +278,26 @@
       "TY": 14
     }
   ],
-  "hide_traps_count": 4,
-  "hide_traps": [
-    [
-      3,
-      0
-    ],
-    [
-      0,
-      4
-    ],
-    [
-      0,
-      6
-    ],
-    [
-      0,
-      8
-    ]
-  ],
   "HideTrap": [
     {
       "X": 3,
-      "Y": 0
+      "Y": 0,
+      "Active": true
     },
     {
       "X": 0,
-      "Y": 4
+      "Y": 4,
+      "Active": true
     },
     {
       "X": 0,
-      "Y": 6
+      "Y": 6,
+      "Active": true
     },
     {
       "X": 0,
-      "Y": 8
+      "Y": 8,
+      "Active": true
     }
   ],
   "Stair": [

@@ -100,9 +100,9 @@ public class LevelRead {
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
                 if ((String) JO.get("Tag") != null) {
-                    hide_trap.add(new com.zaig100.dg.utils.contain.HideTrapC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (String) JO.get("Tag")));
+                    hide_trap.add(new com.zaig100.dg.utils.contain.HideTrapC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (Boolean) JO.get("Active"), (String) JO.get("Tag")));
                 } else {
-                    hide_trap.add(new com.zaig100.dg.utils.contain.HideTrapC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), "HT" + i));
+                    hide_trap.add(new com.zaig100.dg.utils.contain.HideTrapC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (Boolean) JO.get("Active"), "HT" + i));
                 }
                 i++;
             }
@@ -151,9 +151,9 @@ public class LevelRead {
             while (iter.hasNext()) {
                 JO = (JSONObject) iter.next();
                 if ((String) JO.get("Tag") != null) {
-                    item.add(new com.zaig100.dg.utils.contain.ItemC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("ID")).intValue(), (String) JO.get("Tag")));
+                    item.add(new com.zaig100.dg.utils.contain.ItemC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("ID")).intValue(), (Boolean) JO.get("Active"), (String) JO.get("Tag")));
                 } else {
-                    item.add(new com.zaig100.dg.utils.contain.ItemC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("ID")).intValue(), "I" + i));
+                    item.add(new com.zaig100.dg.utils.contain.ItemC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("ID")).intValue(), (Boolean) JO.get("Active"), "I" + i));
                 }
                 i++;
             }

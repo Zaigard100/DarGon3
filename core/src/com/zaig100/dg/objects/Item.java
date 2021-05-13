@@ -30,6 +30,15 @@ public class Item extends Obj {
         }
     }
 
+    public Item(int x, int y, int itemId, boolean active, String tag) {
+        super(x, y, tag);
+        this.itemId = itemId;
+        this.active = active;
+        if (itemId == 0) {
+            this.itemId = new Random().nextInt(2) + 1;
+        }
+    }
+
     public void render(SpriteBatch batch) {
         if (active) {
             if (itemId == 1) {
@@ -59,6 +68,11 @@ public class Item extends Obj {
                 active = false;
             }
         }
+    }
+
+    @Override
+    public void tag_activate(String func) {
+
     }
 
     @Override

@@ -313,7 +313,7 @@ public class PlayScreen implements Screen {
         iter = lR.getHide_trap().iterator();
         while (iter.hasNext()) {
             hideTrapC = (HideTrapC) iter.next();
-            objectsU.add(new HideTrap(hideTrapC.getX(), hideTrapC.getY(), hideTrapC.getTag()));
+            objectsU.add(new HideTrap(hideTrapC.getX(), hideTrapC.getY(), hideTrapC.isActive(), hideTrapC.getTag()));
         }
 
         iter = lR.getFlamefrower().iterator();
@@ -330,7 +330,7 @@ public class PlayScreen implements Screen {
         iter = lR.getItem().iterator();
         while (iter.hasNext()) {
             itemC = (ItemC) iter.next();
-            objectsO.add(new Item(itemC.getX(), itemC.getY(), itemC.getId(), itemC.getTag()));
+            objectsO.add(new Item(itemC.getX(), itemC.getY(), itemC.getId(), itemC.isActive(), itemC.getTag()));
         }
 
         iter = lR.getFlimsy_tile().iterator();

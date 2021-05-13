@@ -158,22 +158,26 @@
   "HideTrap": [
     {
       "X": 7,
-      "Y": 4
+      "Y": 4,
+      "Active": true
     },
     {
       "X": 7,
-      "Y": 6
+      "Y": 6,
+      "Active": true
     },
     {
       "X": 5,
-      "Y": 6
+      "Y": 6,
+      "Active": true
     }
   ],
   "Item": [
     {
       "X": 8,
       "Y": 9,
-      "ID": 0
+      "ID": 0,
+      "Active": true
     }
   ],
   "Stair": [

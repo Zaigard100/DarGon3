@@ -160,7 +160,8 @@
   "HideTrap": [
     {
       "X": 1,
-      "Y": 9
+      "Y": 9,
+      "Active": true
     }
   ],
   "Stair": [
