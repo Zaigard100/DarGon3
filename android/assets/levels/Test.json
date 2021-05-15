@@ -141,7 +141,16 @@
       "Y": 4,
       "Stage": 1,
       "Max": 3,
-      "Rot": 0
+      "Rot": 0,
+      "Tick": 0.5
+    },
+    {
+      "X": 4,
+      "Y": -1,
+      "Stage": 1,
+      "Max": 2,
+      "Rot": 1,
+      "Tick": 4.0
     }
   ],
   "Crossbow": [
@@ -175,8 +184,8 @@
       "Active": false
     },
     {
-      "X": 4,
-      "Y": 0,
+      "X": 3,
+      "Y": 1,
       "Active": false
     }
   ],

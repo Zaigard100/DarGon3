@@ -315,7 +315,7 @@ public class PlayScreen implements Screen {
         iter = lR.getFlamefrower().iterator();
         while (iter.hasNext()) {
             flamefrowerС = (FlamefrowerC) iter.next();
-            objectsO.add(new Flamefrower(flamefrowerС.getX(), flamefrowerС.getY(), flamefrowerС.getStage(), flamefrowerС.getMax(), flamefrowerС.getRot(), flamefrowerС.getTag()));
+            objectsO.add(new Flamefrower(flamefrowerС.getX(), flamefrowerС.getY(), flamefrowerС.getStage(), flamefrowerС.getMax(), flamefrowerС.getRot(), flamefrowerС.getTick_sec(), flamefrowerС.getTag()));
         }
 
         iter = lR.getCrosbow().iterator();

@@ -27,7 +27,7 @@ public class FlamefrowerC extends ObjC {
         return tick_sec;
     }
 
-    public void setTick_sec(float tick_sec) {
-        this.tick_sec = tick_sec;
+    public void setTick_sec(double tick_sec) {
+        this.tick_sec = (float) tick_sec;
     }
 }
