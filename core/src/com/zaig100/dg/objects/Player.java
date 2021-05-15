@@ -18,10 +18,10 @@ public class Player {
     static int oldY;
     static int wX;
     static int wY;
-    static int hp;
-    static int potion;
-    static int sheld;
-    static int torch;
+    static int hp = 4;
+    static int potion = 3;
+    static int sheld = 2;
+    static int torch = 1;
     static int stage = 0;
     static float timer = 0;
     static boolean walked = false, walked_anim = false, flip = false, bag_opened = false;

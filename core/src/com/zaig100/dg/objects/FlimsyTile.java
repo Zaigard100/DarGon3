@@ -10,13 +10,14 @@ public class FlimsyTile extends Obj {
 
     int x, y;
     int crashed_lvl;
-
+    float tick_sec;
     float timer = 0;
 
-    public FlimsyTile(int x, int y, int stage, String tag) {
+    public FlimsyTile(int x, int y, int stage, float tick_sec, String tag) {
         super(x, y, tag);
         this.x = x;
         this.y = y;
+        this.tick_sec = tick_sec;
         crashed_lvl = 3 - stage;
     }
 
@@ -41,7 +42,7 @@ public class FlimsyTile extends Obj {
                 }
             }
         }
-        tick(1f);
+        tick(tick_sec);
     }
 
 

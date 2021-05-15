@@ -12,12 +12,14 @@ public class Flamefrower extends Obj {
     float timer = 0, fire_timer = 0;
     int dx, dy;
     int timst = 0;
+    float tick_sec;
 
-    public Flamefrower(int x, int y, int max, int angle, String tag) {
+    public Flamefrower(int x, int y, int max, int angle, float tick_sec, String tag) {
         super(x, y, tag);
         this.stage = 0;
         this.max = max;
         this.angle = angle;
+        this.tick_sec = tick_sec;
         if (angle == 0) {
             dx = 1;
         }
@@ -32,11 +34,12 @@ public class Flamefrower extends Obj {
         }
     }
 
-    public Flamefrower(int x, int y, int stage, int max, int angle, String tag) {
+    public Flamefrower(int x, int y, int stage, int max, int angle, float tick_sec, String tag) {
         super(x, y, tag);
         this.stage = stage;
         this.max = max;
         this.angle = angle;
+        this.tick_sec = tick_sec;
         //this.player = player;
         if (angle == 0) {
             dx = 1;
@@ -76,7 +79,7 @@ public class Flamefrower extends Obj {
             }
             timst++;
         }
-        tick(2f);
+        tick(tick_sec);
         tick1(0.2f);
     }
 

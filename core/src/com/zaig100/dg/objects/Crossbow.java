@@ -7,15 +7,17 @@ import com.zaig100.dg.utils.Res;
 public class Crossbow extends Obj {
 
     int arr_dx, arr_dy, angle;
+    float tick_sec;
     float timer = 0;
     Arrow arr;
 
-    public Crossbow(int x, int y, int arr_dx, int arr_dy, int angel, String tag) {
+    public Crossbow(int x, int y, int arr_dx, int arr_dy, int angel, float tick_sec, String tag) {
 
         super(x, y, tag);
         this.arr_dx = arr_dx;
         this.arr_dy = arr_dy;
         this.angle = angel;
+        this.tick_sec = tick_sec;
         arr = new Arrow(x, y, arr_dx, arr_dy, angle, tag + "Arr1");
 
     }
@@ -31,6 +33,7 @@ public class Crossbow extends Obj {
     @Override
     public void frame() {
         arr.frame();
+        arr.tick(tick_sec);
     }
 
     @Override
@@ -82,5 +85,9 @@ public class Crossbow extends Obj {
                 }
                 break;
         }
+    }
+
+    public void setTick_sec(float tick_sec) {
+        this.tick_sec = tick_sec;
     }
 }

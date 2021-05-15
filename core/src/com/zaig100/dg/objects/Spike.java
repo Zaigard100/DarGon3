@@ -7,10 +7,12 @@ import com.zaig100.dg.utils.Res;
 
 public class Spike extends Obj {
     boolean active, trigered;
+    float tick_sec;
     private float timer, timer1;
 
-    public Spike(int x, int y, boolean active, String tag) {
+    public Spike(int x, int y, boolean active, float tick_sec, String tag) {
         super(x, y, tag);
+        this.tick_sec = tick_sec;
         this.active = active;
     }
 
@@ -42,7 +44,7 @@ public class Spike extends Obj {
                 }
             }
         }
-        tick(1.5f);
+        tick(tick_sec);
     }
 
 

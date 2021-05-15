@@ -27,7 +27,7 @@ public class Button extends Obj {
     public void frame() {
 
 
-        Joystick.frame(0, 0);
+        //Joystick.frame((int) ((Gdx.graphics.getWidth() - 16 * 7 * Configuration.getScale()) / 2), (int) ((Gdx.graphics.getHeight() - 16 * 5 * Configuration.getScale()) / 2));
         if ((Player.getX() == x) && (Player.getY() == y) && active) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
                 for (int i = 0; i < func.length; i++) {

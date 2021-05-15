@@ -2,6 +2,7 @@ package com.zaig100.dg.utils.contain;
 
 public class FlimsyTileC extends ObjC {
     int stage;
+    float tick_sec = 1f;
 
     public FlimsyTileC(int x, int y, int stage, String tag) {
         super(x, y, tag);
@@ -10,5 +11,13 @@ public class FlimsyTileC extends ObjC {
 
     public int getStage() {
         return stage;
+    }
+
+    public float getTick_sec() {
+        return tick_sec;
+    }
+
+    public void setTick_sec(float tick_sec) {
+        this.tick_sec = tick_sec;
     }
 }

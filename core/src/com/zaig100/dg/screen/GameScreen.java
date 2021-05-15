@@ -104,7 +104,11 @@ public class GameScreen implements Screen {
                     break;
                 case 2:
                     dispose();
-                    m.setScreen(new PlayScreen(m, "levels/01.json", new Player(0, 0, null), false));
+                    Player.setHp(4);
+                    Player.setPotion(3);
+                    Player.setSheld(2);
+                    Player.setTorch(1);
+                    m.setScreen(new PlayScreen(m, "levels/01.json", false));
                     break;
                 case 3:
                     dispose();
@@ -135,6 +139,9 @@ public class GameScreen implements Screen {
     }
 
     private void backgraund() {
+        batch.draw(Res.boards, 7 * 16 * Configuration.getScale(), 0, width, height);
+        batch.draw(Res.boards, 0, 5 * 16 * Configuration.getScale(), width * 2, height);
+
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (map[j + wW * i] == 11) {
@@ -175,7 +182,7 @@ public class GameScreen implements Screen {
                 b_Settings = false;
                 isExit = true;
                 button = 2;
-                m.setScreen(new PlayScreen(m, "levels/01.json", new Player(0, 0, null), false));
+                m.setScreen(new PlayScreen(m, "levels/01.json", false));
             } else {
                 tick++;
             }
@@ -244,7 +251,7 @@ public class GameScreen implements Screen {
                         m.setScreen(new Render3D(m));
                     }
                     if ((Configuration.getMusic() == 20) && (Configuration.getSound() == 50)) {
-                        m.setScreen(new PlayScreen(m, "levels/Test.json", new Player(0, 0, null), false));
+                        m.setScreen(new PlayScreen(m, "levels/Test.json", false));
                     }
                 }
             }

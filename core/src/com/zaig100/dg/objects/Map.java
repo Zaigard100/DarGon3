@@ -75,6 +75,22 @@ public class Map {
         }
     }
 
+    public void tag_activate(String func) {
+        System.out.println(Integer.parseInt(func.split(">")[0].split("-")[1].split(",")[0]) + mapWidht * Integer.parseInt(func.split(">")[0].split("-")[1].split(",")[1]));
+        if (func.split("-")[0].equals("map")) {
+            map[Integer.parseInt(func.split(">")[0].split("-")[1].split(",")[0]) + mapWidht * Integer.parseInt(func.split(">")[0].split("-")[1].split(",")[1])] = Integer.parseInt(func.split(">")[1]);
+        }
+        switch (func.split(">")[0]) {
+            case "isDark":
+                if (func.split(">")[1].equals("++") || func.split(">")[1].equals("--")) {
+                    isDark = !isDark;
+                } else {
+                    isDark = Boolean.parseBoolean((func.split(">")[1]));
+                }
+                break;
+        }
+    }
+
     public int getMapWidht() {
         return mapWidht;
     }

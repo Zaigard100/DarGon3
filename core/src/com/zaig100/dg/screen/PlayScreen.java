@@ -68,8 +68,6 @@ public class PlayScreen implements Screen {
     String path, line;
 
     static Map map;
-    Player player;
-    int hp;
 
     int menu = 0;
     ArrayList<Obj> objectsU = new ArrayList<>();
@@ -103,10 +101,9 @@ public class PlayScreen implements Screen {
     String packname = "";
     String derectory = "";
 
-    public PlayScreen(Main m, String path, Player p, boolean isPack) {
+    public PlayScreen(Main m, String path, boolean isPack) {
         this.m = m;
         this.path = path;
-        this.player = p;
         this.isPack = isPack;
         width = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();
@@ -115,10 +112,9 @@ public class PlayScreen implements Screen {
         fbo2 = new FrameBuffer(Pixmap.Format.RGB888, width, height, false);
     }
 
-    public PlayScreen(Main m, String path, Player p, boolean isPack, String packname, String derectory) {
+    public PlayScreen(Main m, String path, boolean isPack, String packname, String derectory) {
         this.m = m;
         this.path = path;
-        this.player = p;
         this.isPack = isPack;
         this.packname = packname;
         this.derectory = derectory;
@@ -172,7 +168,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Joystick.frame((int) ((Gdx.graphics.getWidth() - 16 * 7 * Configuration.getScale()) / 2), (int) ((Gdx.graphics.getHeight() - 16 * 5 * Configuration.getScale()) / 2));
+        //Joystick.frame((int) ((Gdx.graphics.getWidth() - 16 * 7 * Configuration.getScale()) / 2), (int) ((Gdx.graphics.getHeight() - 16 * 5 * Configuration.getScale()) / 2));
         Joystick.frame((int) ((Gdx.graphics.getWidth() - 16 * 7 * Configuration.getScale()) / 2), (int) ((Gdx.graphics.getHeight() - 16 * 5 * Configuration.getScale()) / 2));
         if (!Joystick.isJoystick() && Gdx.input.isTouched()) {
             sensor_timer += delta;
@@ -202,9 +198,9 @@ public class PlayScreen implements Screen {
                         m.setScreen(new GameScreen(m));
                     } else {
                         if (isPack) {
-                            m.setScreen(new PlayScreen(m, stair.get(i).getNext_path(), player, isPack, packname, derectory));
+                            m.setScreen(new PlayScreen(m, stair.get(i).getNext_path(), isPack, packname, derectory));
                         } else {
-                            m.setScreen(new PlayScreen(m, stair.get(i).getNext_path(), player, isPack));
+                            m.setScreen(new PlayScreen(m, stair.get(i).getNext_path(), isPack));
                         }
                     }
                 }
@@ -325,7 +321,7 @@ public class PlayScreen implements Screen {
         iter = lR.getCrosbow().iterator();
         while (iter.hasNext()) {
             crossbowC = (CrossbowC) iter.next();
-            objectsO.add(new Crossbow(crossbowC.getX(), crossbowC.getY(), crossbowC.getDx(), crossbowC.getDy(), crossbowC.getAngle(), crossbowC.getTag()));
+            objectsO.add(new Crossbow(crossbowC.getX(), crossbowC.getY(), crossbowC.getDx(), crossbowC.getDy(), crossbowC.getAngle(), crossbowC.getTick_sec(), crossbowC.getTag()));
         }
         iter = lR.getItem().iterator();
         while (iter.hasNext()) {
@@ -336,7 +332,7 @@ public class PlayScreen implements Screen {
         iter = lR.getFlimsy_tile().iterator();
         while (iter.hasNext()) {
             flimsyTileC = (FlimsyTileC) iter.next();
-            objectsU.add(new FlimsyTile(flimsyTileC.getX(), flimsyTileC.getY(), flimsyTileC.getStage(), flimsyTileC.getTag()));
+            objectsU.add(new FlimsyTile(flimsyTileC.getX(), flimsyTileC.getY(), flimsyTileC.getStage(), flimsyTileC.getTick_sec(), flimsyTileC.getTag()));
         }
 
         iter = lR.getSpinney().iterator();
@@ -348,7 +344,7 @@ public class PlayScreen implements Screen {
         iter = lR.getSpike().iterator();
         while (iter.hasNext()) {
             spikeC = (SpikeC) iter.next();
-            objectsU.add(new Spike(spikeC.getX(), spikeC.getY(), spikeC.isActive(), spikeC.getTag()));
+            objectsU.add(new Spike(spikeC.getX(), spikeC.getY(), spikeC.isActive(), spikeC.getTick_sec(), spikeC.getTag()));
         }
 
         iter = lR.getButton().iterator();
@@ -380,6 +376,9 @@ public class PlayScreen implements Screen {
                     objectsO.get(i).tag_activate(func.split(":")[1]);
                 }
             }
+        }
+        if (func.split(":")[0].equals("Map")) {
+            map.tag_activate(func.split(":")[1]);
         }
     }
 
@@ -429,10 +428,14 @@ public class PlayScreen implements Screen {
             f2.draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || Joystick.isUse()) {
                 dispose();
+                Player.setHp(save.getHp());
+                Player.setPotion(save.getPotion());
+                Player.setSheld(save.getSheld());
+                Player.setTorch(save.getTorch());
                 if (isPack) {
-                    m.setScreen(new PlayScreen(m, save.getsPath(), new Player(0, 0, null, save.getHp(), save.getPotion(), save.getSheld(), save.getTorch()), isPack, packname, derectory));
+                    m.setScreen(new PlayScreen(m, save.getsPath(), isPack, packname, derectory));
                 } else
-                    m.setScreen(new PlayScreen(m, save.getsPath(), new Player(0, 0, null, save.getHp(), save.getPotion(), save.getSheld(), save.getTorch()), isPack));
+                    m.setScreen(new PlayScreen(m, save.getsPath(), isPack));
             }
 
         }

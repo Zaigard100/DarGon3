@@ -2,6 +2,7 @@ package com.zaig100.dg.utils.contain;
 
 public class FlamefrowerC extends ObjC {
     int stage, max, rot;
+    float tick_sec = 2f;
 
     public FlamefrowerC(int x, int y, int stage, int max, int rot, String tag) {
         super(x, y, tag);
@@ -20,5 +21,13 @@ public class FlamefrowerC extends ObjC {
 
     public int getRot() {
         return rot;
+    }
+
+    public float getTick_sec() {
+        return tick_sec;
+    }
+
+    public void setTick_sec(float tick_sec) {
+        this.tick_sec = tick_sec;
     }
 }

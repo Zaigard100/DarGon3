@@ -1,6 +1,7 @@
 android {
-    buildToolsVersion "30.0.1"
-    compileSdkVersion 29
+    buildToolsVersion "30.0.2"
+    compileSdkVersion 30
+
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -19,9 +20,9 @@ android {
     defaultConfig {
         applicationId "com.zaig100.dg"
         minSdkVersion 14
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
-        versionName "3.4.2"
+        versionName "3.5.1"
     }
     buildTypes {
         release {

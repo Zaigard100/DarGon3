@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.Main;
-import com.zaig100.dg.objects.Player;
 import com.zaig100.dg.utils.Font;
 import com.zaig100.dg.utils.PackManager;
 
@@ -79,7 +78,7 @@ public class Extension implements Screen {
         batch.end();
         if(pM.getList().size()>0) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-                m.setScreen(new PlayScreen(m, (String) pM.getList().get(num).get("FirstLevel"), new Player(0, 0, null), true, (String) pM.getList().get(num).get("PackName"), pM.getDestory().getPath()));
+                m.setScreen(new PlayScreen(m, (String) pM.getList().get(num).get("FirstLevel"), true, (String) pM.getList().get(num).get("PackName"), pM.getDestory().getPath()));
             }
         }
     }
@@ -94,7 +93,7 @@ public class Extension implements Screen {
                     num++;
                 }
             }else{
-                m.setScreen(new PlayScreen(m, (String) pM.getList().get(num).get("FirstLevel"), new Player(0, 0, null), true, (String) pM.getList().get(num).get("PackName"), pM.getDestory().getPath()));
+                m.setScreen(new PlayScreen(m, (String) pM.getList().get(num).get("FirstLevel"), true, (String) pM.getList().get(num).get("PackName"), pM.getDestory().getPath()));
             }
         }
     }

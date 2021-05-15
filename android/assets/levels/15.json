@@ -179,9 +179,10 @@
     {
       "X": 2,
       "Y": 7,
+      "Next": "levels/16.json",
       "FlipX": false,
       "End": false
     }
   ],
-  "save": false
+  "save": true
 }

@@ -97,7 +97,6 @@ public class LevelRead {
     private void hide_trap_read() {
         if (jsonObject.get("HideTrap") != null) {
             i = 0;
-            System.out.println("122");
             jsonArray = (JSONArray) jsonObject.get("HideTrap");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
@@ -175,6 +174,8 @@ public class LevelRead {
                 } else {
                     flimsy_tile.add(new FlimsyTileC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Stage")).intValue(), "FT" + i));
                 }
+                if ((String) JO.get("Tick") != null)
+                    flimsy_tile.get(flimsy_tile.size() - 1).setTick_sec((Float) JO.get("Tick"));
                 i++;
             }
         }
@@ -192,6 +193,8 @@ public class LevelRead {
                 } else {
                     flamefrower.add(new com.zaig100.dg.utils.contain.FlamefrowerC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Stage")).intValue(), ((Long) JO.get("Max")).intValue(), ((Long) JO.get("Rot")).intValue(), "Ff" + i));
                 }
+                if ((String) JO.get("Tick") != null)
+                    flamefrower.get(flamefrower.size() - 1).setTick_sec((Float) JO.get("Tick"));
                 i++;
             }
         }
@@ -209,6 +212,8 @@ public class LevelRead {
                 } else {
                     crosbow.add(new com.zaig100.dg.utils.contain.CrossbowC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("DX")).intValue(), ((Long) JO.get("DY")).intValue(), ((Long) JO.get("Angle")).intValue(), "Cb" + i));
                 }
+                if ((String) JO.get("Tick") != null)
+                    crosbow.get(crosbow.size() - 1).setTick_sec((Float) JO.get("Tick"));
                 i++;
             }
         }
@@ -243,6 +248,8 @@ public class LevelRead {
                 } else {
                     spike.add(new com.zaig100.dg.utils.contain.SpikeC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (Boolean) JO.get("Active"), "Sk" + i));
                 }
+                if ((String) JO.get("Tick") != null)
+                    spike.get(spike.size() - 1).setTick_sec((Float) JO.get("Tick"));
                 i++;
             }
         }

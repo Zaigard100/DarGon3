@@ -62,7 +62,6 @@ public class Arrow extends Obj {
             y = crossbow_y;
 
         }
-        tick(0.5f);
     }
 
     @Override
