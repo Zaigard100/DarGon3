@@ -16,19 +16,19 @@ import java.util.ArrayList;
 
 public class PackManager {
 
-    boolean isAndroid;
-    File destory;
+    static boolean isAndroid;
+    static File destory;
 
-    ArrayList<JSONObject> list = new ArrayList<JSONObject>();
+    static ArrayList<JSONObject> list = new ArrayList<JSONObject>();
 
-    JSONParser parser = new JSONParser();
+    static JSONParser parser = new JSONParser();
 
     public PackManager(boolean isAndroid, Main m) {
 
         this.isAndroid = isAndroid;
 
         if (isAndroid) {
-            destory = new File(Main.getSd(), "DGPacks");
+            destory = new File(Main.getSd(), "DarGon/packs");
         } else {
             destory = new File(new File("").getAbsoluteFile(), "packs");
         }
@@ -56,13 +56,14 @@ public class PackManager {
         }
 
     }
-        public File getDestory() {
-            return destory;
-        }
 
-        public ArrayList<JSONObject> getList() {
-            return list;
-        }
+    static public File getDestory() {
+        return destory;
+    }
+
+    static public ArrayList<JSONObject> getList() {
+        return list;
+    }
 
 
 

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.zaig100.dg.screen.ResLoadScreen;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.ShaderManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,6 +37,7 @@ public class Main extends Game {
     public void dispose() {
         super.dispose();
         Res.dispose();
+        ShaderManager.dispose();
     }
 
     public static Configuration getConfiguration() {

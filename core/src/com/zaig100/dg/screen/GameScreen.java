@@ -16,6 +16,7 @@ import com.zaig100.dg.objects.Player;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.LevelRead;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.ShaderManager;
 
 import java.util.Random;
 
@@ -54,6 +55,7 @@ public class GameScreen implements Screen {
         height = Gdx.graphics.getHeight();
         fbo = new FrameBuffer(Pixmap.Format.RGB888, width, height, false);
         fbo2 = new FrameBuffer(Pixmap.Format.RGB888, width, height, false);
+        ShaderManager.load(m.isAndroid(), m);
     }
 
     public void show() {

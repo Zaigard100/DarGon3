@@ -71,17 +71,16 @@ public class Save {
 
     public void save(File f){
         jsonObject.put("Path", path);
-        jsonObject.put("HP", new Integer(hp));
-        jsonObject.put("Potion", new Integer(potion));
-        jsonObject.put("Sheld", new Integer(sheld));
-        jsonObject.put("Torch", new Integer(torch));
-
-        try{
+        jsonObject.put("HP", hp);
+        jsonObject.put("Potion", potion);
+        jsonObject.put("Sheld", sheld);
+        jsonObject.put("Torch", torch);
+        try {
             FileWriter file = new FileWriter(f);
             file.write(jsonObject.toJSONString());
             file.flush();
             file.close();
-        } catch (IOException ex){
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
 
@@ -144,5 +143,4 @@ public class Save {
     public void setTorch(int torch) {
         Save.torch = torch;
     }
-
 }

@@ -10,7 +10,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.zaig100.dg.Main;
+import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Font;
+import com.zaig100.dg.utils.ShaderManager;
 
 
 public class Setting implements Screen {
@@ -22,10 +24,11 @@ public class Setting implements Screen {
     long Sound;
     boolean Sensor;
     boolean Debug;
+    int Shader;
 
     SpriteBatch batch;
 
-    String[] line = new String[5];
+    String[] line = new String[6];
     Font font;
     BitmapFont f1;
 
@@ -54,14 +57,18 @@ public class Setting implements Screen {
         viewport = new ScreenViewport(cam);
 
 
-        Scale = Main.getConfiguration().getScale();
-        Music = Main.getConfiguration().getMusic();
-        Sound = Main.getConfiguration().getSound();
-        Sensor = Main.getConfiguration().isSensor();
-        Debug = Main.getConfiguration().isDebug();
+        Scale = Configuration.getScale();
+        Music = Configuration.getMusic();
+        Sound = Configuration.getSound();
+        Sensor = Configuration.isSensor();
+        Debug = Configuration.isDebug();
+        Shader = Configuration.getShader();
+        //Fullscreen = Configuration.isFulscreen();
+        //Shader = Configuration.getShader();
+
 
         font = new Font();
-        f1 = font.gFont(8 * Main.getConfiguration().getScale(), "fonts/GFont.ttf");
+        f1 = font.gFont(7 * Configuration.getScale(), "fonts/GFont.ttf");
 
     }
 
@@ -72,44 +79,57 @@ public class Setting implements Screen {
             if(!Gdx.graphics.isFullscreen()) {
                 Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
             }else{
-                Gdx.graphics.setWindowedMode((int)( 16*7*Main.getConfiguration().getScale()), (int)( 16*5*Main.getConfiguration().getScale()));
+                Gdx.graphics.setWindowedMode((int) (16 * 7 * Configuration.getScale()), (int) (16 * 5 * Configuration.getScale()));
             }
         }
-        
+
         Gdx.graphics.getGL20().glClearColor(0, 0, 0, 1f);
         Gdx.graphics.getGL20().glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        if(Sensor) sensor();
+        if (Sensor) sensor();
 
 
-        line[0] = "  Scale: x" + Scale +" (" + Main.getConfiguration().getScale() + ")";
-        line[1] = "  Music:" + Music +" (" + Main.getConfiguration().getMusic() + ")";
-        line[2] = "  Sound:" + Sound +" (" + Main.getConfiguration().getSound() + ")";
-        line[3] = "  Sensor:" + boolStr(Sensor) +" (" + boolStr(Main.getConfiguration().isSensor()) + ")";
-        line[4] = "  Debug:" + boolStr(Debug) +" (" + boolStr(Main.getConfiguration().isDebug()) + ")";
+        line[0] = "  Scale: x" + Scale + " (" + Configuration.getScale() + ")";
+        line[1] = "  Music:" + Music + " (" + Configuration.getMusic() + ")";
+        line[2] = "  Sound:" + Sound + " (" + Configuration.getSound() + ")";
+        line[3] = "  Sensor:" + boolStr(Sensor) + " (" + boolStr(Configuration.isSensor()) + ")";
+        line[4] = "  Debug:" + boolStr(Debug) + " (" + boolStr(Configuration.isDebug()) + ")";
+        if (Configuration.getShader() != -1) {
+            if (Shader != -1) {
+                line[5] = "  Shader:" + ShaderManager.getShaders().get(Shader).getName() + " (" + ShaderManager.getShaders().get(Configuration.getShader()).getName() + ")";
+            } else {
+                line[5] = "  Shader:" + "Default" + " (" + ShaderManager.getShaders().get(Configuration.getShader()).getName() + ")";
+            }
+        } else {
+            if (Shader == -1) {
+                line[5] = "  Shader:" + "Default" + " (" + "Defaulf" + ")";
+            } else {
+                line[5] = "  Shader:" + ShaderManager.getShaders().get(Shader).getName() + " (" + "Default" + ")";
+            }
+        }
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.W)) num--;
-        if(Gdx.input.isKeyJustPressed(Input.Keys.S)) num++;
-        if(Gdx.input.justTouched()) {
-            if (getY > 145 / 8 * Main.getConfiguration().getScale() && getY < 256 / 8 * Main.getConfiguration().getScale()) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.W)) num--;
+        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) num++;
+        if (Gdx.input.justTouched()) {
+            if (getY > 228 / 8 * Configuration.getScale() && getY < 249 / 8 * Configuration.getScale()) {
                 Sensor = !Sensor;
                 num = 3;
             }
         }
-        if(num>4) num = 0;
-        if(num<0) num = 4;
+        if (num > 5) num = 0;
+        if (num < 0) num = 5;
 
-        if(num == 0){
-            line[0] = ">Scale: x" + Scale +" (" + Main.getConfiguration().getScale() + ")";
+        if (num == 0) {
+            line[0] = ">Scale: x" + Scale + " (" + Configuration.getScale() + ")";
 
-            if(Gdx.input.isKeyJustPressed(Input.Keys.A)) Scale -= 1f;
-            if(Gdx.input.isKeyJustPressed(Input.Keys.D)) Scale += 1f;
+            if (Gdx.input.isKeyJustPressed(Input.Keys.A)) Scale -= 1f;
+            if (Gdx.input.isKeyJustPressed(Input.Keys.D)) Scale += 1f;
 
-            if(Scale<0) Scale = 0;
+            if (Scale < 0) Scale = 0;
 
         }
         if(num == 1){
-            line[1] = ">Music:" + Music +" (" + Main.getConfiguration().getMusic() + ")";
+            line[1] = ">Music:" + Music + " (" + Configuration.getMusic() + ")";
 
             if(Gdx.input.isKeyJustPressed(Input.Keys.A)) Music -= 10;
             if(Gdx.input.isKeyJustPressed(Input.Keys.D)) Music += 10;
@@ -118,7 +138,7 @@ public class Setting implements Screen {
 
         }
         if(num == 2){
-            line[2] = ">Sound:" + Sound +" (" + Main.getConfiguration().getSound() + ")";
+            line[2] = ">Sound:" + Sound + " (" + Configuration.getSound() + ")";
 
             if(Gdx.input.isKeyJustPressed(Input.Keys.A)) Sound -= 10;
             if(Gdx.input.isKeyJustPressed(Input.Keys.D)) Sound += 10;
@@ -128,95 +148,129 @@ public class Setting implements Screen {
         }
 
         if(num == 3){
-            line[3] = ">Sensor:" + boolStr(Sensor) +" (" + boolStr(Main.getConfiguration().isSensor()) + ")";
+            line[3] = ">Sensor:" + boolStr(Sensor) + " (" + boolStr(Configuration.isSensor()) + ")";
 
             if(Gdx.input.isKeyJustPressed(Input.Keys.A)) Sensor =!Sensor;
             if(Gdx.input.isKeyJustPressed(Input.Keys.D)) Sensor =!Sensor;
 
         }
-        if(num == 4){
-            line[4] = ">Debug:" + boolStr(Debug) +" (" + boolStr(Main.getConfiguration().isDebug()) + ")";
+        if (num == 4) {
+            line[4] = ">Debug:" + boolStr(Debug) + " (" + boolStr(Configuration.isDebug()) + ")";
 
-            if(Gdx.input.isKeyJustPressed(Input.Keys.A)) Debug =!Debug;
-            if(Gdx.input.isKeyJustPressed(Input.Keys.D)) Debug =!Debug;
+            if (Gdx.input.isKeyJustPressed(Input.Keys.A)) Debug = !Debug;
+            if (Gdx.input.isKeyJustPressed(Input.Keys.D)) Debug = !Debug;
 
         }
 
+        if (num == 5) {
+            if (Configuration.getShader() != -1) {
+                if (Shader != -1) {
+                    line[5] = ">Shader:" + ShaderManager.getShaders().get(Shader).getName() + " (" + ShaderManager.getShaders().get(Configuration.getShader()).getName() + ")";
+                } else {
+                    line[5] = ">Shader:" + "Default" + " (" + ShaderManager.getShaders().get(Configuration.getShader()).getName() + ")";
+                }
+            } else {
+                if (Shader == -1) {
+                    line[5] = ">Shader:" + "Default" + " (" + "Defaulf" + ")";
+                } else {
+                    line[5] = ">Shader:" + ShaderManager.getShaders().get(Shader).getName() + " (" + "Default" + ")";
+                }
+            }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.A)) Shader--;
+            if (Gdx.input.isKeyJustPressed(Input.Keys.D)) Shader++;
+
+            if (Shader > ShaderManager.getShaders().size() - 1)
+                Shader = ShaderManager.getShaders().size() - 1;
+            if (Shader < -1) Shader = 0;
+        }
+
         batch.begin();
-        f1.draw(batch, "Settings :", 10, 5 * 16 * Main.getConfiguration().getScale() - 10);
-        f1.draw(batch, line[0], 10, 5 * 16 * Main.getConfiguration().getScale() - (12 * Main.getConfiguration().getScale()) - 10);
-            f1.draw(batch, line[1], 10, 5 * 16 * Main.getConfiguration().getScale()- (25 * Main.getConfiguration().getScale()) -10);
-            f1.draw(batch, line[2], 10, 5 * 16 * Main.getConfiguration().getScale()- (37 * Main.getConfiguration().getScale()) -10);
-            f1.draw(batch, line[3], 10, 5 * 16 * Main.getConfiguration().getScale()- (49 * Main.getConfiguration().getScale()) -10);
-            f1.draw(batch, line[4], 10, 5 * 16 * Main.getConfiguration().getScale()- (62 * Main.getConfiguration().getScale()) -10);
+        f1.draw(batch, "Settings :", 10, 5 * 16 * Configuration.getScale() - 10);
+        f1.draw(batch, line[0], 10, 5 * 16 * Configuration.getScale() - (10 * Configuration.getScale()) - 10);
+        f1.draw(batch, line[1], 10, 5 * 16 * Configuration.getScale() - (20 * Configuration.getScale()) - 10);
+        f1.draw(batch, line[2], 10, 5 * 16 * Configuration.getScale() - (30 * Configuration.getScale()) - 10);
+        f1.draw(batch, line[3], 10, 5 * 16 * Configuration.getScale() - (40 * Configuration.getScale()) - 10);
+        f1.draw(batch, line[4], 10, 5 * 16 * Configuration.getScale() - (50 * Configuration.getScale()) - 10);
+        f1.draw(batch, line[5], 10, 5 * 16 * Configuration.getScale() - (60 * Configuration.getScale()) - 10);
         batch.end();
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) exit();
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) exit();
 
     }
 
     void sensor(){
-        if(Gdx.input.justTouched()){
-            System.out.println(Gdx.graphics.getHeight()-Gdx.input.getY());
-            getY = Gdx.graphics.getHeight()-Gdx.input.getY();
-            if(getY>549/8*Main.getConfiguration().getScale()){
+        if(Gdx.input.justTouched()) {
+            System.out.println(Gdx.graphics.getHeight() - Gdx.input.getY());
+            getY = Gdx.graphics.getHeight() - Gdx.input.getY();
+            if (getY > 564 / 8 * Configuration.getScale()) {
                 exit();
             }
-            if(Gdx.input.getX()<596/8*Main.getConfiguration().getScale()){
-                if(getY>449/8*Main.getConfiguration().getScale()&&getY<549/8*Main.getConfiguration().getScale()){
+            if (Gdx.input.getX() < 596 / 8 * Configuration.getScale()) {
+                if (getY > 479 / 8 * Configuration.getScale() && getY < 564 / 8 * Configuration.getScale()) {
                     num = 0;
                     Scale -= 1f;
                 }
-                if(getY>349/8*Main.getConfiguration().getScale()&& getY<449/8*Main.getConfiguration().getScale()){
+                if (getY > 398 / 8 * Configuration.getScale() && getY < 479 / 8 * Configuration.getScale()) {
                     num = 1;
                     Music -= 10;
                 }
-                if(getY>249/8*Main.getConfiguration().getScale()&&getY<349/8*Main.getConfiguration().getScale()){
+                if (getY > 319 / 8 * Configuration.getScale() && getY < 398 / 8 * Configuration.getScale()) {
                     num = 2;
                     Sound -= 10;
                 }
+                if (getY > 77 / 8 * Configuration.getScale() && getY < 149 / 8 * Configuration.getScale()) {
+                    Shader -= 1;
+                    num = 4;
+                }
             }
-            if(Gdx.input.getX()>596/8*Main.getConfiguration().getScale()){
-                if(getY>449/8*Main.getConfiguration().getScale()&&getY<549/8*Main.getConfiguration().getScale()){
+            if (Gdx.input.getX() > 596 / 8 * Configuration.getScale()) {
+                if (getY > 479 / 8 * Configuration.getScale() && getY < 564 / 8 * Configuration.getScale()) {
                     num = 0;
                     Scale += 1f;
                 }
-                if(getY>349/8*Main.getConfiguration().getScale()&&getY<449/8*Main.getConfiguration().getScale()){
+                if (getY > 398 / 8 * Configuration.getScale() && getY < 479 / 8 * Configuration.getScale()) {
                     num = 1;
                     Music += 10;
                 }
-                if(getY>249/8*Main.getConfiguration().getScale()&&getY<349/8*Main.getConfiguration().getScale()){
+                if (getY > 319 / 8 * Configuration.getScale() && getY < 398 / 8 * Configuration.getScale()) {
                     num = 2;
                     Sound += 10;
                 }
+                if (getY > 77 / 8 * Configuration.getScale() && getY < 149 / 8 * Configuration.getScale()) {
+                    Shader += 1;
+                    num = 4;
+                }
             }
-            if (getY > 45 / 8 * Main.getConfiguration().getScale() && getY < 146 / 8 * Main.getConfiguration().getScale()) {
+            if (getY > 149 / 8 * Configuration.getScale() && getY < 228 / 8 * Configuration.getScale()) {
                 Debug = !Debug;
                 num = 4;
             }
+
         }
     }
 
-    void exit(){
+    void exit() {
 
-        if(Scale == Main.getConfiguration().getScale()){
-            Main.getConfiguration().setMusic((int) Music);
-            Main.getConfiguration().setSound((int) Sound);
-            Main.getConfiguration().setSensor(Sensor);
-            Main.getConfiguration().setDebug(Debug);
-            Main.getConfiguration().save(Main.getConfiguration().getConf());
+        if (Scale == Configuration.getScale()) {
+            Configuration.setMusic((int) Music);
+            Configuration.setSound((int) Sound);
+            Configuration.setSensor(Sensor);
+            Configuration.setDebug(Debug);
+            Configuration.setShader(Shader);
+            Configuration.save(Configuration.getConf());
             m.setScreen(new GameScreen(m));
-        } else{
-            Main.getConfiguration().setMusic((int) Music);
-            Main.getConfiguration().setSound((int) Sound);
-            Main.getConfiguration().setSensor(Sensor);
-            Main.getConfiguration().setDebug(Debug);
-            Main.getConfiguration().setScale((float) Scale);
-            Main.getConfiguration().save(Main.getConfiguration().getConf());
-            f1 = new Font().gFont((float) (8 * Scale),"fonts/GFont.ttf");
-                if(!Gdx.graphics.isFullscreen()&&!m.isAndroid()) {
-                    Gdx.graphics.setWindowedMode((int)( 16*7*Scale), (int)( 16*5*Scale));
-                }
+        } else {
+            Configuration.setMusic((int) Music);
+            Configuration.setSound((int) Sound);
+            Configuration.setSensor(Sensor);
+            Configuration.setDebug(Debug);
+            Configuration.setScale((float) Scale);
+            Configuration.setShader(Shader);
+            Configuration.save(Configuration.getConf());
+            f1 = new Font().gFont((float) (8 * Scale), "fonts/GFont.ttf");
+            if (!Gdx.graphics.isFullscreen() && !m.isAndroid()) {
+                Gdx.graphics.setWindowedMode((int) (16 * 7 * Scale), (int) (16 * 5 * Scale));
+            }
             dispose();
             m.setScreen(new GameScreen(m));
             //Gdx.app.exit();

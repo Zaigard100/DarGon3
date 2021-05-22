@@ -9,13 +9,13 @@ import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 public class AndroidLauncher extends AndroidApplication {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
 
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 
-		Main m = new Main(true);
-		Main.setSd(Environment.getExternalStorageDirectory());
+        Main m = new Main(true);
+        Main.setSd(Environment.getExternalStorageDirectory().getAbsoluteFile());
 
-		initialize(m, config);
-	}
+        initialize(m, config);
+    }
 }

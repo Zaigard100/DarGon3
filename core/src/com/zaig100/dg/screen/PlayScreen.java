@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -34,6 +35,7 @@ import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.LevelRead;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.Save;
+import com.zaig100.dg.utils.ShaderManager;
 import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.CrossbowC;
 import com.zaig100.dg.utils.contain.FlamefrowerC;
@@ -83,7 +85,7 @@ public class PlayScreen implements Screen {
     SpinneyC spinneyC;
     SpikeC spikeC;
     ButtonС buttonC;
-
+    Texture fr;
     Save save;
     boolean start = true;
 
@@ -92,6 +94,7 @@ public class PlayScreen implements Screen {
 
     boolean fir1 = true;
     int i;
+
 
     Viewport viewport;
 
@@ -244,34 +247,50 @@ public class PlayScreen implements Screen {
         }
         Joystick.render(batch);
         if (debag) debugShow();
-            batch.end();
+        batch.end();
         fbo.end();
         if (Player.getX() != lR.getSpawnX() || Player.getY() != lR.getSpawnY()) start = false;
 
         frame = new Sprite(fbo.getColorBufferTexture());
-
+        frame.setPosition((scrW - 16 * 7 * Configuration.getScale()) / 2, (-scrH + 16 * 5 * Configuration.getScale()) / 2);
         fbo2.begin();
         batch.begin();
-
-        frame.draw(batch);
-
-        batch.end();
-        fbo2.end();
-
-        frame = new Sprite(fbo2.getColorBufferTexture());
-        frame.setPosition((scrW - 16 * 7 * Configuration.getScale()) / 2, (scrH - 16 * 5 * Configuration.getScale()) / 2);
-
-        cam.update();
-
-        batch.begin();
-
         batch.draw(Res.boards, 0, 0, 16 * 7 * Configuration.getScale() * 10, 16 * 5 * Configuration.getScale() * 10);
         if (is_pause) {
             batch.draw(Res.pause_dark, 0, 0, 16 * 7 * Configuration.getScale() * 10, 16 * 5 * Configuration.getScale() * 10);
         }
         frame.draw(batch);
-
         batch.end();
+        fbo2.end();
+
+
+        frame = new Sprite(fbo2.getColorBufferTexture());
+        cam.update();
+        fbo.begin();
+        batch.begin();
+        if (Configuration.getShader() != -1) {
+            ShaderManager.getShaders().get(Configuration.getShader()).shader_update();
+            batch.setShader(ShaderManager.getShaders().get(Configuration.getShader()).getShader());
+        }
+        frame.draw(batch);
+        if (Configuration.getShader() != -1) {
+            batch.setShader(null);
+        }
+        batch.end();
+        fbo.end();
+
+        frame = new Sprite(fbo.getColorBufferTexture());
+
+        if (Configuration.getShader() != -1) {
+            frame.setFlip(ShaderManager.getShaders().get(Configuration.getShader()).isFlipX(), ShaderManager.getShaders().get(Configuration.getShader()).isFlipY());
+        } else {
+            frame.setFlip(false, true);
+        }
+
+        batch.begin();
+        frame.draw(batch);
+        batch.end();
+
     }
 
     private void wasted_render() {

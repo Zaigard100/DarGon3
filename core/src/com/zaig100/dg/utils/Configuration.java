@@ -25,6 +25,9 @@ public class Configuration {
     static int Sound = 50;
     static boolean sensor = true;
     static boolean debug = false;
+    static int shader = -1;
+    ////static boolean fulscreen = false;
+    //static String shader = "shaders/DefautCRT.frag";
 
     public Configuration(Main m) throws IOException {
 
@@ -62,19 +65,21 @@ public class Configuration {
             Scale = ((Double) jsonObject.get("Scale")).floatValue();
             Music = ((Long) jsonObject.get("Music")).intValue();
             Sound = ((Long) jsonObject.get("Sound")).intValue();
-            sensor = ((Boolean) jsonObject.get("Sensor")).booleanValue();
-            debug = ((Boolean) jsonObject.get("Debug")).booleanValue();
+            sensor = (Boolean) jsonObject.get("Sensor");
+            debug = (Boolean) jsonObject.get("Debug");
+            shader = ((Long) jsonObject.get("Shader")).intValue();
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
     }
 
     static public void save(File f) {
-        jsonObject.put("Scale", new Float(Scale));
-        jsonObject.put("Music", new Integer(Music));
-        jsonObject.put("Sound", new Integer(Sound));
-        jsonObject.put("Sensor", new Boolean(sensor));
-        jsonObject.put("Debug", new Boolean(debug));
+        jsonObject.put("Scale", Scale);
+        jsonObject.put("Music", Music);
+        jsonObject.put("Sound", Sound);
+        jsonObject.put("Sensor", sensor);
+        jsonObject.put("Debug", debug);
+        jsonObject.put("Shader", shader);
 
         try {
             FileWriter file = new FileWriter(f);
@@ -142,4 +147,11 @@ public class Configuration {
         Configuration.debug = debug;
     }
 
+    public static int getShader() {
+        return shader;
+    }
+
+    public static void setShader(int shader) {
+        Configuration.shader = shader;
+    }
 }
