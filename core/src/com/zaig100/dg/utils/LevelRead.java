@@ -32,6 +32,7 @@ public class LevelRead {
     Iterator iter, Ir;
     Reader in;
     int[] map;
+    boolean[][] place = new boolean[3][3];
     String[] func;
     int wight, height, SpawnX, SpawnY, i;
     String levelname;
@@ -77,9 +78,16 @@ public class LevelRead {
         spinney_read();
         spike_read();
         button_read();
-
-        isSave = (Boolean) jsonObject.get("save");
-
+        if (jsonObject.get("ReMap") != null) {
+            if ((Boolean) jsonObject.get("ReMap") == true) {
+                map_correct();
+            }
+        }
+        if (jsonObject.get("save") != null) {
+            isSave = (Boolean) jsonObject.get("save");
+        } else {
+            isSave = false;
+        }
     }
 
     private void map_read() {
@@ -276,6 +284,86 @@ public class LevelRead {
             }
         }
     }
+
+    private void map_correct() {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < wight; j++) {
+                for (int i1 = 0; i1 <= 2; i1++) {
+                    for (int j1 = 0; j1 <= 2; j1++) {
+                        place[i1][j1] = false;
+                    }
+                }
+                try {
+                    place[0][0] = map[(height - (i - 1) - 1) * wight + (j - 1)] == 11;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
+                try {
+                    place[0][1] = map[(height - i - 1) * wight + (j - 1)] == 11;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
+                try {
+                    place[0][2] = map[(height - (i + 1) - 1) * wight + (j - 1)] == 11;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
+
+                try {
+                    place[1][0] = map[(height - (i - 1) - 1) * wight + j] == 11;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
+                try {
+                    place[1][1] = map[(height - i - 1) * wight + j] == 11;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
+                try {
+                    place[1][2] = map[(height - (i + 1) - 1) * wight + j] == 11;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
+
+                try {
+                    place[2][0] = map[(height - (i - 1) - 1) * wight + (j + 1)] == 11;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
+                try {
+                    place[2][1] = map[(height - i - 1) * wight + (j + 1)] == 11;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
+                try {
+                    place[2][2] = map[(height - (i + 1) - 1) * wight + (j + 1)] == 11;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
+
+                if (!place[1][1]) {
+                    if (place[1][0] && place[2][1]) {
+                        map[(height - i - 1) * wight + j] = 13;
+                    }
+                    if (place[1][2] && place[2][1]) {
+                        map[(height - i - 1) * wight + j] = 15;
+                    }
+                    if (place[0][1] && place[1][0]) {
+                        map[(height - i - 1) * wight + j] = 14;
+                    }
+                    if (place[0][1] && place[1][2]) {
+                        map[(height - i - 1) * wight + j] = 12;
+                    }
+
+                    if (place[0][1] && place[1][0] && place[2][1]) {
+                        map[(height - i - 1) * wight + j] = 16;
+                    }
+                    if (place[0][1] && place[1][0] && place[1][2]) {
+                        map[(height - i - 1) * wight + j] = 19;
+                    }
+                    if (place[0][1] && place[1][2] && place[2][1]) {
+                        map[(height - i - 1) * wight + j] = 17;
+                    }
+
+                    if (place[1][0] && place[1][2] && place[2][1]) {
+                        map[(height - i - 1) * wight + j] = 18;
+                    }
+                }
+            }
+        }
+    }
+
 
     public int[] getMap() {
         return map;

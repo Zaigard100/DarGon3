@@ -72,12 +72,12 @@
       "X": 10,
       "Y": 20,
       "FlipX": false,
-      "End": false,
+      "End": true,
       "Tag": "Stair1"
     },
     {
       "Y": 30,
-      "Next": "levels/01.json",
+      "Next": "levels/Test2.json",
       "X": 10,
       "FlipX": false,
       "End": false,

@@ -43,6 +43,9 @@ public class ShaderConfig {
             if (val == "resolution") {
                 shader.setUniformf(key, new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
             }
+            if (val == "screen") {
+                shader.setUniformi(key, 1);
+            }
             if (val == "mouse") {
                 shader.setUniformf(key, new Vector2(Gdx.input.getX(), Gdx.input.getY()));
             }
@@ -52,10 +55,10 @@ public class ShaderConfig {
             if (val.split(":")[0] == "int") {
                 shader.setUniformi(key, Integer.parseInt(val.split(":")[1]));
             }
-        }
-        shader.end();
-    }
 
+            shader.end();
+        }
+    }
     public void dispose() {
         shader.dispose();
     }

@@ -31,7 +31,6 @@ public class Button extends Obj {
         if ((Player.getX() == x) && (Player.getY() == y) && active) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
                 for (int i = 0; i < func.length; i++) {
-                    System.out.println(i);
                     PS.doFunc(func[i]);
                 }
                 active = false;

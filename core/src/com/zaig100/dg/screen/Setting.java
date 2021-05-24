@@ -181,7 +181,7 @@ public class Setting implements Screen {
 
             if (Shader > ShaderManager.getShaders().size() - 1)
                 Shader = ShaderManager.getShaders().size() - 1;
-            if (Shader < -1) Shader = 0;
+            if (Shader < -1) Shader = -1;
         }
 
         batch.begin();
@@ -220,7 +220,7 @@ public class Setting implements Screen {
                 }
                 if (getY > 77 / 8 * Configuration.getScale() && getY < 149 / 8 * Configuration.getScale()) {
                     Shader -= 1;
-                    num = 4;
+                    num = 5;
                 }
             }
             if (Gdx.input.getX() > 596 / 8 * Configuration.getScale()) {
@@ -238,7 +238,7 @@ public class Setting implements Screen {
                 }
                 if (getY > 77 / 8 * Configuration.getScale() && getY < 149 / 8 * Configuration.getScale()) {
                     Shader += 1;
-                    num = 4;
+                    num = 5;
                 }
             }
             if (getY > 149 / 8 * Configuration.getScale() && getY < 228 / 8 * Configuration.getScale()) {
@@ -247,6 +247,9 @@ public class Setting implements Screen {
             }
 
         }
+        if (Shader > ShaderManager.getShaders().size() - 1)
+            Shader = ShaderManager.getShaders().size() - 1;
+        if (Shader < -1) Shader = -1;
     }
 
     void exit() {

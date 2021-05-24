@@ -2,7 +2,7 @@
   "Music": 20,
   "Scale": 7.0,
   "Sound": 50,
-  "Shader": 0,
+  "Shader": -1,
   "Debug": false,
   "Sensor": true
 }
