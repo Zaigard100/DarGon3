@@ -118,7 +118,7 @@ public class ShaderManager {
     public static void dispose() {
         iter = shaders.iterator();
         while (iter.hasNext()) {
-            ((ShaderProgram) iter.next()).dispose();
+            ((ShaderConfig) iter.next()).dispose();
         }
     }
 }

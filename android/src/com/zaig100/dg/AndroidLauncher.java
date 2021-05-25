@@ -14,7 +14,7 @@ public class AndroidLauncher extends AndroidApplication {
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 
         Main m = new Main(true);
-        Main.setSd(Environment.getExternalStorageDirectory().getAbsoluteFile());
+        Main.setSd(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getParentFile());
 
         initialize(m, config);
     }

@@ -296,40 +296,49 @@ public class LevelRead {
                 try {
                     place[0][0] = map[(height - (i - 1) - 1) * wight + (j - 1)] == 11;
                 } catch (ArrayIndexOutOfBoundsException e) {
+                    place[0][0] = false;
                 }
                 try {
                     place[0][1] = map[(height - i - 1) * wight + (j - 1)] == 11;
                 } catch (ArrayIndexOutOfBoundsException e) {
+                    place[0][1] = false;
                 }
                 try {
                     place[0][2] = map[(height - (i + 1) - 1) * wight + (j - 1)] == 11;
                 } catch (ArrayIndexOutOfBoundsException e) {
+                    place[0][2] = false;
                 }
 
                 try {
                     place[1][0] = map[(height - (i - 1) - 1) * wight + j] == 11;
                 } catch (ArrayIndexOutOfBoundsException e) {
+                    place[1][0] = false;
                 }
                 try {
                     place[1][1] = map[(height - i - 1) * wight + j] == 11;
                 } catch (ArrayIndexOutOfBoundsException e) {
+                    place[1][1] = false;
                 }
                 try {
                     place[1][2] = map[(height - (i + 1) - 1) * wight + j] == 11;
                 } catch (ArrayIndexOutOfBoundsException e) {
+                    place[1][2] = false;
                 }
 
                 try {
                     place[2][0] = map[(height - (i - 1) - 1) * wight + (j + 1)] == 11;
                 } catch (ArrayIndexOutOfBoundsException e) {
+                    place[2][0] = false;
                 }
                 try {
                     place[2][1] = map[(height - i - 1) * wight + (j + 1)] == 11;
                 } catch (ArrayIndexOutOfBoundsException e) {
+                    place[2][1] = false;
                 }
                 try {
                     place[2][2] = map[(height - (i + 1) - 1) * wight + (j + 1)] == 11;
                 } catch (ArrayIndexOutOfBoundsException e) {
+                    place[2][2] = false;
                 }
 
                 if (!place[1][1]) {

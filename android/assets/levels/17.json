@@ -142,8 +142,9 @@
     {
       "X": 0,
       "Y": 9,
+      "Next": "levels/18.json",
       "FlipX": false,
-      "End": true,
+      "End": false,
       "Tag": "Stair1"
     }
   ],
