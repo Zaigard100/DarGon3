@@ -16,22 +16,33 @@ public final class ScriptTest {
         long time = System.currentTimeMillis();
         final List<Token> tokens = (new Lexer(input)).tokenize();
         System.out.println(System.currentTimeMillis() - time);
-        for (Token token : tokens) {
-            System.out.println(token.toString());
-        }
+
+        //token_show(tokens);
+
         time = System.currentTimeMillis();
-        final List<Statement> expressions = new Parser(tokens).parse();
+        final List<Statement> statements = new Parser(tokens).parse();
         System.out.println(System.currentTimeMillis() - time);
-        for (Statement statement : expressions) {
-            System.out.println(statement);
-        }
+
+        //statement_show(statements);
 
         System.out.println("Script run:");
-
-        for (Statement statement : expressions) {
+        System.out.println();
+        for (Statement statement : statements) {
             statement.execute();
         }
 
+    }
+
+    static void token_show(List<Token> tokens) {
+        for (Token token : tokens) {
+            System.out.println(token.toString());
+        }
+    }
+
+    static void statement_show(List<Statement> statements) {
+        for (Statement statement : statements) {
+            System.out.println(statement);
+        }
     }
 
 }

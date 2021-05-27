@@ -6,7 +6,7 @@ import com.zaig100.dg.utils.dgscript.lib.Variables;
 
 public class AssignStatement implements Statement {
 
-    final String variable;
+    private final String variable;
     private final Expression exp;
 
     public AssignStatement(String variable, Expression exp) {
