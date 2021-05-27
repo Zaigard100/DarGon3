@@ -5,9 +5,9 @@ import java.util.List;
 
 public final class Lexer {
 
-    private static final String OPERATOR_CHARS = "+-*/()";
+    private static final String OPERATOR_CHARS = "+-*/()=";
     private static final TokenType[] OPREATORS_TOKNS = {
-            TokenType.PLUS, TokenType.MINUS, TokenType.STAR, TokenType.SLASH, TokenType.LPAR, TokenType.RPAR
+            TokenType.PLUS, TokenType.MINUS, TokenType.STAR, TokenType.SLASH, TokenType.LPAR, TokenType.RPAR, TokenType.EQ
     };
 
     private final String input;
@@ -28,7 +28,10 @@ public final class Lexer {
         while (pos < lenght) {
             final char curent = peek(0);
             if (Character.isDigit(curent)) tokinizeNum();
-            else if (OPERATOR_CHARS.indexOf(curent) != -1) {
+            else if (Character.isLetter(curent)) tokinizeWord();
+            else if (curent == '\"') {
+                tokinizeText();
+            } else if (OPERATOR_CHARS.indexOf(curent) != -1) {
                 tokinizeOpe();
             } else {
                 next();
@@ -42,10 +45,64 @@ public final class Lexer {
         next();
     }
 
+    private void tokinizeText() {
+        next(); //skip "
+        final StringBuilder buffer = new StringBuilder();
+        char current = peek(0);
+        while (true) {
+            if (current == '\\') {
+                current = next();
+                switch (current) {
+                    case '"':
+                        current = next();
+                        buffer.append('"');
+                        continue;
+                    case 'n':
+                        current = next();
+                        buffer.append('\n');
+                        continue;
+                    case 't':
+                        current = next();
+                        buffer.append('\t');
+                        continue;
+                }
+                buffer.append('\\');
+                continue;
+            }
+            if (current == '\"') break;
+            buffer.append(current);
+            current = next();
+        }
+        next();
+        addtoken(TokenType.TEXT, buffer.toString());
+    }
+
+
+    private void tokinizeWord() {
+        final StringBuilder buffer = new StringBuilder();
+        char current = peek(0);
+        while (Character.isLetterOrDigit(current) || (current == '_')) {
+            buffer.append(current);
+            current = next();
+        }
+        final String toString = buffer.toString();
+        if (toString.equals("print")) {
+            addtoken(TokenType.PRINT);
+        } else {
+            addtoken(TokenType.WORD, toString);
+        }
+    }
+
     private void tokinizeNum() {
         final StringBuilder buffer = new StringBuilder();
         char current = peek(0);
-        while (Character.isDigit(current)) {
+        while (true) {
+            if (current == '.') {
+                if (buffer.indexOf(".") != -1)
+                    throw new RuntimeException("Invalid number in " + pos + " : " + current);
+            } else if (!Character.isDigit(current)) {
+                break;
+            }
             buffer.append(current);
             current = next();
         }

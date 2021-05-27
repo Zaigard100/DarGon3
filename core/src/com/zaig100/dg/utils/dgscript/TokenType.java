@@ -2,14 +2,12 @@ package com.zaig100.dg.utils.dgscript;
 
 public enum TokenType {
     NUMBER,
-    VARIABLE,
+    WORD,
+    TEXT,
 
-    SEMICOLON,
-    SPACE,
+    //kes words
+    PRINT,
 
-    LOG,
-
-    ASSING,
     PLUS,
     MINUS,
     STAR,
@@ -17,6 +15,8 @@ public enum TokenType {
 
     LPAR,
     RPAR,
+
+    EQ,
 
     EOF
 

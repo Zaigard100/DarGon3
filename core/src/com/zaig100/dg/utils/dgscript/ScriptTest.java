@@ -1,24 +1,37 @@
 package com.zaig100.dg.utils.dgscript;
 
-import com.zaig100.dg.utils.dgscript.ast.Expression;
+import com.zaig100.dg.utils.dgscript.ast.statements.Statement;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 public final class ScriptTest {
 
-    public static void main(String[] args) {
-        final String input = "(2 + 2) * 2";
-        final List<Token> tokens = (new Lexer(input)).tokenize();
 
+    @SuppressWarnings("NewApi")
+    public static void main(String[] args) throws IOException {
+        final String input = new String(Files.readAllBytes(Paths.get("testscript.dgs")));
+        long time = System.currentTimeMillis();
+        final List<Token> tokens = (new Lexer(input)).tokenize();
+        System.out.println(System.currentTimeMillis() - time);
         for (Token token : tokens) {
             System.out.println(token.toString());
         }
-
-        final List<Expression> expressions = new Parser(tokens).parse();
-
-        for (Expression expression : expressions) {
-            System.out.println(expression + " = " + expression.evol());
+        time = System.currentTimeMillis();
+        final List<Statement> expressions = new Parser(tokens).parse();
+        System.out.println(System.currentTimeMillis() - time);
+        for (Statement statement : expressions) {
+            System.out.println(statement);
         }
+
+        System.out.println("Script run:");
+
+        for (Statement statement : expressions) {
+            statement.execute();
+        }
+
     }
 
 }

@@ -1,4 +1,7 @@
-package com.zaig100.dg.utils.dgscript.ast;
+package com.zaig100.dg.utils.dgscript.ast.expression;
+
+import com.zaig100.dg.utils.dgscript.lib.NumberVal;
+import com.zaig100.dg.utils.dgscript.lib.Value;
 
 public class UnaryExpression implements Expression {
 
@@ -11,17 +14,17 @@ public class UnaryExpression implements Expression {
     }
 
     @Override
-    public double evol() {
+    public Value eval() {
         switch (opr) {
             case '-':
-                return -ex.evol();
+                return new NumberVal(-ex.eval().asDouble());
             case '*':
-                return ex.evol() * ex.evol();
+                return new NumberVal(ex.eval().asDouble() * ex.eval().asDouble());
             case '/':
-                return Math.sqrt(ex.evol());
+                return new NumberVal(Math.sqrt(ex.eval().asDouble()));
             default:
             case '+':
-                return ex.evol();
+                return ex.eval();
         }
     }
 
