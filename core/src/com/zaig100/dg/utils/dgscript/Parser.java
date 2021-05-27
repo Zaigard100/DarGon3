@@ -1,16 +1,23 @@
 package com.zaig100.dg.utils.dgscript;
 
 import com.zaig100.dg.utils.dgscript.ast.expression.BinExpression;
+import com.zaig100.dg.utils.dgscript.ast.expression.ConditionalExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.Expression;
 import com.zaig100.dg.utils.dgscript.ast.expression.NumExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.StringExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.UnaryExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.ValueExpression;
 import com.zaig100.dg.utils.dgscript.ast.statements.AssignStatement;
+import com.zaig100.dg.utils.dgscript.ast.statements.BlockStatement;
+import com.zaig100.dg.utils.dgscript.ast.statements.BreakStatement;
+import com.zaig100.dg.utils.dgscript.ast.statements.ContinueStatement;
+import com.zaig100.dg.utils.dgscript.ast.statements.DoWhileStatement;
+import com.zaig100.dg.utils.dgscript.ast.statements.ForStatement;
+import com.zaig100.dg.utils.dgscript.ast.statements.IfStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.PrintStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.Statement;
+import com.zaig100.dg.utils.dgscript.ast.statements.WhileStatement;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public final class Parser {
@@ -25,17 +32,48 @@ public final class Parser {
         size = tokens.size();
     }
 
-    public List<Statement> parse() {
-        final List<Statement> result = new ArrayList<>();
+    public Statement parse() {
+        final BlockStatement result = new BlockStatement();
         while (!match(TokenType.EOF)) {
             result.add(statement());
         }
         return result;
     }
 
+    private Statement block() {
+        final BlockStatement block = new BlockStatement();
+        while (!match(TokenType.RBRACE)) {
+            block.add(statement());
+        }
+        return block;
+    }
+
+    private Statement statementOrBlock() {
+        if (match(TokenType.LBRACE)) return block();
+        else return statement();
+    }
+
     private Statement statement() {
         if (match(TokenType.PRINT)) {
             return new PrintStatement(expression());
+        }
+        if (match(TokenType.IF)) {
+            return ifElse();
+        }
+        if (match(TokenType.WHILE)) {
+            return whileSt();
+        }
+        if (match(TokenType.DO)) {
+            return doWhileSt();
+        }
+        if (match(TokenType.BRAKE)) {
+            return new BreakStatement();
+        }
+        if (match(TokenType.CONTINUE)) {
+            return new ContinueStatement();
+        }
+        if (match(TokenType.FOR)) {
+            return forSt();
         }
         return assignmentStatement();
     }
@@ -49,8 +87,105 @@ public final class Parser {
         throw new RuntimeException("Unknown statment in token " + pos + ": " + current.toString());
     }
 
+    private Statement ifElse() {
+        final Expression condition = expression();
+        final Statement ifStatement = statementOrBlock();
+        final Statement elseStatement;
+        if (match(TokenType.ELSE)) {
+            elseStatement = statementOrBlock();
+        } else {
+            elseStatement = null;
+        }
+        return new IfStatement(condition, ifStatement, elseStatement);
+    }
+
+    private Statement whileSt() {
+        final Expression condition = expression();
+        final Statement statement = statementOrBlock();
+        return new WhileStatement(condition, statement);
+    }
+
+    private Statement doWhileSt() {
+        final Statement statement = statementOrBlock();
+        consume(TokenType.WHILE);
+        final Expression condition = expression();
+        return new DoWhileStatement(condition, statement);
+    }
+
+    private Statement forSt() {
+        final Statement init = assignmentStatement();
+        consume(TokenType.COMMA);
+        final Expression condition = expression();
+        consume(TokenType.COMMA);
+        final Statement increment = assignmentStatement();
+        final Statement statement = statementOrBlock();
+        return new ForStatement(init, condition, increment, statement);
+    }
+
     private Expression expression() {
-        return additive();
+        return logicalOr();
+    }
+
+    private Expression logicalOr() {
+        Expression resault = logicalAnd();
+        while (true) {
+            if (match(TokenType.BARBAR)) {
+                resault = new ConditionalExpression(ConditionalExpression.Operator.OR, resault, logicalAnd());
+                continue;
+            }
+            break;
+        }
+        return resault;
+    }
+
+    private Expression logicalAnd() {
+        Expression resault = equality();
+        while (true) {
+            if (match(TokenType.AMPAMP)) {
+                resault = new ConditionalExpression(ConditionalExpression.Operator.AND, resault, equality());
+                continue;
+            }
+            break;
+        }
+        return resault;
+    }
+
+    private Expression equality() {
+        Expression resault = conditional();
+        if (match(TokenType.EQEQ)) {
+            resault = new ConditionalExpression(ConditionalExpression.Operator.EQUALS, resault, conditional());
+        }
+        if (match(TokenType.EXCLEQ)) {
+            resault = new ConditionalExpression(ConditionalExpression.Operator.NOT_EQUALS, resault, conditional());
+        }
+        return resault;
+    }
+
+    private Expression conditional() {
+        Expression resault = additive();
+
+        while (true) {
+
+            if (match(TokenType.LT)) {
+                resault = new ConditionalExpression(ConditionalExpression.Operator.LT, resault, additive());
+                continue;
+            }
+            if (match(TokenType.LTEQ)) {
+                resault = new ConditionalExpression(ConditionalExpression.Operator.LTEQ, resault, additive());
+                continue;
+            }
+            if (match(TokenType.GT)) {
+                resault = new ConditionalExpression(ConditionalExpression.Operator.GT, resault, additive());
+                continue;
+            }
+            if (match(TokenType.GTEQ)) {
+                resault = new ConditionalExpression(ConditionalExpression.Operator.GTEQ, resault, additive());
+                continue;
+            }
+            break;
+        }
+
+        return resault;
     }
 
     private Expression additive() {

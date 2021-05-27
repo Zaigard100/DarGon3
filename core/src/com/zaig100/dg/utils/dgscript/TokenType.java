@@ -7,17 +7,39 @@ public enum TokenType {
 
     //kes words
     PRINT,
+    IF,
+    ELSE,
+    WHILE,
+    FOR,
 
     PLUS,
     MINUS,
     STAR,
     SLASH,
 
-    LPAR,
-    RPAR,
+    LPAR, // (
+    RPAR, // )
+    LBRACE, // {
+    RBRACE, // }
+    COMMA, // ,
+    DO,
+    BRAKE,
+    CONTINUE,
 
-    EQ,
+    EQ, // =
+    EQEQ, // ==
+    EXCL, //!
+    EXCLEQ, //!=
+    LT, // <
+    LTEQ, // <=
+    GT, // >
+    GTEQ, // >=
 
-    EOF
+    BAR, // &
+    BARBAR, // &&
+    AMP, // |
+    AMPAMP, // ||
+
+    EOF,
 
 }

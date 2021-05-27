@@ -26,7 +26,7 @@ public final class BinExpression implements Expression {
                 case '+':
                     return new StringVal(str1 + str2);
                 case '*': {
-                    final int itrs = (int) val2.asDouble();
+                    final int itrs = (int) val2.asNum();
                     final StringBuilder buffer = new StringBuilder();
                     for (int i = 0; i < itrs; i++) {
                         buffer.append(str1);
@@ -35,8 +35,8 @@ public final class BinExpression implements Expression {
                 }
             }
         } else if (val1 instanceof NumberVal && val2 instanceof NumberVal) {
-            final double num1 = val1.asDouble();
-            final double num2 = val2.asDouble();
+            final double num1 = val1.asNum();
+            final double num2 = val2.asNum();
             switch (opr) {
                 case '-':
                     return new NumberVal(num1 - num2);

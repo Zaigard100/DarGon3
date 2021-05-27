@@ -17,11 +17,11 @@ public class UnaryExpression implements Expression {
     public Value eval() {
         switch (opr) {
             case '-':
-                return new NumberVal(-ex.eval().asDouble());
+                return new NumberVal(-ex.eval().asNum());
             case '*':
-                return new NumberVal(ex.eval().asDouble() * ex.eval().asDouble());
+                return new NumberVal(ex.eval().asNum() * ex.eval().asNum());
             case '/':
-                return new NumberVal(Math.sqrt(ex.eval().asDouble()));
+                return new NumberVal(Math.sqrt(ex.eval().asNum()));
             default:
             case '+':
                 return ex.eval();

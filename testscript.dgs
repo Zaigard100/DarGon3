@@ -1,6 +1,5 @@
-num = 2 + 2
-num1 = 8.5 + num
-str = "Start:"
-str2 = "XA" * 5
-print str + "\n" + num + "\n" + num1 + "\n"
-print str2
+i = 0
+do{
+print i + " "
+i = i+1;
+}while(i<10)

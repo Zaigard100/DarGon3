@@ -1,14 +1,42 @@
 package com.zaig100.dg.utils.dgscript;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public final class Lexer {
 
-    private static final String OPERATOR_CHARS = "+-*/()=";
-    private static final TokenType[] OPREATORS_TOKNS = {
-            TokenType.PLUS, TokenType.MINUS, TokenType.STAR, TokenType.SLASH, TokenType.LPAR, TokenType.RPAR, TokenType.EQ
-    };
+    private static final String OPERATOR_CHARS = "+-*/(){}=<>!&|,";
+    private static final Map<String, TokenType> OPERATORS;
+
+    static {
+        OPERATORS = new HashMap<>();
+        OPERATORS.put("+", TokenType.PLUS);
+        OPERATORS.put("-", TokenType.MINUS);
+        OPERATORS.put("*", TokenType.STAR);
+        OPERATORS.put("/", TokenType.SLASH);
+        OPERATORS.put("(", TokenType.LPAR);
+        OPERATORS.put(")", TokenType.RPAR);
+        OPERATORS.put("{", TokenType.LBRACE);
+        OPERATORS.put("}", TokenType.RBRACE);
+        OPERATORS.put("=", TokenType.EQ);
+        OPERATORS.put("<", TokenType.LT);
+        OPERATORS.put(">", TokenType.GT);
+        OPERATORS.put(",", TokenType.COMMA);
+
+        OPERATORS.put("!", TokenType.EXCL);
+        OPERATORS.put("&", TokenType.BAR);
+        OPERATORS.put("|", TokenType.AMP);
+
+        OPERATORS.put("==", TokenType.EQEQ);
+        OPERATORS.put("!=", TokenType.EXCLEQ);
+        OPERATORS.put("<=", TokenType.LTEQ);
+        OPERATORS.put(">=", TokenType.GTEQ);
+
+        OPERATORS.put("&&", TokenType.AMPAMP);
+        OPERATORS.put("||", TokenType.BARBAR);
+    }
 
     private final String input;
     private final int lenght;
@@ -41,7 +69,47 @@ public final class Lexer {
     }
 
     private void tokinizeOpe() {
-        addtoken(OPREATORS_TOKNS[OPERATOR_CHARS.indexOf(peek(0))]);
+        char current = peek(0);
+        if (current == '/') {
+            if (peek(1) == '/') {
+                next();
+                next();
+                tokinizeComments();
+                return;
+            } else if (peek(1) == '*') {
+                next();
+                next();
+                tokinizeMultilineComments();
+                return;
+            }
+        }
+        final StringBuilder bufffer = new StringBuilder();
+        while (true) {
+            final String text = bufffer.toString();
+            if (!OPERATORS.containsKey(text + current) && !text.isEmpty()) {
+                addtoken(OPERATORS.get(text));
+                return;
+            }
+            bufffer.append(current);
+            current = next();
+        }
+    }
+
+    private void tokinizeComments() {
+        char current = peek(0);
+        while ("\r\n\0".indexOf(current) == -1) {
+            current = next();
+        }
+    }
+
+    private void tokinizeMultilineComments() {
+        char current = peek(0);
+        while (true) {
+            if (current == '\0') throw new RuntimeException("Missing close tag");
+            if (current == '*' && peek(1) == '/') break;
+            current = next();
+        }
+        next();
         next();
     }
 
@@ -85,11 +153,34 @@ public final class Lexer {
             buffer.append(current);
             current = next();
         }
-        final String toString = buffer.toString();
-        if (toString.equals("print")) {
-            addtoken(TokenType.PRINT);
-        } else {
-            addtoken(TokenType.WORD, toString);
+        final String word = buffer.toString();
+        switch (word) {
+            case "print":
+                addtoken(TokenType.PRINT);
+                break;
+            case "if":
+                addtoken(TokenType.IF);
+                break;
+            case "else":
+                addtoken(TokenType.ELSE);
+                break;
+            case "while":
+                addtoken(TokenType.WHILE);
+                break;
+            case "for":
+                addtoken(TokenType.FOR);
+                break;
+            case "do":
+                addtoken(TokenType.DO);
+                break;
+            case "break":
+                addtoken(TokenType.BRAKE);
+                break;
+            case "continue":
+                addtoken(TokenType.CONTINUE);
+                break;
+            default:
+                addtoken(TokenType.WORD, word);
         }
     }
 

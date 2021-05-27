@@ -13,36 +13,32 @@ public final class ScriptTest {
     @SuppressWarnings("NewApi")
     public static void main(String[] args) throws IOException {
         final String input = new String(Files.readAllBytes(Paths.get("testscript.dgs")));
-        long time = System.currentTimeMillis();
         final List<Token> tokens = (new Lexer(input)).tokenize();
+
+        token_show(tokens);
+
+        long time = System.currentTimeMillis();
+        final Statement program = new Parser(tokens).parse();
         System.out.println(System.currentTimeMillis() - time);
 
-        //token_show(tokens);
-
-        time = System.currentTimeMillis();
-        final List<Statement> statements = new Parser(tokens).parse();
-        System.out.println(System.currentTimeMillis() - time);
-
-        //statement_show(statements);
+        statement_show(program);
 
         System.out.println("Script run:");
-        System.out.println();
-        for (Statement statement : statements) {
-            statement.execute();
-        }
+        program.execute();
+
 
     }
 
     static void token_show(List<Token> tokens) {
         for (Token token : tokens) {
+            System.out.print(tokens.indexOf(token) + ": ");
             System.out.println(token.toString());
         }
     }
 
-    static void statement_show(List<Statement> statements) {
-        for (Statement statement : statements) {
-            System.out.println(statement);
-        }
+    static void statement_show(Statement statements) {
+        System.out.println(statements.toString());
+
     }
 
 }

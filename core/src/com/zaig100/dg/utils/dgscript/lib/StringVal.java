@@ -8,7 +8,7 @@ public class StringVal implements Value {
     }
 
     @Override
-    public double asDouble() {
+    public double asNum() {
         try {
             return Double.parseDouble(val);
         } catch (NumberFormatException e) {
