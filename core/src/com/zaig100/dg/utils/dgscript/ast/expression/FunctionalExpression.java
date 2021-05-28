@@ -1,7 +1,10 @@
 package com.zaig100.dg.utils.dgscript.ast.expression;
 
+import com.zaig100.dg.utils.dgscript.lib.Function;
 import com.zaig100.dg.utils.dgscript.lib.Functions;
+import com.zaig100.dg.utils.dgscript.lib.UserDefFunc;
 import com.zaig100.dg.utils.dgscript.lib.Value;
+import com.zaig100.dg.utils.dgscript.lib.Variables;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +35,19 @@ public class FunctionalExpression implements Expression {
         for (int i = 0; i < size; i++) {
             vals[i] = args.get(i).eval();
         }
-        return Functions.get(name).execute(vals);
+        final Function function = Functions.get(name);
+        if (function instanceof UserDefFunc) {
+            final UserDefFunc userFunc = (UserDefFunc) function;
+            if (size != userFunc.argCount()) throw new RuntimeException("Args count mismatch");
+            Variables.push();
+            for (int i = 0; i < size; i++) {
+                Variables.set(userFunc.getArgName(i), vals[i]);
+            }
+            final Value result = userFunc.execute(vals);
+            Variables.pop();
+            return result;
+        }
+        return function.execute(vals);
     }
 
     @Override

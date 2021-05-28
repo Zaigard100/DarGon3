@@ -1,6 +1,7 @@
 package com.zaig100.dg.utils.dgscript.lib;
 
 public class NumberVal implements Value {
+    public static final NumberVal ZERO = new NumberVal(0);
     private final double val;
 
     public NumberVal(boolean val) {

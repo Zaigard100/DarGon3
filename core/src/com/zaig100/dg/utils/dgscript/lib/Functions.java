@@ -25,6 +25,7 @@ public class Functions {
                 return new NumberVal(Math.cos(args[0].asNum()));
             }
         });
+        //print
         fuctions.put("print", new Function() {
             @Override
             public Value execute(Value... args) {
@@ -33,6 +34,7 @@ public class Functions {
                 return ZERO;
             }
         });
+        //println
         fuctions.put("println", new Function() {
             @Override
             public Value execute(Value... args) {
@@ -42,6 +44,23 @@ public class Functions {
                 return ZERO;
             }
         });
+        fuctions.put("rand", new Function() {
+            @Override
+            public Value execute(Value... args) {
+                if (args.length == 0) return new NumberVal(Math.random());
+                else if (args.length == 1) return new NumberVal(Math.random() * args[0].asNum());
+                else if (args.length == 2)
+                    return new NumberVal((Math.random() * (args[1].asNum() - args[0].asNum())) + args[0].asNum());
+                else throw new RuntimeException("Argument count exeption");
+            }
+        });
+        fuctions.put("round", new Function() {
+            @Override
+            public Value execute(Value... args) {
+                if (args.length == 1) return new NumberVal(Math.round(args[0].asNum()));
+                else throw new RuntimeException("Argument count exeption");
+            }
+        });
     }
 
     public static boolean isExist(String key) {
@@ -49,11 +68,12 @@ public class Functions {
     }
 
     public static Function get(String key) {
-        if (!isExist(key)) throw new RuntimeException("Unknowm function" + key);
+        if (!isExist(key)) throw new RuntimeException("Unknowm function: " + key);
         return fuctions.get(key);
     }
 
     public static void set(String key, Function func) {
+        if (isExist(key)) throw new RuntimeException("Function duplikat: " + key);
         fuctions.put(key, func);
     }
 

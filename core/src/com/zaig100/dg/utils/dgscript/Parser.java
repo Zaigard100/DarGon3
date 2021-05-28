@@ -14,11 +14,14 @@ import com.zaig100.dg.utils.dgscript.ast.statements.BreakStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.ContinueStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.DoWhileStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.ForStatement;
+import com.zaig100.dg.utils.dgscript.ast.statements.FunctionDefineStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.FunctionStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.IfStatement;
+import com.zaig100.dg.utils.dgscript.ast.statements.ReturnStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.Statement;
 import com.zaig100.dg.utils.dgscript.ast.statements.WhileStatement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class Parser {
@@ -70,8 +73,14 @@ public final class Parser {
         if (match(TokenType.CONTINUE)) {
             return new ContinueStatement();
         }
+        if (match(TokenType.RETURN)) {
+            return retSt();
+        }
         if (match(TokenType.FOR)) {
             return forSt();
+        }
+        if (match(TokenType.DEF)) {
+            return funcDef();
         }
         if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LPAR) {
             return new FunctionStatement(function());
@@ -88,6 +97,22 @@ public final class Parser {
         throw new RuntimeException("Unknown statment in token " + pos + ": " + current.toString());
     }
 
+    private Statement retSt() {
+
+        return new ReturnStatement(expression());
+    }
+
+    private Statement funcDef() {
+        final String name = consume(TokenType.WORD).getText();
+        should_match(TokenType.LPAR);
+        final List<String> argName = new ArrayList<>();
+        while (!match(TokenType.RPAR)) {
+            argName.add(consume(TokenType.WORD).getText());
+            match(TokenType.COMMA);
+        }
+        final Statement body = statementOrBlock();
+        return new FunctionDefineStatement(name, argName, body);
+    }
 
     private Statement ifElse() {
         final Expression condition = expression();
@@ -126,7 +151,6 @@ public final class Parser {
 
     private Expression function() {
         final String name = consume(TokenType.WORD).getText();
-        System.out.println("name=" + name);
         final FunctionalExpression function = new FunctionalExpression(name);
         should_match(TokenType.LPAR);
         while (!match(TokenType.RPAR)) {
@@ -232,6 +256,7 @@ public final class Parser {
                 resault = new BinExpression('/', resault, unary());
                 continue;
             }
+
             break;
         }
 
@@ -287,7 +312,7 @@ public final class Parser {
 
     private boolean should_match(TokenType type) {
         if (type != get(0).getType())
-            throw new RuntimeException("Token " + pos + get(0).getType() + "dosen't match" + type);
+            throw new RuntimeException("Token " + pos + "" + get(0).getType() + " dosen't match" + type);
         pos++;
         return true;
     }

@@ -25,6 +25,9 @@ public enum TokenType {
     DO,
     BRAKE,
     CONTINUE,
+    DEF,
+    RETURN,
+
 
     EQ, // =
     EQEQ, // ==

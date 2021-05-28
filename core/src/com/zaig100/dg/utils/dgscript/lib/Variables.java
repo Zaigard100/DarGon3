@@ -2,12 +2,23 @@ package com.zaig100.dg.utils.dgscript.lib;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 public class Variables {
     private static final NumberVal ZERO = new NumberVal(0);
-    private static final Map<String, Value> variables;
+    private static Map<String, Value> variables;
+    private static final Stack<Map<String, Value>> stack;
+
+    public static void push() {
+        stack.push(new HashMap<String, Value>(variables));
+    }
+
+    public static void pop() {
+        variables = stack.pop();
+    }
 
     static {
+        stack = new Stack<>();
         variables = new HashMap<>();
         variables.put("PI", new NumberVal(3.14));
         variables.put("F_PI", new NumberVal(Math.PI));

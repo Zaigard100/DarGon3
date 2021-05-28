@@ -17,15 +17,3 @@ println()
 println(i)
 println("if")
 
-if(i == 0){
-    println(i)
-}
-println("if/else")
-
-if(i == 1){
-    println(i)
-}else{
-    println(2+i)
-}
-println(sin(F_PI))
-println(cos(F_PI))
