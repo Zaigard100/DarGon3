@@ -26,8 +26,6 @@ public class WhileStatement implements Statement {
 
     @Override
     public String toString() {
-        final StringBuilder result = new StringBuilder();
-        result.append("while ").append(exp).append(statement);
-        return result.toString();
+        return "while (" + exp + " ) {\n" + statement + "}";
     }
 }

@@ -31,6 +31,6 @@ public class ForStatement implements Statement {
 
     @Override
     public String toString() {
-        return "for (" + init + "," + exp + "," + increment + ")" + statement;
+        return "for (" + init + "," + exp + "," + increment + ") {\n" + statement + "}\n";
     }
 }

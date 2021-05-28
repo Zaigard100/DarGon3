@@ -26,6 +26,6 @@ public class DoWhileStatement implements Statement {
 
     @Override
     public String toString() {
-        return "do" + statement + " while" + exp;
+        return "do {\n" + statement + "}" + " while" + exp;
     }
 }

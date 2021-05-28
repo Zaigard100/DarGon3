@@ -1,5 +1,31 @@
 i = 0
+
+println("do/while")
+
 do{
-print i + " "
-i = i+1;
+    print(i + " ")
+    i = i+1;
 }while(i<10)
+println()
+println("while")
+
+while(i>0){
+    print(i + " ")
+    i = i-1;
+}
+println()
+println(i)
+println("if")
+
+if(i == 0){
+    println(i)
+}
+println("if/else")
+
+if(i == 1){
+    println(i)
+}else{
+    println(2+i)
+}
+println(sin(F_PI))
+println(cos(F_PI))

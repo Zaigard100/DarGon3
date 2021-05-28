@@ -27,9 +27,9 @@ public class IfStatement implements Statement {
     @Override
     public String toString() {
         final StringBuilder result = new StringBuilder();
-        result.append("if ").append(exp).append(ifSt);
+        result.append("if ").append(exp).append(" {\n").append(ifSt).append("}");
         if (elseSt != null) {
-            result.append("\nelse ").append(elseSt);
+            result.append("\nelse {\n").append(elseSt).append("}\n");
         }
         return result.toString();
     }

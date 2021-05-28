@@ -3,6 +3,7 @@ package com.zaig100.dg.utils.dgscript;
 import com.zaig100.dg.utils.dgscript.ast.expression.BinExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.ConditionalExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.Expression;
+import com.zaig100.dg.utils.dgscript.ast.expression.FunctionalExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.NumExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.StringExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.UnaryExpression;
@@ -13,8 +14,8 @@ import com.zaig100.dg.utils.dgscript.ast.statements.BreakStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.ContinueStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.DoWhileStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.ForStatement;
+import com.zaig100.dg.utils.dgscript.ast.statements.FunctionStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.IfStatement;
-import com.zaig100.dg.utils.dgscript.ast.statements.PrintStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.Statement;
 import com.zaig100.dg.utils.dgscript.ast.statements.WhileStatement;
 
@@ -54,9 +55,6 @@ public final class Parser {
     }
 
     private Statement statement() {
-        if (match(TokenType.PRINT)) {
-            return new PrintStatement(expression());
-        }
         if (match(TokenType.IF)) {
             return ifElse();
         }
@@ -75,17 +73,21 @@ public final class Parser {
         if (match(TokenType.FOR)) {
             return forSt();
         }
+        if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LPAR) {
+            return new FunctionStatement(function());
+        }
         return assignmentStatement();
     }
 
     private Statement assignmentStatement() {
         final Token current = get(0);
-        if (match(TokenType.WORD) && consume(TokenType.EQ)) {
+        if (match(TokenType.WORD) && should_match(TokenType.EQ)) {
             final String var = current.getText();
             return new AssignStatement(var, expression());
         }
         throw new RuntimeException("Unknown statment in token " + pos + ": " + current.toString());
     }
+
 
     private Statement ifElse() {
         final Expression condition = expression();
@@ -107,19 +109,31 @@ public final class Parser {
 
     private Statement doWhileSt() {
         final Statement statement = statementOrBlock();
-        consume(TokenType.WHILE);
+        should_match(TokenType.WHILE);
         final Expression condition = expression();
         return new DoWhileStatement(condition, statement);
     }
 
     private Statement forSt() {
         final Statement init = assignmentStatement();
-        consume(TokenType.COMMA);
+        should_match(TokenType.COMMA);
         final Expression condition = expression();
-        consume(TokenType.COMMA);
+        should_match(TokenType.COMMA);
         final Statement increment = assignmentStatement();
         final Statement statement = statementOrBlock();
         return new ForStatement(init, condition, increment, statement);
+    }
+
+    private Expression function() {
+        final String name = consume(TokenType.WORD).getText();
+        System.out.println("name=" + name);
+        final FunctionalExpression function = new FunctionalExpression(name);
+        should_match(TokenType.LPAR);
+        while (!match(TokenType.RPAR)) {
+            function.addArg(expression());
+            match(TokenType.COMMA);
+        }
+        return function;
     }
 
     private Expression expression() {
@@ -245,6 +259,9 @@ public final class Parser {
         if (match(TokenType.NUMBER)) {
             return new NumExpression(Double.parseDouble(current.getText()));
         }
+        if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LPAR) {
+            return function();
+        }
         if (match(TokenType.WORD)) {
             return new ValueExpression(current.getText());
         }
@@ -260,7 +277,15 @@ public final class Parser {
 
     }
 
-    private boolean consume(TokenType type) {
+    private Token consume(TokenType type) {
+        final Token current = get(0);
+        if (type != current.getType())
+            throw new RuntimeException("Token " + pos + current.getType() + "dosen't match" + type);
+        pos++;
+        return current;
+    }
+
+    private boolean should_match(TokenType type) {
         if (type != get(0).getType())
             throw new RuntimeException("Token " + pos + get(0).getType() + "dosen't match" + type);
         pos++;
