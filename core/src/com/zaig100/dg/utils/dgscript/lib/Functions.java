@@ -25,6 +25,29 @@ public class Functions {
                 return new NumberVal(Math.cos(args[0].asNum()));
             }
         });
+        ///array
+        fuctions.put("array", new Function() {
+            @Override
+            public Value execute(Value... args) {
+                return createArr(args, 0);
+            }
+
+            private ArrayValue createArr(Value[] args, int index) {
+                final int size = (int) args[index].asNum();
+                final int last = args.length - 1;
+                ArrayValue array = new ArrayValue(size);
+                if (index == last) {
+                    for (int i = 0; i < size; i++) {
+                        array.set(i, NumberVal.ZERO);
+                    }
+                } else if (index < last) {
+                    for (int i = 0; i < size; i++) {
+                        array.set(i, createArr(args, index + 1));
+                    }
+                }
+                return array;
+            }
+        });
         //print
         fuctions.put("print", new Function() {
             @Override
@@ -73,7 +96,7 @@ public class Functions {
     }
 
     public static void set(String key, Function func) {
-        if (isExist(key)) throw new RuntimeException("Function duplikat: " + key);
+        //if (isExist(key)) throw new RuntimeException("Function duplikat: " + key);
         fuctions.put(key, func);
     }
 

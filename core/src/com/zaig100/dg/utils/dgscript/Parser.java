@@ -1,13 +1,17 @@
 package com.zaig100.dg.utils.dgscript;
 
+import com.zaig100.dg.utils.dgscript.ast.Expression;
+import com.zaig100.dg.utils.dgscript.ast.Statement;
+import com.zaig100.dg.utils.dgscript.ast.expression.ArrayAssignExpression;
+import com.zaig100.dg.utils.dgscript.ast.expression.ArrayExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.BinExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.ConditionalExpression;
-import com.zaig100.dg.utils.dgscript.ast.expression.Expression;
 import com.zaig100.dg.utils.dgscript.ast.expression.FunctionalExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.NumExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.StringExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.UnaryExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.ValueExpression;
+import com.zaig100.dg.utils.dgscript.ast.statements.ArrayAssignStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.AssignStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.BlockStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.BreakStatement;
@@ -18,7 +22,6 @@ import com.zaig100.dg.utils.dgscript.ast.statements.FunctionDefineStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.FunctionStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.IfStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.ReturnStatement;
-import com.zaig100.dg.utils.dgscript.ast.statements.Statement;
 import com.zaig100.dg.utils.dgscript.ast.statements.WhileStatement;
 
 import java.util.ArrayList;
@@ -89,12 +92,17 @@ public final class Parser {
     }
 
     private Statement assignmentStatement() {
-        final Token current = get(0);
-        if (match(TokenType.WORD) && should_match(TokenType.EQ)) {
-            final String var = current.getText();
+        if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.EQ)) {
+            final String var = consume(TokenType.WORD).getText();
+            consume(TokenType.EQ);
             return new AssignStatement(var, expression());
         }
-        throw new RuntimeException("Unknown statment in token " + pos + ": " + current.toString());
+        if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.LBRAKET)) {
+            ArrayAssignExpression array = element();
+            consume(TokenType.EQ);
+            return new ArrayAssignStatement(array, expression());
+        }
+        throw new RuntimeException("Unknown statment in token " + pos + ": " + get(0).toString());
     }
 
     private Statement retSt() {
@@ -284,8 +292,14 @@ public final class Parser {
         if (match(TokenType.NUMBER)) {
             return new NumExpression(Double.parseDouble(current.getText()));
         }
-        if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LPAR) {
+        if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.LPAR)) {
             return function();
+        }
+        if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.LBRAKET)) {
+            return element();
+        }
+        if (match(TokenType.LBRAKET)) {
+            return array();
         }
         if (match(TokenType.WORD)) {
             return new ValueExpression(current.getText());
@@ -300,6 +314,27 @@ public final class Parser {
         }
         throw new RuntimeException("Unknown expression in token " + pos + ": " + current.toString());
 
+    }
+
+    private ArrayAssignExpression element() {
+        final String var = consume(TokenType.WORD).getText();
+        List<Expression> indices = new ArrayList<>();
+        do {
+            consume(TokenType.LBRAKET);
+            indices.add(expression());
+            consume(TokenType.RBRAKET);
+        } while (lookMatch(0, TokenType.LBRAKET));
+        return new ArrayAssignExpression(var, indices);
+    }
+
+    private Expression array() {
+        final List<Expression> elements = new ArrayList<>();
+        while (!lookMatch(0, TokenType.RBRAKET)) {
+            elements.add(expression());
+            match(TokenType.COMMA);
+        }
+        consume(TokenType.RBRAKET);
+        return new ArrayExpression(elements);
     }
 
     private Token consume(TokenType type) {
@@ -327,6 +362,11 @@ public final class Parser {
         final int position = pos + revPos;
         if (position >= size) return EOF;
         return tokens.get(position);
+    }
+
+    private boolean lookMatch(int i, TokenType type) {
+        if (type != get(i).getType()) return false;
+        return true;
     }
 
 }

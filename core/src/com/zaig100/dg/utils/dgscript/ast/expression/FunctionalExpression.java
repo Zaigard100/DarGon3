@@ -1,5 +1,7 @@
 package com.zaig100.dg.utils.dgscript.ast.expression;
 
+import com.zaig100.dg.utils.dgscript.ast.Expression;
+import com.zaig100.dg.utils.dgscript.ast.Visitor;
 import com.zaig100.dg.utils.dgscript.lib.Function;
 import com.zaig100.dg.utils.dgscript.lib.Functions;
 import com.zaig100.dg.utils.dgscript.lib.UserDefFunc;
@@ -11,8 +13,8 @@ import java.util.List;
 
 public class FunctionalExpression implements Expression {
 
-    private final String name;
-    private final List<Expression> args;
+    public final String name;
+    public final List<Expression> args;
 
     public FunctionalExpression(String name) {
         this.name = name;
@@ -51,12 +53,17 @@ public class FunctionalExpression implements Expression {
     }
 
     @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
+    @Override
     public String toString() {
         final StringBuilder buffer = new StringBuilder();
         buffer.append(name).append("(");
         for (int i = 0; i < args.size(); i++) {
             buffer.append(args.get(i).toString());
-            if (!(i < args.size() + 1)) buffer.append(",");
+            if (i < args.size() - 1) buffer.append(", ");
         }
         buffer.append(")");
         return buffer.toString();

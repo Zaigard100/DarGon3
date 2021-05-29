@@ -1,11 +1,13 @@
 package com.zaig100.dg.utils.dgscript.ast.expression;
 
+import com.zaig100.dg.utils.dgscript.ast.Expression;
+import com.zaig100.dg.utils.dgscript.ast.Visitor;
 import com.zaig100.dg.utils.dgscript.lib.NumberVal;
 import com.zaig100.dg.utils.dgscript.lib.Value;
 
 public final class NumExpression implements Expression {
 
-    private final Value value;
+    public final Value value;
 
     public NumExpression(double value) {
         this.value = new NumberVal(value);
@@ -14,6 +16,11 @@ public final class NumExpression implements Expression {
     @Override
     public Value eval() {
         return value;
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     @Override

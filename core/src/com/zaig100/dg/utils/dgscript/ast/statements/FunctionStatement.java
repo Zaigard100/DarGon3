@@ -1,10 +1,12 @@
 package com.zaig100.dg.utils.dgscript.ast.statements;
 
-import com.zaig100.dg.utils.dgscript.ast.expression.Expression;
+import com.zaig100.dg.utils.dgscript.ast.Expression;
+import com.zaig100.dg.utils.dgscript.ast.Statement;
+import com.zaig100.dg.utils.dgscript.ast.Visitor;
 
 public class FunctionStatement implements Statement {
 
-    private final Expression func;
+    public final Expression func;
 
     public FunctionStatement(Expression func) {
         this.func = func;
@@ -13,6 +15,11 @@ public class FunctionStatement implements Statement {
     @Override
     public void execute() {
         func.eval();
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     @Override

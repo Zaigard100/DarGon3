@@ -1,11 +1,13 @@
 package com.zaig100.dg.utils.dgscript.ast.statements;
 
-import com.zaig100.dg.utils.dgscript.ast.expression.Expression;
+import com.zaig100.dg.utils.dgscript.ast.Expression;
+import com.zaig100.dg.utils.dgscript.ast.Statement;
+import com.zaig100.dg.utils.dgscript.ast.Visitor;
 
 public class IfStatement implements Statement {
 
-    private final Expression exp;
-    private final Statement ifSt, elseSt;
+    public final Expression exp;
+    public final Statement ifSt, elseSt;
 
     public IfStatement(Expression exp, Statement ifSt, Statement elseSt) {
         this.exp = exp;
@@ -22,6 +24,11 @@ public class IfStatement implements Statement {
             elseSt.execute();
         }
 
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     @Override

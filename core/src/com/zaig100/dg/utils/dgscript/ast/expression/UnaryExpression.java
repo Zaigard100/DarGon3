@@ -1,12 +1,14 @@
 package com.zaig100.dg.utils.dgscript.ast.expression;
 
+import com.zaig100.dg.utils.dgscript.ast.Expression;
+import com.zaig100.dg.utils.dgscript.ast.Visitor;
 import com.zaig100.dg.utils.dgscript.lib.NumberVal;
 import com.zaig100.dg.utils.dgscript.lib.Value;
 
 public class UnaryExpression implements Expression {
 
-    private final Expression ex;
-    private final char opr;
+    public final Expression ex;
+    public final char opr;
 
     public UnaryExpression(char opr, Expression ex) {
         this.ex = ex;
@@ -26,6 +28,11 @@ public class UnaryExpression implements Expression {
             case '+':
                 return ex.eval();
         }
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     @Override

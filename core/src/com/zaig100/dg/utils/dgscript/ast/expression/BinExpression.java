@@ -1,12 +1,15 @@
 package com.zaig100.dg.utils.dgscript.ast.expression;
 
+import com.zaig100.dg.utils.dgscript.ast.Expression;
+import com.zaig100.dg.utils.dgscript.ast.Visitor;
+import com.zaig100.dg.utils.dgscript.lib.ArrayValue;
 import com.zaig100.dg.utils.dgscript.lib.NumberVal;
 import com.zaig100.dg.utils.dgscript.lib.StringVal;
 import com.zaig100.dg.utils.dgscript.lib.Value;
 
 public final class BinExpression implements Expression {
-    private final Expression ex1, ex2;
-    private final char opr;
+    public final Expression ex1, ex2;
+    public final char opr;
 
     public BinExpression(char opr, Expression ex1, Expression ex2) {
         this.ex1 = ex1;
@@ -18,7 +21,7 @@ public final class BinExpression implements Expression {
     public Value eval() {
         final Value val1 = ex1.eval();
         final Value val2 = ex2.eval();
-        if (val1 instanceof StringVal || val2 instanceof StringVal) {
+        if (val1 instanceof StringVal || val2 instanceof StringVal || val1 instanceof ArrayValue || val2 instanceof ArrayValue) {
             final String str1 = val1.asString();
             final String str2 = val2.asString();
             switch (opr) {
@@ -50,6 +53,11 @@ public final class BinExpression implements Expression {
             }
         }
         throw new RuntimeException("Invalid type : " + ex1.toString() + " or " + ex2.toString());
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.util.Map;
 
 public final class Lexer {
 
-    private static final String OPERATOR_CHARS = "+-*/(){}=<>!&|,";
+    private static final String OPERATOR_CHARS = "+-*/()[]{}=<>!&|,";
     private static final Map<String, TokenType> OPERATORS;
 
     static {
@@ -18,6 +18,8 @@ public final class Lexer {
         OPERATORS.put("/", TokenType.SLASH);
         OPERATORS.put("(", TokenType.LPAR);
         OPERATORS.put(")", TokenType.RPAR);
+        OPERATORS.put("[", TokenType.LBRAKET);
+        OPERATORS.put("]", TokenType.RBRAKET);
         OPERATORS.put("{", TokenType.LBRACE);
         OPERATORS.put("}", TokenType.RBRACE);
         OPERATORS.put("=", TokenType.EQ);

@@ -3,25 +3,21 @@ package com.zaig100.dg.utils.dgscript.ast.statements;
 import com.zaig100.dg.utils.dgscript.ast.Expression;
 import com.zaig100.dg.utils.dgscript.ast.Statement;
 import com.zaig100.dg.utils.dgscript.ast.Visitor;
-import com.zaig100.dg.utils.dgscript.lib.Value;
+import com.zaig100.dg.utils.dgscript.ast.expression.ArrayAssignExpression;
 
-public class ReturnStatement extends RuntimeException implements Statement {
+public class ArrayAssignStatement implements Statement {
 
+    public final ArrayAssignExpression array;
     public final Expression exp;
-    public Value val;
 
-    public ReturnStatement(Expression exp) {
+    public ArrayAssignStatement(ArrayAssignExpression array, Expression exp) {
+        this.array = array;
         this.exp = exp;
-    }
-
-    public Value getVal() {
-        return val;
     }
 
     @Override
     public void execute() {
-        if (exp != null) val = exp.eval();
-        throw this;
+        array.getArr().set(array.lastIndex(), exp.eval());
     }
 
     @Override
@@ -31,7 +27,6 @@ public class ReturnStatement extends RuntimeException implements Statement {
 
     @Override
     public String toString() {
-        if (exp != null) return "return" + exp.toString();
-        return "return";
+        return array.toString() + " = " + exp.toString();
     }
 }

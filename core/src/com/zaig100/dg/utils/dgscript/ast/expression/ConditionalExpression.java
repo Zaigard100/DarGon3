@@ -1,5 +1,7 @@
 package com.zaig100.dg.utils.dgscript.ast.expression;
 
+import com.zaig100.dg.utils.dgscript.ast.Expression;
+import com.zaig100.dg.utils.dgscript.ast.Visitor;
 import com.zaig100.dg.utils.dgscript.lib.NumberVal;
 import com.zaig100.dg.utils.dgscript.lib.StringVal;
 import com.zaig100.dg.utils.dgscript.lib.Value;
@@ -34,8 +36,8 @@ public final class ConditionalExpression implements Expression {
         }
     }
 
-    private final Expression ex1, ex2;
-    private final Operator opr;
+    public final Expression ex1, ex2;
+    public final Operator opr;
 
     public ConditionalExpression(Operator opr, Expression ex1, Expression ex2) {
         this.ex1 = ex1;
@@ -88,6 +90,11 @@ public final class ConditionalExpression implements Expression {
                 break;
         }
         return new NumberVal(resault);
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     @Override

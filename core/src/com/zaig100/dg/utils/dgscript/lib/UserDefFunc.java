@@ -1,7 +1,7 @@
 package com.zaig100.dg.utils.dgscript.lib;
 
+import com.zaig100.dg.utils.dgscript.ast.Statement;
 import com.zaig100.dg.utils.dgscript.ast.statements.ReturnStatement;
-import com.zaig100.dg.utils.dgscript.ast.statements.Statement;
 
 import java.util.List;
 

@@ -1,13 +1,15 @@
 package com.zaig100.dg.utils.dgscript.ast.statements;
 
-import com.zaig100.dg.utils.dgscript.ast.expression.Expression;
+import com.zaig100.dg.utils.dgscript.ast.Expression;
+import com.zaig100.dg.utils.dgscript.ast.Statement;
+import com.zaig100.dg.utils.dgscript.ast.Visitor;
 import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.utils.dgscript.lib.Variables;
 
 public class AssignStatement implements Statement {
 
-    private final String variable;
-    private final Expression exp;
+    public final String variable;
+    public final Expression exp;
 
     public AssignStatement(String variable, Expression exp) {
         this.variable = variable;
@@ -18,6 +20,11 @@ public class AssignStatement implements Statement {
     public void execute() {
         final Value result = exp.eval();
         Variables.set(variable, result);
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     @Override

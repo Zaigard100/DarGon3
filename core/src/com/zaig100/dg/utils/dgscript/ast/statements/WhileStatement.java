@@ -1,10 +1,12 @@
 package com.zaig100.dg.utils.dgscript.ast.statements;
 
-import com.zaig100.dg.utils.dgscript.ast.expression.Expression;
+import com.zaig100.dg.utils.dgscript.ast.Expression;
+import com.zaig100.dg.utils.dgscript.ast.Statement;
+import com.zaig100.dg.utils.dgscript.ast.Visitor;
 
 public class WhileStatement implements Statement {
-    private final Expression exp;
-    private final Statement statement;
+    public final Expression exp;
+    public final Statement statement;
 
     public WhileStatement(Expression exp, Statement statement) {
         this.exp = exp;
@@ -22,6 +24,11 @@ public class WhileStatement implements Statement {
                 //continue;
             }
         }
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     @Override

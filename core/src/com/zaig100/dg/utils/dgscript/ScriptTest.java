@@ -1,6 +1,8 @@
 package com.zaig100.dg.utils.dgscript;
 
-import com.zaig100.dg.utils.dgscript.ast.statements.Statement;
+import com.zaig100.dg.utils.dgscript.ast.Statement;
+import com.zaig100.dg.utils.dgscript.visitors.AsignValid;
+import com.zaig100.dg.utils.dgscript.visitors.FuntionAdder;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -22,7 +24,9 @@ public final class ScriptTest {
         System.out.println(System.currentTimeMillis() - time);
 
         statement_show(program);
-
+        program.accept(new FuntionAdder());
+        //program.accept(new ValPrinter());
+        program.accept(new AsignValid());
         System.out.println("Script run:");
         program.execute();
 

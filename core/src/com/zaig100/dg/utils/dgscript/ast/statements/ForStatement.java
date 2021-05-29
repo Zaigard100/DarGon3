@@ -1,13 +1,15 @@
 package com.zaig100.dg.utils.dgscript.ast.statements;
 
-import com.zaig100.dg.utils.dgscript.ast.expression.Expression;
+import com.zaig100.dg.utils.dgscript.ast.Expression;
+import com.zaig100.dg.utils.dgscript.ast.Statement;
+import com.zaig100.dg.utils.dgscript.ast.Visitor;
 
 public class ForStatement implements Statement {
 
-    private final Statement init;
-    private final Expression exp;
-    private final Statement increment;
-    private final Statement statement;
+    public final Statement init;
+    public final Expression exp;
+    public final Statement increment;
+    public final Statement statement;
 
     public ForStatement(Statement init, Expression exp, Statement increment, Statement statement) {
         this.init = init;
@@ -27,6 +29,11 @@ public class ForStatement implements Statement {
                 //continue;
             }
         }
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     @Override

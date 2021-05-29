@@ -1,11 +1,14 @@
 package com.zaig100.dg.utils.dgscript.ast.statements;
 
+import com.zaig100.dg.utils.dgscript.ast.Statement;
+import com.zaig100.dg.utils.dgscript.ast.Visitor;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class BlockStatement implements Statement {
 
-    List<Statement> statemens;
+    public List<Statement> statemens;
 
     public BlockStatement() {
         this.statemens = new ArrayList<>();
@@ -20,6 +23,11 @@ public class BlockStatement implements Statement {
         for (Statement statement : statemens) {
             statement.execute();
         }
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
     }
 
     @SuppressWarnings("NewApi")

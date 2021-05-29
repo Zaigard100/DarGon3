@@ -19,6 +19,8 @@ public enum TokenType {
 
     LPAR, // (
     RPAR, // )
+    LBRAKET, // [
+    RBRAKET, // ]
     LBRACE, // {
     RBRACE, // }
     COMMA, // ,

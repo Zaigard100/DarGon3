@@ -1,19 +1,12 @@
-i = 0
+func()
 
-println("do/while")
+a = 45
+b = *45 - /a
+c = round(a+b)
+print(c)
 
-do{
-    print(i + " ")
-    i = i+1;
-}while(i<10)
-println()
-println("while")
-
-while(i>0){
-    print(i + " ")
-    i = i-1;
+def func(){
+print("This func")
 }
-println()
-println(i)
-println("if")
+
 
