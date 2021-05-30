@@ -20,9 +20,11 @@ import com.zaig100.dg.utils.dgscript.ast.statements.FunctionDefineStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.FunctionStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.IfStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.ReturnStatement;
+import com.zaig100.dg.utils.dgscript.ast.statements.UseStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.WhileStatement;
 
 public interface Visitor {
+
     void visit(ArrayAssignExpression s);
 
     void visit(ArrayExpression s);
@@ -64,4 +66,6 @@ public interface Visitor {
     void visit(ReturnStatement s);
 
     void visit(WhileStatement s);
+
+    void visit(UseStatement s);
 }

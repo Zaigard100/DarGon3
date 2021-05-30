@@ -22,6 +22,7 @@ import com.zaig100.dg.utils.dgscript.ast.statements.FunctionDefineStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.FunctionStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.IfStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.ReturnStatement;
+import com.zaig100.dg.utils.dgscript.ast.statements.UseStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.WhileStatement;
 
 import java.util.ArrayList;
@@ -85,6 +86,9 @@ public final class Parser {
         if (match(TokenType.DEF)) {
             return funcDef();
         }
+        if (match(TokenType.USE)) {
+            return useSt();
+        }
         if (get(0).getType() == TokenType.WORD && get(1).getType() == TokenType.LPAR) {
             return new FunctionStatement(function());
         }
@@ -138,6 +142,10 @@ public final class Parser {
         final Expression condition = expression();
         final Statement statement = statementOrBlock();
         return new WhileStatement(condition, statement);
+    }
+
+    private Statement useSt() {
+        return new UseStatement(consume(TokenType.TEXT).getText());
     }
 
     private Statement doWhileSt() {

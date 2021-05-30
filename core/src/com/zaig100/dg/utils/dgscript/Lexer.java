@@ -184,6 +184,9 @@ public final class Lexer {
             case "return":
                 addtoken(TokenType.RETURN);
                 break;
+            case "use":
+                addtoken(TokenType.USE);
+                break;
             default:
                 addtoken(TokenType.WORD, word);
         }

@@ -23,6 +23,7 @@ import com.zaig100.dg.utils.dgscript.ast.statements.FunctionDefineStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.FunctionStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.IfStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.ReturnStatement;
+import com.zaig100.dg.utils.dgscript.ast.statements.UseStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.WhileStatement;
 
 public abstract class AbstractVisitor implements Visitor {
@@ -149,4 +150,10 @@ public abstract class AbstractVisitor implements Visitor {
         s.statement.accept(this);
 
     }
+
+    @Override
+    public void visit(UseStatement s) {
+
+    }
+
 }

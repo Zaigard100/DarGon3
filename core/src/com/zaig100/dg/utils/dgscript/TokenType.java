@@ -12,6 +12,8 @@ public enum TokenType {
     WHILE,
     FOR,
 
+    USE,
+
     PLUS,
     MINUS,
     STAR,

@@ -2,8 +2,6 @@ package com.zaig100.dg.utils.dgscript.ast.statements;
 
 import com.zaig100.dg.utils.dgscript.ast.Statement;
 import com.zaig100.dg.utils.dgscript.ast.Visitor;
-import com.zaig100.dg.utils.dgscript.lib.Functions;
-import com.zaig100.dg.utils.dgscript.lib.UserDefFunc;
 
 import java.util.List;
 
@@ -21,7 +19,7 @@ public class FunctionDefineStatement implements Statement {
 
     @Override
     public void execute() {
-        Functions.set(name, new UserDefFunc(argNames, body));
+        //Functions.set(name, new UserDefFunc(argNames, body));
     }
 
     @Override

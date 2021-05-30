@@ -1,12 +1,20 @@
-func()
+use "std"
+use "system"
 
-a = 45
-b = *45 - /a
-c = round(a+b)
-print(c)
+thread("th1")
 
-def func(){
-print("This func")
+def th1(){
+    time = time();
+    a = round(rand(10000)+rand(10000))
+    println(a)
+    sleep(a)
+    a = round(rand(10000)+rand(10000))
+    println(a)
+    sleep(a)
+    a = round(rand(10000)+rand(10000))
+    sleep(a)
+    println(a)
+    println(time() - time)
 }
 
 

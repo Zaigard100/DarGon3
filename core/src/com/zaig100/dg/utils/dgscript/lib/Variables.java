@@ -20,11 +20,7 @@ public class Variables {
     static {
         stack = new Stack<>();
         variables = new HashMap<>();
-        variables.put("PI", new NumberVal(3.14));
-        variables.put("F_PI", new NumberVal(Math.PI));
-        variables.put("E", new NumberVal(2.72));
-        variables.put("F_E", new NumberVal(Math.E));
-        variables.put("G_R", new NumberVal(1.618));
+
     }
 
     public static boolean isExist(String key) {
