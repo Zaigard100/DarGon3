@@ -1,6 +1,5 @@
 package com.zaig100.dg.objects;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
@@ -13,13 +12,11 @@ public class Arrow extends Obj {
     int dy;
     int angle;
     float timer = 0;
+    public boolean isDel;
 
     //static Player player;
     public Arrow(int crossbow_x, int crossbow_y, int dx, int dy, int angle, String tag) {
         super(crossbow_x + dx, crossbow_y + dy, tag);
-
-        x = crossbow_x + dx;
-        y = crossbow_y + dy;
         this.crossbow_x = crossbow_x;
         this.crossbow_y = crossbow_y;
         this.dx = dx;
@@ -33,8 +30,8 @@ public class Arrow extends Obj {
 
         batch.draw(
                 Res.arrow,
-                ((x + 3) * 16 * Configuration.getScale()) - Player.get_wX(),
-                ((y + 2) * 16 * Configuration.getScale()) - Player.get_wY(),
+                wX - Player.get_wX(),
+                wY - Player.get_wY(),
                 8 * Configuration.getScale(),
                 8 * Configuration.getScale(),
                 16 * Configuration.getScale(),
@@ -58,9 +55,17 @@ public class Arrow extends Obj {
                 }
                 Player.setDamgeScr(0f, 3);
             }
-            x = crossbow_x;
-            y = crossbow_y;
 
+        }
+        isDel = last() || ((x == Player.getX()) && (y == Player.getY()));
+        if (!isMove()) {
+            x += dx;
+            y += dy;
+            timer = 0;
+        }
+
+        if (isMove()) {
+            move();
         }
     }
 
@@ -113,31 +118,16 @@ public class Arrow extends Obj {
                     angle = Integer.parseInt((func.split(">")[1]));
                 }
                 break;
+            case "cordN":
+                cordinateNormalize();
+                break;
         }
 
     }
 
-    public void tick(float second) {
-        timer += Gdx.graphics.getDeltaTime();
-        if (timer >= second) {
-
-            x += dx;
-            y += dy;
-
-            if (((x < 0) || (x >= Player.getMap().getMapWidht())) || ((y < 0) || (y >= Player.getMap().getMapHeight()))) {
-
-                x = crossbow_x + dx;
-                y = crossbow_y + dy;
-
-            }
-
-            timer = 0;
-
-        }
-    }
 
     public boolean last() {
-        return ((x < 0) || (x + dx >= Player.getMap().getMapWidht())) || ((y < 0) || (y + dy >= Player.getMap().getMapHeight()));
+        return ((x < 0) || (x + dx - 1 >= Player.getMap().getMapWidht())) || ((y < 0) || (y + dy - 1 >= Player.getMap().getMapHeight()));
     }
 
 }

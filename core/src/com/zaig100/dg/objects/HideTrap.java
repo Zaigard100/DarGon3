@@ -35,6 +35,7 @@ public class HideTrap extends Obj {
                 active = false;
             }
         }
+
     }
 
     @Override
@@ -64,6 +65,9 @@ public class HideTrap extends Obj {
                 } else {
                     active = Boolean.parseBoolean(func.split(">")[1]);
                 }
+                break;
+            case "cordN":
+                cordinateNormalize();
                 break;
         }
     }

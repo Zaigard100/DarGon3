@@ -16,14 +16,16 @@ public class Spinney extends Obj {
     public void render(SpriteBatch batch) {
         for (i = 0; i < height; i++) {
             for (j = 0; j < wight; j++) {
-                batch.draw(Res.spinney, ((x + j + 3) * 16 * Configuration.getScale()) - Player.get_wX(), ((y + i + 2) * 16 * Configuration.getScale()) - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+                batch.draw(Res.spinney, (wX + j * 16 * Configuration.getScale()) - Player.get_wX(), (wY + i * 16 * Configuration.getScale()) - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
             }
         }
     }
 
     @Override
     public void frame() {
-
+        if (isMove()) {
+            move();
+        }
     }
     @Override
     public void tag_activate(String func) {
@@ -63,6 +65,9 @@ public class Spinney extends Obj {
                 } else {
                     height = Integer.parseInt((func.split(">")[1]));
                 }
+                break;
+            case "cordN":
+                cordinateNormalize();
                 break;
         }
     }

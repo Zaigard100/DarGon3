@@ -43,3 +43,5 @@ dependencies {
 dist.dependsOn classes
 
 eclipse.project.name = appName + "-desktop"
+
+java.targetCompatibility = JavaVersion.VERSION_1_7

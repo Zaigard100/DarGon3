@@ -43,6 +43,8 @@ public class GameScreen implements Screen {
     boolean isPres = false;
     boolean isExit = false;
     int button = 0;
+    private int stage;
+    private float timer;
 
     public GameScreen(Main m) {
         this.m = m;
@@ -169,8 +171,21 @@ public class GameScreen implements Screen {
                 }
             }
         }
+        tick(0.2f);
+        batch.draw(Res.hero(true, false, stage), 6 * 16 * Configuration.getScale(), 3 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
         batch.draw(Res.nextlv, 6 * 16 * Configuration.getScale(), 0, 16 * Configuration.getScale(), 16 * Configuration.getScale());
 
+    }
+
+    public void tick(float second) {
+        timer += Gdx.graphics.getDeltaTime();
+        if (timer >= second) {
+            if (stage > 4) {
+                stage = 0;
+            }
+            stage++;
+            timer = 0;
+        }
     }
 
     private void button_draw() {

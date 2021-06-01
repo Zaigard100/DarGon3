@@ -56,7 +56,7 @@ public class Flamefrower extends Obj {
     }
 
     public void render(SpriteBatch batch) {
-        batch.draw(Res.flamethrowfer, (x + 3) * 16 * Configuration.getScale() - Player.get_wX(), (y + 2) * 16 * Configuration.getScale() - Player.get_wY(), 8 * Configuration.getScale(), 8 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale(), 1, 1, 90 * angle);
+        batch.draw(Res.flamethrowfer, wX - Player.get_wX(), wY - Player.get_wY(), 8 * Configuration.getScale(), 8 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale(), 1, 1, 90 * angle);
 
         flame_stage = 0;
         while (flame_stage < stage) {
@@ -81,6 +81,9 @@ public class Flamefrower extends Obj {
         }
         tick(tick_sec);
         tick1(0.2f);
+        if (isMove()) {
+            move();
+        }
     }
 
     public void tick(float second) {
@@ -145,6 +148,9 @@ public class Flamefrower extends Obj {
                 } else {
                     stage = Integer.parseInt((func.split(">")[1]));
                 }
+                break;
+            case "cordN":
+                cordinateNormalize();
                 break;
         }
         if (angle == 0) {

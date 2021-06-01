@@ -20,7 +20,7 @@ public class Button extends Obj {
 
     @Override
     public void render(SpriteBatch batch) {
-        batch.draw(Res.button, ((x + 3) * 16 * Configuration.getScale()) - Player.get_wX(), ((y + 2) * 16 * Configuration.getScale()) - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+        batch.draw(Res.button, wX - Player.get_wX(), wY - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
     }
 
     @Override
@@ -39,6 +39,10 @@ public class Button extends Obj {
 
         if ((Player.getX() != x) && (Player.getY() != y)) {
             active = true;
+        }
+
+        if (isMove()) {
+            move();
         }
 
     }
@@ -69,6 +73,9 @@ public class Button extends Obj {
                 } else {
                     y = Integer.parseInt((func.split(">")[1]));
                 }
+                break;
+            case "cordN":
+                cordinateNormalize();
                 break;
         }
     }

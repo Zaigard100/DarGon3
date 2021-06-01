@@ -23,13 +23,13 @@ public class FlimsyTile extends Obj {
 
     public void render(SpriteBatch batch) {
         if (crashed_lvl == 2) {
-            batch.draw(Res.clvl2, ((x + 3) * 16 * Configuration.getScale()) - Player.get_wX(), ((y + 2) * 16 * Configuration.getScale()) - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+            batch.draw(Res.clvl2, wX - Player.get_wX(), wY - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
         }
         if (crashed_lvl == 1) {
-            batch.draw(Res.clvl1, ((x + 3) * 16 * Configuration.getScale()) - Player.get_wX(), ((y + 2) * 16 * Configuration.getScale()) - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+            batch.draw(Res.clvl1, wX - Player.get_wX(), wY - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
         }
         if (crashed_lvl <= 0) {
-            batch.draw(Res.clvl0, ((x + 3) * 16 * Configuration.getScale()) - Player.get_wX(), ((y + 2) * 16 * Configuration.getScale()) - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+            batch.draw(Res.clvl0, wX - Player.get_wX(), wY - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
         }
     }
 
@@ -43,6 +43,9 @@ public class FlimsyTile extends Obj {
             }
         }
         tick(tick_sec);
+        if (isMove()) {
+            move();
+        }
     }
 
 
@@ -88,7 +91,9 @@ public class FlimsyTile extends Obj {
                     crashed_lvl = 3 - Integer.parseInt((func.split(">")[1]));
                 }
                 break;
-
+            case "cordN":
+                cordinateNormalize();
+                break;
         }
     }
 

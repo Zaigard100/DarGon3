@@ -221,7 +221,7 @@ public class LevelRead {
                     crosbow.add(new com.zaig100.dg.utils.contain.CrossbowC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("DX")).intValue(), ((Long) JO.get("DY")).intValue(), ((Long) JO.get("Angle")).intValue(), "Cb" + i));
                 }
                 if (JO.get("Tick") != null)
-                    crosbow.get(crosbow.size() - 1).setTick_sec((Double) JO.get("Tick"));
+                    crosbow.get(crosbow.size() - 1).setTick_sec((double) ((Long) JO.get("Tick")));
                 i++;
             }
         }

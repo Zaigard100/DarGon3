@@ -54,55 +54,55 @@ import java.util.Random;
 
 public class PlayScreen implements Screen {
 
-    FrameBuffer fbo,fbo2;
-    SpriteBatch batch;
-    OrthographicCamera cam;
-    Main m;
-    Sprite frame;
+    private FrameBuffer fbo, fbo2;
+    private SpriteBatch batch;
+    private OrthographicCamera cam;
+    private Main m;
+    private Sprite frame;
     static LevelRead lR;
     static Font font;
     static Random random;
-    static BitmapFont f1,f2,f3,f4;
-    static int height;
-    static int width;
+    private BitmapFont f1, f2, f3, f4;
+    private int height;
+    private int width;
 
-    static int scrW, scrH;
-    String path, line;
+    private int scrW, scrH;
+    private String path, line;
 
-    static Map map;
+    private Map map;
 
-    int menu = 0;
-    ArrayList<Obj> objectsU = new ArrayList<>();
-    ArrayList<Obj> objectsO = new ArrayList<>();
-    ArrayList<Stair> stair = new ArrayList<>();
-    StairC stairС;
-    TeleportC teleportC;
-    HideTrapC hideTrapC;
-    FlamefrowerC flamefrowerС;
-    CrossbowC crossbowC;
-    ItemC itemC;
-    FlimsyTileC flimsyTileC;
-    SpinneyC spinneyC;
-    SpikeC spikeC;
-    ButtonС buttonC;
-    Texture fr;
-    Save save;
-    boolean start = true;
+    private int menu = 0;
+    private ArrayList<Obj> objectsU = new ArrayList<>();
+    private ArrayList<Obj> objectsO = new ArrayList<>();
+    private ArrayList<Stair> stair = new ArrayList<>();
+    private StairC stairС;
+    private TeleportC teleportC;
+    private HideTrapC hideTrapC;
+    private FlamefrowerC flamefrowerС;
+    private CrossbowC crossbowC;
+    private ItemC itemC;
+    private FlimsyTileC flimsyTileC;
+    private SpinneyC spinneyC;
+    private SpikeC spikeC;
+    private ButtonС buttonC;
+    private Texture fr;
+    private Save save;
+    private boolean start = true;
 
-    boolean is_pause = false, debag = false;
-    float exit_timer = 0, sensor_timer = 0f;
+    private boolean is_pause = false, debag = false;
+    private float exit_timer = 0, sensor_timer = 0f;
 
-    boolean fir1 = true;
-    int i;
+    private boolean fir1 = true;
+    private int i;
 
 
-    Viewport viewport;
+    private Viewport viewport;
 
-    Iterator iter;
+    private Iterator iter;
 
-    boolean isPack;
-    String packname = "";
-    String derectory = "";
+    private boolean isPack;
+    private String packname = "";
+    private String derectory = "";
 
     public PlayScreen(Main m, String path, boolean isPack) {
         this.m = m;
@@ -171,7 +171,6 @@ public class PlayScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        //Joystick.frame((int) ((Gdx.graphics.getWidth() - 16 * 7 * Configuration.getScale()) / 2), (int) ((Gdx.graphics.getHeight() - 16 * 5 * Configuration.getScale()) / 2));
         Joystick.frame((int) ((Gdx.graphics.getWidth() - 16 * 7 * Configuration.getScale()) / 2), (int) ((Gdx.graphics.getHeight() - 16 * 5 * Configuration.getScale()) / 2));
         if (!Joystick.isJoystick() && Gdx.input.isTouched()) {
             sensor_timer += delta;
@@ -182,14 +181,84 @@ public class PlayScreen implements Screen {
         } else {
             sensor_timer = 0;
         }
+
         fbo.begin();
         batch.setProjectionMatrix(cam.combined);
         batch.begin();
+        first_render();
+        batch.end();
+        fbo.end();
 
+        if (Player.getX() != lR.getSpawnX() || Player.getY() != lR.getSpawnY()) start = false;
+
+        frame = new Sprite(fbo.getColorBufferTexture());
+        frame.setPosition((scrW - 16 * 7 * Configuration.getScale()) / 2, (-scrH + 16 * 5 * Configuration.getScale()) / 2);
+
+        fbo2.begin();
+        batch.begin();
+        second_render();
+        batch.end();
+        fbo2.end();
+
+
+        frame = new Sprite(fbo2.getColorBufferTexture());
+        cam.update();
+
+        fbo.begin();
+        batch.begin();
+        third_render();
+        batch.end();
+        fbo.end();
+
+        frame = new Sprite(fbo.getColorBufferTexture());
+
+        if (Configuration.getShader() != -1) {
+            frame.setFlip(ShaderManager.getShaders().get(Configuration.getShader()).isFlipX(), ShaderManager.getShaders().get(Configuration.getShader()).isFlipY());
+        } else {
+            frame.setFlip(false, true);
+        }
+
+        batch.begin();
+        frame.draw(batch);
+        batch.end();
+
+    }
+
+
+    private void first_render() {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         map.render(batch);
 
+        stair_update();
+
+        object_update();
+
+        map.dark_render(batch);
+
+        render_ui();
+    }
+
+    private void second_render() {
+        batch.draw(Res.boards, 0, 0, 16 * 7 * Configuration.getScale() * 10, 16 * 5 * Configuration.getScale() * 10);
+        if (is_pause) {
+            batch.draw(Res.pause_dark, 0, 0, 16 * 7 * Configuration.getScale() * 10, 16 * 5 * Configuration.getScale() * 10);
+        }
+        frame.draw(batch);
+    }
+
+    private void third_render() {
+        if (Configuration.getShader() != -1) {
+            ShaderManager.getShaders().get(Configuration.getShader()).shader_update();
+            batch.setShader(ShaderManager.getShaders().get(Configuration.getShader()).getShader());
+        }
+        frame.draw(batch);
+        if (Configuration.getShader() != -1) {
+            batch.setShader(null);
+        }
+    }
+
+    private void stair_update() {
         if (stair.size() > 0) {
             for (i = 0; i < stair.size(); i++) {
                 stair.get(i).render(batch);
@@ -209,7 +278,9 @@ public class PlayScreen implements Screen {
                 }
             }
         }
+    }
 
+    private void object_update() {
         if (objectsU.size() > 0) {
             for (i = 0; i < objectsU.size(); i++) {
                 objectsU.get(i).render(batch);
@@ -226,84 +297,7 @@ public class PlayScreen implements Screen {
                 if (!is_pause) objectsO.get(i).frame();
             }
         }
-
-        map.dark_render(batch);
-        if (!is_pause) {
-            Player.render_bag(batch, f4);
-            if (start)
-                f2.draw(batch, lR.getLevelname(), 8 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
-        }
-        if (Player.getHp() <= 0 && !is_pause) {
-            wasted_render();
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            is_pause = !is_pause;
-        }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.F3)) {
-            debag = !debag;
-        }
-        if (is_pause) {
-            pauseMenu();
-        }
-        Joystick.render(batch);
-        if (debag) debugShow();
-        batch.end();
-        fbo.end();
-        if (Player.getX() != lR.getSpawnX() || Player.getY() != lR.getSpawnY()) start = false;
-
-        frame = new Sprite(fbo.getColorBufferTexture());
-        frame.setPosition((scrW - 16 * 7 * Configuration.getScale()) / 2, (-scrH + 16 * 5 * Configuration.getScale()) / 2);
-        fbo2.begin();
-        batch.begin();
-        batch.draw(Res.boards, 0, 0, 16 * 7 * Configuration.getScale() * 10, 16 * 5 * Configuration.getScale() * 10);
-        if (is_pause) {
-            batch.draw(Res.pause_dark, 0, 0, 16 * 7 * Configuration.getScale() * 10, 16 * 5 * Configuration.getScale() * 10);
-        }
-        frame.draw(batch);
-        batch.end();
-        fbo2.end();
-
-
-        frame = new Sprite(fbo2.getColorBufferTexture());
-        cam.update();
-        fbo.begin();
-        batch.begin();
-        if (Configuration.getShader() != -1) {
-            ShaderManager.getShaders().get(Configuration.getShader()).shader_update();
-            batch.setShader(ShaderManager.getShaders().get(Configuration.getShader()).getShader());
-        }
-        frame.draw(batch);
-        if (Configuration.getShader() != -1) {
-            batch.setShader(null);
-        }
-        batch.end();
-        fbo.end();
-
-        frame = new Sprite(fbo.getColorBufferTexture());
-
-        if (Configuration.getShader() != -1) {
-            frame.setFlip(ShaderManager.getShaders().get(Configuration.getShader()).isFlipX(), ShaderManager.getShaders().get(Configuration.getShader()).isFlipY());
-        } else {
-            frame.setFlip(false, true);
-        }
-
-        batch.begin();
-        frame.draw(batch);
-        batch.end();
-
     }
-
-    private void wasted_render() {
-        if (fir1) Res.wasted.play(2.0f);
-        fir1 = false;
-        f1.draw(batch, "Wasted", 2 * 16 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
-        f2.draw(batch, "Press Space", 2 * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Joystick.isUse()) {
-            m.setScreen(new GameScreen(m));
-
-        }
-    }
-
     private void object_load() {
         map = new Map(lR.getWight(), lR.getHeight(), lR.getMap(), true);
         Player.setX(lR.getSpawnX());
@@ -373,7 +367,6 @@ public class PlayScreen implements Screen {
         }
 
     }
-
     public void doFunc(String func) {
         if (stair.size() > 0) {
             for (i = 0; i < stair.size(); i++) {
@@ -400,7 +393,6 @@ public class PlayScreen implements Screen {
             map.tag_activate(func.split(":")[1]);
         }
     }
-
     void debugShow() {
         line = "Debug:";
         f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 10);
@@ -415,9 +407,6 @@ public class PlayScreen implements Screen {
         line = "NativeHeap:" + (((int) Gdx.app.getNativeHeap()) / (8 * 1024)) + " KB";
         f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 85);
     }
-
-
-
     void pauseMenu() {
         batch.draw(Res.pause_dark, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         f1.draw(batch, "Pause", 2.2f * 16 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
@@ -485,25 +474,59 @@ public class PlayScreen implements Screen {
             Res.click[random.nextInt(2)].play(Configuration.getSound());
         }
 
-        if(menu>=4){
+        if (menu >= 4) {
             menu = 0;
         }
 
-        if(menu<0){
+        if (menu < 0) {
             menu = 3;
         }
 
     }
 
+    private void render_ui() {
+
+        if (!is_pause) {
+            Player.render_bag(batch, f4);
+            if (start)
+                f2.draw(batch, lR.getLevelname(), 8 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
+        }
+        if (Player.getHp() <= 0 && !is_pause) {
+            wasted_render();
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            is_pause = !is_pause;
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F3)) {
+            debag = !debag;
+        }
+        if (is_pause) {
+            pauseMenu();
+        }
+        Joystick.render(batch);
+        if (debag) debugShow();
+
+    }
+
+    private void wasted_render() {
+        if (fir1) Res.wasted.play(2.0f);
+        fir1 = false;
+        f1.draw(batch, "Wasted", 2 * 16 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
+        f2.draw(batch, "Press Space", 2 * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Joystick.isUse()) {
+            m.setScreen(new GameScreen(m));
+
+        }
+    }
 
     @Override
     public void resize(int width, int height) {
         fbo.dispose();
         fbo2.dispose();
-        int ry = height - PlayScreen.height;
-        int rx = width - PlayScreen.width;
-        PlayScreen.width = width;
-        PlayScreen.height = height;
+        int ry = height - this.height;
+        int rx = width - this.width;
+        this.width = width;
+        this.height = height;
         scrW = width;
         scrH = height;
         viewport.update(width, height);

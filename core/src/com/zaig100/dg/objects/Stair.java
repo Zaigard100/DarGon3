@@ -26,7 +26,7 @@ public class Stair extends Obj {
         if (Res.nextlv.isFlipX() != flip_x) {
             Res.nextlv.flip(flip_x, false);
         }
-        batch.draw(Res.nextlv, -Player.get_wX() + (x + 3) * 16 * Configuration.getScale(), -Player.get_wY() + (y + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+        batch.draw(Res.nextlv, wX - Player.get_wX(), wY - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
     }
 
     @Override
@@ -36,6 +36,9 @@ public class Stair extends Obj {
                 Player.setIsSheld(false);
                 isExit = true;
             }
+        }
+        if (isMove()) {
+            move();
         }
     }
     @Override
@@ -75,6 +78,9 @@ public class Stair extends Obj {
                 break;
             case "Next":
                 next_path = func.split(">")[1];
+                break;
+            case "cordN":
+                cordinateNormalize();
                 break;
         }
     }

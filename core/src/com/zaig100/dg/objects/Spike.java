@@ -19,15 +19,15 @@ public class Spike extends Obj {
     public void render(SpriteBatch batch) {
         if (active) {
             batch.draw(Res.spike_1,
-                    ((x + 3) * 16 * Configuration.getScale()) - Player.get_wX() - Configuration.getScale(),
-                    ((y + 2) * 16 * Configuration.getScale()) - Player.get_wY() + Configuration.getScale(),
+                    wX - Player.get_wX() - Configuration.getScale(),
+                    wY - Player.get_wY() + Configuration.getScale(),
                     16 * Configuration.getScale(),
                     16 * Configuration.getScale()
             );
         } else {
             batch.draw(Res.spike_0,
-                    ((x + 3) * 16 * Configuration.getScale()) - Player.get_wX() - Configuration.getScale(),
-                    ((y + 2) * 16 * Configuration.getScale()) - Player.get_wY() + Configuration.getScale(),
+                    wX - Player.get_wX() - Configuration.getScale(),
+                    wY - Player.get_wY() + Configuration.getScale(),
                     16 * Configuration.getScale(),
                     16 * Configuration.getScale()
             );
@@ -45,6 +45,9 @@ public class Spike extends Obj {
             }
         }
         tick(tick_sec);
+        if (isMove()) {
+            move();
+        }
     }
 
 
@@ -97,6 +100,9 @@ public class Spike extends Obj {
                 } else {
                     active = Boolean.parseBoolean(func.split(">")[1]);
                 }
+                break;
+            case "cordN":
+                cordinateNormalize();
                 break;
         }
     }

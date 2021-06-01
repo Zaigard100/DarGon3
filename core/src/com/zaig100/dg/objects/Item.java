@@ -33,13 +33,13 @@ public class Item extends Obj {
     public void render(SpriteBatch batch) {
         if (active) {
             if (itemId == 1) {
-                batch.draw(Res.hp_potion, (x + 3.25f) * 16 * Configuration.getScale() - Player.get_wX(), (y + 2.25f) * 16 * Configuration.getScale() - Player.get_wY(), 16 * Configuration.getScale() * 0.5f, 16 * Configuration.getScale() * 0.5f);
+                batch.draw(Res.hp_potion, wX + (3.25f * 16 * Configuration.getScale()) - Player.get_wX(), wY + (2.25f * 16 * Configuration.getScale()) - Player.get_wY(), 16 * Configuration.getScale() * 0.5f, 16 * Configuration.getScale() * 0.5f);
             }
             if (itemId == 2) {
-                batch.draw(Res.sheld, (x + 3.25f) * 16 * Configuration.getScale() - Player.get_wX(), (y + 2.25f) * 16 * Configuration.getScale() - Player.get_wY(), 16 * Configuration.getScale() * 0.5f, 16 * Configuration.getScale() * 0.5f);
+                batch.draw(Res.sheld, wX + (3.25f * 16 * Configuration.getScale()) - Player.get_wX(), wY + (2.25f * 16 * Configuration.getScale()) - Player.get_wY(), 16 * Configuration.getScale() * 0.5f, 16 * Configuration.getScale() * 0.5f);
             }
             if (itemId == 3) {
-                batch.draw(Res.torch, (x + 3.25f) * 16 * Configuration.getScale() - Player.get_wX(), (y + 2.25f) * 16 * Configuration.getScale() - Player.get_wY(), 16 * Configuration.getScale() * 0.5f, 16 * Configuration.getScale() * 0.5f);
+                batch.draw(Res.torch, wX + (3.25f * 16 * Configuration.getScale()) - Player.get_wX(), wY + (2.25f * 16 * Configuration.getScale()) - Player.get_wY(), 16 * Configuration.getScale() * 0.5f, 16 * Configuration.getScale() * 0.5f);
             }
         }
     }
@@ -58,6 +58,9 @@ public class Item extends Obj {
                 }
                 active = false;
             }
+        }
+        if (isMove()) {
+            move();
         }
     }
 
@@ -97,6 +100,9 @@ public class Item extends Obj {
                 } else {
                     active = Boolean.parseBoolean((func.split(">")[1]));
                 }
+                break;
+            case "cordN":
+                cordinateNormalize();
                 break;
         }
     }

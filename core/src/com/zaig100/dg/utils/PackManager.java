@@ -25,15 +25,15 @@ public class PackManager {
 
     public PackManager(boolean isAndroid, Main m) {
 
-        this.isAndroid = isAndroid;
+        PackManager.isAndroid = isAndroid;
 
         if (isAndroid) {
-            destory = new File(Main.getSd(), "DarGon/packs");
+            destory = new File(Main.getSd(), "packs");
         } else {
             destory = new File(new File("").getAbsoluteFile(), "packs");
         }
         if (!destory.exists()) {
-            destory.mkdir();
+            destory.mkdirs();
         }
         if (destory.list() != null) {
             if (destory.list().length > 0) {

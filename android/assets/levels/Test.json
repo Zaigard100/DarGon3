@@ -93,10 +93,14 @@
         "Stair1:Y>2",
         "Stair2:X>1",
         "Stair2:Y>3",
+        "Stair1:cordN",
+        "Stair2:cordN",
         "A:X>9",
         "A:Y>9",
         "B:X>1",
-        "B:Y>0"
+        "B:Y>0",
+        "A:cordN",
+        "B:cordN"
       ],
       "Tag": "A"
     },
@@ -109,7 +113,9 @@
         "C:X>0",
         "C:Y>0",
         "B:X>9",
-        "B:Y>9"
+        "B:Y>9",
+        "C:cordN",
+        "B:cordN"
       ],
       "Tag": "B"
     },
@@ -122,7 +128,9 @@
         "B:X>1",
         "B:Y>0",
         "C:X>9",
-        "C:Y>9"
+        "C:Y>9",
+        "C:cordN",
+        "B:cordN"
       ],
       "Tag": "C"
     }

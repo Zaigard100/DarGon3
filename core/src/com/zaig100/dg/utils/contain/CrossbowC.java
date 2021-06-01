@@ -2,7 +2,7 @@ package com.zaig100.dg.utils.contain;
 
 public class CrossbowC extends ObjC {
     int dx, dy, angle;
-    float tick_sec = 0.5f;
+    float tick_sec = 4f;
 
     public CrossbowC(int x, int y, int dx, int dy, int angle, String tag) {
         super(x, y, tag);

@@ -29,16 +29,18 @@ public class Teleport extends Obj {
 
     @Override
     public void render(SpriteBatch batch) {
-        batch.draw(Res.teleport, ((x + 3) * 16 * Configuration.getScale()) - Player.get_wX(), ((y + 2) * 16 * Configuration.getScale()) - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+        batch.draw(Res.teleport, wX - Player.get_wX(), wY - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
     }
 
     @Override
     public void frame() {
-        //Joystick.frame((int) ((Gdx.graphics.getWidth() - 16 * 7 * Configuration.getScale()) / 2), (int) ((Gdx.graphics.getHeight() - 16 * 5 * Configuration.getScale()) / 2));
         if ((Player.getX() == x) && (Player.getY() == y)) {
             if ((Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) || (Joystick.isUse())) {
                 Player.teleport(tx, ty);
             }
+        }
+        if (isMove()) {
+            move();
         }
     }
 
@@ -87,6 +89,9 @@ public class Teleport extends Obj {
                 } else {
                     hide = Boolean.parseBoolean((func.split(">")[1]));
                 }
+                break;
+            case "cordN":
+                cordinateNormalize();
                 break;
         }
     }
