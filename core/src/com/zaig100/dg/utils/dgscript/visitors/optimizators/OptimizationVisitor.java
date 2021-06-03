@@ -17,6 +17,7 @@ import com.zaig100.dg.utils.dgscript.ast.statements.BlockStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.BreakStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.ContinueStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.DoWhileStatement;
+import com.zaig100.dg.utils.dgscript.ast.statements.ExprStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.ForStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.FunctionDefineStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.FunctionStatement;
@@ -243,6 +244,15 @@ public abstract class OptimizationVisitor<T> implements ResultVisitor<Node, T> {
         final Node stat = s.statement.accept(this, t);
         if (cond != s.exp || stat != s.statement) {
             return new WhileStatement((Expression) cond, (Statement) stat);
+        }
+        return s;
+    }
+
+    @Override
+    public Node visit(ExprStatement s, T t) {
+        final Node node = s.exp.accept(this, t);
+        if (node != s.exp) {
+            return new ExprStatement((Expression) node);
         }
         return s;
     }

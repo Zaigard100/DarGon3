@@ -11,15 +11,18 @@ public class Optimizer {
 
     public static Statement optimize(Statement st) {
         int iterOptiCount = 0, level = 1;
-        final ConstantFolding constantFolding = new ConstantFolding();
+        final ConstantFolding cF = new ConstantFolding();
+        final DeadCodeElimitation dcE = new DeadCodeElimitation();
         Statement result = st;
         do {
             level++;
-            iterOptiCount = constantFolding.optimizCount();
-            result = (Statement) result.accept(constantFolding, null);
-        } while ((constantFolding.optimizCount() - iterOptiCount) > 0);
+            iterOptiCount = cF.optimizCount() + dcE.optimizCount();
+            result = (Statement) result.accept(cF, null);
+            result = (Statement) result.accept(dcE, null);
+        } while (((cF.optimizCount() + dcE.optimizCount()) - iterOptiCount) > 0);
         System.out.println("Levels: " + level);
-        System.out.println(constantFolding.sumInfo());
+        System.out.println(cF.sumInfo());
+        System.out.println(dcE.sumInfo());
         return result;
     }
 

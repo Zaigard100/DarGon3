@@ -14,6 +14,7 @@ import com.zaig100.dg.utils.dgscript.ast.statements.BlockStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.BreakStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.ContinueStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.DoWhileStatement;
+import com.zaig100.dg.utils.dgscript.ast.statements.ExprStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.ForStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.FunctionDefineStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.FunctionStatement;
@@ -66,4 +67,5 @@ public interface ResultVisitor<R, T> {
 
     R visit(WhileStatement s, T t);
 
+    R visit(ExprStatement s, T t);
 }
