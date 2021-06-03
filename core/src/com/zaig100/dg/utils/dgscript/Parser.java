@@ -6,6 +6,7 @@ import com.zaig100.dg.utils.dgscript.ast.expression.ArrayAssignExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.ArrayExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.BinExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.ConditionalExpression;
+import com.zaig100.dg.utils.dgscript.ast.expression.FuncValExpresion;
 import com.zaig100.dg.utils.dgscript.ast.expression.FunctionalExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.NumExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.StringExpression;
@@ -24,6 +25,7 @@ import com.zaig100.dg.utils.dgscript.ast.statements.IfStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.ReturnStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.UseStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.WhileStatement;
+import com.zaig100.dg.utils.dgscript.lib.UserDefFunc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -314,6 +316,16 @@ public final class Parser {
         }
         if (match(TokenType.TEXT)) {
             return new StringExpression(current.getText());
+        }
+        if (match(TokenType.DEF)) {
+            consume(TokenType.LPAR);
+            final List<String> argNames = new ArrayList<>();
+            while (!match(TokenType.RPAR)) {
+                argNames.add(consume(TokenType.WORD).getText());
+                match(TokenType.COMMA);
+            }
+            final Statement body = statementOrBlock();
+            return new FuncValExpresion(new UserDefFunc(argNames, body));
         }
         if (match(TokenType.LPAR)) {
             Expression result = expression();

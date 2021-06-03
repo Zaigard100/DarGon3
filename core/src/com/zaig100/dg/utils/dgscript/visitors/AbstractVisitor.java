@@ -7,6 +7,7 @@ import com.zaig100.dg.utils.dgscript.ast.expression.ArrayAssignExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.ArrayExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.BinExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.ConditionalExpression;
+import com.zaig100.dg.utils.dgscript.ast.expression.FuncValExpresion;
 import com.zaig100.dg.utils.dgscript.ast.expression.FunctionalExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.NumExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.StringExpression;
@@ -120,6 +121,11 @@ public abstract class AbstractVisitor implements Visitor {
         s.increment.accept(this);
         s.exp.accept(this);
         s.init.accept(this);
+    }
+
+    @Override
+    public void visit(FuncValExpresion s) {
+
     }
 
     @Override

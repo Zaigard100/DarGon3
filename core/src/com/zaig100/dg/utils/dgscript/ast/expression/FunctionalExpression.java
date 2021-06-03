@@ -3,6 +3,7 @@ package com.zaig100.dg.utils.dgscript.ast.expression;
 import com.zaig100.dg.utils.dgscript.ast.Expression;
 import com.zaig100.dg.utils.dgscript.ast.Visitor;
 import com.zaig100.dg.utils.dgscript.lib.Function;
+import com.zaig100.dg.utils.dgscript.lib.FunctionVal;
 import com.zaig100.dg.utils.dgscript.lib.Functions;
 import com.zaig100.dg.utils.dgscript.lib.UserDefFunc;
 import com.zaig100.dg.utils.dgscript.lib.Value;
@@ -37,7 +38,7 @@ public class FunctionalExpression implements Expression {
         for (int i = 0; i < size; i++) {
             vals[i] = args.get(i).eval();
         }
-        final Function function = Functions.get(name);
+        final Function function = getFunc(name);
         if (function instanceof UserDefFunc) {
             final UserDefFunc userFunc = (UserDefFunc) function;
             if (size != userFunc.argCount()) throw new RuntimeException("Args count mismatch");
@@ -55,6 +56,15 @@ public class FunctionalExpression implements Expression {
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
+    }
+
+    private Function getFunc(String key) {
+        if (Functions.isExist(key)) return Functions.get(key);
+        if (Variables.isExist(key)) {
+            final Value val = Variables.get(key);
+            if (val instanceof FunctionVal) return ((FunctionVal) val).getVal();
+        }
+        throw new RuntimeException("Unknown function: " + key);
     }
 
     @Override

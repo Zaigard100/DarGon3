@@ -89,6 +89,7 @@ public class PlayScreen implements Screen {
     private Save save;
     private boolean start = true;
 
+
     private boolean is_pause = false, debag = false;
     private float exit_timer = 0, sensor_timer = 0f;
 
@@ -146,7 +147,6 @@ public class PlayScreen implements Screen {
             lR = new LevelRead(path, isPack);
         }
         object_load();
-
         cam.position.set(new Vector3(width / 2, height / 2, 0));
 
         try {

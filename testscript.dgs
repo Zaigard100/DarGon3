@@ -1,20 +1,7 @@
 use "std"
-use "system"
 
-thread("th1")
+add = def(a,b) return a+b
+sub = def(a,b) return a-b
 
-def th1(){
-    time = time();
-    a = round(rand(10000)+rand(10000))
-    println(a)
-    sleep(a)
-    a = round(rand(10000)+rand(10000))
-    println(a)
-    sleep(a)
-    a = round(rand(10000)+rand(10000))
-    sleep(a)
-    println(a)
-    println(time() - time)
-}
-
-
+println(add(10,6))
+println(sub(10,6))

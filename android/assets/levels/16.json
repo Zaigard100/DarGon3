@@ -133,7 +133,9 @@
       "Y": 4,
       "Function": [
         "FirstFT1:X>15",
-        "FirstFT:Y>15"
+        "FirstFT1:Y>15",
+        "FirstFT1:Stage>0",
+        "FirstFT1:cordN"
       ]
     },
     {
@@ -141,7 +143,9 @@
       "Y": 7,
       "Function": [
         "FirstFT2:X>15",
-        "FirstFT2:Y>15"
+        "FirstFT2:Y>15",
+        "FirstFT2:Stage>0",
+        "FirstFT2:cordN"
       ]
     },
     {
@@ -149,7 +153,8 @@
       "Y": 4,
       "Function": [
         "Stair:X>9",
-        "Stair:Y>4"
+        "Stair:Y>4",
+        "Stair:cordN"
       ]
     }
   ],

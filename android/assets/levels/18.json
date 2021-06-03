@@ -125,8 +125,10 @@
         "Map:map-3,4>10",
         "but1:X>15",
         "but1:Y>15",
+        "but1:cordN",
         "but2:X>2",
-        "but2:Y>4"
+        "but2:Y>4",
+        "but2:cordN"
       ]
     },
     {
@@ -165,8 +167,10 @@
         "Map:map-5,8>10",
         "but2:X>15",
         "but2:y>15",
+        "but2:cordN",
         "but3:X>0",
-        "but3:Y>8"
+        "but3:Y>8",
+        "but3:cordN"
       ]
     },
     {
@@ -177,7 +181,9 @@
         "Stair1:X>2",
         "Stair1:Y>4",
         "but3:X>15",
-        "but3:Y>15"
+        "but3:Y>15",
+        "but3:cordN",
+        "Stair1:cordN"
       ]
     }
   ],
