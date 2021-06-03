@@ -1,7 +1,9 @@
 use "std"
-
+i = 8 + 13 - 4 * -6 - 10 * 46 / /16 + *2
 add = def(a,b) return a+b
 sub = def(a,b) return a-b
-
+if(45/5==5||60/5*7==8*6){
+println(i)
+}
 println(add(10,6))
 println(sub(10,6))

@@ -1,9 +1,10 @@
 package com.zaig100.dg.utils.dgscript.ast.expression;
 
 import com.zaig100.dg.utils.dgscript.ast.Expression;
-import com.zaig100.dg.utils.dgscript.ast.Visitor;
 import com.zaig100.dg.utils.dgscript.lib.ArrayValue;
 import com.zaig100.dg.utils.dgscript.lib.Value;
+import com.zaig100.dg.utils.dgscript.visitors.Visitor;
+import com.zaig100.dg.utils.dgscript.visitors.optimizators.ResultVisitor;
 
 import java.util.List;
 
@@ -29,6 +30,10 @@ public class ArrayExpression implements Expression {
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
+    }
+
+    public <R, T> R accept(ResultVisitor<R, T> visitor, T t) {
+        return visitor.visit(this, t);
     }
 
     @Override

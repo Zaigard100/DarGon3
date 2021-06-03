@@ -1,15 +1,13 @@
-package com.zaig100.dg.utils.dgscript.ast;
+package com.zaig100.dg.utils.dgscript.visitors;
 
 import com.zaig100.dg.utils.dgscript.ast.expression.ArrayAssignExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.ArrayExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.BinExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.ConditionalExpression;
-import com.zaig100.dg.utils.dgscript.ast.expression.FuncValExpresion;
 import com.zaig100.dg.utils.dgscript.ast.expression.FunctionalExpression;
-import com.zaig100.dg.utils.dgscript.ast.expression.NumExpression;
-import com.zaig100.dg.utils.dgscript.ast.expression.StringExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.UnaryExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.ValueExpression;
+import com.zaig100.dg.utils.dgscript.ast.expression.VarableExpression;
 import com.zaig100.dg.utils.dgscript.ast.statements.ArrayAssignStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.AssignStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.BlockStatement;
@@ -36,13 +34,11 @@ public interface Visitor {
 
     void visit(FunctionalExpression s);
 
-    void visit(NumExpression s);
-
-    void visit(StringExpression s);
+    void visit(ValueExpression s);
 
     void visit(UnaryExpression s);
 
-    void visit(ValueExpression s);
+    void visit(VarableExpression s);
 
     void visit(ArrayAssignStatement s);
 
@@ -70,5 +66,4 @@ public interface Visitor {
 
     void visit(UseStatement s);
 
-    void visit(FuncValExpresion s);
 }

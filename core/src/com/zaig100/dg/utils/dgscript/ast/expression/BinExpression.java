@@ -1,11 +1,13 @@
 package com.zaig100.dg.utils.dgscript.ast.expression;
 
 import com.zaig100.dg.utils.dgscript.ast.Expression;
-import com.zaig100.dg.utils.dgscript.ast.Visitor;
+import com.zaig100.dg.utils.dgscript.exeptions.OperationIsNotSupportedExeption;
 import com.zaig100.dg.utils.dgscript.lib.ArrayValue;
 import com.zaig100.dg.utils.dgscript.lib.NumberVal;
 import com.zaig100.dg.utils.dgscript.lib.StringVal;
 import com.zaig100.dg.utils.dgscript.lib.Value;
+import com.zaig100.dg.utils.dgscript.visitors.Visitor;
+import com.zaig100.dg.utils.dgscript.visitors.optimizators.ResultVisitor;
 
 public final class BinExpression implements Expression {
     public final Expression ex1, ex2;
@@ -52,12 +54,16 @@ public final class BinExpression implements Expression {
                     return new NumberVal(num1 + num2);
             }
         }
-        throw new RuntimeException("Invalid type : " + ex1.toString() + " or " + ex2.toString());
+        throw new OperationIsNotSupportedExeption(opr);
     }
 
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
+    }
+
+    public <R, T> R accept(ResultVisitor<R, T> visitor, T t) {
+        return visitor.visit(this, t);
     }
 
     @Override

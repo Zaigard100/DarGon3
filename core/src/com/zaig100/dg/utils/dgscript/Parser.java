@@ -6,12 +6,10 @@ import com.zaig100.dg.utils.dgscript.ast.expression.ArrayAssignExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.ArrayExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.BinExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.ConditionalExpression;
-import com.zaig100.dg.utils.dgscript.ast.expression.FuncValExpresion;
 import com.zaig100.dg.utils.dgscript.ast.expression.FunctionalExpression;
-import com.zaig100.dg.utils.dgscript.ast.expression.NumExpression;
-import com.zaig100.dg.utils.dgscript.ast.expression.StringExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.UnaryExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.ValueExpression;
+import com.zaig100.dg.utils.dgscript.ast.expression.VarableExpression;
 import com.zaig100.dg.utils.dgscript.ast.statements.ArrayAssignStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.AssignStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.BlockStatement;
@@ -300,7 +298,7 @@ public final class Parser {
     private Expression primary() {
         final Token current = get(0);
         if (match(TokenType.NUMBER)) {
-            return new NumExpression(Double.parseDouble(current.getText()));
+            return new ValueExpression(Double.parseDouble(current.getText()));
         }
         if (lookMatch(0, TokenType.WORD) && lookMatch(1, TokenType.LPAR)) {
             return function();
@@ -312,10 +310,10 @@ public final class Parser {
             return array();
         }
         if (match(TokenType.WORD)) {
-            return new ValueExpression(current.getText());
+            return new VarableExpression(current.getText());
         }
         if (match(TokenType.TEXT)) {
-            return new StringExpression(current.getText());
+            return new ValueExpression(current.getText());
         }
         if (match(TokenType.DEF)) {
             consume(TokenType.LPAR);
@@ -325,7 +323,7 @@ public final class Parser {
                 match(TokenType.COMMA);
             }
             final Statement body = statementOrBlock();
-            return new FuncValExpresion(new UserDefFunc(argNames, body));
+            return new ValueExpression(new UserDefFunc(argNames, body));
         }
         if (match(TokenType.LPAR)) {
             Expression result = expression();

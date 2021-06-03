@@ -1,9 +1,11 @@
 package com.zaig100.dg.utils.dgscript.ast.expression;
 
 import com.zaig100.dg.utils.dgscript.ast.Expression;
-import com.zaig100.dg.utils.dgscript.ast.Visitor;
+import com.zaig100.dg.utils.dgscript.exeptions.OperationIsNotSupportedExeption;
 import com.zaig100.dg.utils.dgscript.lib.NumberVal;
 import com.zaig100.dg.utils.dgscript.lib.Value;
+import com.zaig100.dg.utils.dgscript.visitors.Visitor;
+import com.zaig100.dg.utils.dgscript.visitors.optimizators.ResultVisitor;
 
 public class UnaryExpression implements Expression {
 
@@ -24,15 +26,20 @@ public class UnaryExpression implements Expression {
                 return new NumberVal(ex.eval().asNum() * ex.eval().asNum());
             case '/':
                 return new NumberVal(Math.sqrt(ex.eval().asNum()));
-            default:
             case '+':
                 return ex.eval();
+            default:
+                throw new OperationIsNotSupportedExeption(opr);
         }
     }
 
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
+    }
+
+    public <R, T> R accept(ResultVisitor<R, T> visitor, T t) {
+        return visitor.visit(this, t);
     }
 
     @Override

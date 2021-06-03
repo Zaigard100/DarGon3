@@ -1,10 +1,12 @@
 package com.zaig100.dg.utils.dgscript.ast.expression;
 
 import com.zaig100.dg.utils.dgscript.ast.Expression;
-import com.zaig100.dg.utils.dgscript.ast.Visitor;
+import com.zaig100.dg.utils.dgscript.exeptions.OperationIsNotSupportedExeption;
 import com.zaig100.dg.utils.dgscript.lib.NumberVal;
 import com.zaig100.dg.utils.dgscript.lib.StringVal;
 import com.zaig100.dg.utils.dgscript.lib.Value;
+import com.zaig100.dg.utils.dgscript.visitors.Visitor;
+import com.zaig100.dg.utils.dgscript.visitors.optimizators.ResultVisitor;
 
 public final class ConditionalExpression implements Expression {
 
@@ -83,11 +85,11 @@ public final class ConditionalExpression implements Expression {
             case OR:
                 resault = (num1 != 0) || (num2 != 0);
                 break;
-
-            default:
             case EQUALS:
                 resault = num1 == num2;
                 break;
+            default:
+                throw new OperationIsNotSupportedExeption(opr);
         }
         return new NumberVal(resault);
     }
@@ -95,6 +97,10 @@ public final class ConditionalExpression implements Expression {
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
+    }
+
+    public <R, T> R accept(ResultVisitor<R, T> visitor, T t) {
+        return visitor.visit(this, t);
     }
 
     @Override

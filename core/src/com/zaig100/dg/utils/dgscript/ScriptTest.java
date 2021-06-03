@@ -4,6 +4,7 @@ import com.zaig100.dg.utils.dgscript.ast.Statement;
 import com.zaig100.dg.utils.dgscript.visitors.AsignValid;
 import com.zaig100.dg.utils.dgscript.visitors.FuntionAdder;
 import com.zaig100.dg.utils.dgscript.visitors.UsingInit;
+import com.zaig100.dg.utils.dgscript.visitors.optimizators.Optimizer;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -33,6 +34,9 @@ public final class ScriptTest {
         program.accept(new UsingInit());
         program.accept(new AsignValid());
         program.accept(new FuntionAdder());
+        program = Optimizer.optimize(program);
+
+        statement_show();
 
         System.out.println("Script run:");
         timeS = System.currentTimeMillis();

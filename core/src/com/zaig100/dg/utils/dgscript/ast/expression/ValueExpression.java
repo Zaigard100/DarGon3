@@ -1,23 +1,37 @@
 package com.zaig100.dg.utils.dgscript.ast.expression;
 
 import com.zaig100.dg.utils.dgscript.ast.Expression;
-import com.zaig100.dg.utils.dgscript.ast.Visitor;
+import com.zaig100.dg.utils.dgscript.lib.Function;
+import com.zaig100.dg.utils.dgscript.lib.FunctionVal;
+import com.zaig100.dg.utils.dgscript.lib.NumberVal;
+import com.zaig100.dg.utils.dgscript.lib.StringVal;
 import com.zaig100.dg.utils.dgscript.lib.Value;
-import com.zaig100.dg.utils.dgscript.lib.Variables;
+import com.zaig100.dg.utils.dgscript.visitors.Visitor;
+import com.zaig100.dg.utils.dgscript.visitors.optimizators.ResultVisitor;
 
-public class ValueExpression implements Expression {
+public final class ValueExpression implements Expression {
 
-    public final String name;
+    public final Value value;
 
-    public ValueExpression(String name) {
-        this.name = name;
+    public ValueExpression(double value) {
+        this.value = new NumberVal(value);
+    }
+
+    public ValueExpression(String value) {
+        this.value = new StringVal(value);
+    }
+
+    public ValueExpression(Function value) {
+        this.value = new FunctionVal(value);
+    }
+
+    public ValueExpression(Value value) {
+        this.value = value;
     }
 
     @Override
     public Value eval() {
-        if (!Variables.isExist(name))
-            throw new RuntimeException("Noe-existent variable or constant " + name);
-        return Variables.get(name);
+        return value;
     }
 
     @Override
@@ -25,9 +39,12 @@ public class ValueExpression implements Expression {
         visitor.visit(this);
     }
 
+    public <R, T> R accept(ResultVisitor<R, T> visitor, T t) {
+        return visitor.visit(this, t);
+    }
+
     @Override
     public String toString() {
-        //return  String.format("%s[%f]",name,Constants.get(name));
-        return name;
+        return value.asString();
     }
 }
