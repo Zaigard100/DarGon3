@@ -18,7 +18,19 @@ public class ResLoadScreen implements Screen {
     int wight, height;
     SpriteBatch batch;
     BitmapFont font;
-    Texture zaigard, progresbar;
+    int num = 0;
+    Texture zaigard[] = new Texture[8];
+    float[][] colors = new float[][]{
+            {0.8705882f, 0.890196f, 0.8745098f},
+            {0.6392157f, 0.592116f, 0.6f},
+            {0.7803922f, 0.807843f, 0.635294f},
+            {0.3529412f, 0.317647f, 0.298039f},
+            {0.4823529f, 0.592157f, 0.603922f},
+            {0.4862745f, 0.447059f, 0.439215f},
+            {0.7294118f, 0.541176f, 0.392156f},
+            {0.6980392f, 0.686275f, 0.666667f}
+    };
+    Texture progresbar;
     GlyphLayout load_layout, press_layout;
     float tick_timer = 0;
     float color_a = 1;
@@ -26,6 +38,7 @@ public class ResLoadScreen implements Screen {
 
     public ResLoadScreen(Main main) {
         m = main;
+        num = (int) Math.round(7 * Math.random());
     }
 
     @Override
@@ -36,7 +49,14 @@ public class ResLoadScreen implements Screen {
         font.setColor(0f, 0f, 0f, 0.5f);
         load_layout = new GlyphLayout();
         press_layout = new GlyphLayout();
-        zaigard = new Texture("zaigard.jpg");
+        this.zaigard[0] = new Texture("zaigard/0.jpg");
+        this.zaigard[1] = new Texture("zaigard/1.jpeg");
+        this.zaigard[3] = new Texture("zaigard/2.jpeg");
+        this.zaigard[4] = new Texture("zaigard/3.jpeg");
+        this.zaigard[5] = new Texture("zaigard/4.jpg");
+        this.zaigard[6] = new Texture("zaigard/5.jpg");
+        this.zaigard[7] = new Texture("zaigard/6.jpg");
+        this.zaigard[2] = new Texture("zaigard/7.jpg");
         progresbar = new Texture("texture/resume.png");
         load_layout.setText(font, "Load resurse: " + String.valueOf(0) + "%", Color.BLACK, Gdx.graphics.getWidth(), Align.center, true);
         press_layout.setText(font, "Press to screen", Color.BLACK, Gdx.graphics.getWidth(), Align.center, true);
@@ -44,7 +64,7 @@ public class ResLoadScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0.8705882f, 0.890196f, 0.8745098f, 1);
+        Gdx.gl.glClearColor(colors[num][0], colors[num][1], colors[num][2], 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         if (tick_timer > 0.15f) {
             Res.sprL();
@@ -52,7 +72,7 @@ public class ResLoadScreen implements Screen {
             tick_timer = 0;
         }
         batch.begin();
-        batch.draw(zaigard, 3 * wight / 8, height / 2 - height / 8, wight / 4, wight / 4);
+        batch.draw(zaigard[num], 3 * wight / 8, height / 2 - height / 8, wight / 4, wight / 4);
         batch.draw(progresbar, 3 * wight / 8, height / 2 - height / 6, wight / 4 * (float) ((float) Res.i / 17), wight / 128);
         font.draw(batch, load_layout, 0, height / 2 - height / 4);
         if (Res.end) {
@@ -107,7 +127,14 @@ public class ResLoadScreen implements Screen {
     public void dispose() {
         batch.dispose();
         font.dispose();
-        zaigard.dispose();
+        this.zaigard[0].dispose();
+        this.zaigard[1].dispose();
+        this.zaigard[2].dispose();
+        this.zaigard[3].dispose();
+        this.zaigard[4].dispose();
+        this.zaigard[5].dispose();
+        this.zaigard[6].dispose();
+        this.zaigard[7].dispose();
         progresbar.dispose();
     }
 }
