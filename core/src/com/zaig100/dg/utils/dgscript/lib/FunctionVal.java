@@ -9,6 +9,16 @@ public class FunctionVal implements Value {
     }
 
     @Override
+    public Object raw() {
+        return val;
+    }
+
+    @Override
+    public int asInt() {
+        throw new RuntimeException("Cannot cast function to number");
+    }
+
+    @Override
     public double asNum() {
         throw new RuntimeException("Cannot cast function to number");
     }
@@ -16,6 +26,11 @@ public class FunctionVal implements Value {
     @Override
     public String asString() {
         return val.toString();
+    }
+
+    @Override
+    public int type() {
+        return Types.FUNC;
     }
 
     public Function getVal() {

@@ -1,12 +1,12 @@
 package com.zaig100.dg.utils.dgscript.visitors;
 
-import com.zaig100.dg.utils.dgscript.ast.expression.VarableExpression;
+import com.zaig100.dg.utils.dgscript.ast.expression.VariableExpression;
 import com.zaig100.dg.utils.dgscript.ast.statements.AssignStatement;
 
 public class ValPrinter extends AbstractVisitor {
 
     @Override
-    public void visit(VarableExpression s) {
+    public void visit(VariableExpression s) {
         System.out.println(s.name);
     }
 

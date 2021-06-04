@@ -10,7 +10,7 @@ import com.zaig100.dg.utils.dgscript.ast.expression.ConditionalExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.FunctionalExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.UnaryExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.ValueExpression;
-import com.zaig100.dg.utils.dgscript.ast.expression.VarableExpression;
+import com.zaig100.dg.utils.dgscript.ast.expression.VariableExpression;
 import com.zaig100.dg.utils.dgscript.ast.statements.ArrayAssignStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.AssignStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.BlockStatement;
@@ -117,7 +117,7 @@ public abstract class OptimizationVisitor<T> implements ResultVisitor<Node, T> {
     }
 
     @Override
-    public Node visit(VarableExpression s, T t) {
+    public Node visit(VariableExpression s, T t) {
         return s;
     }
 

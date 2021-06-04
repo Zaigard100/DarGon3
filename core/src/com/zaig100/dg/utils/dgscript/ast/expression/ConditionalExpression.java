@@ -91,7 +91,7 @@ public final class ConditionalExpression implements Expression {
             default:
                 throw new OperationIsNotSupportedExeption(opr);
         }
-        return new NumberVal(resault);
+        return NumberVal.fromBoolean(resault);
     }
 
     @Override

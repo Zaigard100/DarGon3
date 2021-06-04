@@ -29,6 +29,16 @@ public class ArrayValue implements Value {
     }
 
     @Override
+    public Object raw() {
+        return elements;
+    }
+
+    @Override
+    public int asInt() {
+        return 0;
+    }
+
+    @Override
     public double asNum() {
         throw new RuntimeException("Cannot cast array to number");
     }
@@ -43,6 +53,11 @@ public class ArrayValue implements Value {
         }
         buff.append(']');
         return buff.toString();
+    }
+
+    @Override
+    public int type() {
+        return 0;
     }
 
     @Override

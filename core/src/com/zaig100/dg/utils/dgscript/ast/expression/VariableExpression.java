@@ -6,11 +6,11 @@ import com.zaig100.dg.utils.dgscript.lib.Variables;
 import com.zaig100.dg.utils.dgscript.visitors.Visitor;
 import com.zaig100.dg.utils.dgscript.visitors.optimizators.ResultVisitor;
 
-public class VarableExpression implements Expression {
+public class VariableExpression implements Expression {
 
     public final String name;
 
-    public VarableExpression(String name) {
+    public VariableExpression(String name) {
         this.name = name;
     }
 

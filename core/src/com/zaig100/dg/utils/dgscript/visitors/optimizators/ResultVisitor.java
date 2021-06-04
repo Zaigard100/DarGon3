@@ -7,7 +7,7 @@ import com.zaig100.dg.utils.dgscript.ast.expression.ConditionalExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.FunctionalExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.UnaryExpression;
 import com.zaig100.dg.utils.dgscript.ast.expression.ValueExpression;
-import com.zaig100.dg.utils.dgscript.ast.expression.VarableExpression;
+import com.zaig100.dg.utils.dgscript.ast.expression.VariableExpression;
 import com.zaig100.dg.utils.dgscript.ast.statements.ArrayAssignStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.AssignStatement;
 import com.zaig100.dg.utils.dgscript.ast.statements.BlockStatement;
@@ -39,7 +39,7 @@ public interface ResultVisitor<R, T> {
 
     R visit(UnaryExpression s, T t);
 
-    R visit(VarableExpression s, T t);
+    R visit(VariableExpression s, T t);
 
     R visit(ArrayAssignStatement s, T t);
 

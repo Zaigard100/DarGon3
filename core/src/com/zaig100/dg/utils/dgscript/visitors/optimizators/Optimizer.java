@@ -13,16 +13,19 @@ public class Optimizer {
         int iterOptiCount = 0, level = 1;
         final ConstantFolding cF = new ConstantFolding();
         final DeadCodeElimitation dcE = new DeadCodeElimitation();
+        final ExpressionSimplification eS = new ExpressionSimplification();
         Statement result = st;
         do {
             level++;
-            iterOptiCount = cF.optimizCount() + dcE.optimizCount();
+            iterOptiCount = cF.optimizCount() + dcE.optimizCount() + eS.optimizCount();
             result = (Statement) result.accept(cF, null);
             result = (Statement) result.accept(dcE, null);
-        } while (((cF.optimizCount() + dcE.optimizCount()) - iterOptiCount) > 0);
+            result = (Statement) result.accept(eS, null);
+        } while (((cF.optimizCount() + dcE.optimizCount() + eS.optimizCount()) - iterOptiCount) > 0);
         System.out.println("Levels: " + level);
         System.out.println(cF.sumInfo());
         System.out.println(dcE.sumInfo());
+        System.out.println(eS.sumInfo());
         return result;
     }
 

@@ -8,6 +8,20 @@ public class StringVal implements Value {
     }
 
     @Override
+    public Object raw() {
+        return val;
+    }
+
+    @Override
+    public int asInt() {
+        try {
+            return Integer.parseInt(val);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
+    @Override
     public double asNum() {
         try {
             return Double.parseDouble(val);
@@ -19,6 +33,11 @@ public class StringVal implements Value {
     @Override
     public String asString() {
         return val;
+    }
+
+    @Override
+    public int type() {
+        return Types.STR;
     }
 
     @Override
