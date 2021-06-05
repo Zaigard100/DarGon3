@@ -4,10 +4,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Res;
 
 public class HideTrap extends Obj {
-    boolean active;
+    public boolean active;
 
     public HideTrap(int x, int y, String tag) {
         super(x, y, tag);
+        type = ObjType.HIDE_TRAP;
         this.x = x;
         this.y = y;
         this.active = true;

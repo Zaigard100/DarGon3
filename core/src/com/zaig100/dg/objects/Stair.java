@@ -9,13 +9,14 @@ import com.zaig100.dg.utils.Res;
 
 public class Stair extends Obj {
 
-    boolean flip_x, end;
-    String next_path;
+    public boolean flip_x, end;
+    public String next_path;
     boolean isExit = false;
 
 
     public Stair(int x, int y, boolean flip_x, String next_path, boolean end, String tag) {
         super(x, y, tag);
+        type = ObjType.STAIR;
         this.flip_x = flip_x;
         this.next_path = next_path;
         this.end = end;

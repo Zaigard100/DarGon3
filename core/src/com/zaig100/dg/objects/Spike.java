@@ -6,12 +6,13 @@ import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
 
 public class Spike extends Obj {
-    boolean active, trigered;
-    float tick_sec;
+    public boolean active, trigered;
+    public float tick_sec;
     private float timer, timer1;
 
     public Spike(int x, int y, boolean active, float tick_sec, String tag) {
         super(x, y, tag);
+        type = ObjType.SPIKE;
         this.tick_sec = tick_sec;
         this.active = active;
     }

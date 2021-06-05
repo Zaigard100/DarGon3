@@ -9,11 +9,12 @@ import java.util.Random;
 public class Item extends Obj {
 
 
-    int itemId;
-    boolean active;
+    public int itemId;
+    public boolean active;
 
     public Item(int x, int y, int itemId, String tag) {
         super(x, y, tag);
+        type = ObjType.ITEM;
         this.itemId = itemId;
         this.active = true;
         if (itemId == 0) {
@@ -107,4 +108,11 @@ public class Item extends Obj {
         }
     }
 
+    public int getItemId() {
+        return itemId;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
 }

@@ -15,6 +15,7 @@ public class Button extends Obj {
 
     public Button(int x, int y, String[] func, String tag) {
         super(x, y, tag);
+        type = ObjType.BUTTON;
         this.func = func;
     }
 

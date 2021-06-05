@@ -4,8 +4,25 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 
 public abstract class Obj {
+
+    public enum ObjType {
+        OBJ,
+        ARROW,
+        BUTTON,
+        CROSSBOW,
+        FLAMETHROWER,
+        FLIMSY_TILE,
+        HIDE_TRAP,
+        ITEM,
+        SPIKE,
+        SPINNEY,
+        STAIR,
+        TELEPORT
+    }
+
     int x, y, wX, wY;
     String tag;
+    ObjType type = ObjType.OBJ;
 
     public Obj(int x, int y, String tag) {
         this.x = x;
@@ -50,6 +67,10 @@ public abstract class Obj {
     public abstract void frame();
 
     public abstract void tag_activate(String func);
+
+    public ObjType getType() {
+        return type;
+    }
 
     public int getX() {
         return x;

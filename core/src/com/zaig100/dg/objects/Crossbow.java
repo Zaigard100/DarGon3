@@ -9,19 +9,20 @@ import java.util.ArrayList;
 
 public class Crossbow extends Obj {
 
-    int arr_dx, arr_dy, angle;
-    float tick_sec;
+    public int dx, dy, angle;
+    public float tick_sec;
     float timer = 0;
     ArrayList<Arrow> arrs = new ArrayList<>();
 
-    public Crossbow(int x, int y, int arr_dx, int arr_dy, int angel, float tick_sec, String tag) {
+    public Crossbow(int x, int y, int dx, int dy, int angel, float tick_sec, String tag) {
 
         super(x, y, tag);
-        this.arr_dx = arr_dx;
-        this.arr_dy = arr_dy;
+        type = ObjType.CROSSBOW;
+        this.dx = dx;
+        this.dy = dy;
         this.angle = angel;
         this.tick_sec = tick_sec;
-        arrs.add(new Arrow(x, y, arr_dx, arr_dy, angle, tag + "Arr" + arrs.size()));
+        arrs.add(new Arrow(x, y, dx, dy, angle, tag + "Arr" + arrs.size()));
     }
 
     @Override
@@ -54,7 +55,7 @@ public class Crossbow extends Obj {
     public void tick(float second) {
         timer += Gdx.graphics.getDeltaTime();
         if (timer >= second) {
-            arrs.add(new Arrow(x, y, arr_dx, arr_dy, angle, tag + "Arr" + arrs.size()));
+            arrs.add(new Arrow(x, y, dx, dy, angle, tag + "Arr" + arrs.size()));
             timer = 0;
         }
     }
@@ -82,20 +83,20 @@ public class Crossbow extends Obj {
                 break;
             case "DX":
                 if (func.split(">")[1] == "++") {
-                    arr_dx++;
+                    dx++;
                 } else if (func.split(">")[1] == "--") {
-                    arr_dx--;
+                    dx--;
                 } else {
-                    arr_dx = Integer.parseInt((func.split(">")[1]));
+                    dx = Integer.parseInt((func.split(">")[1]));
                 }
                 break;
             case "DY":
                 if (func.split(">")[1] == "++") {
-                    arr_dy++;
+                    dy++;
                 } else if (func.split(">")[1] == "--") {
-                    arr_dy--;
+                    dy--;
                 } else {
-                    arr_dy = Integer.parseInt((func.split(">")[1]));
+                    dy = Integer.parseInt((func.split(">")[1]));
                 }
                 break;
             case "Angle":

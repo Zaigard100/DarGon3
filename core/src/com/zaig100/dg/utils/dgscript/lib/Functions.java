@@ -7,10 +7,14 @@ import static com.zaig100.dg.utils.dgscript.lib.NumberVal.ZERO;
 
 public class Functions {
 
-    private static final Map<String, Function> fuctions;
+    private static Map<String, Function> fuctions = new HashMap<>();
 
     static {
-        fuctions = new HashMap<>();
+        clear();
+    }
+
+    public static void clear() {
+        fuctions.clear();
         //print
         fuctions.put("print", new Function() {
             @Override

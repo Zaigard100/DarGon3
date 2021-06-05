@@ -9,12 +9,13 @@ public class FlimsyTile extends Obj {
 
 
     int x, y;
-    int crashed_lvl;
-    float tick_sec;
+    public int crashed_lvl;
+    public float tick_sec;
     float timer = 0;
 
     public FlimsyTile(int x, int y, int stage, float tick_sec, String tag) {
         super(x, y, tag);
+        type = ObjType.FLIMSY_TILE;
         this.x = x;
         this.y = y;
         this.tick_sec = tick_sec;

@@ -7,15 +7,16 @@ import com.zaig100.dg.utils.Res;
 
 public class Flamefrower extends Obj {
 
-    int max, angle, stage;
+    public int max, angle, stage;
     int flame_stage, anim_stage = 0;
     float timer = 0, fire_timer = 0;
     int dx, dy;
     int timst = 0;
-    float tick_sec;
+    public float tick_sec;
 
     public Flamefrower(int x, int y, int max, int angle, float tick_sec, String tag) {
         super(x, y, tag);
+        type = ObjType.FLAMETHROWER;
         this.stage = 0;
         this.max = max;
         this.angle = angle;

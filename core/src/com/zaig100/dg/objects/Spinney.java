@@ -5,10 +5,12 @@ import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
 
 public class Spinney extends Obj {
-    int wight, height, i, j;
+    public int wight, height;
+    private int i, j;
 
     public Spinney(int x, int y, int wight, int height, String tag) {
         super(x, y, tag);
+        type = ObjType.SPINNEY;
         this.wight = Math.abs(wight);
         this.height = Math.abs(height);
     }

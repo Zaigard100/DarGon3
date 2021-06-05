@@ -6,19 +6,20 @@ import com.zaig100.dg.utils.Res;
 
 public class Arrow extends Obj {
 
-    int crossbow_x;
-    int crossbow_y;
-    int dx;
-    int dy;
-    int angle;
+    int x;
+    int y;
+    public int dx;
+    public int dy;
+    public int angle;
     float timer = 0;
     public boolean isDel;
 
     //static Player player;
-    public Arrow(int crossbow_x, int crossbow_y, int dx, int dy, int angle, String tag) {
-        super(crossbow_x + dx, crossbow_y + dy, tag);
-        this.crossbow_x = crossbow_x;
-        this.crossbow_y = crossbow_y;
+    public Arrow(int x, int y, int dx, int dy, int angle, String tag) {
+        super(x, y, tag);
+        type = ObjType.ARROW;
+        this.x = x;
+        this.y = y;
         this.dx = dx;
         this.dy = dy;
         this.angle = angle;

@@ -8,11 +8,12 @@ import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
 
 public class Teleport extends Obj {
-    int tx, ty;
-    boolean hide;
+    public int tx, ty;
+    public boolean hide;
 
     public Teleport(int x, int y, int tx, int ty, String tag) {
         super(x, y, tag);
+        type = ObjType.TELEPORT;
         this.tx = tx;
         this.ty = ty;
         this.hide = true;

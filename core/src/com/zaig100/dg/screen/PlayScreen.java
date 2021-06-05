@@ -72,9 +72,9 @@ public class PlayScreen implements Screen {
     private Map map;
 
     private int menu = 0;
-    private ArrayList<Obj> objectsU = new ArrayList<>();
-    private ArrayList<Obj> objectsO = new ArrayList<>();
-    private ArrayList<Stair> stair = new ArrayList<>();
+    public ArrayList<Obj> objectsU = new ArrayList<>();
+    public ArrayList<Obj> objectsO = new ArrayList<>();
+    public ArrayList<Stair> stair = new ArrayList<>();
     private StairC stairС;
     private TeleportC teleportC;
     private HideTrapC hideTrapC;
@@ -456,7 +456,7 @@ public class PlayScreen implements Screen {
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || Joystick.isUse()) {
                 exit_timer += Gdx.graphics.getDeltaTime();
                 if (exit_timer > 1.0f) {
-                    System.exit(0);
+                    Gdx.app.exit();
                 }
             } else {
                 exit_timer = 0;

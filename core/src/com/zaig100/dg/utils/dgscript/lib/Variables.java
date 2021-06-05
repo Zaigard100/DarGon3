@@ -6,8 +6,8 @@ import java.util.Stack;
 
 public class Variables {
     private static final NumberVal ZERO = new NumberVal(0);
-    private static Map<String, Value> variables;
-    private static final Stack<Map<String, Value>> stack;
+    private static Map<String, Value> variables = new HashMap<>();
+    private static Stack<Map<String, Value>> stack = new Stack<>();
 
     public static void push() {
         stack.push(new HashMap<String, Value>(variables));
@@ -18,8 +18,12 @@ public class Variables {
     }
 
     static {
-        stack = new Stack<>();
-        variables = new HashMap<>();
+        clear();
+    }
+
+    public static void clear() {
+        stack.clear();
+        variables.clear();
 
     }
 
