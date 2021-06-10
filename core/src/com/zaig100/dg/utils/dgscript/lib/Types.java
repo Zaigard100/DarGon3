@@ -1,7 +1,7 @@
 package com.zaig100.dg.utils.dgscript.lib;
 
 public class Types {
-    public static final int NUM = 0, STR = 1, FUNC = 3;
+    public static final int NUM = 0, STR = 1, ARR = 2, FUNC = 3;
     private static final String[] NAMES = {"num", "str", "func"};
 
     public static String typeToString(int type) {

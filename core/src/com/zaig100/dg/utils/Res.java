@@ -3,10 +3,13 @@ package com.zaig100.dg.utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Res {
 
@@ -91,6 +94,8 @@ public class Res {
 
     static Texture crossbowT;
     static Texture fireT;
+    static Map<Integer, BitmapFont> fonts = new HashMap<>();
+    static public Texture inventar;
 
     /**
      * Resource Loading
@@ -136,6 +141,7 @@ public class Res {
             case 7:
                 Res.pause_dark = new Texture(Gdx.files.internal("texture/resume.png"));
                 Res.button = new Texture(Gdx.files.internal("texture/button.png"));
+                Res.inventar = new Texture(Gdx.files.internal("texture/inventar.png"));
                 break;
             case 8:
                 Res.joystick = new Texture(Gdx.files.internal("texture/Joystick.png"));
@@ -254,6 +260,12 @@ public class Res {
         return new Sprite(Res.tileset, x * 16, y * 16, 16, 16);
     }
 
+    static public BitmapFont getFont(int size) {
+        if (!fonts.containsKey(size)) {
+            fonts.put(size, Font.gFont(size, "fonts/GFont.ttf"));
+        }
+        return fonts.get(size);
+    }
 
     static public void dispose() {
 /*
@@ -261,6 +273,9 @@ public class Res {
         ingame.dispose();
         settingmisc.dispose();
 */
+        for (Map.Entry<Integer, BitmapFont> entry : fonts.entrySet()) {
+            entry.getValue().dispose();
+        }
         Res.clvl0.dispose();
         Res.clvl1.dispose();
         Res.clvl2.dispose();

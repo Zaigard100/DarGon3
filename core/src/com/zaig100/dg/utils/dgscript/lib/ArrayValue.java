@@ -28,6 +28,15 @@ public class ArrayValue implements Value {
         elements[index] = val;
     }
 
+    public int getLastIndex() {
+        return elements.length - 1;
+    }
+
+    public Value getLastVal() {
+        return get(getLastIndex());
+    }
+
+
     @Override
     public Object raw() {
         return elements;
@@ -57,8 +66,9 @@ public class ArrayValue implements Value {
 
     @Override
     public int type() {
-        return 0;
+        return Types.ARR;
     }
+
 
     @Override
     public String toString() {

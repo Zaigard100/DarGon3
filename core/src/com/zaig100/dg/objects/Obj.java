@@ -20,7 +20,7 @@ public abstract class Obj {
         TELEPORT
     }
 
-    int x, y, wX, wY;
+    int x, y, wX, wY, objID;
     String tag;
     ObjType type = ObjType.OBJ;
 
@@ -29,6 +29,10 @@ public abstract class Obj {
         this.y = y;
         cordinateNormalize();
         this.tag = tag;
+    }
+
+    public void setObjID(int id) {
+        objID = id;
     }
 
     public void cordinateNormalize() {
@@ -82,5 +86,9 @@ public abstract class Obj {
 
     public String getTag() {
         return tag;
+    }
+
+    public int getObjID() {
+        return objID;
     }
 }

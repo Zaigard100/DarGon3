@@ -5,13 +5,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
-public class Font
-{
-    public Font(){
+public class Font {
+    public Font() {
 
     }
-        FreeTypeFontGenerator g;
-    public BitmapFont gFont(float s,String path) {
+
+    static FreeTypeFontGenerator g;
+
+    public static BitmapFont gFont(float s, String path) {
         FreeTypeFontGenerator.FreeTypeFontParameter pr = new FreeTypeFontGenerator.FreeTypeFontParameter();
         g = new FreeTypeFontGenerator(Gdx.files.internal(path));
         pr.size = Math.round(s);
@@ -20,5 +21,7 @@ public class Font
         return font;
     }
 
-    public void dispose() { g.dispose(); }
+    public static void dispose() {
+        g.dispose();
+    }
 }

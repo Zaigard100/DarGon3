@@ -94,7 +94,7 @@ public class PlayScreen implements Screen {
     private float exit_timer = 0, sensor_timer = 0f;
 
     private boolean fir1 = true;
-    private int i;
+    private int i, idNum = 0;
 
 
     private Viewport viewport;
@@ -311,59 +311,79 @@ public class PlayScreen implements Screen {
         while (iter.hasNext()) {
             stairС = (StairC) iter.next();
             stair.add(new Stair(stairС.getX(), stairС.getY(), stairС.getFlipX(), stairС.getNext(), stairС.isEnd(), stairС.getTag()));
+            stair.get(stair.size() - 1).setObjID(idNum);
+            idNum++;
         }
 
         iter = lR.getTeleport().iterator();
         while (iter.hasNext()) {
             teleportC = (TeleportC) iter.next();
             objectsU.add(new Teleport(teleportC.getX(), teleportC.getY(), teleportC.getTx(), teleportC.getTy(), teleportC.getTag()));
+            objectsU.get(objectsU.size() - 1).setObjID(idNum);
+            idNum++;
         }
 
         iter = lR.getHide_trap().iterator();
         while (iter.hasNext()) {
             hideTrapC = (HideTrapC) iter.next();
             objectsU.add(new HideTrap(hideTrapC.getX(), hideTrapC.getY(), hideTrapC.isActive(), hideTrapC.getTag()));
+            objectsU.get(objectsU.size() - 1).setObjID(idNum);
+            idNum++;
         }
 
         iter = lR.getFlamefrower().iterator();
         while (iter.hasNext()) {
             flamefrowerС = (FlamefrowerC) iter.next();
             objectsO.add(new Flamefrower(flamefrowerС.getX(), flamefrowerС.getY(), flamefrowerС.getStage(), flamefrowerС.getMax(), flamefrowerС.getRot(), flamefrowerС.getTick_sec(), flamefrowerС.getTag()));
+            objectsO.get(objectsO.size() - 1).setObjID(idNum);
+            idNum++;
         }
 
         iter = lR.getCrosbow().iterator();
         while (iter.hasNext()) {
             crossbowC = (CrossbowC) iter.next();
             objectsO.add(new Crossbow(crossbowC.getX(), crossbowC.getY(), crossbowC.getDx(), crossbowC.getDy(), crossbowC.getAngle(), crossbowC.getTick_sec(), crossbowC.getTag()));
+            objectsO.get(objectsO.size() - 1).setObjID(idNum);
+            idNum++;
         }
         iter = lR.getItem().iterator();
         while (iter.hasNext()) {
             itemC = (ItemC) iter.next();
             objectsO.add(new Item(itemC.getX(), itemC.getY(), itemC.getId(), itemC.isActive(), itemC.getTag()));
+            objectsO.get(objectsO.size() - 1).setObjID(idNum);
+            idNum++;
         }
 
         iter = lR.getFlimsy_tile().iterator();
         while (iter.hasNext()) {
             flimsyTileC = (FlimsyTileC) iter.next();
             objectsU.add(new FlimsyTile(flimsyTileC.getX(), flimsyTileC.getY(), flimsyTileC.getStage(), flimsyTileC.getTick_sec(), flimsyTileC.getTag()));
+            objectsU.get(objectsU.size() - 1).setObjID(idNum);
+            idNum++;
         }
 
         iter = lR.getSpinney().iterator();
         while (iter.hasNext()) {
             spinneyC = (SpinneyC) iter.next();
             objectsO.add(new Spinney(spinneyC.getX(), spinneyC.getY(), spinneyC.getWight(), spinneyC.getHeight(), spinneyC.getTag()));
+            objectsO.get(objectsO.size() - 1).setObjID(idNum);
+            idNum++;
         }
 
         iter = lR.getSpike().iterator();
         while (iter.hasNext()) {
             spikeC = (SpikeC) iter.next();
             objectsU.add(new Spike(spikeC.getX(), spikeC.getY(), spikeC.isActive(), spikeC.getTick_sec(), spikeC.getTag()));
+            objectsU.get(objectsU.size() - 1).setObjID(idNum);
+            idNum++;
         }
 
         iter = lR.getButton().iterator();
         while (iter.hasNext()) {
             buttonC = (ButtonС) iter.next();
             objectsU.add((new Button(buttonC.getX(), buttonC.getY(), buttonC.getFunc(), buttonC.getTag()).setPlayScreen(this)));
+            objectsU.get(objectsU.size() - 1).setObjID(idNum);
+            idNum++;
         }
 
     }
