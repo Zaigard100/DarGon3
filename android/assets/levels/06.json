@@ -176,7 +176,7 @@
     {
       "X": 8,
       "Y": 9,
-      "ID": 0,
+      "ID": "poition",
       "Active": true
     }
   ],

@@ -12,6 +12,9 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.zaig100.dg.Main;
+import com.zaig100.dg.elements.items.Poition;
+import com.zaig100.dg.elements.items.Sheld;
+import com.zaig100.dg.elements.items.Torch;
 import com.zaig100.dg.objects.Player;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.LevelRead;
@@ -40,7 +43,6 @@ public class GameScreen implements Screen {
     boolean b_Play = false;
     boolean b_Settings = false;
     boolean b_Tutorial = false;
-    boolean isPres = false;
     boolean isExit = false;
     int button = 0;
     private int stage;
@@ -91,7 +93,7 @@ public class GameScreen implements Screen {
         backgraund();
         button_draw();
         logo_draw();
-        sensor((int) (scrW - 16 * 7 * Main.getConfiguration().getScale()), (int) (scrH - 16 * 5 * Main.getConfiguration().getScale()));
+        sensor((int) (scrW - 16 * 7 * Configuration.getScale()), (int) (scrH - 16 * 5 * Configuration.getScale()));
         batch.end();
         fbo.end();
 
@@ -109,9 +111,10 @@ public class GameScreen implements Screen {
                 case 2:
                     dispose();
                     Player.setHp(4);
-                    Player.setPotion(3);
-                    Player.setSheld(2);
-                    Player.setTorch(1);
+                    Player.inventory.clear();
+                    Player.inventory.set(new Poition(3));
+                    Player.inventory.set(new Sheld(2));
+                    Player.inventory.set(new Torch(1));
                     m.setScreen(new PlayScreen(m, "levels/01.json", false));
                     break;
                 case 3:
@@ -124,7 +127,7 @@ public class GameScreen implements Screen {
         fbo2.begin();
         batch.begin();
         batch.draw(Res.boards, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        frame.setPosition((scrW - 16 * 7 * Main.getConfiguration().getScale()) / 2, -(scrH - 16 * 5 * Main.getConfiguration().getScale()) / 2);
+        frame.setPosition((scrW - 16 * 7 * Configuration.getScale()) / 2, -(scrH - 16 * 5 * Configuration.getScale()) / 2);
         frame.draw(batch);
 
         batch.end();

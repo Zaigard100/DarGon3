@@ -4,6 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.zaig100.dg.elements.Inventory;
+import com.zaig100.dg.elements.items.Poition;
+import com.zaig100.dg.elements.items.Sheld;
+import com.zaig100.dg.elements.items.Torch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
@@ -19,12 +23,10 @@ public class Player {
     static int wX;
     static int wY;
     static int hp = 4;
-    static int potion = 3;
-    static int sheld = 2;
-    static int torch = 1;
+    public static Inventory inventory = new Inventory();
     static int stage = 0;
     static float timer = 0;
-    static boolean walked = false, walked_anim = false, flip = false, bag_opened = false;
+    static boolean walked = false, walked_anim = false, flip = false, menu_opened = false;
     static int sx, sy;
     static int wasted_id = 0;
 
@@ -37,6 +39,8 @@ public class Player {
     static float damgeScr = 100;
     static private int getYP;
 
+    static boolean inventarIsOpen = false;
+    public static boolean isPause = false, isStop = false;
 
     public Player(int x, int y, Map map) {
         Player.x = x;
@@ -46,9 +50,9 @@ public class Player {
         Player.wX = (int) (x * 16 * Configuration.getScale());
         Player.wY = (int) (y * 16 * Configuration.getScale());
         Player.hp = 4;
-        Player.potion = 3;
-        Player.sheld = 2;
-        Player.torch = 1;
+        Player.inventory.set(0, new Poition(3));
+        Player.inventory.set(1, new Sheld(2));
+        Player.inventory.set(2, new Torch(1));
         Player.map = map;
     }
 
@@ -60,9 +64,9 @@ public class Player {
         Player.wX = x * 16 * (int) Configuration.getScale();
         Player.wY = y * 16 * (int) Configuration.getScale();
         Player.map = map;
-        Player.potion = potion;
-        Player.sheld = sheld;
-        Player.torch = torch;
+        Player.inventory.set(0, new Poition(3));
+        Player.inventory.set(1, new Sheld(2));
+        Player.inventory.set(2, new Torch(1));
         Player.hp = hp;
 
     }
@@ -105,19 +109,23 @@ public class Player {
 
     }
 
-    static public void render_bag(SpriteBatch batch, BitmapFont font) {
-        batch.draw(Res.bag, 6 * 16 * Configuration.getScale(), 4 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
-        if (bag_opened) {
-            bag_use();
+    static public void render_menu(SpriteBatch batch, BitmapFont font) {
+        batch.draw(Res.menu, 6 * 16 * Configuration.getScale(), 4 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+        if (menu_opened) {
+            menu_use();
             if (hp > 0) {
                 batch.draw(Res.HP(hp), 6 * 16 * Configuration.getScale(), 3 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
             }
-            batch.draw(Res.hp_potion, 6 * 16 * Configuration.getScale(), 2 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
-            font.draw(batch, String.valueOf(potion), 6 * 16 * Configuration.getScale(), 2 * 16 * Configuration.getScale() + 4 * Configuration.getScale());
-            batch.draw(Res.sheld, 6 * 16 * Configuration.getScale(), 1 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
-            font.draw(batch, String.valueOf(sheld), 6 * 16 * Configuration.getScale(), 1 * 16 * Configuration.getScale() + 4 * Configuration.getScale());
-            batch.draw(Res.torch, 6 * 16 * Configuration.getScale(), 0 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
-            font.draw(batch, String.valueOf(torch), 6 * 16 * Configuration.getScale(), 0 * 16 * Configuration.getScale() + 4 * Configuration.getScale());
+            batch.draw(Res.bag, 6 * 16 * Configuration.getScale(), 2 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+
+            batch.draw(Res.pause, 6 * 16 * Configuration.getScale(), 1 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+
+            //batch.draw(Res.torch, 6 * 16 * Configuration.getScale(), 0 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+        }
+        if (inventarIsOpen) {
+
+            inventory.frame();
+            inventory.render(batch);
         }
     }
 
@@ -125,9 +133,9 @@ public class Player {
     static public void frame() {
         if (hp > 0) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.TAB) || Joystick.isBag()) {
-                System.out.println(bag_opened);
+                System.out.println(menu_opened);
                 Joystick.setUse(false);
-                bag_opened = !bag_opened;
+                menu_opened = !menu_opened;
             }
             if ((Gdx.input.isKeyPressed(Input.Keys.W)) || (Joystick.isUp())) {
                 if (!walked) {
@@ -226,7 +234,7 @@ public class Player {
     }
 
 
-    static void bag_use() {
+    static void menu_use() {
         sx = (int) ((Gdx.graphics.getWidth() - 16 * 7 * Configuration.getScale()) / 2);
         sy = (int) ((Gdx.graphics.getHeight() - 16 * 5 * Configuration.getScale()) / 2);
         slots[0] = false;
@@ -249,23 +257,17 @@ public class Player {
                 }
             }
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)||slots[0]){
-            if((hp<4)&&(potion>0)) {
-                potion--;
-                hp++;
-            }
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)||slots[0]) {
+            inventarIsOpen = !inventarIsOpen;
+            isStop = inventarIsOpen;
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)||slots[1]){
-            if((!isSheld)&&(sheld>0)) {
-                sheld--;
-                isSheld = true;
-            }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)||slots[1]) {
+            isPause = !isPause;
+            isStop = isPause;
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)||slots[2]){
-            if((map.isDark)&&(torch>0)) {
-                torch--;
-                map.setDark(false);
-            }
+
         }
     }
 
@@ -323,31 +325,6 @@ public class Player {
     static public int getHp() {
         return hp;
     }
-
-    static public int getPotion() {
-        return potion;
-    }
-
-    static public void setPotion(int potion) {
-        Player.potion = potion;
-    }
-
-    static public int getSheld() {
-        return sheld;
-    }
-
-    static public void setSheld(int sheld) {
-        Player.sheld = sheld;
-    }
-
-    static public int getTorch() {
-        return torch;
-    }
-
-    static public void setTorch(int torch) {
-        Player.torch = torch;
-    }
-
 
     static public boolean isSheld() {
         return isSheld;

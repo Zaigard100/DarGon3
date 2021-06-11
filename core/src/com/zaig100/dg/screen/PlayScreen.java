@@ -21,7 +21,7 @@ import com.zaig100.dg.objects.Crossbow;
 import com.zaig100.dg.objects.Flamefrower;
 import com.zaig100.dg.objects.FlimsyTile;
 import com.zaig100.dg.objects.HideTrap;
-import com.zaig100.dg.objects.Item;
+import com.zaig100.dg.objects.Items;
 import com.zaig100.dg.objects.Map;
 import com.zaig100.dg.objects.Obj;
 import com.zaig100.dg.objects.Player;
@@ -90,7 +90,7 @@ public class PlayScreen implements Screen {
     private boolean start = true;
 
 
-    private boolean is_pause = false, debag = false;
+    private boolean debag = false;
     private float exit_timer = 0, sensor_timer = 0f;
 
     private boolean fir1 = true;
@@ -158,9 +158,7 @@ public class PlayScreen implements Screen {
             if (lR.isSave()) {
                 save.setHp(Player.getHp());
                 save.setPath(path);
-                save.setPotion(Player.getPotion());
-                save.setSheld(Player.getSheld());
-                save.setTorch(Player.getTorch());
+                save.setArr(Player.inventory.inventoryToJSON());
                 save.save(save.getConf());
             }
         } catch (IOException e) {
@@ -175,7 +173,8 @@ public class PlayScreen implements Screen {
         if (!Joystick.isJoystick() && Gdx.input.isTouched()) {
             sensor_timer += delta;
             if (sensor_timer > 1f) {
-                is_pause = !is_pause;
+                Player.isPause = !Player.isPause;
+                Player.isStop = Player.isPause;
                 sensor_timer = 0;
             }
         } else {
@@ -241,7 +240,7 @@ public class PlayScreen implements Screen {
 
     private void second_render() {
         batch.draw(Res.boards, 0, 0, 16 * 7 * Configuration.getScale() * 10, 16 * 5 * Configuration.getScale() * 10);
-        if (is_pause) {
+        if (Player.isStop) {
             batch.draw(Res.pause_dark, 0, 0, 16 * 7 * Configuration.getScale() * 10, 16 * 5 * Configuration.getScale() * 10);
         }
         frame.draw(batch);
@@ -284,17 +283,17 @@ public class PlayScreen implements Screen {
         if (objectsU.size() > 0) {
             for (i = 0; i < objectsU.size(); i++) {
                 objectsU.get(i).render(batch);
-                if (!is_pause) objectsU.get(i).frame();
+                if (!Player.isStop) objectsU.get(i).frame();
             }
         }
         Player.render(batch);
-        if (!is_pause) Player.tick(0.2f);
-        if (!is_pause) Player.frame();
+        if (!Player.isStop) Player.tick(0.2f);
+        if (!Player.isStop) Player.frame();
 
         if (objectsO.size() > 0) {
             for (i = 0; i < objectsO.size(); i++) {
                 objectsO.get(i).render(batch);
-                if (!is_pause) objectsO.get(i).frame();
+                if (!Player.isStop) objectsO.get(i).frame();
             }
         }
     }
@@ -349,7 +348,7 @@ public class PlayScreen implements Screen {
         iter = lR.getItem().iterator();
         while (iter.hasNext()) {
             itemC = (ItemC) iter.next();
-            objectsO.add(new Item(itemC.getX(), itemC.getY(), itemC.getId(), itemC.isActive(), itemC.getTag()));
+            objectsO.add(new Items(itemC.getX(), itemC.getY(), itemC.getItem(), itemC.isActive(), itemC.getTag()));
             objectsO.get(objectsO.size() - 1).setObjID(idNum);
             idNum++;
         }
@@ -435,8 +434,9 @@ public class PlayScreen implements Screen {
             f2.draw(batch, " Main menu", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
             f2.draw(batch, " Load save", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
             f2.draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Joystick.isUse()) {
-                is_pause = false;
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
+                Player.isPause = false;
+                Player.isStop = false;
             }
         }
         if (menu == 1) {
@@ -444,9 +444,11 @@ public class PlayScreen implements Screen {
             f2.draw(batch, ">Main menu<", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
             f2.draw(batch, " Load save", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
             f2.draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Joystick.isUse()) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
                 dispose();
                 m.setScreen(new GameScreen(m));
+                Player.isPause = false;
+                Player.isStop = false;
             }
         }
         if(menu==2) {
@@ -454,12 +456,12 @@ public class PlayScreen implements Screen {
             f2.draw(batch, " Main menu", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
             f2.draw(batch, ">Load save<", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
             f2.draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
-            if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || Joystick.isUse()) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
                 dispose();
                 Player.setHp(save.getHp());
-                Player.setPotion(save.getPotion());
-                Player.setSheld(save.getSheld());
-                Player.setTorch(save.getTorch());
+                Player.inventory.jsonToInventory(save.getArr());
+                Player.isPause = false;
+                Player.isStop = false;
                 if (isPack) {
                     m.setScreen(new PlayScreen(m, save.getsPath(), isPack, packname, derectory));
                 } else
@@ -476,6 +478,8 @@ public class PlayScreen implements Screen {
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || Joystick.isUse()) {
                 exit_timer += Gdx.graphics.getDeltaTime();
                 if (exit_timer > 1.0f) {
+                    Player.isPause = false;
+                    Player.isStop = false;
                     Gdx.app.exit();
                 }
             } else {
@@ -506,21 +510,22 @@ public class PlayScreen implements Screen {
 
     private void render_ui() {
 
-        if (!is_pause) {
-            Player.render_bag(batch, f4);
+        if (!Player.isPause) {
+            Player.render_menu(batch, f4);
             if (start)
                 f2.draw(batch, lR.getLevelname(), 8 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
         }
-        if (Player.getHp() <= 0 && !is_pause) {
+        if (Player.getHp() <= 0 && !Player.isPause) {
             wasted_render();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            is_pause = !is_pause;
+            Player.isPause = !Player.isPause;
+            Player.isStop = Player.isPause;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.F3)) {
             debag = !debag;
         }
-        if (is_pause) {
+        if (Player.isPause) {
             pauseMenu();
         }
         Joystick.render(batch);
@@ -558,7 +563,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void pause() {
-        is_pause = true;
+        Player.isPause = true;
     }
 
     @Override
@@ -572,7 +577,6 @@ public class PlayScreen implements Screen {
 
     @Override
     public void dispose() {
-        System.out.println("123");
         batch.dispose();
         fbo.dispose();
         fbo2.dispose();

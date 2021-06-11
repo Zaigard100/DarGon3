@@ -139,7 +139,7 @@
     {
       "X": 0,
       "Y": 3,
-      "ID": 0,
+      "ID": "torch",
       "Active": true
     }
   ],

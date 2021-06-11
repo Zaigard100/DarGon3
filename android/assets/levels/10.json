@@ -284,25 +284,19 @@
     {
       "X": 9,
       "Y": 10,
-      "ID": 3,
+      "ID": "torch",
       "Active": true
     },
     {
       "X": 8,
       "Y": 10,
-      "ID": 2,
+      "ID": "sheld",
       "Active": true
     },
     {
       "X": 7,
       "Y": 10,
-      "ID": 1,
-      "Active": true
-    },
-    {
-      "X": 6,
-      "Y": 10,
-      "ID": 0,
+      "ID": "poition",
       "Active": true
     }
   ],

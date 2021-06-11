@@ -37,6 +37,8 @@ public class Res {
     static public Texture dark;
 
     static public Texture bag;
+    static public Texture menu;
+
     static public Texture hp_potion;
     static public Texture sheld;
     static public Texture torch;
@@ -96,6 +98,7 @@ public class Res {
     static Texture fireT;
     static Map<Integer, BitmapFont> fonts = new HashMap<>();
     static public Texture inventar;
+    static public Texture pause;
 
     /**
      * Resource Loading
@@ -185,10 +188,12 @@ public class Res {
             case 15:
                 Res.crossbowT = new Texture(Gdx.files.internal("texture/crossbow.png"));
                 Res.fireT = new Texture(Gdx.files.internal("texture/Fire.png"));
+                Res.pause = new Texture(Gdx.files.internal("texture/pause.png"));
                 break;
             case 16:
                 Res.spike_0 = new Texture(Gdx.files.internal("texture/spike0.png"));
                 Res.spike_1 = new Texture(Gdx.files.internal("texture/spike1.png"));
+                Res.menu = new Texture(Gdx.files.internal("texture/menu.png"));
                 break;
             case 17:
                 end = true;

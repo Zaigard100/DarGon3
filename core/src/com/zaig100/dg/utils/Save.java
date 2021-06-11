@@ -2,7 +2,9 @@ package com.zaig100.dg.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.zaig100.dg.Main;
+import com.zaig100.dg.objects.Player;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -21,16 +23,14 @@ public class Save {
     static JSONObject jsonObject;
 
     static String path = "levels/01.json";
-    static int hp = 4;
-    static int potion = 3;
-    static int sheld = 2;
-    static int torch = 1;
+    static int hp;
+    static JSONArray arr;
 
-    public  Save(Main m,String pack,String derect) throws IOException {
-         path = derect;
-        if(m.isAndroid()){
-            conf = Gdx.files.local("save"+pack+".json").file();
-        }else {
+    public Save(Main m, String pack, String derect) throws IOException {
+        path = derect;
+        if (m.isAndroid()) {
+            conf = Gdx.files.local("save" + pack + ".json").file();
+        } else {
             conf = new File(new File("").getAbsoluteFile(), "save" + pack + ".json");
         }
 
@@ -61,9 +61,7 @@ public class Save {
         try {
             path = (String) jsonObject.get("Path");
             hp = ((Long) jsonObject.get("HP")).intValue();
-            potion = ((Long) jsonObject.get("Potion")).intValue();
-            sheld = ((Long) jsonObject.get("Sheld")).intValue();
-            torch = ((Long) jsonObject.get("Torch")).intValue();
+            arr = (JSONArray) jsonObject.get("Inventory");
         }catch(NullPointerException e){
             e.printStackTrace();
         }
@@ -72,9 +70,7 @@ public class Save {
     public void save(File f){
         jsonObject.put("Path", path);
         jsonObject.put("HP", hp);
-        jsonObject.put("Potion", potion);
-        jsonObject.put("Sheld", sheld);
-        jsonObject.put("Torch", torch);
+        jsonObject.put("Inventory", Player.inventory.inventoryToJSON());
         try {
             FileWriter file = new FileWriter(f);
             file.write(jsonObject.toJSONString());
@@ -120,27 +116,11 @@ public class Save {
         Save.hp = hp;
     }
 
-    public int getPotion() {
-        return potion;
+    public JSONArray getArr() {
+        return arr;
     }
 
-    public void setPotion(int potion) {
-        Save.potion = potion;
-    }
-
-    public int getSheld() {
-        return sheld;
-    }
-
-    public void setSheld(int sheld) {
-        Save.sheld = sheld;
-    }
-
-    public int getTorch() {
-        return torch;
-    }
-
-    public void setTorch(int torch) {
-        Save.torch = torch;
+    public static void setArr(JSONArray arr) {
+        Save.arr = arr;
     }
 }

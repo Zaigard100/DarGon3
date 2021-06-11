@@ -5,7 +5,7 @@ import com.zaig100.dg.objects.Crossbow;
 import com.zaig100.dg.objects.Flamefrower;
 import com.zaig100.dg.objects.FlimsyTile;
 import com.zaig100.dg.objects.HideTrap;
-import com.zaig100.dg.objects.Item;
+import com.zaig100.dg.objects.Items;
 import com.zaig100.dg.objects.Obj;
 import com.zaig100.dg.objects.Spike;
 import com.zaig100.dg.objects.Spinney;
@@ -41,8 +41,8 @@ public class dargon implements Module {
                 arr = new ArrayValue(7);
                 arr.set(0, new NumberVal(obj.getX()));
                 arr.set(1, new NumberVal(obj.getY()));
-                arr.set(2, new NumberVal(((Item) obj).itemId));
-                arr.set(3, NumberVal.fromBoolean(((Item) obj).active));
+                //TODO Item in script
+                arr.set(3, NumberVal.fromBoolean(((Items) obj).active));
                 arr.set(4, new NumberVal(obj.getObjID()));
                 arr.set(5, new StringVal(obj.getTag()));
                 arr.set(6, new StringVal("ITEM"));

@@ -11,6 +11,8 @@ import com.zaig100.dg.objects.Player;
 import com.zaig100.dg.utils.Font;
 import com.zaig100.dg.utils.PackManager;
 
+import org.json.simple.JSONArray;
+
 public class Extension implements Screen {
 
     Main m;
@@ -80,9 +82,7 @@ public class Extension implements Screen {
         if(pM.getList().size()>0) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                 m.setScreen(new PlayScreen(m, (String) pM.getList().get(num).get("FirstLevel"), true, (String) pM.getList().get(num).get("PackName"), pM.getDestory().getPath()));
-                Player.setPotion(((Long) pM.getList().get(num).get("Poition")).intValue());
-                Player.setSheld(((Long) pM.getList().get(num).get("Sheld")).intValue());
-                Player.setTorch(((Long) pM.getList().get(num).get("Torch")).intValue());
+                Player.inventory.jsonToInventory((JSONArray) pM.getList().get(num).get("Inventory"));
             }
         }
     }
@@ -98,9 +98,7 @@ public class Extension implements Screen {
                 }
             }else {
                 m.setScreen(new PlayScreen(m, (String) pM.getList().get(num).get("FirstLevel"), true, (String) pM.getList().get(num).get("PackName"), pM.getDestory().getPath()));
-                Player.setPotion(((Long) pM.getList().get(num).get("Poition")).intValue());
-                Player.setSheld(((Long) pM.getList().get(num).get("Sheld")).intValue());
-                Player.setTorch(((Long) pM.getList().get(num).get("Torch")).intValue());
+                Player.inventory.jsonToInventory((JSONArray) pM.getList().get(num).get("Inventory"));
             }
         }
     }
