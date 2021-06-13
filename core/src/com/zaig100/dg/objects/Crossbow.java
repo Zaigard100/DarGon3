@@ -43,9 +43,7 @@ public class Crossbow extends Obj {
                 return;
             }
             arr.frame();
-
         }
-
         if (isMove()) {
             move();
         }

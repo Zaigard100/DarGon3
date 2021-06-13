@@ -39,8 +39,7 @@ public class Player {
     static float damgeScr = 100;
     static private int getYP;
 
-    static boolean inventarIsOpen = false;
-    public static boolean isPause = false, isStop = false;
+    public static boolean isPause = false, isStop = false, inventarIsOpen = false;
 
     public Player(int x, int y, Map map) {
         Player.x = x;
@@ -265,6 +264,7 @@ public class Player {
         if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)||slots[1]) {
             isPause = !isPause;
             isStop = isPause;
+            inventarIsOpen = false;
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)||slots[2]){
 

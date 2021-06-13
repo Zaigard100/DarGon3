@@ -8,7 +8,6 @@ import com.zaig100.dg.utils.Res;
 public class FlimsyTile extends Obj {
 
 
-    int x, y;
     public int crashed_lvl;
     public float tick_sec;
     float timer = 0;

@@ -35,6 +35,16 @@ public class Torch extends Item {
     }
 
     @Override
+    public void renderInMap(Batch batch, int wX, int wY) {
+        batch.draw(Res.torch,
+                wX + (0.25f * 16 * Configuration.getScale()) - Player.get_wX(),
+                wY + (0.25f * 16 * Configuration.getScale()) - Player.get_wY(),
+                16 * Configuration.getScale() * 0.5f,
+                16 * Configuration.getScale() * 0.5f
+        );
+    }
+
+    @Override
     public boolean use() {
         if (!Player.getMap().isDark()) {
             return false;

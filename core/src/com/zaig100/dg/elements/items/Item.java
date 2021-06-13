@@ -38,6 +38,8 @@ public abstract class Item {
 
     public abstract void render(Batch batch, int x, int y);
 
+    public abstract void renderInMap(Batch batch, int wX, int wY);
+
     public abstract boolean use();
 
     public abstract JSONObject toJson();

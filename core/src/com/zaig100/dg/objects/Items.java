@@ -28,7 +28,7 @@ public class Items extends Obj {
 
     public void render(SpriteBatch batch) {
         if (active) {
-
+            item.renderInMap(batch, wX, wY);
         }
     }
 

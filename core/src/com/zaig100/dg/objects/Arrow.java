@@ -6,24 +6,33 @@ import com.zaig100.dg.utils.Res;
 
 public class Arrow extends Obj {
 
-    int x;
-    int y;
     public int dx;
     public int dy;
     public int angle;
     float timer = 0;
+    int far;
     public boolean isDel;
 
-    //static Player player;
     public Arrow(int x, int y, int dx, int dy, int angle, String tag) {
         super(x, y, tag);
         type = ObjType.ARROW;
-        this.x = x;
-        this.y = y;
         this.dx = dx;
         this.dy = dy;
         this.angle = angle;
+        if (Player.getMap().mapHeight > Player.getMap().mapWidht) {
+            far = -Player.getMap().mapHeight * 2;
+        } else {
+            far = -Player.getMap().mapWidht * 2;
+        }
+    }
 
+    public Arrow(int x, int y, int dx, int dy, int angle, String tag, int far) {
+        super(x, y, tag);
+        type = ObjType.ARROW;
+        this.dx = dx;
+        this.dy = dy;
+        this.angle = angle;
+        this.far = -far;
     }
 
     @Override
@@ -46,7 +55,7 @@ public class Arrow extends Obj {
 
     @Override
     public void frame() {
-
+        //System.out.println("X "+x+" Y " +y);
         if ((x == Player.getX()) && (y == Player.getY())) {
             if (Player.getHp() > 0) {
                 if (Player.isSheld()) {
@@ -59,14 +68,14 @@ public class Arrow extends Obj {
 
         }
         isDel = last() || ((x == Player.getX()) && (y == Player.getY()));
-        if (!isMove()) {
-            x += dx;
-            y += dy;
-            timer = 0;
-        }
 
         if (isMove()) {
             move();
+        } else {
+            x += dx;
+            y += dy;
+            timer = 0;
+            far++;
         }
     }
 
@@ -128,7 +137,7 @@ public class Arrow extends Obj {
 
 
     public boolean last() {
-        return ((x < 0) || (x + dx - 1 >= Player.getMap().getMapWidht())) || ((y < 0) || (y + dy - 1 >= Player.getMap().getMapHeight()));
+        return far == 0;
     }
 
 }

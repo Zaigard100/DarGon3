@@ -66,8 +66,17 @@ public class Inventory {
                 }
             } /// Y
 
-            if (items.get(x + y * 4).use()) {
-                items.get(x + y * 4).setCount(items.get(x + y * 4).getCount() - 1);
+            if (items.get(x + y * 4).getCount() > 0) {
+                if (items.get(x + y * 4).use()) {
+                    items.get(x + y * 4).setCount(items.get(x + y * 4).getCount() - 1);
+                    if (items.get(x + y * 4).getCount() <= 0) {
+                        items.remove(x + y * 4);
+                        items.add(new Empty());
+                    }
+                }
+            } else {
+                items.remove(x + y * 4);
+                items.add(new Empty());
             }
 
         }
@@ -100,8 +109,17 @@ public class Inventory {
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            if (items.get(x + y * 4).use()) {
-                items.get(x + y * 4).setCount(items.get(x + y * 4).getCount() - 1);
+            if (items.get(x + y * 4).getCount() > 0) {
+                if (items.get(x + y * 4).use()) {
+                    items.get(x + y * 4).setCount(items.get(x + y * 4).getCount() - 1);
+                    if (items.get(x + y * 4).getCount() <= 0) {
+                        items.remove(x + y * 4);
+                        items.add(new Empty());
+                    }
+                }
+            } else {
+                items.remove(x + y * 4);
+                items.add(new Empty());
             }
         }
     }
@@ -139,7 +157,6 @@ public class Inventory {
     public void jsonToInventory(JSONArray arr) {
         for (int i = 0; i < 12; i++) {
             String type = (String) (((JSONObject) arr.get(i)).get("Type"));
-            System.out.println(type);
             if (type.equals("poition")) {
                 items.set(i, new Poition((((Long) ((JSONObject) arr.get(i)).get("Count"))).intValue()));
             } else if (type.equals("sheld")) {

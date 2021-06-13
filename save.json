@@ -1,23 +1,22 @@
 {
-  "Path": "levels\/05.json",
+  "Path": "levels\/21.json",
   "HP": 3,
   "Sheld": 2,
   "Inventory": [
     {
       "Type": "poition",
-      "Count": 3
+      "Count": 9
     },
     {
       "Type": "sheld",
-      "Count": 2
+      "Count": 9
     },
     {
       "Type": "torch",
-      "Count": 0
+      "Count": 9
     },
     {
-      "Type": "poition",
-      "Count": 1
+      "Type": "empty"
     },
     {
       "Type": "empty"

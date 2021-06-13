@@ -16,6 +16,11 @@ public class Empty extends Item {
     }
 
     @Override
+    public void renderInMap(Batch batch, int wX, int wY) {
+
+    }
+
+    @Override
     public boolean use() {
         return false;
     }

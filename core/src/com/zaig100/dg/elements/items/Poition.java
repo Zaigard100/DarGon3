@@ -36,6 +36,16 @@ public class Poition extends Item {
     }
 
     @Override
+    public void renderInMap(Batch batch, int wX, int wY) {
+        batch.draw(Res.hp_potion,
+                wX + (0.25f * 16 * Configuration.getScale()) - Player.get_wX(),
+                wY + (0.25f * 16 * Configuration.getScale()) - Player.get_wY(),
+                16 * Configuration.getScale() * 0.5f,
+                16 * Configuration.getScale() * 0.5f
+        );
+    }
+
+    @Override
     public boolean use() {
         if (Player.getHp() < 4 && Player.getHp() > 0) {
             Player.setHp(Player.getHp() + 1);

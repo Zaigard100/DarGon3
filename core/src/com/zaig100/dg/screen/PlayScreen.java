@@ -175,6 +175,7 @@ public class PlayScreen implements Screen {
             if (sensor_timer > 1f) {
                 Player.isPause = !Player.isPause;
                 Player.isStop = Player.isPause;
+                Player.inventarIsOpen = false;
                 sensor_timer = 0;
             }
         } else {
@@ -437,6 +438,7 @@ public class PlayScreen implements Screen {
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
                 Player.isPause = false;
                 Player.isStop = false;
+                Player.inventarIsOpen = false;
             }
         }
         if (menu == 1) {
@@ -449,6 +451,7 @@ public class PlayScreen implements Screen {
                 m.setScreen(new GameScreen(m));
                 Player.isPause = false;
                 Player.isStop = false;
+                Player.inventarIsOpen = false;
             }
         }
         if(menu==2) {
@@ -462,6 +465,8 @@ public class PlayScreen implements Screen {
                 Player.inventory.jsonToInventory(save.getArr());
                 Player.isPause = false;
                 Player.isStop = false;
+                Player.inventarIsOpen = false;
+                Player.setIsSheld(false);
                 if (isPack) {
                     m.setScreen(new PlayScreen(m, save.getsPath(), isPack, packname, derectory));
                 } else
@@ -480,6 +485,7 @@ public class PlayScreen implements Screen {
                 if (exit_timer > 1.0f) {
                     Player.isPause = false;
                     Player.isStop = false;
+                    Player.inventarIsOpen = false;
                     Gdx.app.exit();
                 }
             } else {
@@ -521,6 +527,7 @@ public class PlayScreen implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Player.isPause = !Player.isPause;
             Player.isStop = Player.isPause;
+            Player.inventarIsOpen = false;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.F3)) {
             debag = !debag;
