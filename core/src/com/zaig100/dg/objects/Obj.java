@@ -17,7 +17,8 @@ public abstract class Obj {
         SPIKE,
         SPINNEY,
         STAIR,
-        TELEPORT
+        TELEPORT,
+        DOOR
     }
 
     int x, y, wX, wY, objID;

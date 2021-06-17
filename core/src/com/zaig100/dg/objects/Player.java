@@ -109,7 +109,7 @@ public class Player {
     }
 
     static public void render_menu(SpriteBatch batch, BitmapFont font) {
-        batch.draw(Res.menu, 6 * 16 * Configuration.getScale(), 4 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+        batch.draw(Res.menu, 6 * 16 * Configuration.getScale() + 2 * Configuration.getScale(), 4 * 16 * Configuration.getScale() + 2 * Configuration.getScale(), 12 * Configuration.getScale(), 12 * Configuration.getScale());
         if (menu_opened) {
             menu_use();
             if (hp > 0) {
@@ -117,12 +117,11 @@ public class Player {
             }
             batch.draw(Res.bag, 6 * 16 * Configuration.getScale(), 2 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
 
-            batch.draw(Res.pause, 6 * 16 * Configuration.getScale(), 1 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+            batch.draw(Res.pause, 6 * 16 * Configuration.getScale() + 2 * Configuration.getScale(), 1 * 16 * Configuration.getScale() + 2 * Configuration.getScale(), 12 * Configuration.getScale(), 12 * Configuration.getScale());
 
             //batch.draw(Res.torch, 6 * 16 * Configuration.getScale(), 0 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
         }
         if (inventarIsOpen) {
-
             inventory.frame();
             inventory.render(batch);
         }

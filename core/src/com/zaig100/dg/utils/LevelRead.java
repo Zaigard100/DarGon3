@@ -2,8 +2,11 @@ package com.zaig100.dg.utils;
 
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
+import com.zaig100.dg.screen.GameScreen;
+import com.zaig100.dg.screen.PlayScreen;
 import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.CrossbowC;
+import com.zaig100.dg.utils.contain.DoorC;
 import com.zaig100.dg.utils.contain.FlamefrowerC;
 import com.zaig100.dg.utils.contain.FlimsyTileC;
 import com.zaig100.dg.utils.contain.HideTrapC;
@@ -47,6 +50,7 @@ public class LevelRead {
     ArrayList<SpinneyC> spinney = new ArrayList<>();
     ArrayList<SpikeC> spike = new ArrayList<>();
     ArrayList<ButtonС> button = new ArrayList<>();
+    ArrayList<DoorC> door = new ArrayList<>();
 
 
     public LevelRead(String path, boolean isPack) {
@@ -62,10 +66,20 @@ public class LevelRead {
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
+        try {
+            levelname = (String) jsonObject.get("LevelName");
+        } catch (NullPointerException npe) {
+            System.out.println("LevelName invalid");
+            PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+        }
 
-        levelname = (String) jsonObject.get("LevelName");
-        SpawnX = ((Long) ((JSONArray) jsonObject.get("Spawn")).get(0)).intValue();
-        SpawnY = ((Long) ((JSONArray) jsonObject.get("Spawn")).get(1)).intValue();
+        try {
+            SpawnX = ((Long) ((JSONArray) jsonObject.get("Spawn")).get(0)).intValue();
+            SpawnY = ((Long) ((JSONArray) jsonObject.get("Spawn")).get(1)).intValue();
+        } catch (NullPointerException npe) {
+            System.out.println("Spawn invalid in map " + levelname);
+            PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+        }
 
         map_read();
         hide_trap_read();
@@ -78,8 +92,9 @@ public class LevelRead {
         spinney_read();
         spike_read();
         button_read();
+        door_read();
         if (jsonObject.get("ReMap") != null) {
-            if ((Boolean) jsonObject.get("ReMap") == true) {
+            if ((Boolean) jsonObject.get("ReMap")) {
                 map_correct();
             }
         }
@@ -91,14 +106,19 @@ public class LevelRead {
     }
 
     private void map_read() {
-        jsonArray = (JSONArray) jsonObject.get("map");
-        wight = ((JSONArray) jsonArray.get(0)).size();
-        height = jsonArray.size();
-        map = new int[wight * height];
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < wight; j++) {
-                map[(height - i - 1) * wight + j] = ((Long) ((JSONArray) jsonArray.get(i)).get(j)).intValue();
+        try {
+            jsonArray = (JSONArray) jsonObject.get("map");
+            wight = ((JSONArray) jsonArray.get(0)).size();
+            height = jsonArray.size();
+            map = new int[wight * height];
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < wight; j++) {
+                    map[(height - i - 1) * wight + j] = ((Long) ((JSONArray) jsonArray.get(i)).get(j)).intValue();
+                }
             }
+        } catch (NullPointerException npe) {
+            System.out.println("Map invalid in level " + levelname);
+            PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
         }
     }
 
@@ -108,13 +128,18 @@ public class LevelRead {
             jsonArray = (JSONArray) jsonObject.get("HideTrap");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
-                JO = (JSONObject) iter.next();
-                if ((String) JO.get("Tag") != null) {
-                    hide_trap.add(new com.zaig100.dg.utils.contain.HideTrapC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (Boolean) JO.get("Active"), (String) JO.get("Tag")));
-                } else {
-                    hide_trap.add(new com.zaig100.dg.utils.contain.HideTrapC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (Boolean) JO.get("Active"), "HT" + i));
+                try {
+                    JO = (JSONObject) iter.next();
+                    if ((String) JO.get("Tag") != null) {
+                        hide_trap.add(new com.zaig100.dg.utils.contain.HideTrapC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (Boolean) JO.get("Active"), (String) JO.get("Tag")));
+                    } else {
+                        hide_trap.add(new com.zaig100.dg.utils.contain.HideTrapC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (Boolean) JO.get("Active"), "HT" + i));
+                    }
+                    i++;
+                } catch (NullPointerException npe) {
+                    System.out.println("HideTrap invalid in array " + i + " in map " + levelname);
+                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
                 }
-                i++;
             }
         }
     }
@@ -125,13 +150,18 @@ public class LevelRead {
             jsonArray = (JSONArray) jsonObject.get("Teleport");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
-                JO = (JSONObject) iter.next();
-                if ((String) JO.get("Tag") != null) {
-                    teleport.add(new com.zaig100.dg.utils.contain.TeleportC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("TX")).intValue(), ((Long) JO.get("TY")).intValue(), (String) JO.get("Tag")));
-                } else {
-                    teleport.add(new com.zaig100.dg.utils.contain.TeleportC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("TX")).intValue(), ((Long) JO.get("TY")).intValue(), "Tp" + i));
+                try {
+                    JO = (JSONObject) iter.next();
+                    if ((String) JO.get("Tag") != null) {
+                        teleport.add(new com.zaig100.dg.utils.contain.TeleportC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("TX")).intValue(), ((Long) JO.get("TY")).intValue(), (String) JO.get("Tag")));
+                    } else {
+                        teleport.add(new com.zaig100.dg.utils.contain.TeleportC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("TX")).intValue(), ((Long) JO.get("TY")).intValue(), "Tp" + i));
+                    }
+                    i++;
+                } catch (NullPointerException npe) {
+                    System.out.println("Teleport invalid in array " + i + " in map " + levelname);
+                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
                 }
-                i++;
             }
         }
     }
@@ -142,13 +172,18 @@ public class LevelRead {
             jsonArray = (JSONArray) jsonObject.get("Stair");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
-                JO = (JSONObject) iter.next();
-                if ((String) JO.get("Tag") != null) {
-                    stair.add(new StairC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Boolean) JO.get("FlipX")), (String) JO.get("Next"), (Boolean) JO.get("End"), (String) JO.get("Tag")));
-                } else {
-                    stair.add(new StairC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Boolean) JO.get("FlipX")), (String) JO.get("Next"), (Boolean) JO.get("End"), "St" + i));
+                try {
+                    JO = (JSONObject) iter.next();
+                    if ((String) JO.get("Tag") != null) {
+                        stair.add(new StairC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Boolean) JO.get("FlipX")), (String) JO.get("Next"), (Boolean) JO.get("End"), (String) JO.get("Tag")));
+                    } else {
+                        stair.add(new StairC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Boolean) JO.get("FlipX")), (String) JO.get("Next"), (Boolean) JO.get("End"), "St" + i));
+                    }
+                    i++;
+                } catch (NullPointerException npe) {
+                    System.out.println("Stair invalid in array " + i + " in map " + levelname);
+                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
                 }
-                i++;
             }
         }
     }
@@ -159,13 +194,18 @@ public class LevelRead {
             jsonArray = (JSONArray) jsonObject.get("Item");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
-                JO = (JSONObject) iter.next();
-                if ((String) JO.get("Tag") != null) {
-                    item.add(new com.zaig100.dg.utils.contain.ItemC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (String) JO.get("ID"), (Boolean) JO.get("Active"), (String) JO.get("Tag")));
-                } else {
-                    item.add(new com.zaig100.dg.utils.contain.ItemC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (String) JO.get("ID"), (Boolean) JO.get("Active"), "I" + i));
+                try {
+                    JO = (JSONObject) iter.next();
+                    if ((String) JO.get("Tag") != null) {
+                        item.add(new com.zaig100.dg.utils.contain.ItemC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (String) JO.get("ID"), (Boolean) JO.get("Active"), (String) JO.get("Tag")));
+                    } else {
+                        item.add(new com.zaig100.dg.utils.contain.ItemC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (String) JO.get("ID"), (Boolean) JO.get("Active"), "I" + i));
+                    }
+                    i++;
+                } catch (NullPointerException npe) {
+                    System.out.println("Item invalid in array " + i + " in map " + levelname);
+                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
                 }
-                i++;
             }
         }
     }
@@ -176,15 +216,20 @@ public class LevelRead {
             jsonArray = (JSONArray) jsonObject.get("FlimsyTile");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
-                JO = (JSONObject) iter.next();
-                if ((String) JO.get("Tag") != null) {
-                    flimsy_tile.add(new FlimsyTileC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Stage")).intValue(), (String) JO.get("Tag")));
-                } else {
-                    flimsy_tile.add(new FlimsyTileC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Stage")).intValue(), "FT" + i));
+                try {
+                    JO = (JSONObject) iter.next();
+                    if ((String) JO.get("Tag") != null) {
+                        flimsy_tile.add(new FlimsyTileC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Stage")).intValue(), (String) JO.get("Tag")));
+                    } else {
+                        flimsy_tile.add(new FlimsyTileC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Stage")).intValue(), "FT" + i));
+                    }
+                    if (JO.get("Tick") != null)
+                        flimsy_tile.get(flimsy_tile.size() - 1).setTick_sec((Double) JO.get("Tick"));
+                    i++;
+                } catch (NullPointerException npe) {
+                    System.out.println("FlimsyTile invalid in array " + i + " in map " + levelname);
+                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
                 }
-                if (JO.get("Tick") != null)
-                    flimsy_tile.get(flimsy_tile.size() - 1).setTick_sec((Double) JO.get("Tick"));
-                i++;
             }
         }
     }
@@ -195,15 +240,21 @@ public class LevelRead {
             jsonArray = (JSONArray) jsonObject.get("Flamefrower");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
-                JO = (JSONObject) iter.next();
-                if ((String) JO.get("Tag") != null) {
-                    flamefrower.add(new com.zaig100.dg.utils.contain.FlamefrowerC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Stage")).intValue(), ((Long) JO.get("Max")).intValue(), ((Long) JO.get("Rot")).intValue(), (String) JO.get("Tag")));
-                } else {
-                    flamefrower.add(new com.zaig100.dg.utils.contain.FlamefrowerC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Stage")).intValue(), ((Long) JO.get("Max")).intValue(), ((Long) JO.get("Rot")).intValue(), "Ff" + i));
+                try {
+                    JO = (JSONObject) iter.next();
+                    if ((String) JO.get("Tag") != null) {
+                        flamefrower.add(new com.zaig100.dg.utils.contain.FlamefrowerC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Stage")).intValue(), ((Long) JO.get("Max")).intValue(), ((Long) JO.get("Rot")).intValue(), (String) JO.get("Tag")));
+                    } else {
+                        flamefrower.add(new com.zaig100.dg.utils.contain.FlamefrowerC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Stage")).intValue(), ((Long) JO.get("Max")).intValue(), ((Long) JO.get("Rot")).intValue(), "Ff" + i));
+                    }
+                    if (JO.get("Tick") != null)
+                        flamefrower.get(flamefrower.size() - 1).setTick_sec((Double) JO.get("Tick"));
+                    i++;
+
+                } catch (NullPointerException npe) {
+                    System.out.println("Flamefrower invalid in array " + i + " in map " + levelname);
+                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
                 }
-                if (JO.get("Tick") != null)
-                    flamefrower.get(flamefrower.size() - 1).setTick_sec((Double) JO.get("Tick"));
-                i++;
             }
         }
     }
@@ -214,15 +265,21 @@ public class LevelRead {
             jsonArray = (JSONArray) jsonObject.get("Crossbow");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
-                JO = (JSONObject) iter.next();
-                if ((String) JO.get("Tag") != null) {
-                    crosbow.add(new com.zaig100.dg.utils.contain.CrossbowC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("DX")).intValue(), ((Long) JO.get("DY")).intValue(), ((Long) JO.get("Angle")).intValue(), (String) JO.get("Tag")));
-                } else {
-                    crosbow.add(new com.zaig100.dg.utils.contain.CrossbowC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("DX")).intValue(), ((Long) JO.get("DY")).intValue(), ((Long) JO.get("Angle")).intValue(), "Cb" + i));
+                try {
+                    JO = (JSONObject) iter.next();
+                    if ((String) JO.get("Tag") != null) {
+                        crosbow.add(new com.zaig100.dg.utils.contain.CrossbowC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("DX")).intValue(), ((Long) JO.get("DY")).intValue(), ((Long) JO.get("Angle")).intValue(), (String) JO.get("Tag")));
+                    } else {
+                        crosbow.add(new com.zaig100.dg.utils.contain.CrossbowC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("DX")).intValue(), ((Long) JO.get("DY")).intValue(), ((Long) JO.get("Angle")).intValue(), "Cb" + i));
+                    }
+                    if (JO.get("Tick") != null)
+                        crosbow.get(crosbow.size() - 1).setTick_sec((double) ((Long) JO.get("Tick")));
+                    i++;
+
+                } catch (NullPointerException npe) {
+                    System.out.println("Crossbow invalid in array " + i + " in map " + levelname);
+                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
                 }
-                if (JO.get("Tick") != null)
-                    crosbow.get(crosbow.size() - 1).setTick_sec((double) ((Long) JO.get("Tick")));
-                i++;
             }
         }
     }
@@ -233,13 +290,18 @@ public class LevelRead {
             jsonArray = (JSONArray) jsonObject.get("Spinney");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
-                JO = (JSONObject) iter.next();
-                if ((String) JO.get("Tag") != null) {
-                    spinney.add(new com.zaig100.dg.utils.contain.SpinneyC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Widht")).intValue(), ((Long) JO.get("Height")).intValue(), (String) JO.get("Tag")));
-                } else {
-                    spinney.add(new com.zaig100.dg.utils.contain.SpinneyC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Widht")).intValue(), ((Long) JO.get("Height")).intValue(), "Sn" + i));
+                try {
+                    JO = (JSONObject) iter.next();
+                    if ((String) JO.get("Tag") != null) {
+                        spinney.add(new com.zaig100.dg.utils.contain.SpinneyC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Widht")).intValue(), ((Long) JO.get("Height")).intValue(), (String) JO.get("Tag")));
+                    } else {
+                        spinney.add(new com.zaig100.dg.utils.contain.SpinneyC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Widht")).intValue(), ((Long) JO.get("Height")).intValue(), "Sn" + i));
+                    }
+                    i++;
+                } catch (NullPointerException npe) {
+                    System.out.println("Spinney invalid in array " + i + " in map " + levelname);
+                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
                 }
-                i++;
             }
         }
     }
@@ -250,15 +312,20 @@ public class LevelRead {
             jsonArray = (JSONArray) jsonObject.get("Spike");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
-                JO = (JSONObject) iter.next();
-                if ((String) JO.get("Tag") != null) {
-                    spike.add(new com.zaig100.dg.utils.contain.SpikeC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (Boolean) JO.get("Active"), (String) JO.get("Tag")));
-                } else {
-                    spike.add(new com.zaig100.dg.utils.contain.SpikeC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (Boolean) JO.get("Active"), "Sk" + i));
+                try {
+                    JO = (JSONObject) iter.next();
+                    if ((String) JO.get("Tag") != null) {
+                        spike.add(new com.zaig100.dg.utils.contain.SpikeC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (Boolean) JO.get("Active"), (String) JO.get("Tag")));
+                    } else {
+                        spike.add(new com.zaig100.dg.utils.contain.SpikeC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (Boolean) JO.get("Active"), "Sk" + i));
+                    }
+                    if (JO.get("Tick") != null)
+                        spike.get(spike.size() - 1).setTick_sec((Double) JO.get("Tick"));
+                    i++;
+                } catch (NullPointerException npe) {
+                    System.out.println("Spike invalid in array " + i + " in map " + levelname);
+                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
                 }
-                if (JO.get("Tick") != null)
-                    spike.get(spike.size() - 1).setTick_sec((Double) JO.get("Tick"));
-                i++;
             }
         }
     }
@@ -269,18 +336,45 @@ public class LevelRead {
             jsonArray = (JSONArray) jsonObject.get("Button");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
-                JO = (JSONObject) iter.next();
-                JA = (JSONArray) JO.get("Function");
-                func = new String[JA.size()];
-                for (int j = 0; j < func.length; j++) {
-                    func[j] = (String) JA.get(j);
+                try {
+                    JO = (JSONObject) iter.next();
+                    JA = (JSONArray) JO.get("Function");
+                    func = new String[JA.size()];
+                    for (int j = 0; j < func.length; j++) {
+                        func[j] = (String) JA.get(j);
+                    }
+                    if ((String) JO.get("Tag") != null) {
+                        button.add(new com.zaig100.dg.utils.contain.ButtonС(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), func, (String) JO.get("Tag")));
+                    } else {
+                        button.add(new com.zaig100.dg.utils.contain.ButtonС(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), func, "Bt" + i));
+                    }
+                    i++;
+                } catch (NullPointerException npe) {
+                    System.out.println("Button invalid in array " + i + " in map " + levelname);
+                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
                 }
-                if ((String) JO.get("Tag") != null) {
-                    button.add(new com.zaig100.dg.utils.contain.ButtonС(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), func, (String) JO.get("Tag")));
-                } else {
-                    button.add(new com.zaig100.dg.utils.contain.ButtonС(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), func, "Bt" + i));
+            }
+        }
+    }
+
+    private void door_read() {
+        if (jsonObject.get("Door") != null) {
+            i = 0;
+            jsonArray = (JSONArray) jsonObject.get("Door");
+            iter = jsonArray.iterator();
+            while (iter.hasNext()) {
+                try {
+                    JO = (JSONObject) iter.next();
+                    if ((String) JO.get("Tag") != null) {
+                        door.add(new com.zaig100.dg.utils.contain.DoorC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (String) JO.get("KeyTag"), (Boolean) JO.get("IsOpen"), ((Long) JO.get("Facing")).intValue(), (String) JO.get("Tag")));
+                    } else {
+                        door.add(new com.zaig100.dg.utils.contain.DoorC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (String) JO.get("KeyTag"), (Boolean) JO.get("IsOpen"), ((Long) JO.get("Facing")).intValue(), "Bt" + i));
+                    }
+                    i++;
+                } catch (NullPointerException npe) {
+                    System.out.println("Door invalid in array " + i + " in map " + levelname);
+                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
                 }
-                i++;
             }
         }
     }
@@ -373,7 +467,6 @@ public class LevelRead {
         }
     }
 
-
     public int[] getMap() {
         return map;
     }
@@ -396,6 +489,10 @@ public class LevelRead {
 
     public String getLevelname() {
         return levelname;
+    }
+
+    public ArrayList<DoorC> getDoor() {
+        return door;
     }
 
     public boolean isSave() {

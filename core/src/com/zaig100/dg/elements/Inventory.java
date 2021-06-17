@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.zaig100.dg.elements.items.Empty;
 import com.zaig100.dg.elements.items.Item;
+import com.zaig100.dg.elements.items.Key;
 import com.zaig100.dg.elements.items.Poition;
 import com.zaig100.dg.elements.items.Sheld;
 import com.zaig100.dg.elements.items.Torch;
@@ -163,6 +164,14 @@ public class Inventory {
                 items.set(i, new Sheld((((Long) ((JSONObject) arr.get(i)).get("Count"))).intValue()));
             } else if (type.equals("torch")) {
                 items.set(i, new Torch((((Long) ((JSONObject) arr.get(i)).get("Count"))).intValue()));
+            } else if (type.equals("key")) {
+                items.set(i, new Key(
+                                ((String) (((JSONObject) arr.get(i)).get("KeyTag"))),
+                                (((Long) ((JSONObject) arr.get(i)).get("R"))).floatValue(),
+                                (((Long) ((JSONObject) arr.get(i)).get("G"))).floatValue(),
+                                (((Long) ((JSONObject) arr.get(i)).get("B"))).floatValue()
+                        )
+                );
             } else {
                 items.set(i, new Empty());
             }

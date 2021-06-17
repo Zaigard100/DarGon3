@@ -10,7 +10,7 @@ public class Map {
 
     int mapWidht,mapHeight;
     boolean isDark;
-    int[] map;
+    public int[] map;
     int j;
     int i;
 

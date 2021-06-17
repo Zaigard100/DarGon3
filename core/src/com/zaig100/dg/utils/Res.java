@@ -24,6 +24,8 @@ public class Res {
     static public Texture tileset = new Texture(Gdx.files.internal("texture/TileSet.png"));
     static public Texture logo;
 
+    static public Texture doors = new Texture(Gdx.files.internal("texture/doors.png"));
+
     static public TextureRegion play_button;
     static public TextureRegion play_button_toched;
 
@@ -90,6 +92,8 @@ public class Res {
     static public Texture HP1, HP2, HP3, HP4;
     static public Texture spinney;
 
+    static public Sprite key;
+
     static Sprite spr = null;
 
     static Sprite spr1;
@@ -149,6 +153,7 @@ public class Res {
             case 8:
                 Res.joystick = new Texture(Gdx.files.internal("texture/Joystick.png"));
                 Res.use = new Texture(Gdx.files.internal("texture/use.png"));
+                Res.key = new Sprite(new Texture(Gdx.files.internal("texture/key.png")));
                 break;
             case 9:
                 Res.vk = new Texture(Gdx.files.internal("texture/vk.png"));
@@ -258,6 +263,10 @@ public class Res {
         return Res.hero;
     }
 
+    static public Sprite door(int i) {
+        return new Sprite(doors, 16 * i, 0, 16, 32);
+    }
+
     /**
      * @return Return tile
      */
@@ -272,15 +281,12 @@ public class Res {
         return fonts.get(size);
     }
 
+
     static public void dispose() {
-/*
-        mainmenu.dispose();
-        ingame.dispose();
-        settingmisc.dispose();
-*/
         for (Map.Entry<Integer, BitmapFont> entry : fonts.entrySet()) {
             entry.getValue().dispose();
         }
+        Res.doors.dispose();
         Res.clvl0.dispose();
         Res.clvl1.dispose();
         Res.clvl2.dispose();

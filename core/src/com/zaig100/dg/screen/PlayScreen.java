@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.zaig100.dg.Main;
 import com.zaig100.dg.objects.Button;
 import com.zaig100.dg.objects.Crossbow;
+import com.zaig100.dg.objects.Door;
 import com.zaig100.dg.objects.Flamefrower;
 import com.zaig100.dg.objects.FlimsyTile;
 import com.zaig100.dg.objects.HideTrap;
@@ -38,6 +39,7 @@ import com.zaig100.dg.utils.Save;
 import com.zaig100.dg.utils.ShaderManager;
 import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.CrossbowC;
+import com.zaig100.dg.utils.contain.DoorC;
 import com.zaig100.dg.utils.contain.FlamefrowerC;
 import com.zaig100.dg.utils.contain.FlimsyTileC;
 import com.zaig100.dg.utils.contain.HideTrapC;
@@ -57,7 +59,7 @@ public class PlayScreen implements Screen {
     private FrameBuffer fbo, fbo2;
     private SpriteBatch batch;
     private OrthographicCamera cam;
-    private Main m;
+    public static Main m;
     private Sprite frame;
     static LevelRead lR;
     static Font font;
@@ -69,7 +71,7 @@ public class PlayScreen implements Screen {
     private int scrW, scrH;
     private String path, line;
 
-    private Map map;
+    public Map map;
 
     private int menu = 0;
     public ArrayList<Obj> objectsU = new ArrayList<>();
@@ -85,6 +87,7 @@ public class PlayScreen implements Screen {
     private SpinneyC spinneyC;
     private SpikeC spikeC;
     private ButtonС buttonC;
+    private DoorC doorC;
     private Texture fr;
     private Save save;
     private boolean start = true;
@@ -106,7 +109,7 @@ public class PlayScreen implements Screen {
     private String derectory = "";
 
     public PlayScreen(Main m, String path, boolean isPack) {
-        this.m = m;
+        PlayScreen.m = m;
         this.path = path;
         this.isPack = isPack;
         width = Gdx.graphics.getWidth();
@@ -117,7 +120,7 @@ public class PlayScreen implements Screen {
     }
 
     public PlayScreen(Main m, String path, boolean isPack, String packname, String derectory) {
-        this.m = m;
+        PlayScreen.m = m;
         this.path = path;
         this.isPack = isPack;
         this.packname = packname;
@@ -307,6 +310,7 @@ public class PlayScreen implements Screen {
         map.setDark(!lR.isDark());
 
 
+
         iter = lR.getStair().iterator();
         while (iter.hasNext()) {
             stairС = (StairC) iter.next();
@@ -383,6 +387,14 @@ public class PlayScreen implements Screen {
             buttonC = (ButtonС) iter.next();
             objectsU.add((new Button(buttonC.getX(), buttonC.getY(), buttonC.getFunc(), buttonC.getTag()).setPlayScreen(this)));
             objectsU.get(objectsU.size() - 1).setObjID(idNum);
+            idNum++;
+        }
+
+        iter = lR.getDoor().iterator();
+        while (iter.hasNext()) {
+            doorC = (DoorC) iter.next();
+            objectsO.add(new Door(doorC.getX(), doorC.getY(), doorC.isDoorOpen(), doorC.getKeyTag(), doorC.getFaicing(), doorC.getTag()));
+            objectsO.get(stair.size() - 1).setObjID(idNum);
             idNum++;
         }
 
@@ -525,9 +537,12 @@ public class PlayScreen implements Screen {
             wasted_render();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            Player.isPause = !Player.isPause;
+            if (Player.inventarIsOpen) {
+                Player.inventarIsOpen = false;
+            } else {
+                Player.isPause = !Player.isPause;
+            }
             Player.isStop = Player.isPause;
-            Player.inventarIsOpen = false;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.F3)) {
             debag = !debag;

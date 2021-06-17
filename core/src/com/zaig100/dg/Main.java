@@ -10,9 +10,11 @@ import java.io.File;
 import java.io.IOException;
 
 public class Main extends Game {
+
     static boolean isAndroid;
     static File sd = null;
     static Configuration configuration;
+
     public Main(boolean isAndroid) {
         Main.isAndroid = isAndroid;
     }
