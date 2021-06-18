@@ -3,14 +3,13 @@ package com.zaig100.dg.objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.zaig100.dg.screen.PlayScreen;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
 
 public class Button extends Obj {
     String[] func;
-    PlayScreen PS;
+    Map M;
     boolean active = true;
 
     public Button(int x, int y, String[] func, String tag) {
@@ -32,7 +31,7 @@ public class Button extends Obj {
         if ((Player.getX() == x) && (Player.getY() == y) && active) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
                 for (int i = 0; i < func.length; i++) {
-                    PS.doFunc(func[i]);
+                    M.doFunc(func[i]);
                 }
                 active = false;
             }
@@ -48,8 +47,8 @@ public class Button extends Obj {
 
     }
 
-    public Button setPlayScreen(PlayScreen PS) {
-        this.PS = PS;
+    public Button setMap(Map M) {
+        this.M = M;
         return this;
     }
 

@@ -35,7 +35,7 @@ public class Player {
 
     static Random random = new Random();
 
-    static Map map;
+    static public Map map;
     static float damgeScr = 100;
     static private int getYP;
 

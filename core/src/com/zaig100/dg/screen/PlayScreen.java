@@ -16,20 +16,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.zaig100.dg.Main;
-import com.zaig100.dg.objects.Button;
-import com.zaig100.dg.objects.Crossbow;
-import com.zaig100.dg.objects.Door;
-import com.zaig100.dg.objects.Flamefrower;
-import com.zaig100.dg.objects.FlimsyTile;
-import com.zaig100.dg.objects.HideTrap;
-import com.zaig100.dg.objects.Items;
 import com.zaig100.dg.objects.Map;
-import com.zaig100.dg.objects.Obj;
 import com.zaig100.dg.objects.Player;
-import com.zaig100.dg.objects.Spike;
-import com.zaig100.dg.objects.Spinney;
-import com.zaig100.dg.objects.Stair;
-import com.zaig100.dg.objects.Teleport;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Font;
 import com.zaig100.dg.utils.Joystick;
@@ -37,21 +25,8 @@ import com.zaig100.dg.utils.LevelRead;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.Save;
 import com.zaig100.dg.utils.ShaderManager;
-import com.zaig100.dg.utils.contain.ButtonС;
-import com.zaig100.dg.utils.contain.CrossbowC;
-import com.zaig100.dg.utils.contain.DoorC;
-import com.zaig100.dg.utils.contain.FlamefrowerC;
-import com.zaig100.dg.utils.contain.FlimsyTileC;
-import com.zaig100.dg.utils.contain.HideTrapC;
-import com.zaig100.dg.utils.contain.ItemC;
-import com.zaig100.dg.utils.contain.SpikeC;
-import com.zaig100.dg.utils.contain.SpinneyC;
-import com.zaig100.dg.utils.contain.StairC;
-import com.zaig100.dg.utils.contain.TeleportC;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 public class PlayScreen implements Screen {
@@ -71,23 +46,23 @@ public class PlayScreen implements Screen {
     private int scrW, scrH;
     private String path, line;
 
-    public Map map;
+    //public Map map;
 
     private int menu = 0;
-    public ArrayList<Obj> objectsU = new ArrayList<>();
-    public ArrayList<Obj> objectsO = new ArrayList<>();
-    public ArrayList<Stair> stair = new ArrayList<>();
-    private StairC stairС;
-    private TeleportC teleportC;
-    private HideTrapC hideTrapC;
-    private FlamefrowerC flamefrowerС;
-    private CrossbowC crossbowC;
-    private ItemC itemC;
-    private FlimsyTileC flimsyTileC;
-    private SpinneyC spinneyC;
-    private SpikeC spikeC;
-    private ButtonС buttonC;
-    private DoorC doorC;
+    //public ArrayList<Obj> objectsU = new ArrayList<>();
+    //public ArrayList<Obj> objectsO = new ArrayList<>();
+    //public ArrayList<Stair> stair = new ArrayList<>();
+    //private StairC stairС;
+    //private TeleportC teleportC;
+    //private HideTrapC hideTrapC;
+    //private FlamefrowerC flamefrowerС;
+    //private CrossbowC crossbowC;
+    //private ItemC itemC;
+    //private FlimsyTileC flimsyTileC;
+    //private SpinneyC spinneyC;
+    //private SpikeC spikeC;
+    //private ButtonС buttonC;
+    //private DoorC doorC;
     private Texture fr;
     private Save save;
     private boolean start = true;
@@ -97,12 +72,12 @@ public class PlayScreen implements Screen {
     private float exit_timer = 0, sensor_timer = 0f;
 
     private boolean fir1 = true;
-    private int i, idNum = 0;
+    private int i;
 
 
     private Viewport viewport;
 
-    private Iterator iter;
+    //private Iterator iter;
 
     private boolean isPack;
     private String packname = "";
@@ -149,7 +124,8 @@ public class PlayScreen implements Screen {
         } else {
             lR = new LevelRead(path, isPack);
         }
-        object_load();
+        Player.setMap(new Map(lR.getWight(), lR.getHeight(), lR.getMap(), true));
+        Player.map.object_load(lR);
         cam.position.set(new Vector3(width / 2, height / 2, 0));
 
         try {
@@ -231,13 +207,13 @@ public class PlayScreen implements Screen {
     private void first_render() {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        map.render(batch);
+        Player.map.render(batch);
 
         stair_update();
 
-        object_update();
+        Player.getMap().object_update(batch);
 
-        map.dark_render(batch);
+        Player.map.dark_render(batch);
 
         render_ui();
     }
@@ -260,22 +236,20 @@ public class PlayScreen implements Screen {
             batch.setShader(null);
         }
     }
-
     private void stair_update() {
-        if (stair.size() > 0) {
-            for (i = 0; i < stair.size(); i++) {
-                stair.get(i).render(batch);
-                stair.get(i).frame();
-                if (stair.get(i).isExit()) {
-                    System.out.println(stairС.isEnd());
+        if (Player.getMap().stair.size() > 0) {
+            for (i = 0; i < Player.getMap().stair.size(); i++) {
+                Player.getMap().stair.get(i).render(batch);
+                Player.getMap().stair.get(i).frame();
+                if (Player.getMap().stair.get(i).isExit()) {
                     dispose();
-                    if (stair.get(i).isEnd()) {
+                    if (Player.getMap().stair.get(i).isEnd()) {
                         m.setScreen(new GameScreen(m));
                     } else {
                         if (isPack) {
-                            m.setScreen(new PlayScreen(m, stair.get(i).getNext_path(), isPack, packname, derectory));
+                            m.setScreen(new PlayScreen(m, Player.getMap().stair.get(i).getNext_path(), isPack, packname, derectory));
                         } else {
-                            m.setScreen(new PlayScreen(m, stair.get(i).getNext_path(), isPack));
+                            m.setScreen(new PlayScreen(m, Player.getMap().stair.get(i).getNext_path(), isPack));
                         }
                     }
                 }
@@ -283,148 +257,6 @@ public class PlayScreen implements Screen {
         }
     }
 
-    private void object_update() {
-        if (objectsU.size() > 0) {
-            for (i = 0; i < objectsU.size(); i++) {
-                objectsU.get(i).render(batch);
-                if (!Player.isStop) objectsU.get(i).frame();
-            }
-        }
-        Player.render(batch);
-        if (!Player.isStop) Player.tick(0.2f);
-        if (!Player.isStop) Player.frame();
-
-        if (objectsO.size() > 0) {
-            for (i = 0; i < objectsO.size(); i++) {
-                objectsO.get(i).render(batch);
-                if (!Player.isStop) objectsO.get(i).frame();
-            }
-        }
-    }
-    private void object_load() {
-        map = new Map(lR.getWight(), lR.getHeight(), lR.getMap(), true);
-        Player.setX(lR.getSpawnX());
-        Player.setY(lR.getSpawnY());
-        Player.wCordNormalize();
-        Player.setMap(map);
-        map.setDark(!lR.isDark());
-
-
-
-        iter = lR.getStair().iterator();
-        while (iter.hasNext()) {
-            stairС = (StairC) iter.next();
-            stair.add(new Stair(stairС.getX(), stairС.getY(), stairС.getFlipX(), stairС.getNext(), stairС.isEnd(), stairС.getTag()));
-            stair.get(stair.size() - 1).setObjID(idNum);
-            idNum++;
-        }
-
-        iter = lR.getTeleport().iterator();
-        while (iter.hasNext()) {
-            teleportC = (TeleportC) iter.next();
-            objectsU.add(new Teleport(teleportC.getX(), teleportC.getY(), teleportC.getTx(), teleportC.getTy(), teleportC.getTag()));
-            objectsU.get(objectsU.size() - 1).setObjID(idNum);
-            idNum++;
-        }
-
-        iter = lR.getHide_trap().iterator();
-        while (iter.hasNext()) {
-            hideTrapC = (HideTrapC) iter.next();
-            objectsU.add(new HideTrap(hideTrapC.getX(), hideTrapC.getY(), hideTrapC.isActive(), hideTrapC.getTag()));
-            objectsU.get(objectsU.size() - 1).setObjID(idNum);
-            idNum++;
-        }
-
-        iter = lR.getFlamefrower().iterator();
-        while (iter.hasNext()) {
-            flamefrowerС = (FlamefrowerC) iter.next();
-            objectsO.add(new Flamefrower(flamefrowerС.getX(), flamefrowerС.getY(), flamefrowerС.getStage(), flamefrowerС.getMax(), flamefrowerС.getRot(), flamefrowerС.getTick_sec(), flamefrowerС.getTag()));
-            objectsO.get(objectsO.size() - 1).setObjID(idNum);
-            idNum++;
-        }
-
-        iter = lR.getCrosbow().iterator();
-        while (iter.hasNext()) {
-            crossbowC = (CrossbowC) iter.next();
-            objectsO.add(new Crossbow(crossbowC.getX(), crossbowC.getY(), crossbowC.getDx(), crossbowC.getDy(), crossbowC.getAngle(), crossbowC.getTick_sec(), crossbowC.getTag()));
-            objectsO.get(objectsO.size() - 1).setObjID(idNum);
-            idNum++;
-        }
-        iter = lR.getItem().iterator();
-        while (iter.hasNext()) {
-            itemC = (ItemC) iter.next();
-            objectsU.add(new Items(itemC.getX(), itemC.getY(), itemC.getItem(), itemC.isActive(), itemC.getTag()));
-            objectsU.get(objectsU.size() - 1).setObjID(idNum);
-            idNum++;
-        }
-
-        iter = lR.getFlimsy_tile().iterator();
-        while (iter.hasNext()) {
-            flimsyTileC = (FlimsyTileC) iter.next();
-            objectsU.add(new FlimsyTile(flimsyTileC.getX(), flimsyTileC.getY(), flimsyTileC.getStage(), flimsyTileC.getTick_sec(), flimsyTileC.getTag()));
-            objectsU.get(objectsU.size() - 1).setObjID(idNum);
-            idNum++;
-        }
-
-        iter = lR.getSpinney().iterator();
-        while (iter.hasNext()) {
-            spinneyC = (SpinneyC) iter.next();
-            objectsO.add(new Spinney(spinneyC.getX(), spinneyC.getY(), spinneyC.getWight(), spinneyC.getHeight(), spinneyC.getTag()));
-            objectsO.get(objectsO.size() - 1).setObjID(idNum);
-            idNum++;
-        }
-
-        iter = lR.getSpike().iterator();
-        while (iter.hasNext()) {
-            spikeC = (SpikeC) iter.next();
-            objectsU.add(new Spike(spikeC.getX(), spikeC.getY(), spikeC.isActive(), spikeC.getTick_sec(), spikeC.getTag()));
-            objectsU.get(objectsU.size() - 1).setObjID(idNum);
-            idNum++;
-        }
-
-        iter = lR.getButton().iterator();
-        while (iter.hasNext()) {
-            buttonC = (ButtonС) iter.next();
-            objectsU.add((new Button(buttonC.getX(), buttonC.getY(), buttonC.getFunc(), buttonC.getTag()).setPlayScreen(this)));
-            objectsU.get(objectsU.size() - 1).setObjID(idNum);
-            idNum++;
-        }
-
-        iter = lR.getDoor().iterator();
-        while (iter.hasNext()) {
-            doorC = (DoorC) iter.next();
-            objectsO.add(new Door(doorC.getX(), doorC.getY(), doorC.isDoorOpen(), doorC.getKeyTag(), doorC.getFaicing(), doorC.getTag()));
-            objectsO.get(stair.size() - 1).setObjID(idNum);
-            idNum++;
-        }
-
-    }
-    public void doFunc(String func) {
-        if (stair.size() > 0) {
-            for (i = 0; i < stair.size(); i++) {
-                if (stair.get(i).getTag().equals(func.split(":")[0])) {
-                    stair.get(i).tag_activate(func.split(":")[1]);
-                }
-            }
-        }
-        if (objectsU.size() > 0) {
-            for (i = 0; i < objectsU.size(); i++) {
-                if (objectsU.get(i).getTag().equals(func.split(":")[0])) {
-                    objectsU.get(i).tag_activate(func.split(":")[1]);
-                }
-            }
-        }
-        if (objectsO.size() > 0) {
-            for (i = 0; i < objectsO.size(); i++) {
-                if (objectsO.get(i).getTag().equals(func.split(":")[0])) {
-                    objectsO.get(i).tag_activate(func.split(":")[1]);
-                }
-            }
-        }
-        if (func.split(":")[0].equals("Map")) {
-            map.tag_activate(func.split(":")[1]);
-        }
-    }
     void debugShow() {
         line = "Debug:";
         f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 10);

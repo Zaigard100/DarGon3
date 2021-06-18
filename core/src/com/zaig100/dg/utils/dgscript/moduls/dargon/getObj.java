@@ -1,7 +1,7 @@
 package com.zaig100.dg.utils.dgscript.moduls.dargon;
 
 import com.zaig100.dg.objects.Obj;
-import com.zaig100.dg.utils.dgscript.ScriptStarter;
+import com.zaig100.dg.objects.Player;
 import com.zaig100.dg.utils.dgscript.lib.ArrayValue;
 import com.zaig100.dg.utils.dgscript.lib.Function;
 import com.zaig100.dg.utils.dgscript.lib.Value;
@@ -12,9 +12,9 @@ public class getObj implements Function {
     @Override
     public Value execute(Value... args) {
 
-        final ArrayList<Obj> objs = ScriptStarter.ps.objectsU;
-        objs.addAll(ScriptStarter.ps.objectsO);
-        objs.addAll(ScriptStarter.ps.stair);
+        final ArrayList<Obj> objs = Player.map.objectsU;
+        objs.addAll(Player.map.objectsO);
+        objs.addAll(Player.map.stair);
         final ArrayList<Obj> cond = new ArrayList<>();
         for (Obj obj : objs) {
             if (obj.getTag().equals((String) args[0].asString())) {
