@@ -76,6 +76,11 @@ public class Res {
         public Music ingame;
         public Music settingmisc;
     */
+
+    static public Texture cube;
+    static public Texture item_frame;
+    static public Texture drop_item;
+
     static public Sound[] click = new Sound[3];
     static public Sound wasted;
     static public Sound lov;
@@ -126,6 +131,7 @@ public class Res {
                 Res.nextlv = new TextureRegion(new Texture(Gdx.files.internal("texture/nextlevel.png")));
                 Res.logo = new Texture(Gdx.files.internal("texture/logo.png"));
                 Res.dark = new Texture(Gdx.files.internal("texture/Dark.png"));
+                drop_item = new Texture(Gdx.files.internal("texture/drop_item.png"));
                 break;
             case 4:
                 Res.bag = new Texture(Gdx.files.internal("texture/bag.png"));
@@ -178,6 +184,8 @@ public class Res {
                 Res.clvl2 = new Texture(Gdx.files.internal("texture/2_clvl.png"));
                 Res.clvl1 = new Texture(Gdx.files.internal("texture/1_clvl.png"));
                 Res.clvl0 = new Texture(Gdx.files.internal("texture/0_clvl.png"));
+                cube = new Texture(Gdx.files.internal("texture/cube.png"));
+                item_frame = new Texture(Gdx.files.internal("texture/item_frame.png"));
                 break;
             case 13:
                 Res.run = new Texture(Gdx.files.internal("texture/run.png"));

@@ -3,6 +3,7 @@ package com.zaig100.dg.elements;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.zaig100.dg.elements.items.EasterEgg;
 import com.zaig100.dg.elements.items.Empty;
 import com.zaig100.dg.elements.items.Item;
 import com.zaig100.dg.elements.items.Key;
@@ -21,7 +22,7 @@ public class Inventory {
 
     public ArrayList<Item> items;
 
-    int x, y;
+    int x = 0, y = 0;
     int scrX, scrY;
 
     public Inventory() {
@@ -45,6 +46,13 @@ public class Inventory {
                 8 * Configuration.getScale(),
                 5 * 16 * Configuration.getScale(),
                 4 * 16 * Configuration.getScale()
+        );
+        batch.draw(
+                Res.item_frame,
+                (x + 1) * 16 * Configuration.getScale(),
+                ((2 - y) + 1) * 16 * Configuration.getScale(),
+                16 * Configuration.getScale(),
+                16 * Configuration.getScale()
         );
         for (int i = 0; i < 12; i++) {
             items.get(i).render(batch, i - ((int) (i / 4)) * 4, 2 - i / 4);
@@ -100,13 +108,18 @@ public class Inventory {
         if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
             x--;
             if (x < 0) {
-                x = 2;
+                x = 3;
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
             x++;
-            if ((x > 2)) {
+            if ((x > 3)) {
                 x = 0;
+            }
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
+            if (!items.get(x + y * 4).getType().equals("empty")) {
+
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
@@ -158,22 +171,31 @@ public class Inventory {
     public void jsonToInventory(JSONArray arr) {
         for (int i = 0; i < 12; i++) {
             String type = (String) (((JSONObject) arr.get(i)).get("Type"));
-            if (type.equals("poition")) {
-                items.set(i, new Poition((((Long) ((JSONObject) arr.get(i)).get("Count"))).intValue()));
-            } else if (type.equals("sheld")) {
-                items.set(i, new Sheld((((Long) ((JSONObject) arr.get(i)).get("Count"))).intValue()));
-            } else if (type.equals("torch")) {
-                items.set(i, new Torch((((Long) ((JSONObject) arr.get(i)).get("Count"))).intValue()));
-            } else if (type.equals("key")) {
-                items.set(i, new Key(
-                                ((String) (((JSONObject) arr.get(i)).get("KeyTag"))),
-                                (((Long) ((JSONObject) arr.get(i)).get("R"))).floatValue(),
-                                (((Long) ((JSONObject) arr.get(i)).get("G"))).floatValue(),
-                                (((Long) ((JSONObject) arr.get(i)).get("B"))).floatValue()
-                        )
-                );
-            } else {
-                items.set(i, new Empty());
+            switch (type) {
+                case "poition":
+                    items.set(i, new Poition((((Number) ((JSONObject) arr.get(i)).get("Count"))).intValue()));
+                    break;
+                case "sheld":
+                    items.set(i, new Sheld((((Number) ((JSONObject) arr.get(i)).get("Count"))).intValue()));
+                    break;
+                case "torch":
+                    items.set(i, new Torch((((Number) ((JSONObject) arr.get(i)).get("Count"))).intValue()));
+                    break;
+                case "key":
+                    items.set(i, new Key(
+                                    ((String) (((JSONObject) arr.get(i)).get("KeyTag"))),
+                                    (((Number) ((JSONObject) arr.get(i)).get("R"))).floatValue(),
+                                    (((Number) ((JSONObject) arr.get(i)).get("G"))).floatValue(),
+                                    (((Number) ((JSONObject) arr.get(i)).get("B"))).floatValue()
+                            )
+                    );
+                    break;
+                case "egg":
+                    items.set(i, new EasterEgg((String) ((JSONObject) arr.get(i)).get("Code")));
+                    break;
+                default:
+                    items.set(i, new Empty());
+                    break;
             }
         }
     }

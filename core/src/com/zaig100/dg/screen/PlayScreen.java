@@ -244,7 +244,7 @@ public class PlayScreen implements Screen {
 
     private void second_render() {
         batch.draw(Res.boards, 0, 0, 16 * 7 * Configuration.getScale() * 10, 16 * 5 * Configuration.getScale() * 10);
-        if (Player.isStop) {
+        if (Player.isPause) {
             batch.draw(Res.pause_dark, 0, 0, 16 * 7 * Configuration.getScale() * 10, 16 * 5 * Configuration.getScale() * 10);
         }
         frame.draw(batch);
@@ -353,8 +353,8 @@ public class PlayScreen implements Screen {
         iter = lR.getItem().iterator();
         while (iter.hasNext()) {
             itemC = (ItemC) iter.next();
-            objectsO.add(new Items(itemC.getX(), itemC.getY(), itemC.getItem(), itemC.isActive(), itemC.getTag()));
-            objectsO.get(objectsO.size() - 1).setObjID(idNum);
+            objectsU.add(new Items(itemC.getX(), itemC.getY(), itemC.getItem(), itemC.isActive(), itemC.getTag()));
+            objectsU.get(objectsU.size() - 1).setObjID(idNum);
             idNum++;
         }
 

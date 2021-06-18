@@ -12,7 +12,8 @@ public abstract class Item {
         POITION("poition"),
         SHELD("sheld"),
         TORCH("torch"),
-        KEY("key");
+        KEY("key"),
+        EGG("egg");
 
         String name;
 

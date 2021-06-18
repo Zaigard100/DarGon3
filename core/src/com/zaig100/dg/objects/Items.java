@@ -1,10 +1,13 @@
 package com.zaig100.dg.objects;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.elements.items.Item;
 import com.zaig100.dg.elements.items.Poition;
 import com.zaig100.dg.elements.items.Sheld;
 import com.zaig100.dg.elements.items.Torch;
+import com.zaig100.dg.utils.Joystick;
 
 public class Items extends Obj {
 
@@ -34,9 +37,11 @@ public class Items extends Obj {
 
     public void frame(){
         if(active) {
-            if ((Player.getX() == x) && (Player.getY() == y)) {
-                Player.inventory.set(item);
-                active = false;
+            if ((Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) || (Joystick.isUse())) {
+                if ((Player.getX() == x) && (Player.getY() == y)) {
+                    Player.inventory.set(item);
+                    active = false;
+                }
             }
         }
         if (isMove()) {

@@ -1,5 +1,6 @@
 package com.zaig100.dg.utils.contain;
 
+import com.zaig100.dg.elements.items.EasterEgg;
 import com.zaig100.dg.elements.items.Item;
 import com.zaig100.dg.elements.items.Key;
 import com.zaig100.dg.elements.items.Poition;
@@ -22,6 +23,7 @@ public class ItemC extends ObjC {
             case "torch":
                 item = new Torch(1);
                 break;
+
             default:
                 if (name.split(":")[0].equals("key")) {
                     item = new Key(
@@ -30,6 +32,11 @@ public class ItemC extends ObjC {
                             Float.parseFloat(name.split(":")[1].split(",")[2]),
                             Float.parseFloat(name.split(":")[1].split(",")[3])
                     );
+                    break;
+                }
+                if (name.split(":")[0].equals("key")) {
+                    item = new EasterEgg(name.split(":")[1]);
+                    break;
                 }
                 break;
         }
