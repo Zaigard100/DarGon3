@@ -70,6 +70,9 @@ public class HideTrap extends Obj {
             case "cordN":
                 cordinateNormalize();
                 break;
+            case "del":
+                del();
+                break;
         }
     }
 }

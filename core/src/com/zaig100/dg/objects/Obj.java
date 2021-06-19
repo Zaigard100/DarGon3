@@ -92,4 +92,14 @@ public abstract class Obj {
     public int getObjID() {
         return objID;
     }
+
+    public void del() {
+        if (Player.map.objectsU.contains(this)) {
+            Player.map.objectsU.remove(this);
+        } else if (Player.map.objectsO.contains(this)) {
+            Player.map.objectsO.remove(this);
+        } else if (Player.map.stair.contains(this)) {
+            Player.map.stair.remove(this);
+        }
+    }
 }

@@ -153,6 +153,9 @@ public class Flamefrower extends Obj {
             case "cordN":
                 cordinateNormalize();
                 break;
+            case "del":
+                del();
+                break;
         }
         if (angle == 0) {
             dx = 1;

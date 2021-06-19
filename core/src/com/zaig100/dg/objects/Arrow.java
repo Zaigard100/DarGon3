@@ -131,6 +131,9 @@ public class Arrow extends Obj {
             case "cordN":
                 cordinateNormalize();
                 break;
+            case "del":
+                del();
+                break;
         }
 
     }

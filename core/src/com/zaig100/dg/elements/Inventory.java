@@ -10,6 +10,8 @@ import com.zaig100.dg.elements.items.Key;
 import com.zaig100.dg.elements.items.Poition;
 import com.zaig100.dg.elements.items.Sheld;
 import com.zaig100.dg.elements.items.Torch;
+import com.zaig100.dg.objects.Items;
+import com.zaig100.dg.objects.Player;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
 
@@ -118,8 +120,33 @@ public class Inventory {
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
-            if (!items.get(x + y * 4).getType().equals("empty")) {
-
+            if (!items.get(x + y * 4).getType().equals("empty") || items.get(x + y * 4).getCount() > 0) {
+                //TODO проблема с дропом
+                Item item;
+                switch (items.get(x + y * 4).getType()) {
+                    case POITION:
+                        item = new Poition(1);
+                        break;
+                    case SHELD:
+                        item = new Sheld(1);
+                        break;
+                    case TORCH:
+                        item = new Torch(1);
+                        break;
+                    case KEY:
+                    case EGG:
+                        item = items.get(x + y * 4);
+                        item.setCount(1);
+                        break;
+                    default:
+                        return;
+                }
+                Player.map.objectsU.add(new Items(Player.getX(), Player.getY(), item, "Drop"));
+                items.get(x + y * 4).setCount(items.get(x + y * 4).getCount() - 1);
+                if (items.get(x + y * 4).getCount() <= 0) {
+                    items.remove(x + y * 4);
+                    items.add(new Empty());
+                }
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {

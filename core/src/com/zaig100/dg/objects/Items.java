@@ -47,6 +47,9 @@ public class Items extends Obj {
         if (isMove()) {
             move();
         }
+        if (!active) {
+            del();
+        }
     }
 
     @Override
@@ -90,6 +93,9 @@ public class Items extends Obj {
                 break;
             case "cordN":
                 cordinateNormalize();
+                break;
+            case "del":
+                del();
                 break;
         }
     }

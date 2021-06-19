@@ -270,6 +270,8 @@ public class PlayScreen implements Screen {
         f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 70);
         line = "NativeHeap:" + (((int) Gdx.app.getNativeHeap()) / (8 * 1024)) + " KB";
         f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 85);
+        line = "Object Count:" + Player.map.getObjCount();
+        f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 100);
     }
     void pauseMenu() {
         batch.draw(Res.pause_dark, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

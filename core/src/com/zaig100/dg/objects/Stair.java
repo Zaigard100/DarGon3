@@ -83,6 +83,9 @@ public class Stair extends Obj {
             case "cordN":
                 cordinateNormalize();
                 break;
+            case "del":
+                del();
+                break;
         }
     }
     public String getNext_path() {

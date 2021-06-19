@@ -202,7 +202,6 @@ public class Map {
         iter = lR.getButton().iterator();
         while (iter.hasNext()) {
             buttonC = (ButtonС) iter.next();
-            //TODO Buutton
             objectsU.add((new Button(buttonC.getX(), buttonC.getY(), buttonC.getFunc(), buttonC.getTag()).setMap(this)));
             objectsU.get(objectsU.size() - 1).setObjID(idNum);
             idNum++;
@@ -267,6 +266,10 @@ public class Map {
                 }
                 break;
         }
+    }
+
+    public int getObjCount() {
+        return objectsO.size() + objectsU.size() + stair.size();
     }
 
     public int getMapWidht() {
