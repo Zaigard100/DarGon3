@@ -24,7 +24,7 @@ public class Inventory {
 
     public ArrayList<Item> items;
 
-    int x = 0, y = 0;
+    int x = 0, y = 0, lastX = 0, lastY = 0;
     int scrX, scrY;
 
     public Inventory() {
@@ -56,6 +56,13 @@ public class Inventory {
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
         );
+        batch.draw(
+                Res.drop_item,
+                6 * 16 * Configuration.getScale(),
+                0 * 16 * Configuration.getScale(),
+                16 * Configuration.getScale(),
+                16 * Configuration.getScale()
+        );
         for (int i = 0; i < 12; i++) {
             items.get(i).render(batch, i - ((int) (i / 4)) * 4, 2 - i / 4);
         }
@@ -66,30 +73,74 @@ public class Inventory {
 
             scrX = (int) (Gdx.input.getX() - (sx + 16 * Configuration.getScale()));
             scrY = (int) ((Gdx.graphics.getHeight() - Gdx.input.getY()) - (sy + 16 * Configuration.getScale()));
-            for (int i = 0; i < 4; i++) {
-                if (i * 16 * Configuration.getScale() <= scrX && (i + 1) * 16 * Configuration.getScale() >= scrX) {
-                    x = i;
-                }
-            } /// X
-            for (int i = 0; i < 3; i++) {
-                if (i * 16 * Configuration.getScale() <= scrY && (i + 1) * 16 * Configuration.getScale() >= scrY) {
-                    y = 2 - i;
-                }
-            } /// Y
 
-            if (items.get(x + y * 4).getCount() > 0) {
-                if (items.get(x + y * 4).use()) {
-                    items.get(x + y * 4).setCount(items.get(x + y * 4).getCount() - 1);
-                    if (items.get(x + y * 4).getCount() <= 0) {
-                        items.remove(x + y * 4);
-                        items.add(new Empty());
+            if (-16 * Configuration.getScale() <= scrY && 0 >= scrY) {
+                if (5 * 16 * Configuration.getScale() <= scrX && 6 * 16 * Configuration.getScale() >= scrX) {
+                    if (!items.get(x + y * 4).getType().equals("empty") || items.get(x + y * 4).getCount() > 0) {
+                        Item item;
+                        switch (items.get(x + y * 4).getType()) {
+                            case POITION:
+                                item = new Poition(1);
+                                break;
+                            case SHELD:
+                                item = new Sheld(1);
+                                break;
+                            case TORCH:
+                                item = new Torch(1);
+                                break;
+                            case KEY:
+                            case EGG:
+                                item = items.get(x + y * 4);
+                                item.setCount(1);
+                                break;
+                            default:
+                                return;
+                        }
+                        Player.map.objectsU.add(new Items(Player.getX(), Player.getY(), item, "Drop"));
+                        items.get(x + y * 4).setCount(items.get(x + y * 4).getCount() - 1);
+                        if (items.get(x + y * 4).getCount() <= 0) {
+                            items.remove(x + y * 4);
+                            items.add(new Empty());
+                        }
                     }
                 }
-            } else {
-                items.remove(x + y * 4);
-                items.add(new Empty());
             }
 
+            if ((0 <= scrX) && (4 * 16 * Configuration.getScale() >= scrX)) {
+                if ((0 <= scrY) && (3 * 16 * Configuration.getScale() >= scrY)) {
+                    for (int i = 0; i < 4; i++) {
+                        if (i * 16 * Configuration.getScale() <= scrX && (i + 1) * 16 * Configuration.getScale() >= scrX) {
+                            lastX = i;
+                        }
+                    } /// X
+
+
+                    for (int i = 0; i < 3; i++) {
+                        if (i * 16 * Configuration.getScale() <= scrY && (i + 1) * 16 * Configuration.getScale() >= scrY) {
+                            lastY = 2 - i;
+                        }
+                    } /// Y
+
+
+                    if (lastX == x && lastY == y) {
+                        if (items.get(x + y * 4).getCount() > 0) {
+                            if (items.get(x + y * 4).use()) {
+                                items.get(x + y * 4).setCount(items.get(x + y * 4).getCount() - 1);
+                                if (items.get(x + y * 4).getCount() <= 0) {
+                                    items.remove(x + y * 4);
+                                    items.add(new Empty());
+                                }
+                            }
+                        } else {
+                            items.remove(x + y * 4);
+                            items.add(new Empty());
+                        }
+                    } else {
+                        x = lastX;
+                        y = lastY;
+                    }
+                }
+            }
         }
     }
 
@@ -121,7 +172,6 @@ public class Inventory {
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.Q)) {
             if (!items.get(x + y * 4).getType().equals("empty") || items.get(x + y * 4).getCount() > 0) {
-                //TODO проблема с дропом
                 Item item;
                 switch (items.get(x + y * 4).getType()) {
                     case POITION:

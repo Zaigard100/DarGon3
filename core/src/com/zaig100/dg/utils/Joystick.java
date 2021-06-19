@@ -2,13 +2,13 @@ package com.zaig100.dg.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
+import com.zaig100.dg.objects.Player;
 
 
 public class Joystick {
 
     static int getY;
-    static boolean up, right, down, left, use, Sensor, bag;
+    static boolean up, right, down, left, use, Sensor, bag, menu;
     static int pointX, pointY, deltaX, deltaY;
 
 
@@ -27,6 +27,7 @@ public class Joystick {
             up = false;
             use = false;
             bag = false;
+            menu = false;
             if (Gdx.input.justTouched()) {
                 pointX = Gdx.input.getX();
                 pointY = Gdx.graphics.getHeight() - Gdx.input.getY();
@@ -50,7 +51,7 @@ public class Joystick {
                         down = true;
                     }
                 }
-                if(Gdx.input.getX()>Gdx.graphics.getWidth()/2){
+                if (Gdx.input.getX() > Gdx.graphics.getWidth() / 2) {
                     use = true;
                 }
                 if (Gdx.input.justTouched()) {
@@ -59,6 +60,9 @@ public class Joystick {
                             bag = true;
                         }
                     }
+                }
+                if (Player.menu_opened && !Player.isPause) {
+                    use = false;
                 }
             }
         }

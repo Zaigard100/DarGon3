@@ -26,7 +26,7 @@ public class Player {
     public static Inventory inventory = new Inventory();
     static int stage = 0;
     static float timer = 0;
-    static boolean walked = false, walked_anim = false, flip = false, menu_opened = false;
+    static boolean walked = false, walked_anim = false, flip = false;
     static int sx, sy;
     static int wasted_id = 0;
 
@@ -39,7 +39,7 @@ public class Player {
     static float damgeScr = 100;
     static private int getYP;
 
-    public static boolean isPause = false, isStop = false, inventarIsOpen = false;
+    public static boolean isPause = false, isStop = false, inventarIsOpen = false, menu_opened = false;
 
     public Player(int x, int y, Map map) {
         Player.x = x;
