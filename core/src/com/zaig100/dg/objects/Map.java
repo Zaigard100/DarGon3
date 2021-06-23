@@ -1,7 +1,11 @@
 package com.zaig100.dg.objects;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Align;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.LevelRead;
 import com.zaig100.dg.utils.Res;
@@ -15,6 +19,7 @@ import com.zaig100.dg.utils.contain.ItemC;
 import com.zaig100.dg.utils.contain.SpikeC;
 import com.zaig100.dg.utils.contain.SpinneyC;
 import com.zaig100.dg.utils.contain.StairC;
+import com.zaig100.dg.utils.contain.TabletC;
 import com.zaig100.dg.utils.contain.TeleportC;
 
 import java.util.ArrayList;
@@ -29,11 +34,15 @@ public class Map {
     private FlamefrowerC flamefrowerС;
     private CrossbowC crossbowC;
     private ItemC itemC;
+    private TabletC tabletC;
     private FlimsyTileC flimsyTileC;
     private SpinneyC spinneyC;
     private SpikeC spikeC;
     private ButtonС buttonC;
     private DoorC doorC;
+
+    String[] text;
+    boolean textShow;
 
     private Iterator iter;
 
@@ -46,6 +55,8 @@ public class Map {
     public int[] map;
     int j;
     int i;
+
+    GlyphLayout textLayout = new GlyphLayout();
 
     public Map(int mapWidht, int mapHeight, int[] map, boolean isDark) {
         this.mapWidht = mapWidht;
@@ -100,6 +111,31 @@ public class Map {
         }
     }
 
+    public void show_tablet_text(Batch batch) {
+        //TODO показ текста
+        if (textShow) {
+            for (int i = 0; i < text.length; i++) {
+                textLayout.setText(
+                        Res.getFont(3),
+                        text[i],
+                        Color.WHITE, Gdx.graphics.getWidth(),
+                        Align.center,
+                        true
+                );
+                Res.getFont(3).draw(batch, textLayout, -2.5f * 16 * Configuration.getScale(), Gdx.graphics.getHeight() / 2 + 4 * Configuration.getScale() * (text.length / 2 - i));
+            }
+            if (Player.walked) {
+                textShow = false;
+            }
+        }
+    }
+
+    public void setTablet_text(String[] text) {
+        //TODO вставка текста
+        if (textShow) return;
+        this.text = text;
+        textShow = true;
+    }
 
     public void object_update(SpriteBatch batch) {
         if (objectsU.size() > 0) {
@@ -167,13 +203,6 @@ public class Map {
             objectsO.get(objectsO.size() - 1).setObjID(idNum);
             idNum++;
         }
-        iter = lR.getItem().iterator();
-        while (iter.hasNext()) {
-            itemC = (ItemC) iter.next();
-            objectsU.add(new Items(itemC.getX(), itemC.getY(), itemC.getItem(), itemC.isActive(), itemC.getTag()));
-            objectsU.get(objectsU.size() - 1).setObjID(idNum);
-            idNum++;
-        }
 
         iter = lR.getFlimsy_tile().iterator();
         while (iter.hasNext()) {
@@ -203,6 +232,22 @@ public class Map {
         while (iter.hasNext()) {
             buttonC = (ButtonС) iter.next();
             objectsU.add((new Button(buttonC.getX(), buttonC.getY(), buttonC.getFunc(), buttonC.getTag()).setMap(this)));
+            objectsU.get(objectsU.size() - 1).setObjID(idNum);
+            idNum++;
+        }
+
+        iter = lR.getItem().iterator();
+        while (iter.hasNext()) {
+            itemC = (ItemC) iter.next();
+            objectsU.add(new Items(itemC.getX(), itemC.getY(), itemC.getItem(), itemC.isActive(), itemC.getTag()));
+            objectsU.get(objectsU.size() - 1).setObjID(idNum);
+            idNum++;
+        }
+
+        iter = lR.getTablet().iterator();
+        while (iter.hasNext()) {
+            tabletC = (TabletC) iter.next();
+            objectsU.add(new Tablet(tabletC.getX(), tabletC.getY(), tabletC.getText(), tabletC.getTag()));
             objectsU.get(objectsU.size() - 1).setObjID(idNum);
             idNum++;
         }

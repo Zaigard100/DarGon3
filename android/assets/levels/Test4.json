@@ -446,14 +446,31 @@
         10
       ]
     ],
-	"ReMap": true,
-	"Stair": [
-		{
-			"X": 0,
-			"Y": 0,
-			"Next": "levels/Test.json",
-			"FlipX": false,
-			"End": false
-		}
-	]
+  "Door": [
+    {
+      "X": 18,
+      "Y": 8,
+      "KeyTag": "eek",
+      "IsOpen": false,
+      "Facing": 3
+    }
+  ],
+  "Item": [
+    {
+      "X": 18,
+      "Y": 9,
+      "ID": "egg:4601025111298",
+      "Active": true
+    }
+  ],
+  "ReMap": true,
+  "Stair": [
+    {
+      "X": 0,
+      "Y": 0,
+      "Next": "levels/Test.json",
+      "FlipX": false,
+      "End": false
+    }
+  ]
 }

@@ -45,7 +45,7 @@ public class Door extends Obj {
         if (!isDoorOpen) {
             batch.draw(Res.door(facing), wX - Player.get_wX(), wY - Player.get_wY(), 16 * Configuration.getScale(), 32 * Configuration.getScale());
             if ((Player.getX() - 1 == x || Player.getX() == x || Player.getX() + 1 == x) && (Player.getY() - 1 == y || Player.getY() == y || Player.getY() + 1 == y)) {
-                Res.getFont((int) (3 * Configuration.getScale())).draw(batch,
+                Res.getFont(3).draw(batch,
                         keyTag,
                         x * 16 * Configuration.getScale() - Player.get_wX() + 3 * 16 * Configuration.getScale(),
                         y * 16 * Configuration.getScale() - Player.get_wY() + 2 * 16 * Configuration.getScale()

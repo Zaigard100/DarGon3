@@ -27,7 +27,7 @@ public class Sheld extends Item {
                 16 * Configuration.getScale() - 6 * Configuration.getScale(),
                 16 * Configuration.getScale() - 6 * Configuration.getScale()
         );
-        Res.getFont((int) (3 * Configuration.getScale())).draw(batch,
+        Res.getFont(3).draw(batch,
                 String.valueOf(count),
                 x * 16 * Configuration.getScale() + 28 * Configuration.getScale(),
                 y * 16 * Configuration.getScale() + 22 * Configuration.getScale()

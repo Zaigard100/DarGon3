@@ -91,10 +91,18 @@
     ]
   ],
   "ReMap": true,
+  "Item": [
+    {
+      "X": 10,
+      "Y": 5,
+      "ID": "key:eek,1.0,0.8431,0.0",
+      "Active": true
+    }
+  ],
   "Stair": [
     {
-      "Y": 5,
-      "X": 10,
+      "Y": 4,
+      "X": 6,
       "Next": "levels/Test3.json",
       "FlipX": false,
       "End": false

@@ -96,6 +96,7 @@ public class Res {
     static public Texture NGSprite;
     static public Texture HP1, HP2, HP3, HP4;
     static public Texture spinney;
+    static public Texture tablet;
 
     static public Sprite key;
 
@@ -164,6 +165,7 @@ public class Res {
             case 9:
                 Res.vk = new Texture(Gdx.files.internal("texture/vk.png"));
                 Res.spinney = new Texture(Gdx.files.internal("texture/spinney.png"));
+                tablet = new Texture(Gdx.files.internal("texture/tablet.png"));
                 break;
 /*
             mainmenu = Gdx.audio.newMusic(Gdx.files.internal("sounds/mainmenu.mp3"));
@@ -284,7 +286,7 @@ public class Res {
 
     static public BitmapFont getFont(int size) {
         if (!fonts.containsKey(size)) {
-            fonts.put(size, Font.gFont(size, "fonts/GFont.ttf"));
+            fonts.put(size, Font.gFont(size * Configuration.getScale(), "fonts/GFont.ttf"));
         }
         return fonts.get(size);
     }

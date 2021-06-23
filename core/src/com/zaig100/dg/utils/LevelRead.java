@@ -14,6 +14,7 @@ import com.zaig100.dg.utils.contain.ItemC;
 import com.zaig100.dg.utils.contain.SpikeC;
 import com.zaig100.dg.utils.contain.SpinneyC;
 import com.zaig100.dg.utils.contain.StairC;
+import com.zaig100.dg.utils.contain.TabletC;
 import com.zaig100.dg.utils.contain.TeleportC;
 
 import org.json.simple.JSONArray;
@@ -36,7 +37,7 @@ public class LevelRead {
     Reader in;
     int[] map;
     boolean[][] place = new boolean[3][3];
-    String[] func;
+    String[] func, text;
     int wight, height, SpawnX, SpawnY, i;
     String levelname;
     boolean isSave, isDark;
@@ -51,7 +52,7 @@ public class LevelRead {
     ArrayList<SpikeC> spike = new ArrayList<>();
     ArrayList<ButtonС> button = new ArrayList<>();
     ArrayList<DoorC> door = new ArrayList<>();
-
+    ArrayList<TabletC> tablet = new ArrayList<>();
 
     public LevelRead(String path, boolean isPack) {
         if (isPack) {
@@ -93,6 +94,7 @@ public class LevelRead {
         spike_read();
         button_read();
         door_read();
+        tablet_read();
         if (jsonObject.get("ReMap") != null) {
             if ((Boolean) jsonObject.get("ReMap")) {
                 map_correct();
@@ -357,6 +359,33 @@ public class LevelRead {
         }
     }
 
+    private void tablet_read() {
+        if (jsonObject.get("Tablet") != null) {
+            i = 0;
+            jsonArray = (JSONArray) jsonObject.get("Tablet");
+            iter = jsonArray.iterator();
+            while (iter.hasNext()) {
+                try {
+                    JO = (JSONObject) iter.next();
+                    JA = (JSONArray) JO.get("Text");
+                    text = new String[JA.size()];
+                    for (int j = 0; j < text.length; j++) {
+                        text[j] = (String) JA.get(j);
+                    }
+                    if ((String) JO.get("Tag") != null) {
+                        tablet.add(new com.zaig100.dg.utils.contain.TabletC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), text, (String) JO.get("Tag")));
+                    } else {
+                        tablet.add(new com.zaig100.dg.utils.contain.TabletC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), text, "Tb" + i));
+                    }
+                    i++;
+                } catch (NullPointerException npe) {
+                    System.out.println("Tablet invalid in array " + i + " in map " + levelname);
+                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                }
+            }
+        }
+    }
+
     private void door_read() {
         if (jsonObject.get("Door") != null) {
             i = 0;
@@ -493,6 +522,10 @@ public class LevelRead {
 
     public ArrayList<DoorC> getDoor() {
         return door;
+    }
+
+    public ArrayList<TabletC> getTablet() {
+        return tablet;
     }
 
     public boolean isSave() {

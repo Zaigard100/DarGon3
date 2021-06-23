@@ -420,8 +420,9 @@
     {
       "Y": 14,
       "X": 9,
+      "Next": "levels/22.json",
       "FlipX": false,
-      "End": true
+      "End": false
     }
   ],
   "save": false

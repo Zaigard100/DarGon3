@@ -34,7 +34,7 @@ public class Key extends Item {
                 16 * Configuration.getScale() - 6 * Configuration.getScale()
         );
         batch.setColor(1f, 1f, 1f, 1f);
-        Res.getFont((int) (3 * Configuration.getScale())).draw(batch,
+        Res.getFont(3).draw(batch,
                 keyTag,
                 x * 16 * Configuration.getScale() + 19 * Configuration.getScale(),
                 y * 16 * Configuration.getScale() + 22 * Configuration.getScale()

@@ -39,7 +39,7 @@ public class PlayScreen implements Screen {
     static LevelRead lR;
     static Font font;
     static Random random;
-    private BitmapFont f1, f2, f3, f4;
+    private BitmapFont f1;
     private int height;
     private int width;
 
@@ -114,11 +114,8 @@ public class PlayScreen implements Screen {
         viewport = new ScreenViewport(cam);
         font = new Font();
         debag = Configuration.isDebug();
-        f1 = font.gFont(11 * Configuration.getScale(), "fonts/GFont.ttf");
-        f2 = font.gFont(6 * Configuration.getScale(), "fonts/GFont.ttf");
-        f4 = font.gFont(3 * Configuration.getScale(), "fonts/GFont.ttf");
-        f3 = new BitmapFont();
-        f3.setColor(Color.WHITE);
+        f1 = new BitmapFont();
+        f1.setColor(Color.WHITE);
         if (isPack) {
             lR = new LevelRead(derectory + path, isPack);
         } else {
@@ -216,6 +213,7 @@ public class PlayScreen implements Screen {
         Player.map.dark_render(batch);
 
         render_ui();
+
     }
 
     private void second_render() {
@@ -259,28 +257,28 @@ public class PlayScreen implements Screen {
 
     void debugShow() {
         line = "Debug:";
-        f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 10);
+        f1.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 10);
         line = "FPS:" + Gdx.graphics.getFramesPerSecond();
-        f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 25);
+        f1.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 25);
         line = "X:" + Player.getX() + "  Y:" + Player.getY();
-        f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 40);
+        f1.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 40);
         line = "WX:" + Player.get_wX() + "  WY:" + Player.get_wY();
-        f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 55);
+        f1.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 55);
         line = "JavaHeap:" + (((int) Gdx.app.getJavaHeap()) / (8 * 1024)) + " KB";
-        f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 70);
+        f1.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 70);
         line = "NativeHeap:" + (((int) Gdx.app.getNativeHeap()) / (8 * 1024)) + " KB";
-        f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 85);
+        f1.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 85);
         line = "Object Count:" + Player.map.getObjCount();
-        f3.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 100);
+        f1.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 100);
     }
     void pauseMenu() {
         batch.draw(Res.pause_dark, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        f1.draw(batch, "Pause", 2.2f * 16 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
+        Res.getFont(11).draw(batch, "Pause", 2.2f * 16 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
         if (menu == 0) {
-            f2.draw(batch, ">Resume<", 2.2f * 16 * Configuration.getScale(), 3.5f * 16 * Configuration.getScale());
-            f2.draw(batch, " Main menu", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
-            f2.draw(batch, " Load save", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
-            f2.draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
+            Res.getFont(6).draw(batch, ">Resume<", 2.2f * 16 * Configuration.getScale(), 3.5f * 16 * Configuration.getScale());
+            Res.getFont(6).draw(batch, " Main menu", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
+            Res.getFont(6).draw(batch, " Load save", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
+            Res.getFont(6).draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
                 Player.isPause = false;
                 Player.isStop = false;
@@ -288,10 +286,10 @@ public class PlayScreen implements Screen {
             }
         }
         if (menu == 1) {
-            f2.draw(batch, " Resume", 2.2f * 16 * Configuration.getScale(), 3.5f * 16 * Configuration.getScale());
-            f2.draw(batch, ">Main menu<", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
-            f2.draw(batch, " Load save", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
-            f2.draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
+            Res.getFont(6).draw(batch, " Resume", 2.2f * 16 * Configuration.getScale(), 3.5f * 16 * Configuration.getScale());
+            Res.getFont(6).draw(batch, ">Main menu<", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
+            Res.getFont(6).draw(batch, " Load save", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
+            Res.getFont(6).draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
                 dispose();
                 m.setScreen(new GameScreen(m));
@@ -301,10 +299,10 @@ public class PlayScreen implements Screen {
             }
         }
         if(menu==2) {
-            f2.draw(batch, " Resume", 2.2f * 16 * Configuration.getScale(), 3.5f * 16 * Configuration.getScale());
-            f2.draw(batch, " Main menu", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
-            f2.draw(batch, ">Load save<", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
-            f2.draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
+            Res.getFont(6).draw(batch, " Resume", 2.2f * 16 * Configuration.getScale(), 3.5f * 16 * Configuration.getScale());
+            Res.getFont(6).draw(batch, " Main menu", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
+            Res.getFont(6).draw(batch, ">Load save<", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
+            Res.getFont(6).draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
                 dispose();
                 Player.setHp(save.getHp());
@@ -322,10 +320,10 @@ public class PlayScreen implements Screen {
         }
 
         if(menu==3) {
-            f2.draw(batch, " Resume", 2.2f * 16 * Configuration.getScale(), 3.5f * 16 * Configuration.getScale());
-            f2.draw(batch, " Main menu", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
-            f2.draw(batch, " Load save", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
-            f2.draw(batch, ">Exit(Hold)<", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
+            Res.getFont(6).draw(batch, " Resume", 2.2f * 16 * Configuration.getScale(), 3.5f * 16 * Configuration.getScale());
+            Res.getFont(6).draw(batch, " Main menu", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
+            Res.getFont(6).draw(batch, " Load save", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
+            Res.getFont(6).draw(batch, ">Exit(Hold)<", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || Joystick.isUse()) {
                 exit_timer += Gdx.graphics.getDeltaTime();
                 if (exit_timer > 1.0f) {
@@ -363,9 +361,10 @@ public class PlayScreen implements Screen {
     private void render_ui() {
 
         if (!Player.isPause) {
-            Player.render_menu(batch, f4);
+            Player.render_menu(batch, Res.getFont(3));
             if (start)
-                f2.draw(batch, lR.getLevelname(), 8 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
+                Res.getFont(6).draw(batch, lR.getLevelname(), 8 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
+            Player.map.show_tablet_text(batch);
         }
         if (Player.getHp() <= 0 && !Player.isPause) {
             wasted_render();
@@ -392,8 +391,8 @@ public class PlayScreen implements Screen {
     private void wasted_render() {
         if (fir1) Res.wasted.play(2.0f);
         fir1 = false;
-        f1.draw(batch, "Wasted", 2 * 16 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
-        f2.draw(batch, "Press Space", 2 * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
+        Res.getFont(11).draw(batch, "Wasted", 2 * 16 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
+        Res.getFont(6).draw(batch, "Press Space", 2 * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Joystick.isUse()) {
             m.setScreen(new GameScreen(m));
 
@@ -436,10 +435,5 @@ public class PlayScreen implements Screen {
         batch.dispose();
         fbo.dispose();
         fbo2.dispose();
-        f1.dispose();
-        f2.dispose();
-        f3.dispose();
-        f4.dispose();
-        font.dispose();
     }
 }

@@ -34,7 +34,7 @@ public class ItemC extends ObjC {
                     );
                     break;
                 }
-                if (name.split(":")[0].equals("key")) {
+                if (name.split(":")[0].equals("egg")) {
                     item = new EasterEgg(name.split(":")[1]);
                     break;
                 }
