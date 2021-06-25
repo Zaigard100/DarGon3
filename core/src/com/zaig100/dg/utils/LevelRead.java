@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.zaig100.dg.screen.GameScreen;
 import com.zaig100.dg.screen.PlayScreen;
 import com.zaig100.dg.utils.contain.ButtonС;
+import com.zaig100.dg.utils.contain.ChestC;
 import com.zaig100.dg.utils.contain.CrossbowC;
 import com.zaig100.dg.utils.contain.DoorC;
 import com.zaig100.dg.utils.contain.FlamefrowerC;
@@ -53,6 +54,7 @@ public class LevelRead {
     ArrayList<ButtonС> button = new ArrayList<>();
     ArrayList<DoorC> door = new ArrayList<>();
     ArrayList<TabletC> tablet = new ArrayList<>();
+    ArrayList<ChestC> chest = new ArrayList<>();
 
     public LevelRead(String path, boolean isPack) {
         if (isPack) {
@@ -95,6 +97,7 @@ public class LevelRead {
         button_read();
         door_read();
         tablet_read();
+        chest_read();
         if (jsonObject.get("ReMap") != null) {
             if ((Boolean) jsonObject.get("ReMap")) {
                 map_correct();
@@ -121,6 +124,37 @@ public class LevelRead {
         } catch (NullPointerException npe) {
             System.out.println("Map invalid in level " + levelname);
             PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+        }
+    }
+
+    private void chest_read() {
+        if (jsonObject.get("Chest") != null) {
+            i = 0;
+            jsonArray = (JSONArray) jsonObject.get("Chest");
+            iter = jsonArray.iterator();
+            while (iter.hasNext()) {
+                try {
+                    JO = (JSONObject) iter.next();
+                    if ((String) JO.get("Tag") != null) {
+                        if (JO.get("Loked") == null || JO.get("Open") == null) {
+                            chest.add(new com.zaig100.dg.utils.contain.ChestC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (JSONArray) JO.get("Items"), (String) JO.get("Tag")));
+                        } else {
+                            chest.add(new com.zaig100.dg.utils.contain.ChestC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (JSONArray) JO.get("Items"), (Boolean) JO.get("Loked"), (String) JO.get("KeyTag"), (Boolean) JO.get("Open"), (String) JO.get("Tag")));
+                        }
+
+                    } else {
+                        if (JO.get("Looked") == null || JO.get("open") == null) {
+                            chest.add(new com.zaig100.dg.utils.contain.ChestC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (JSONArray) JO.get("Items"), (String) JO.get("Tag")));
+                        } else {
+                            chest.add(new com.zaig100.dg.utils.contain.ChestC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (JSONArray) JO.get("Items"), (Boolean) JO.get("Loked"), (String) JO.get("KeyTag"), (Boolean) JO.get("Open"), (String) JO.get("Tag")));
+                        }
+                    }
+                    i++;
+                } catch (NullPointerException npe) {
+                    System.out.println("Chest invalid in array " + i + " in map " + levelname);
+                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                }
+            }
         }
     }
 
@@ -518,6 +552,10 @@ public class LevelRead {
 
     public String getLevelname() {
         return levelname;
+    }
+
+    public ArrayList<ChestC> getChest() {
+        return chest;
     }
 
     public ArrayList<DoorC> getDoor() {

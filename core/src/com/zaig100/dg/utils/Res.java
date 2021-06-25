@@ -59,6 +59,7 @@ public class Res {
     static public Texture spike_1;
 
     static public Texture button;
+    static public Texture chest;
 
     static Sprite hero;
 
@@ -166,6 +167,7 @@ public class Res {
                 Res.vk = new Texture(Gdx.files.internal("texture/vk.png"));
                 Res.spinney = new Texture(Gdx.files.internal("texture/spinney.png"));
                 tablet = new Texture(Gdx.files.internal("texture/tablet.png"));
+                chest = new Texture(Gdx.files.internal("texture/chest.png"));
                 break;
 /*
             mainmenu = Gdx.audio.newMusic(Gdx.files.internal("sounds/mainmenu.mp3"));
@@ -230,10 +232,17 @@ public class Res {
 
     }
 
+    static public Sprite chest(boolean stage) {
+        if (stage) {
+            Res.num = 1;
+        } else {
+            Res.num = 0;
+        }
+        return new Sprite(chest, 16 * num, 0, 16, 16);
+    }
 
     static public Sprite fire(int stage) {
         Res.spr1 = new Sprite(fireT, 16 * stage, 0, 16, 16);
-
         return Res.spr1;
     }
 

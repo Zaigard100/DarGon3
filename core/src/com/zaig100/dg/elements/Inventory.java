@@ -3,10 +3,8 @@ package com.zaig100.dg.elements;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.zaig100.dg.elements.items.EasterEgg;
 import com.zaig100.dg.elements.items.Empty;
 import com.zaig100.dg.elements.items.Item;
-import com.zaig100.dg.elements.items.Key;
 import com.zaig100.dg.elements.items.Poition;
 import com.zaig100.dg.elements.items.Sheld;
 import com.zaig100.dg.elements.items.Torch;
@@ -217,6 +215,7 @@ public class Inventory {
 
     public boolean set(Item item) {
         for (int i = 0; i < 12; i++) {
+            if (item.getType() == Item.ItemType.KEY) break;
             if (items.get(i).getType() == item.getType()) {
                 items.get(i).setCount(items.get(i).getCount() + 1);
                 return true;
@@ -247,33 +246,7 @@ public class Inventory {
 
     public void jsonToInventory(JSONArray arr) {
         for (int i = 0; i < 12; i++) {
-            String type = (String) (((JSONObject) arr.get(i)).get("Type"));
-            switch (type) {
-                case "poition":
-                    items.set(i, new Poition((((Number) ((JSONObject) arr.get(i)).get("Count"))).intValue()));
-                    break;
-                case "sheld":
-                    items.set(i, new Sheld((((Number) ((JSONObject) arr.get(i)).get("Count"))).intValue()));
-                    break;
-                case "torch":
-                    items.set(i, new Torch((((Number) ((JSONObject) arr.get(i)).get("Count"))).intValue()));
-                    break;
-                case "key":
-                    items.set(i, new Key(
-                                    ((String) (((JSONObject) arr.get(i)).get("KeyTag"))),
-                                    (((Number) ((JSONObject) arr.get(i)).get("R"))).floatValue(),
-                                    (((Number) ((JSONObject) arr.get(i)).get("G"))).floatValue(),
-                                    (((Number) ((JSONObject) arr.get(i)).get("B"))).floatValue()
-                            )
-                    );
-                    break;
-                case "egg":
-                    items.set(i, new EasterEgg((String) ((JSONObject) arr.get(i)).get("Code")));
-                    break;
-                default:
-                    items.set(i, new Empty());
-                    break;
-            }
+            items.set(i, Item.jsonToItem((JSONObject) arr.get(i)));
         }
     }
 

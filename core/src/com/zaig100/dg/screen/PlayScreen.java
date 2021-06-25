@@ -46,23 +46,7 @@ public class PlayScreen implements Screen {
     private int scrW, scrH;
     private String path, line;
 
-    //public Map map;
-
     private int menu = 0;
-    //public ArrayList<Obj> objectsU = new ArrayList<>();
-    //public ArrayList<Obj> objectsO = new ArrayList<>();
-    //public ArrayList<Stair> stair = new ArrayList<>();
-    //private StairC stairС;
-    //private TeleportC teleportC;
-    //private HideTrapC hideTrapC;
-    //private FlamefrowerC flamefrowerС;
-    //private CrossbowC crossbowC;
-    //private ItemC itemC;
-    //private FlimsyTileC flimsyTileC;
-    //private SpinneyC spinneyC;
-    //private SpikeC spikeC;
-    //private ButtonС buttonC;
-    //private DoorC doorC;
     private Texture fr;
     private Save save;
     private boolean start = true;

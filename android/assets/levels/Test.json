@@ -104,6 +104,21 @@
       "Tag": "Stair2"
     }
   ],
+  "Chest": [
+    {
+      "X": 1,
+      "Y": -1,
+      "Items": [
+        {
+          "Type": "torch",
+          "Count": 9
+        }
+      ],
+      "Loked": true,
+      "KeyTag": "key1",
+      "Open": false
+    }
+  ],
   "Button": [
     {
       "X": 0,
