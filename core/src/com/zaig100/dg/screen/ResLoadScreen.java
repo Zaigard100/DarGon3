@@ -36,6 +36,8 @@ public class ResLoadScreen implements Screen {
     float color_a = 1;
     byte color_dr = -1;
 
+    final int load_while = 18;
+
     public ResLoadScreen(Main main) {
         m = main;
         num = (int) Math.round(7 * Math.random());
@@ -68,12 +70,12 @@ public class ResLoadScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         if (tick_timer > 0.15f) {
             Res.sprL();
-            load_layout.setText(font, "Load resurse: " + String.valueOf((int) ((float) Res.i / 17 * 100)) + "%", Color.BLACK, Gdx.graphics.getWidth(), Align.center, true);
+            load_layout.setText(font, "Load resurse: " + String.valueOf((int) ((float) Res.i / load_while * 100)) + "%", Color.BLACK, Gdx.graphics.getWidth(), Align.center, true);
             tick_timer = 0;
         }
         batch.begin();
         batch.draw(zaigard[num], 3 * wight / 8, height / 2 - height / 8, wight / 4, wight / 4);
-        batch.draw(progresbar, 3 * wight / 8, height / 2 - height / 6, wight / 4 * (float) ((float) Res.i / 17), wight / 128);
+        batch.draw(progresbar, 3 * wight / 8, height / 2 - height / 6, wight / 4 * (float) ((float) Res.i / load_while), wight / 128);
         font.draw(batch, load_layout, 0, height / 2 - height / 4);
         if (Res.end) {
             loadEnd(0.03125f);

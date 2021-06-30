@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
+import com.zaig100.dg.elements.items.Item;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.LevelRead;
 import com.zaig100.dg.utils.Res;
@@ -45,6 +46,9 @@ public class Map {
     int j;
     int i;
 
+    Item[] shop_item;
+    int[] shop_cost;
+
     GlyphLayout textLayout = new GlyphLayout();
 
     public Map(int mapWidht, int mapHeight, int[] map, boolean isDark) {
@@ -63,6 +67,21 @@ public class Map {
         }
     }
 
+    public void setShop(Shop shop) {
+        Player.isShop = true;
+        shop_item = shop.getItem();
+        shop_cost = shop.getCost();
+    }
+
+    public void render_shop(SpriteBatch batch) {
+        batch.draw(
+                Res.shop_ui,
+                7 * 16 * Configuration.getScale() - 18 * Configuration.getScale(),
+                5 * 16 * Configuration.getScale() - 32 * Configuration.getScale(),
+                64 * Configuration.getScale(),
+                36 * Configuration.getScale()
+        );
+    }
 
     public void render(SpriteBatch batch) {
         for (i = Player.getY() - 4; i < Player.getY() + 4; i++) {
@@ -142,6 +161,25 @@ public class Map {
             for (i1 = 0; i1 < objectsO.size(); i1++) {
                 objectsO.get(i1).render(batch);
                 if (!Player.isStop) objectsO.get(i1).frame();
+            }
+        }
+    }
+
+    public void show_obj(SpriteBatch batch) {
+        int i1;
+        if (objectsU.size() > 0) {
+            for (i1 = 0; i1 < objectsU.size(); i1++) {
+                objectsU.get(i1).show_obj(batch);
+            }
+        }
+        if (objectsO.size() > 0) {
+            for (i1 = 0; i1 < objectsO.size(); i1++) {
+                objectsO.get(i1).show_obj(batch);
+            }
+        }
+        if (objectsO.size() > 0) {
+            for (i1 = 0; i < stair.size(); i++) {
+                stair.get(i1).show_obj(batch);
             }
         }
     }
@@ -229,7 +267,7 @@ public class Map {
         iter = lR.getItem().iterator();
         while (iter.hasNext()) {
             ItemC itemC = (ItemC) iter.next();
-            objectsU.add(new Items(itemC.getX(), itemC.getY(), itemC.getItem(), itemC.isActive(), itemC.getTag()));
+            objectsU.add(new Items(itemC.getX(), itemC.getY(), Item.jsonToItem(itemC.getItem()), itemC.isActive(), itemC.getTag()));
             objectsU.get(objectsU.size() - 1).setObjID(idNum);
             idNum++;
         }
@@ -259,30 +297,33 @@ public class Map {
     }
 
     public void doFunc(String func) {
-        if (stair.size() > 0) {
-            for (i = 0; i < stair.size(); i++) {
-                if (stair.get(i).getTag().equals(func.split(":")[0])) {
-                    stair.get(i).tag_activate(func.split(":")[1]);
+        try {
+            if (stair.size() > 0) {
+                for (i = 0; i < stair.size(); i++) {
+                    if (stair.get(i).getTag().equals(func.split(":")[0])) {
+                        stair.get(i).tag_activate(func.split(":")[1]);
+                    }
                 }
             }
-        }
-        if (objectsU.size() > 0) {
-            //TODO вылеты при испльзовании кнопки
-            for (i = 0; i < objectsU.size(); i++) {
-                if (objectsU.get(i).getTag().equals(func.split(":")[0])) {
-                    objectsU.get(i).tag_activate(func.split(":")[1]);
+            if (objectsU.size() > 0) {
+                for (i = 0; i < objectsU.size(); i++) {
+                    if (objectsU.get(i).getTag().equals(func.split(":")[0])) {
+                        objectsU.get(i).tag_activate(func.split(":")[1]);
+                    }
                 }
             }
-        }
-        if (objectsO.size() > 0) {
-            for (i = 0; i < objectsO.size(); i++) {
-                if (objectsO.get(i).getTag().equals(func.split(":")[0])) {
-                    objectsO.get(i).tag_activate(func.split(":")[1]);
+            if (objectsO.size() > 0) {
+                for (i = 0; i < objectsO.size(); i++) {
+                    if (objectsO.get(i).getTag().equals(func.split(":")[0])) {
+                        objectsO.get(i).tag_activate(func.split(":")[1]);
+                    }
                 }
             }
-        }
-        if (func.split(":")[0].equals("Map")) {
-            tag_activate(func.split(":")[1]);
+            if (func.split(":")[0].equals("Map")) {
+                tag_activate(func.split(":")[1]);
+            }
+        } catch (Exception ignored) {
+
         }
     }
 

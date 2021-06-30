@@ -7,22 +7,22 @@ import com.zaig100.dg.utils.Res;
 
 import org.json.simple.JSONObject;
 
-public class Poition extends Item {
+public class TrapShowPotion extends Item {
 
-    public Poition() {
+    public TrapShowPotion() {
         super();
-        type = ItemType.POTION;
+        type = ItemType.SHOW_TRAP_POTION;
     }
 
-    public Poition(int i) {
-        super(i);
-        type = ItemType.POTION;
+    public TrapShowPotion(int count) {
+        super(count);
+        type = ItemType.SHOW_TRAP_POTION;
     }
 
     @Override
     public void render(Batch batch, int x, int y) {
         batch.draw(
-                Res.hp_potion,
+                Res.show_trap_potion,
                 x * 16 * Configuration.getScale() + 19 * Configuration.getScale(),
                 y * 16 * Configuration.getScale() + 19 * Configuration.getScale(),
                 16 * Configuration.getScale() - 6 * Configuration.getScale(),
@@ -37,7 +37,7 @@ public class Poition extends Item {
 
     @Override
     public void renderInMap(Batch batch, int wX, int wY) {
-        batch.draw(Res.hp_potion,
+        batch.draw(Res.show_trap_potion,
                 wX + (0.25f * 16 * Configuration.getScale()) - Player.get_wX(),
                 wY + (0.25f * 16 * Configuration.getScale()) - Player.get_wY(),
                 16 * Configuration.getScale() * 0.5f,
@@ -47,8 +47,8 @@ public class Poition extends Item {
 
     @Override
     public boolean use() {
-        if (Player.getHp() < 4 && Player.getHp() > 0) {
-            Player.setHp(Player.getHp() + 1);
+        if (!Player.isShowObj) {
+            Player.isShowObj = true;
             return true;
         }
         return false;

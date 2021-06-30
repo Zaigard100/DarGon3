@@ -284,19 +284,30 @@
     {
       "X": 9,
       "Y": 10,
+      "Item": {
+        "Type": "torch",
+        "Count": 1
+      },
       "ID": "torch",
       "Active": true
     },
     {
       "X": 8,
       "Y": 10,
+      "Item": {
+        "Type": "sheld",
+        "Count": 1
+      },
       "ID": "sheld",
       "Active": true
     },
     {
       "X": 7,
       "Y": 10,
-      "ID": "poition",
+      "Item": {
+        "Type": "potion",
+        "Count": 1
+      },
       "Active": true
     }
   ],

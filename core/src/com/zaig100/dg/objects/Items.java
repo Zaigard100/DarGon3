@@ -7,7 +7,9 @@ import com.zaig100.dg.elements.items.Item;
 import com.zaig100.dg.elements.items.Poition;
 import com.zaig100.dg.elements.items.Sheld;
 import com.zaig100.dg.elements.items.Torch;
+import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
+import com.zaig100.dg.utils.Res;
 
 public class Items extends Obj {
 
@@ -50,6 +52,17 @@ public class Items extends Obj {
         if (!active) {
             del();
         }
+    }
+
+    @Override
+    public void show_obj(SpriteBatch batch) {
+        batch.draw(
+                Res.green_obj,
+                wX - Player.get_wX(),
+                wY - Player.get_wY(),
+                16 * Configuration.getScale(),
+                16 * Configuration.getScale()
+        );
     }
 
     @Override

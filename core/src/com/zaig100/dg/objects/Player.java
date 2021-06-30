@@ -31,7 +31,8 @@ public class Player {
     static int wasted_id = 0;
 
     static boolean[] slots = new boolean[3];
-    static boolean isSheld = false;
+    public static boolean isSheld = false;
+    public static boolean isShowObj = false, isShop = false;
 
     static Random random = new Random();
 
@@ -70,6 +71,7 @@ public class Player {
 
     }
 
+    //TODO Показ UI магазина
     static public void render(SpriteBatch batch) {
         if (getHp() > 0) {
             batch.draw(Res.hero(flip, walked_anim, stage), 16 * Configuration.getScale() * 3, 16 * Configuration.getScale() * 2, 16 * Configuration.getScale(), 16 * Configuration.getScale());
@@ -107,6 +109,7 @@ public class Player {
         }
 
     }
+
 
     static public void render_menu(SpriteBatch batch, BitmapFont font) {
         batch.draw(Res.menu, 6 * 16 * Configuration.getScale() + 2 * Configuration.getScale(), 4 * 16 * Configuration.getScale() + 2 * Configuration.getScale(), 12 * Configuration.getScale(), 12 * Configuration.getScale());

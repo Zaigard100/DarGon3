@@ -18,6 +18,11 @@ public class Zona extends Obj {
     }
 
     @Override
+    public void show_obj(SpriteBatch batch) {
+
+    }
+
+    @Override
     public void tag_activate(String func) {
 
     }

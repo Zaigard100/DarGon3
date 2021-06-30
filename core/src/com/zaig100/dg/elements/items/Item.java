@@ -9,11 +9,12 @@ public abstract class Item {
     public enum ItemType {
         ITEM("item"),
         EMPTY("empty"),
-        POITION("poition"),
+        POTION("potion"),
         SHELD("sheld"),
         TORCH("torch"),
         KEY("key"),
-        EGG("egg");
+        EGG("egg"),
+        SHOW_TRAP_POTION("show_trap");
 
         String name;
 
@@ -39,9 +40,16 @@ public abstract class Item {
     }
 
     public static Item jsonToItem(JSONObject item) {
-        String type = (String) item.get("Type");
+        String type;
+        try {
+            type = (String) item.get("Type");
+        } catch (NullPointerException npe) {
+            System.out.println("Error in jsonToItem(): ");
+            System.out.println(item.toJSONString());
+            type = "empty";
+        }
         switch (type) {
-            case "poition":
+            case "potion":
                 return new Poition((((Number) item.get("Count"))).intValue());
             case "sheld":
                 return new Sheld((((Number) item.get("Count"))).intValue());
@@ -54,6 +62,8 @@ public abstract class Item {
                         (((Number) item.get("G"))).floatValue(),
                         (((Number) item.get("B"))).floatValue()
                 );
+            case "show_trap":
+                return new TrapShowPotion((((Number) item.get("Count"))).intValue());
             case "egg":
                 return new EasterEgg((String) item.get("Code"));
             default:

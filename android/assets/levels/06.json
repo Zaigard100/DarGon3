@@ -176,7 +176,10 @@
     {
       "X": 8,
       "Y": 9,
-      "ID": "poition",
+      "Item": {
+        "Type": "potion",
+        "Count": 1
+      },
       "Active": true
     }
   ],

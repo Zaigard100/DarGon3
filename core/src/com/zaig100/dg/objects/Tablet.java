@@ -7,7 +7,7 @@ import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
 
-public class Tablet extends Obj { //TODO Табличка, сэр.
+public class Tablet extends Obj { //TODO Отображение на андроид.
 
     String[] text;
 
@@ -37,6 +37,17 @@ public class Tablet extends Obj { //TODO Табличка, сэр.
             }
         }
 
+    }
+
+    @Override
+    public void show_obj(SpriteBatch batch) {
+        batch.draw(
+                Res.blue_obj,
+                wX - Player.get_wX(),
+                wY - Player.get_wY(),
+                16 * Configuration.getScale(),
+                16 * Configuration.getScale()
+        );
     }
 
     @Override

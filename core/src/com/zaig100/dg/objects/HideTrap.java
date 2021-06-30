@@ -1,6 +1,7 @@
 package com.zaig100.dg.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
 
 public class HideTrap extends Obj {
@@ -38,6 +39,18 @@ public class HideTrap extends Obj {
         }
 
     }
+
+    @Override
+    public void show_obj(SpriteBatch batch) {
+        batch.draw(
+                Res.damage,
+                wX - Player.get_wX(),
+                wY - Player.get_wY(),
+                16 * Configuration.getScale(),
+                16 * Configuration.getScale()
+        );
+    }
+
 
     @Override
     public void tag_activate(String func) {

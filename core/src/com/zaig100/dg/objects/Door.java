@@ -80,6 +80,17 @@ public class Door extends Obj {
     }
 
     @Override
+    public void show_obj(SpriteBatch batch) {
+        batch.draw(
+                Res.blue_obj,
+                wX - Player.get_wX(),
+                wY - Player.get_wY(),
+                16 * Configuration.getScale(),
+                16 * Configuration.getScale()
+        );
+    }
+
+    @Override
     public void tag_activate(String func) {
         switch (func.split(">")[0]) {
             case "X":

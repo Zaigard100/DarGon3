@@ -196,6 +196,9 @@ public class PlayScreen implements Screen {
 
         Player.map.dark_render(batch);
 
+        if (Player.isShowObj) {
+            Player.map.show_obj(batch);
+        }
         render_ui();
 
     }
@@ -224,9 +227,12 @@ public class PlayScreen implements Screen {
                 Player.getMap().stair.get(i).render(batch);
                 Player.getMap().stair.get(i).frame();
                 if (Player.getMap().stair.get(i).isExit()) {
+                    Player.isShowObj = false;
+                    Player.isSheld = false;
                     dispose();
                     if (Player.getMap().stair.get(i).isEnd()) {
                         m.setScreen(new GameScreen(m));
+
                     } else {
                         if (isPack) {
                             m.setScreen(new PlayScreen(m, Player.getMap().stair.get(i).getNext_path(), isPack, packname, derectory));
@@ -280,6 +286,8 @@ public class PlayScreen implements Screen {
                 Player.isPause = false;
                 Player.isStop = false;
                 Player.inventarIsOpen = false;
+                Player.isShowObj = false;
+                Player.isSheld = false;
             }
         }
         if(menu==2) {
@@ -294,7 +302,8 @@ public class PlayScreen implements Screen {
                 Player.isPause = false;
                 Player.isStop = false;
                 Player.inventarIsOpen = false;
-                Player.setIsSheld(false);
+                Player.isShowObj = false;
+                Player.isSheld = false;
                 if (isPack) {
                     m.setScreen(new PlayScreen(m, save.getsPath(), isPack, packname, derectory));
                 } else
@@ -314,6 +323,8 @@ public class PlayScreen implements Screen {
                     Player.isPause = false;
                     Player.isStop = false;
                     Player.inventarIsOpen = false;
+                    Player.isShowObj = false;
+                    Player.isSheld = false;
                     Gdx.app.exit();
                 }
             } else {

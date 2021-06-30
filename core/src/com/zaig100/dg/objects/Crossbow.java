@@ -32,6 +32,7 @@ public class Crossbow extends Obj {
         for (Arrow arr : arrs) {
             arr.render(batch);
         }
+
     }
 
     @Override
@@ -48,6 +49,20 @@ public class Crossbow extends Obj {
             move();
         }
 
+    }
+
+    @Override
+    public void show_obj(SpriteBatch batch) {
+        batch.draw(
+                Res.damage,
+                wX - Player.get_wX(),
+                wY - Player.get_wY(),
+                16 * Configuration.getScale(),
+                16 * Configuration.getScale()
+        );
+        for (Arrow arr : arrs) {
+            arr.show_obj(batch);
+        }
     }
 
     public void tick(float second) {

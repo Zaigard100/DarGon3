@@ -77,7 +77,7 @@ public class Inventory {
                     if (!items.get(x + y * 4).getType().equals("empty") || items.get(x + y * 4).getCount() > 0) {
                         Item item;
                         switch (items.get(x + y * 4).getType()) {
-                            case POITION:
+                            case POTION:
                                 item = new Poition(1);
                                 break;
                             case SHELD:
@@ -172,7 +172,7 @@ public class Inventory {
             if (!items.get(x + y * 4).getType().equals("empty") || items.get(x + y * 4).getCount() > 0) {
                 Item item;
                 switch (items.get(x + y * 4).getType()) {
-                    case POITION:
+                    case POTION:
                         item = new Poition(1);
                         break;
                     case SHELD:
@@ -217,7 +217,7 @@ public class Inventory {
         for (int i = 0; i < 12; i++) {
             if (item.getType() == Item.ItemType.KEY) break;
             if (items.get(i).getType() == item.getType()) {
-                items.get(i).setCount(items.get(i).getCount() + 1);
+                items.get(i).setCount(items.get(i).getCount() + item.getCount());
                 return true;
             }
         }

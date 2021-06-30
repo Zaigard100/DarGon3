@@ -233,9 +233,9 @@ public class LevelRead {
                 try {
                     JO = (JSONObject) iter.next();
                     if ((String) JO.get("Tag") != null) {
-                        item.add(new com.zaig100.dg.utils.contain.ItemC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (String) JO.get("ID"), (Boolean) JO.get("Active"), (String) JO.get("Tag")));
+                        item.add(new com.zaig100.dg.utils.contain.ItemC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (JSONObject) JO.get("Item"), (Boolean) JO.get("Active"), (String) JO.get("Tag")));
                     } else {
-                        item.add(new com.zaig100.dg.utils.contain.ItemC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (String) JO.get("ID"), (Boolean) JO.get("Active"), "I" + i));
+                        item.add(new com.zaig100.dg.utils.contain.ItemC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (JSONObject) JO.get("Item"), (Boolean) JO.get("Active"), "I" + i));
                     }
                     i++;
                 } catch (NullPointerException npe) {

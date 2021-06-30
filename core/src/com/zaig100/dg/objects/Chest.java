@@ -17,12 +17,6 @@ public class Chest extends Obj {
     boolean isLooked;
     String keyTag;
 
-    public Chest(int x, int y, ArrayList<Item> items, String tag) {
-        super(x, y, tag);
-        this.items = items;
-        isLooked = false;
-        open = false;
-    }
 
     public Chest(int x, int y, ArrayList<Item> items, boolean isLooked, String keyTag, boolean open, String tag) {
         super(x, y, tag);
@@ -79,7 +73,7 @@ public class Chest extends Obj {
                         }
                     } else {
                         if (items != null) {
-                            open = false;
+                            open = true;
                             for (Item item : items) {
                                 Player.inventory.set(item);
                             }
@@ -89,6 +83,17 @@ public class Chest extends Obj {
                 }
             }
         }
+    }
+
+    @Override
+    public void show_obj(SpriteBatch batch) {
+        batch.draw(
+                Res.green_obj,
+                wX - Player.get_wX(),
+                wY - Player.get_wY(),
+                16 * Configuration.getScale(),
+                16 * Configuration.getScale()
+        );
     }
 
     @Override

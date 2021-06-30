@@ -51,6 +51,17 @@ public class Spike extends Obj {
         }
     }
 
+    @Override
+    public void show_obj(SpriteBatch batch) {
+        batch.draw(
+                Res.damage,
+                wX - Player.get_wX(),
+                wY - Player.get_wY(),
+                16 * Configuration.getScale(),
+                16 * Configuration.getScale()
+        );
+    }
+
 
     public void tick(float second) {
         if (trigered) {

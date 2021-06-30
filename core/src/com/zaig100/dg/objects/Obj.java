@@ -71,6 +71,8 @@ public abstract class Obj {
 
     public abstract void frame();
 
+    public abstract void show_obj(SpriteBatch batch);
+
     public abstract void tag_activate(String func);
 
     public ObjType getType() {

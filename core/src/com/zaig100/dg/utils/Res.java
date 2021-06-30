@@ -40,13 +40,17 @@ public class Res {
 
     static public Texture bag;
     static public Texture menu;
+    static public Texture money, shop, shop_ui;
 
     static public Texture hp_potion;
     static public Texture sheld;
     static public Texture torch;
+    static public Texture show_trap_potion;
 
     static public Texture teleport;
     static public Texture damage;
+
+    static public Texture blue_obj, green_obj;
 
     static public TextureRegion flamethrowfer;
 
@@ -69,6 +73,7 @@ public class Res {
     static public Texture spikedhero;
 
     static public Texture pause_dark;
+
 
     static public Texture joystick;
     static public Texture use;
@@ -157,6 +162,7 @@ public class Res {
                 Res.pause_dark = new Texture(Gdx.files.internal("texture/resume.png"));
                 Res.button = new Texture(Gdx.files.internal("texture/button.png"));
                 Res.inventar = new Texture(Gdx.files.internal("texture/inventar.png"));
+                show_trap_potion = new Texture(Gdx.files.internal("texture/show_trap_potion.png"));
                 break;
             case 8:
                 Res.joystick = new Texture(Gdx.files.internal("texture/Joystick.png"));
@@ -213,6 +219,13 @@ public class Res {
                 Res.menu = new Texture(Gdx.files.internal("texture/menu.png"));
                 break;
             case 17:
+                blue_obj = new Texture(Gdx.files.internal("texture/blue_obj.png"));
+                green_obj = new Texture(Gdx.files.internal("texture/green_obj.png"));
+                money = new Texture(Gdx.files.internal("texture/money.png"));
+                shop = new Texture(Gdx.files.internal("texture/shop.png"));
+                shop_ui = new Texture(Gdx.files.internal("texture/shop_ui.png"));
+                break;
+            case 18:
                 end = true;
                 break;
         }

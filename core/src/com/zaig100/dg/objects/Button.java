@@ -47,6 +47,17 @@ public class Button extends Obj {
 
     }
 
+    @Override
+    public void show_obj(SpriteBatch batch) {
+        batch.draw(
+                Res.blue_obj,
+                wX - Player.get_wX(),
+                wY - Player.get_wY(),
+                16 * Configuration.getScale(),
+                16 * Configuration.getScale()
+        );
+    }
+
     public Button setMap(Map M) {
         this.M = M;
         return this;
