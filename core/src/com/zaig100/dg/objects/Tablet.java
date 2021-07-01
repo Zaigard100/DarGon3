@@ -7,7 +7,7 @@ import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
 
-public class Tablet extends Obj { //TODO Отображение на андроид.
+public class Tablet extends Obj {
 
     String[] text;
 

@@ -1,11 +1,9 @@
 package com.zaig100.dg.objects;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Align;
 import com.zaig100.dg.elements.items.Item;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.LevelRead;
@@ -18,6 +16,7 @@ import com.zaig100.dg.utils.contain.FlamefrowerC;
 import com.zaig100.dg.utils.contain.FlimsyTileC;
 import com.zaig100.dg.utils.contain.HideTrapC;
 import com.zaig100.dg.utils.contain.ItemC;
+import com.zaig100.dg.utils.contain.ShopC;
 import com.zaig100.dg.utils.contain.SpikeC;
 import com.zaig100.dg.utils.contain.SpinneyC;
 import com.zaig100.dg.utils.contain.StairC;
@@ -46,8 +45,7 @@ public class Map {
     int j;
     int i;
 
-    Item[] shop_item;
-    int[] shop_cost;
+    public Shop shop;
 
     GlyphLayout textLayout = new GlyphLayout();
 
@@ -69,18 +67,7 @@ public class Map {
 
     public void setShop(Shop shop) {
         Player.isShop = true;
-        shop_item = shop.getItem();
-        shop_cost = shop.getCost();
-    }
-
-    public void render_shop(SpriteBatch batch) {
-        batch.draw(
-                Res.shop_ui,
-                7 * 16 * Configuration.getScale() - 18 * Configuration.getScale(),
-                5 * 16 * Configuration.getScale() - 32 * Configuration.getScale(),
-                64 * Configuration.getScale(),
-                36 * Configuration.getScale()
-        );
+        this.shop = shop;
     }
 
     public void render(SpriteBatch batch) {
@@ -120,17 +107,9 @@ public class Map {
     }
 
     public void show_tablet_text(Batch batch) {
-        //TODO показ текста
         if (textShow) {
             for (int i = 0; i < text.length; i++) {
-                textLayout.setText(
-                        Res.getFont(3),
-                        text[i],
-                        Color.WHITE, Gdx.graphics.getWidth(),
-                        Align.center,
-                        true
-                );
-                Res.getFont(3).draw(batch, textLayout, -2.5f * 16 * Configuration.getScale(), Gdx.graphics.getHeight() / 2 + 4 * Configuration.getScale() * (text.length / 2 - i));
+                Res.getFont(3).draw(batch, text[i], 8 * Configuration.getScale(), Gdx.graphics.getHeight() / 2 + 4 * Configuration.getScale() * (text.length / 2 - i));
             }
             if (Player.walked) {
                 textShow = false;
@@ -139,7 +118,6 @@ public class Map {
     }
 
     public void setTablet_text(String[] text) {
-        //TODO вставка текста
         if (textShow) return;
         this.text = text;
         textShow = true;
@@ -277,6 +255,13 @@ public class Map {
             TabletC tabletC = (TabletC) iter.next();
             objectsU.add(new Tablet(tabletC.getX(), tabletC.getY(), tabletC.getText(), tabletC.getTag()));
             objectsU.get(objectsU.size() - 1).setObjID(idNum);
+            idNum++;
+        }
+        iter = lR.getShop().iterator();
+        while (iter.hasNext()) {
+            ShopC shopC = (ShopC) iter.next();
+            objectsU.add(new Shop(shopC.getX(), shopC.getY(), shopC.getItems(), shopC.getCost(), shopC.getTag()));
+            objectsU.get(stair.size() - 1).setObjID(idNum);
             idNum++;
         }
         iter = lR.getChest().iterator();

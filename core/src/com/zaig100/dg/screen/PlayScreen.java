@@ -367,10 +367,16 @@ public class PlayScreen implements Screen {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             if (Player.inventarIsOpen) {
                 Player.inventarIsOpen = false;
-            } else {
-                Player.isPause = !Player.isPause;
+                Player.isStop = false;
+            } else if (Player.isShop) {
+                if (Player.isPause) {
+                    Player.isPause = false;
+                    Player.isStop = false;
+                } else {
+                    Player.isPause = true;
+                    Player.isStop = true;
+                }
             }
-            Player.isStop = Player.isPause;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.F3)) {
             debag = !debag;

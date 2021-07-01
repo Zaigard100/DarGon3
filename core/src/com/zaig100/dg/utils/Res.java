@@ -47,6 +47,8 @@ public class Res {
     static public Texture torch;
     static public Texture show_trap_potion;
 
+    static public Texture bundle;
+
     static public Texture teleport;
     static public Texture damage;
 
@@ -72,7 +74,7 @@ public class Res {
     static public Texture shotedhero;
     static public Texture spikedhero;
 
-    static public Texture pause_dark;
+    static public Texture pause_dark, turn_off;
 
 
     static public Texture joystick;
@@ -102,7 +104,7 @@ public class Res {
     static public Texture NGSprite;
     static public Texture HP1, HP2, HP3, HP4;
     static public Texture spinney;
-    static public Texture tablet;
+    static public Texture tablet, x;
 
     static public Sprite key;
 
@@ -168,6 +170,8 @@ public class Res {
                 Res.joystick = new Texture(Gdx.files.internal("texture/Joystick.png"));
                 Res.use = new Texture(Gdx.files.internal("texture/use.png"));
                 Res.key = new Sprite(new Texture(Gdx.files.internal("texture/key.png")));
+                turn_off = new Texture(Gdx.files.internal("texture/turn_off.png"));
+                x = new Texture(Gdx.files.internal("texture/x.png"));
                 break;
             case 9:
                 Res.vk = new Texture(Gdx.files.internal("texture/vk.png"));
@@ -217,6 +221,7 @@ public class Res {
                 Res.spike_0 = new Texture(Gdx.files.internal("texture/spike0.png"));
                 Res.spike_1 = new Texture(Gdx.files.internal("texture/spike1.png"));
                 Res.menu = new Texture(Gdx.files.internal("texture/menu.png"));
+                bundle = new Texture(Gdx.files.internal("texture/bundle.png"));
                 break;
             case 17:
                 blue_obj = new Texture(Gdx.files.internal("texture/blue_obj.png"));

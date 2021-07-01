@@ -56,7 +56,7 @@ public class Inventory {
         );
         batch.draw(
                 Res.drop_item,
-                6 * 16 * Configuration.getScale(),
+                5 * 16 * Configuration.getScale(),
                 0 * 16 * Configuration.getScale(),
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
@@ -73,7 +73,7 @@ public class Inventory {
             scrY = (int) ((Gdx.graphics.getHeight() - Gdx.input.getY()) - (sy + 16 * Configuration.getScale()));
 
             if (-16 * Configuration.getScale() <= scrY && 0 >= scrY) {
-                if (5 * 16 * Configuration.getScale() <= scrX && 6 * 16 * Configuration.getScale() >= scrX) {
+                if (4 * 16 * Configuration.getScale() <= scrX && 5 * 16 * Configuration.getScale() >= scrX) {
                     if (!items.get(x + y * 4).getType().equals("empty") || items.get(x + y * 4).getCount() > 0) {
                         Item item;
                         switch (items.get(x + y * 4).getType()) {

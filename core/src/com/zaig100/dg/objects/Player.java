@@ -30,7 +30,7 @@ public class Player {
     static int sx, sy;
     static int wasted_id = 0;
 
-    static boolean[] slots = new boolean[3];
+    static boolean[] slots = new boolean[2];
     public static boolean isSheld = false;
     public static boolean isShowObj = false, isShop = false;
 
@@ -39,6 +39,7 @@ public class Player {
     static public Map map;
     static float damgeScr = 100;
     static private int getYP;
+    public static int coin_count;
 
     public static boolean isPause = false, isStop = false, inventarIsOpen = false, menu_opened = false;
 
@@ -53,10 +54,11 @@ public class Player {
         Player.inventory.set(0, new Poition(3));
         Player.inventory.set(1, new Sheld(2));
         Player.inventory.set(2, new Torch(1));
+        coin_count = 10;
         Player.map = map;
     }
 
-    public Player(int x, int y, Map map, int hp, int potion, int sheld, int torch) {
+    public Player(int x, int y, Map map, int hp) {
         Player.x = x;
         Player.y = y;
         Player.oldX = x;
@@ -67,11 +69,11 @@ public class Player {
         Player.inventory.set(0, new Poition(3));
         Player.inventory.set(1, new Sheld(2));
         Player.inventory.set(2, new Torch(1));
+        coin_count = 10;
         Player.hp = hp;
 
     }
 
-    //TODO Показ UI магазина
     static public void render(SpriteBatch batch) {
         if (getHp() > 0) {
             batch.draw(Res.hero(flip, walked_anim, stage), 16 * Configuration.getScale() * 3, 16 * Configuration.getScale() * 2, 16 * Configuration.getScale(), 16 * Configuration.getScale());
@@ -118,15 +120,47 @@ public class Player {
             if (hp > 0) {
                 batch.draw(Res.HP(hp), 6 * 16 * Configuration.getScale(), 3 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
             }
-            batch.draw(Res.bag, 6 * 16 * Configuration.getScale(), 2 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
 
-            batch.draw(Res.pause, 6 * 16 * Configuration.getScale() + 2 * Configuration.getScale(), 1 * 16 * Configuration.getScale() + 2 * Configuration.getScale(), 12 * Configuration.getScale(), 12 * Configuration.getScale());
+            batch.draw(
+                    Res.money,
+                    6 * 16 * Configuration.getScale(),
+                    2 * 16 * Configuration.getScale() + 9 * Configuration.getScale(),
+                    6 * Configuration.getScale(),
+                    6 * Configuration.getScale()
+            );
 
-            //batch.draw(Res.torch, 6 * 16 * Configuration.getScale(), 0 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+            Res.getFont(3).draw(
+                    batch,
+                    String.valueOf(coin_count),
+                    6 * 16 * Configuration.getScale() + 7 * Configuration.getScale(),
+                    2 * 16 * Configuration.getScale() + 14 * Configuration.getScale()
+            );
+
+            batch.draw(
+                    Res.bag,
+                    6 * 16 * Configuration.getScale(),
+                    16 * Configuration.getScale(),
+                    16 * Configuration.getScale(),
+                    16 * Configuration.getScale()
+            );
+
+            batch.draw(
+                    Res.pause,
+                    6 * 16 * Configuration.getScale() + 2 * Configuration.getScale(),
+                    2 * Configuration.getScale(),
+                    12 * Configuration.getScale(),
+                    12 * Configuration.getScale()
+            );
+
         }
+
         if (inventarIsOpen) {
             inventory.frame();
             inventory.render(batch);
+        }
+        if (isShop) {
+            map.shop.render_shop(batch);
+            map.shop.frame_shop();
         }
     }
 
@@ -240,21 +274,16 @@ public class Player {
         sy = (int) ((Gdx.graphics.getHeight() - 16 * 5 * Configuration.getScale()) / 2);
         slots[0] = false;
         slots[1] = false;
-        slots[2] = false;
         if (Gdx.input.justTouched()) {
             getYP = Gdx.graphics.getHeight() - Gdx.input.getY();
             if ((Gdx.input.getX() - sx > 6 * 16 * Configuration.getScale()) && (Gdx.input.getX() - sx < 7 * 16 * Configuration.getScale())) {
-                if ((getYP - sy > 2 * 16 * Configuration.getScale()) && (getYP - sy < 3 * 16 * Configuration.getScale())) {
+                if ((getYP - sy > 1 * 16 * Configuration.getScale()) && (getYP - sy < 2 * 16 * Configuration.getScale())) {
                     Joystick.setUse(false);
                     slots[0] = true;
                 }
-                if ((getYP - sy > 1 * 16 * Configuration.getScale()) && (getYP - sy < 2 * 16 * Configuration.getScale())) {
+                if ((getYP - sy > 0) && (getYP - sy < 1 * 16 * Configuration.getScale())) {
                     Joystick.setUse(false);
                     slots[1] = true;
-                }
-                if ((getYP - sy > 0 * 16 * Configuration.getScale()) && (getYP - sy < 1 * 16 * Configuration.getScale())) {
-                    Joystick.setUse(false);
-                    slots[2] = true;
                 }
             }
         }
@@ -262,14 +291,13 @@ public class Player {
         if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)||slots[0]) {
             inventarIsOpen = !inventarIsOpen;
             isStop = inventarIsOpen;
+            isShop = false;
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)||slots[1]) {
             isPause = !isPause;
             isStop = isPause;
             inventarIsOpen = false;
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)||slots[2]){
-
+            isShop = false;
         }
     }
 

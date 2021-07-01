@@ -14,7 +14,8 @@ public abstract class Item {
         TORCH("torch"),
         KEY("key"),
         EGG("egg"),
-        SHOW_TRAP_POTION("show_trap");
+        SHOW_TRAP_POTION("show_trap"),
+        MONEY("money");
 
         String name;
 
@@ -64,6 +65,8 @@ public abstract class Item {
                 );
             case "show_trap":
                 return new TrapShowPotion((((Number) item.get("Count"))).intValue());
+            case "money":
+                return new Money((((Number) item.get("Count"))).intValue());
             case "egg":
                 return new EasterEgg((String) item.get("Code"));
             default:

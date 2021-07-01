@@ -43,14 +43,14 @@ public class Chest extends Obj {
                         batch,
                         keyTag,
                         x * 16 * Configuration.getScale() - Player.get_wX() + 3 * 16 * Configuration.getScale(),
-                        y * 16 * Configuration.getScale() - Player.get_wY() + 2 * 16 * Configuration.getScale()
+                        y * 16 * Configuration.getScale() - Player.get_wY() + 7 * 16 * Configuration.getScale()
                 );
             } else {
                 Res.getFont(3).draw(
                         batch,
                         "open",
                         x * 16 * Configuration.getScale() - Player.get_wX() + 3 * 16 * Configuration.getScale(),
-                        y * 16 * Configuration.getScale() - Player.get_wY() + 2 * 16 * Configuration.getScale()
+                        y * 16 * Configuration.getScale() - Player.get_wY() + 7 * 16 * Configuration.getScale()
                 );
             }
         }
@@ -66,7 +66,7 @@ public class Chest extends Obj {
                         for (Item item : Player.inventory.items) {
                             if (item.getType().equals(Item.ItemType.KEY)) {
                                 if (((Key) item).getKeyTag().equals(keyTag)) {
-                                    isLooked = true;
+                                    isLooked = false;
                                     break;
                                 }
                             }

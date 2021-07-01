@@ -115,6 +115,7 @@ public class GameScreen implements Screen {
                     Player.inventory.set(new Poition(3));
                     Player.inventory.set(new Sheld(2));
                     Player.inventory.set(new Torch(1));
+                    Player.coin_count = 10;
                     m.setScreen(new PlayScreen(m, "levels/01.json", false));
                     break;
                 case 3:

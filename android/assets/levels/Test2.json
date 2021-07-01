@@ -103,6 +103,65 @@
         "B": 0.0
       },
       "Active": true
+    },
+    {
+      "X": 8,
+      "Y": 4,
+      "Item": {
+        "Type": "money",
+        "Count": 5
+      },
+      "Active": true
+    },
+    {
+      "X": 2,
+      "Y": 4,
+      "Item": {
+        "Type": "money",
+        "Count": 40
+      },
+      "Active": true
+    },
+    {
+      "X": 3,
+      "Y": 4,
+      "Item": {
+        "Type": "money",
+        "Count": 100
+      },
+      "Active": true
+    }
+  ],
+  "Shop": [
+    {
+      "X": 2,
+      "Y": 0,
+      "Slots": [
+        {
+          "Item": {
+            "Type": "key",
+            "KeyTag": "fz4",
+            "R": 1.0,
+            "G": 0.5,
+            "B": 0.1
+          },
+          "Cost": 40
+        },
+        {
+          "Item": {
+            "Type": "torch",
+            "Count": 2
+          },
+          "Cost": 10
+        },
+        {
+          "Item": {
+            "Type": "egg",
+            "Code": "jokkeer_lovushcera"
+          },
+          "Cost": 100
+        }
+      ]
     }
   ],
   "Stair": [

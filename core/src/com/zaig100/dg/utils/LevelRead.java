@@ -12,6 +12,7 @@ import com.zaig100.dg.utils.contain.FlamefrowerC;
 import com.zaig100.dg.utils.contain.FlimsyTileC;
 import com.zaig100.dg.utils.contain.HideTrapC;
 import com.zaig100.dg.utils.contain.ItemC;
+import com.zaig100.dg.utils.contain.ShopC;
 import com.zaig100.dg.utils.contain.SpikeC;
 import com.zaig100.dg.utils.contain.SpinneyC;
 import com.zaig100.dg.utils.contain.StairC;
@@ -55,6 +56,7 @@ public class LevelRead {
     ArrayList<DoorC> door = new ArrayList<>();
     ArrayList<TabletC> tablet = new ArrayList<>();
     ArrayList<ChestC> chest = new ArrayList<>();
+    ArrayList<ShopC> shop = new ArrayList<>();
 
     public LevelRead(String path, boolean isPack) {
         if (isPack) {
@@ -98,6 +100,7 @@ public class LevelRead {
         door_read();
         tablet_read();
         chest_read();
+        shop_read();
         if (jsonObject.get("ReMap") != null) {
             if ((Boolean) jsonObject.get("ReMap")) {
                 map_correct();
@@ -127,6 +130,29 @@ public class LevelRead {
         }
     }
 
+    private void shop_read() {
+        if (jsonObject.get("Shop") != null) {
+            i = 0;
+            jsonArray = (JSONArray) jsonObject.get("Shop");
+            iter = jsonArray.iterator();
+            while (iter.hasNext()) {
+                try {
+                    JO = (JSONObject) iter.next();
+                    if ((String) JO.get("Tag") != null) {
+                        shop.add(new com.zaig100.dg.utils.contain.ShopC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (JSONArray) JO.get("Slots"), (String) JO.get("Tag")));
+                    } else {
+                        shop.add(new com.zaig100.dg.utils.contain.ShopC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (JSONArray) JO.get("Slots"), "Sp" + i));
+                    }
+                    i++;
+                } catch (Exception e) {
+                    System.out.println("Shop invalid in array " + i + " in map " + levelname);
+                    e.printStackTrace();
+                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                }
+            }
+        }
+    }
+
     private void chest_read() {
         if (jsonObject.get("Chest") != null) {
             i = 0;
@@ -143,7 +169,7 @@ public class LevelRead {
                         }
 
                     } else {
-                        if (JO.get("Looked") == null || JO.get("open") == null) {
+                        if (JO.get("Loked") == null || JO.get("Open") == null) {
                             chest.add(new com.zaig100.dg.utils.contain.ChestC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (JSONArray) JO.get("Items"), (String) JO.get("Tag")));
                         } else {
                             chest.add(new com.zaig100.dg.utils.contain.ChestC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (JSONArray) JO.get("Items"), (Boolean) JO.get("Loked"), (String) JO.get("KeyTag"), (Boolean) JO.get("Open"), (String) JO.get("Tag")));
@@ -552,6 +578,10 @@ public class LevelRead {
 
     public String getLevelname() {
         return levelname;
+    }
+
+    public ArrayList<ShopC> getShop() {
+        return shop;
     }
 
     public ArrayList<ChestC> getChest() {
