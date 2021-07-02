@@ -38,7 +38,7 @@ public class Shop extends Obj {
 
     @Override
     public void frame() {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() || Gdx.input.justTouched())) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
             if ((Player.getX() - 1 == x || Player.getX() == x || Player.getX() + 1 == x) && (Player.getY() - 1 == y || Player.getY() == y || Player.getY() + 1 == y)) {
                 if (!((Player.getX() == x && Player.getY() == y))) {
                     if (!Player.isShop) {
