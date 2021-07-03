@@ -24,6 +24,7 @@ public class Save {
 
     static String path = "levels/01.json";
     static int hp;
+    static int money;
     static JSONArray arr;
 
     public Save(Main m, String pack, String derect) throws IOException {
@@ -60,7 +61,8 @@ public class Save {
     void load(){
         try {
             path = (String) jsonObject.get("Path");
-            hp = ((Long) jsonObject.get("HP")).intValue();
+            hp = ((Number) jsonObject.get("HP")).intValue();
+            money = ((Number) jsonObject.get("Money")).intValue();
             arr = (JSONArray) jsonObject.get("Inventory");
         }catch(NullPointerException e){
             e.printStackTrace();
@@ -70,6 +72,7 @@ public class Save {
     public void save(File f){
         jsonObject.put("Path", path);
         jsonObject.put("HP", hp);
+        jsonObject.put("Money", money);
         jsonObject.put("Inventory", Player.inventory.inventoryToJSON());
         try {
             FileWriter file = new FileWriter(f);
@@ -108,12 +111,20 @@ public class Save {
         Save.path = path;
     }
 
-    public int getHp() {
+    public static int getHp() {
         return hp;
     }
 
-    public void setHp(int hp) {
+    public static void setHp(int hp) {
         Save.hp = hp;
+    }
+
+    public static int getMoney() {
+        return money;
+    }
+
+    public static void setMoney(int money) {
+        Save.money = money;
     }
 
     public JSONArray getArr() {

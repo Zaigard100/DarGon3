@@ -53,7 +53,7 @@
       11,
       11,
       11,
-      10,
+      11,
       10,
       15,
       11,
@@ -76,7 +76,7 @@
       11,
       16,
       11,
-      10
+      12
     ],
     [
       10,
@@ -94,7 +94,7 @@
       14,
       10,
       11,
-      10
+      11
     ],
     [
       10,
@@ -112,7 +112,7 @@
       10,
       10,
       11,
-      12
+      19
     ],
     [
       10,
@@ -292,6 +292,24 @@
       "Active": true
     },
     {
+      "X": 5,
+      "Y": 4,
+      "Item": {
+        "Type": "money",
+        "Count": 40
+      },
+      "Active": true
+    },
+    {
+      "X": 10,
+      "Y": 10,
+      "Item": {
+        "Type": "money",
+        "Count": 10
+      },
+      "Active": true
+    },
+    {
       "X": 8,
       "Y": 10,
       "Item": {
@@ -318,6 +336,23 @@
       "FlipX": false,
       "Next": "levels/11.json",
       "End": false
+    },
+    {
+      "X": 15,
+      "Y": 8,
+      "FlipX": false,
+      "Next": "levels/shops/shop_10.json",
+      "End": false
+    }
+  ],
+  "Tablet": [
+    {
+      "X": 15,
+      "Y": 7,
+      "Text": [
+        "UP: Shop",
+        "DOWN:Next"
+      ]
     }
   ],
   "save": true

@@ -1,5 +1,6 @@
 {
-  "Path": "levels\/22.json",
+  "Path": "levels\/05.json",
+  "Money": 999,
   "HP": 3,
   "Sheld": 2,
   "Inventory": [
@@ -16,10 +17,12 @@
       "Count": 9
     },
     {
-      "Type": "empty"
+      "Type": "egg",
+      "Code": "inf"
     },
     {
-      "Type": "empty"
+      "Type": "show_trap",
+      "Count": 9
     },
     {
       "Type": "empty"

@@ -37,7 +37,9 @@ public class HideTrap extends Obj {
                 active = false;
             }
         }
-
+        if (!active) {
+            del();
+        }
     }
 
     @Override

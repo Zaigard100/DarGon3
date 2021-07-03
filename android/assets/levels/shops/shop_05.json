@@ -1,0 +1,83 @@
+{
+  "LevelName": "Shop",
+  "Spawn": [
+    0,
+    0
+  ],
+  "ReMap": true,
+  "isDark": false,
+  "map": [
+    [
+      10,
+      11,
+      10,
+      11,
+      10,
+      10
+    ],
+    [
+      10,
+      11,
+      11,
+      11,
+      10,
+      10
+    ],
+    [
+      11,
+      11,
+      11,
+      11,
+      11,
+      10
+    ]
+  ],
+  "Shop": [
+    {
+      "X": 2,
+      "Y": 2,
+      "Slots": [
+        {
+          "Item": {
+            "Type": "potion",
+            "Count": 1
+          },
+          "Cost": 10
+        },
+        {
+          "Item": {
+            "Type": "torch",
+            "Count": 1
+          },
+          "Cost": 10
+        },
+        {
+          "Item": {
+            "Type": "sheld",
+            "Count": 1
+          },
+          "Cost": 10
+        }
+      ]
+    }
+  ],
+  "Zona": [
+    {
+      "X": 0,
+      "Y": 0,
+      "Wight": 5,
+      "Height": 3,
+      "Type": "hp+",
+      "Tick": 30.0
+    }
+  ],
+  "Stair": [
+    {
+      "X": 4,
+      "Y": 0,
+      "FlipX": false,
+      "Next": "levels/06.json",
+      "End": false
+    }
+  ]
+}

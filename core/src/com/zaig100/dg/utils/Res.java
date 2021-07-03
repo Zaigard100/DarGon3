@@ -45,14 +45,14 @@ public class Res {
     static public Texture hp_potion;
     static public Texture sheld;
     static public Texture torch;
-    static public Texture show_trap_potion;
+    static public Texture show_trap_potion, sinf;
 
     static public Texture bundle;
 
     static public Texture teleport;
     static public Texture damage;
 
-    static public Texture blue_obj, green_obj;
+    static public Texture blue_obj, green_obj, red_sm_obj, blue_sm_obj, green_sm_obj;
 
     static public TextureRegion flamethrowfer;
 
@@ -141,6 +141,7 @@ public class Res {
                 Res.logo = new Texture(Gdx.files.internal("texture/logo.png"));
                 Res.dark = new Texture(Gdx.files.internal("texture/Dark.png"));
                 drop_item = new Texture(Gdx.files.internal("texture/drop_item.png"));
+                sinf = new Texture(Gdx.files.internal("texture/sinf.png"));
                 break;
             case 4:
                 Res.bag = new Texture(Gdx.files.internal("texture/bag.png"));
@@ -222,6 +223,9 @@ public class Res {
                 Res.spike_1 = new Texture(Gdx.files.internal("texture/spike1.png"));
                 Res.menu = new Texture(Gdx.files.internal("texture/menu.png"));
                 bundle = new Texture(Gdx.files.internal("texture/bundle.png"));
+                red_sm_obj = new Texture(Gdx.files.internal("texture/red_sm_obj.png"));
+                blue_sm_obj = new Texture(Gdx.files.internal("texture/blue_sm_obj.png"));
+                green_sm_obj = new Texture(Gdx.files.internal("texture/green_sm_obj.png"));
                 break;
             case 17:
                 blue_obj = new Texture(Gdx.files.internal("texture/blue_obj.png"));

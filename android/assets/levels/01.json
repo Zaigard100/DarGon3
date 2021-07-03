@@ -127,6 +127,17 @@
       14
     ]
   ],
+  "Item": [
+    {
+      "X": 0,
+      "Y": 6,
+      "Item": {
+        "Type": "money",
+        "Count": 5
+      },
+      "Active": true
+    }
+  ],
   "Stair": [
     {
       "X": 0,

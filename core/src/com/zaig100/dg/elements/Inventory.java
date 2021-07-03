@@ -75,25 +75,9 @@ public class Inventory {
             if (-16 * Configuration.getScale() <= scrY && 0 >= scrY) {
                 if (4 * 16 * Configuration.getScale() <= scrX && 5 * 16 * Configuration.getScale() >= scrX) {
                     if (!items.get(x + y * 4).getType().equals("empty") || items.get(x + y * 4).getCount() > 0) {
-                        Item item;
-                        switch (items.get(x + y * 4).getType()) {
-                            case POTION:
-                                item = new Poition(1);
-                                break;
-                            case SHELD:
-                                item = new Sheld(1);
-                                break;
-                            case TORCH:
-                                item = new Torch(1);
-                                break;
-                            case KEY:
-                            case EGG:
-                                item = items.get(x + y * 4);
-                                item.setCount(1);
-                                break;
-                            default:
-                                return;
-                        }
+                        Item item = Item.jsonToItem(items.get(x + y * 4).toJson());
+                        if (item == null) return;
+                        item.setCount(1);
                         Player.map.objectsU.add(new Items(Player.getX(), Player.getY(), item, "Drop"));
                         items.get(x + y * 4).setCount(items.get(x + y * 4).getCount() - 1);
                         if (items.get(x + y * 4).getCount() <= 0) {

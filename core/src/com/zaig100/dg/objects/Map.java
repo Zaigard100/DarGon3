@@ -22,6 +22,7 @@ import com.zaig100.dg.utils.contain.SpinneyC;
 import com.zaig100.dg.utils.contain.StairC;
 import com.zaig100.dg.utils.contain.TabletC;
 import com.zaig100.dg.utils.contain.TeleportC;
+import com.zaig100.dg.utils.contain.ZonaC;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -175,6 +176,14 @@ public class Map {
             StairC stairС = (StairC) iter.next();
             stair.add(new Stair(stairС.getX(), stairС.getY(), stairС.getFlipX(), stairС.getNext(), stairС.isEnd(), stairС.getTag()));
             stair.get(stair.size() - 1).setObjID(idNum);
+            idNum++;
+        }
+
+        iter = lR.getZona().iterator();
+        while (iter.hasNext()) {
+            ZonaC zonaC = (ZonaC) iter.next();
+            objectsU.add(new Zona(zonaC.getX(), zonaC.getY(), zonaC.getWight(), zonaC.getHeight(), zonaC.getType(), zonaC.getTick(), zonaC.getTag()));
+            objectsU.get(objectsU.size() - 1).setObjID(idNum);
             idNum++;
         }
 

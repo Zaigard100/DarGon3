@@ -18,6 +18,7 @@ import com.zaig100.dg.utils.contain.SpinneyC;
 import com.zaig100.dg.utils.contain.StairC;
 import com.zaig100.dg.utils.contain.TabletC;
 import com.zaig100.dg.utils.contain.TeleportC;
+import com.zaig100.dg.utils.contain.ZonaC;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -57,6 +58,7 @@ public class LevelRead {
     ArrayList<TabletC> tablet = new ArrayList<>();
     ArrayList<ChestC> chest = new ArrayList<>();
     ArrayList<ShopC> shop = new ArrayList<>();
+    ArrayList<ZonaC> zona = new ArrayList<>();
 
     public LevelRead(String path, boolean isPack) {
         if (isPack) {
@@ -101,6 +103,8 @@ public class LevelRead {
         tablet_read();
         chest_read();
         shop_read();
+        zona_read();
+
         if (jsonObject.get("ReMap") != null) {
             if ((Boolean) jsonObject.get("ReMap")) {
                 map_correct();
@@ -127,6 +131,29 @@ public class LevelRead {
         } catch (NullPointerException npe) {
             System.out.println("Map invalid in level " + levelname);
             PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+        }
+    }
+
+    private void zona_read() {
+        if (jsonObject.get("Zona") != null) {
+            i = 0;
+            jsonArray = (JSONArray) jsonObject.get("Zona");
+            iter = jsonArray.iterator();
+            while (iter.hasNext()) {
+                try {
+                    JO = (JSONObject) iter.next();
+                    if ((String) JO.get("Tag") != null) {
+                        zona.add(new com.zaig100.dg.utils.contain.ZonaC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Wight")).intValue(), ((Long) JO.get("Height")).intValue(), ((Number) JO.get("Tick")).floatValue(), (String) JO.get("Type"), (String) JO.get("Tag")));
+                    } else {
+                        zona.add(new com.zaig100.dg.utils.contain.ZonaC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Wight")).intValue(), ((Long) JO.get("Height")).intValue(), ((Number) JO.get("Tick")).floatValue(), (String) JO.get("Type"), "Sp" + i));
+                    }
+                    i++;
+                } catch (Exception e) {
+                    System.out.println("Zona invalid in array " + i + " in map " + levelname);
+                    e.printStackTrace();
+                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                }
+            }
         }
     }
 
@@ -578,6 +605,10 @@ public class LevelRead {
 
     public String getLevelname() {
         return levelname;
+    }
+
+    public ArrayList<ZonaC> getZona() {
+        return zona;
     }
 
     public ArrayList<ShopC> getShop() {

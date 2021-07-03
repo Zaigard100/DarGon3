@@ -40,6 +40,24 @@ public class EasterEgg extends Item {
                         16 * Configuration.getScale() - 6 * Configuration.getScale()
                 );
                 break;
+            case "inf":
+                batch.draw(
+                        Res.sinf,
+                        x * 16 * Configuration.getScale() + 19 * Configuration.getScale(),
+                        y * 16 * Configuration.getScale() + 19 * Configuration.getScale(),
+                        16 * Configuration.getScale() - 6 * Configuration.getScale(),
+                        16 * Configuration.getScale() - 6 * Configuration.getScale()
+                );
+                if (Player.inf) {
+                    batch.draw(
+                            Res.green_obj,
+                            x * 16 * Configuration.getScale() + 19 * Configuration.getScale(),
+                            y * 16 * Configuration.getScale() + 19 * Configuration.getScale(),
+                            16 * Configuration.getScale() - 6 * Configuration.getScale(),
+                            16 * Configuration.getScale() - 6 * Configuration.getScale()
+                    );
+                }
+                break;
         }
     }
 
@@ -62,6 +80,14 @@ public class EasterEgg extends Item {
                         16 * Configuration.getScale() * 0.5f
                 );
                 break;
+            case "inf":
+                batch.draw(Res.sinf,
+                        wX + (0.25f * 16 * Configuration.getScale()) - Player.get_wX(),
+                        wY + (0.25f * 16 * Configuration.getScale()) - Player.get_wY(),
+                        16 * Configuration.getScale() * 0.5f,
+                        16 * Configuration.getScale() * 0.5f
+                );
+                break;
         }
     }
 
@@ -74,6 +100,9 @@ public class EasterEgg extends Item {
             case "jokkeer_lovushcera":
                 Gdx.app.exit();
                 break;
+            case "inf":
+                Player.inf = true;
+                return false;
         }
         return true;
     }

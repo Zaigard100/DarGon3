@@ -116,9 +116,10 @@ public class PlayScreen implements Screen {
                 save = new Save(m, "", path);
             }
             if (lR.isSave()) {
-                save.setHp(Player.getHp());
+                Save.setHp(Player.getHp());
+                Save.setMoney(Player.coin_count);
                 save.setPath(path);
-                save.setArr(Player.inventory.inventoryToJSON());
+                Save.setArr(Player.inventory.inventoryToJSON());
                 save.save(save.getConf());
             }
         } catch (IOException e) {
@@ -229,6 +230,9 @@ public class PlayScreen implements Screen {
                 if (Player.getMap().stair.get(i).isExit()) {
                     Player.isShowObj = false;
                     Player.isSheld = false;
+                    Player.isShop = false;
+                    Player.inventarIsOpen = false;
+                    Player.menu_opened = false;
                     dispose();
                     if (Player.getMap().stair.get(i).isEnd()) {
                         m.setScreen(new GameScreen(m));
@@ -288,6 +292,10 @@ public class PlayScreen implements Screen {
                 Player.inventarIsOpen = false;
                 Player.isShowObj = false;
                 Player.isSheld = false;
+                Player.isShop = false;
+                Player.inventarIsOpen = false;
+                Player.menu_opened = false;
+                Player.inf = false;
             }
         }
         if(menu==2) {
@@ -298,12 +306,17 @@ public class PlayScreen implements Screen {
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
                 dispose();
                 Player.setHp(save.getHp());
+                Player.coin_count = Save.getMoney();
                 Player.inventory.jsonToInventory(save.getArr());
                 Player.isPause = false;
                 Player.isStop = false;
                 Player.inventarIsOpen = false;
                 Player.isShowObj = false;
                 Player.isSheld = false;
+                Player.isShop = false;
+                Player.inventarIsOpen = false;
+                Player.menu_opened = false;
+                Player.inf = false;
                 if (isPack) {
                     m.setScreen(new PlayScreen(m, save.getsPath(), isPack, packname, derectory));
                 } else
@@ -325,6 +338,10 @@ public class PlayScreen implements Screen {
                     Player.inventarIsOpen = false;
                     Player.isShowObj = false;
                     Player.isSheld = false;
+                    Player.isShop = false;
+                    Player.inventarIsOpen = false;
+                    Player.menu_opened = false;
+                    Player.inf = false;
                     Gdx.app.exit();
                 }
             } else {

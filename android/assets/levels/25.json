@@ -1,0 +1,384 @@
+{
+  "LevelName": "Why?",
+  "Spawn": [
+    0,
+    0
+  ],
+  "map": [
+    [
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11
+    ],
+    [
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11
+    ],
+    [
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11
+    ],
+    [
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11
+    ],
+    [
+      11,
+      14,
+      10,
+      10,
+      10,
+      13,
+      11,
+      11,
+      11,
+      11
+    ],
+    [
+      10,
+      10,
+      10,
+      10,
+      10,
+      15,
+      11,
+      11,
+      11,
+      11
+    ],
+    [
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11
+    ],
+    [
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11
+    ],
+    [
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11
+    ],
+    [
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11,
+      11
+    ]
+  ],
+  "save": true,
+  "HideTrap": [
+    {
+      "X": 2,
+      "Y": 3,
+      "Active": true
+    },
+    {
+      "X": 2,
+      "Y": 2,
+      "Active": true
+    },
+    {
+      "X": 2,
+      "Y": 0,
+      "Active": true
+    },
+    {
+      "X": 3,
+      "Y": 2,
+      "Active": true
+    },
+    {
+      "X": 3,
+      "Y": 3,
+      "Active": true
+    },
+    {
+      "X": 3,
+      "Y": 0,
+      "Active": true
+    },
+    {
+      "X": 4,
+      "Y": 2,
+      "Active": true
+    },
+    {
+      "X": 4,
+      "Y": 3,
+      "Active": true
+    },
+    {
+      "X": 5,
+      "Y": 3,
+      "Active": true
+    },
+    {
+      "X": 5,
+      "Y": 2,
+      "Active": true
+    },
+    {
+      "X": 5,
+      "Y": 1,
+      "Active": true
+    },
+    {
+      "X": 6,
+      "Y": 3,
+      "Active": true
+    },
+    {
+      "X": 7,
+      "Y": 3,
+      "Active": true
+    },
+    {
+      "X": 7,
+      "Y": 1,
+      "Active": true
+    },
+    {
+      "X": 7,
+      "Y": 0,
+      "Active": true
+    },
+    {
+      "X": 8,
+      "Y": 1,
+      "Active": true
+    },
+    {
+      "X": 8,
+      "Y": 0,
+      "Active": true
+    },
+    {
+      "X": 9,
+      "Y": 3,
+      "Active": true
+    },
+    {
+      "X": 9,
+      "Y": 2,
+      "Active": true
+    },
+    {
+      "X": 9,
+      "Y": 1,
+      "Active": true
+    },
+    {
+      "X": 9,
+      "Y": 0,
+      "Active": true
+    },
+    {
+      "X": 7,
+      "Y": 5,
+      "Active": true
+    },
+    {
+      "X": 8,
+      "Y": 5,
+      "Active": true
+    },
+    {
+      "X": 9,
+      "Y": 5,
+      "Active": true
+    },
+    {
+      "X": 9,
+      "Y": 4,
+      "Active": true
+    },
+    {
+      "X": 0,
+      "Y": 9,
+      "Active": true
+    },
+    {
+      "X": 0,
+      "Y": 8,
+      "Active": true
+    },
+    {
+      "X": 1,
+      "Y": 9,
+      "Active": true
+    },
+    {
+      "X": 2,
+      "Y": 9,
+      "Active": true
+    },
+    {
+      "X": 2,
+      "Y": 7,
+      "Active": true
+    },
+    {
+      "X": 2,
+      "Y": 6,
+      "Active": true
+    },
+    {
+      "X": 3,
+      "Y": 9,
+      "Active": true
+    },
+    {
+      "X": 3,
+      "Y": 6,
+      "Active": true
+    },
+    {
+      "X": 4,
+      "Y": 9,
+      "Active": true
+    },
+    {
+      "X": 4,
+      "Y": 8,
+      "Active": true
+    },
+    {
+      "X": 4,
+      "Y": 6,
+      "Active": true
+    },
+    {
+      "X": 5,
+      "Y": 6,
+      "Active": true
+    },
+    {
+      "X": 6,
+      "Y": 8,
+      "Active": true
+    },
+    {
+      "X": 6,
+      "Y": 7,
+      "Active": true
+    },
+    {
+      "X": 7,
+      "Y": 8,
+      "Active": true
+    },
+    {
+      "X": 7,
+      "Y": 7,
+      "Active": true
+    },
+    {
+      "X": 8,
+      "Y": 8,
+      "Active": true
+    },
+    {
+      "X": 8,
+      "Y": 7,
+      "Active": true
+    }
+  ],
+  "Item": [
+    {
+      "X": 0,
+      "Y": 1,
+      "Item": {
+        "Type": "show_trap",
+        "Count": 2
+      },
+      "Active": true
+    }
+  ],
+  "Stair": [
+    {
+      "X": 0,
+      "Y": 5,
+      "NextClosed": "levels/26.json",
+      "FlipX": false,
+      "End": true
+    },
+    {
+      "X": 0,
+      "Y": 7,
+      "Next": "levels/shops/shop_25.json",
+      "FlipX": false,
+      "End": false
+    }
+  ],
+  "Tablet": [
+    {
+      "X": -1,
+      "Y": 6,
+      "Text": [
+        "UP: Shop",
+        "DOWN: Next"
+      ]
+    }
+  ]
+}

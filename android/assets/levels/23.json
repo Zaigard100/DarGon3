@@ -1,5 +1,5 @@
 {
-  "LevelName": "IIDOOR",
+  "LevelName": "II DOOR",
   "Spawn": [
     5,
     7
@@ -196,8 +196,9 @@
     {
       "X": 8,
       "Y": 6,
+      "Next": "levels/24.json",
       "FlipX": false,
-      "End": true
+      "End": false
     }
   ],
   "Door": [

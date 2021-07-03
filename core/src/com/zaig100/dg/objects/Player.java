@@ -32,7 +32,7 @@ public class Player {
 
     static boolean[] slots = new boolean[2];
     public static boolean isSheld = false;
-    public static boolean isShowObj = false, isShop = false;
+    public static boolean isShowObj = false, isShop = false, inf = false;
 
     static Random random = new Random();
 
@@ -308,8 +308,10 @@ public class Player {
     //public float getDamgeScr() { return damgeScr; }
 
     static public void setDamgeScr(float damgeScr, int id) {
-        Player.damgeScr = damgeScr;
-        wasted_id = id;
+        if (!inf) {
+            Player.damgeScr = damgeScr;
+            wasted_id = id;
+        }
     }
 
     static public void setMap(Map map) {
@@ -349,7 +351,11 @@ public class Player {
     }
 
     static public void setHp(int hp) {
-        Player.hp = hp;
+        if (!inf) {
+            Player.hp = hp;
+        } else {
+            hp = 4;
+        }
     }
 
     static public int getHp() {

@@ -165,6 +165,15 @@
   ],
   "Item": [
     {
+      "X": 5,
+      "Y": 9,
+      "Item": {
+        "Type": "money",
+        "Count": 10
+      },
+      "Active": true
+    },
+    {
       "X": 0,
       "Y": 8,
       "Item": {

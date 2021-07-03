@@ -1,4 +1,5 @@
 {
+
   "LevelName": "Prison",
   "Spawn": [
     11,
@@ -177,11 +178,28 @@
   ],
   "Stair": [
     {
-      "X": 2,
-      "Y": 7,
+      "X": 3,
+      "Y": 8,
       "Next": "levels/16.json",
       "FlipX": false,
       "End": false
+    },
+    {
+      "X": 1,
+      "Y": 8,
+      "Next": "levels/shops/shop_15.json",
+      "FlipX": false,
+      "End": false
+    }
+  ],
+  "Tablet": [
+    {
+      "X": 2,
+      "Y": 9,
+      "Text": [
+        "< Shop",
+        "Next >"
+      ]
     }
   ],
   "save": true

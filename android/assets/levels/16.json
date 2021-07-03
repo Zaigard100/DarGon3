@@ -194,6 +194,17 @@
       "Height": 6
     }
   ],
+  "Item": [
+    {
+      "X": 1,
+      "Y": 6,
+      "Item": {
+        "Type": "money",
+        "Count": 20
+      },
+      "Active": true
+    }
+  ],
   "Stair": [
     {
       "X": 15,
