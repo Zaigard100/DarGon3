@@ -1,4 +1,4 @@
-package com.zaig100.dg.objects;
+package com.zaig100.dg.world.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -8,6 +8,7 @@ import com.zaig100.dg.elements.items.Key;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.world.World;
 
 import java.util.ArrayList;
 
@@ -31,26 +32,26 @@ public class Chest extends Obj {
     public void render(SpriteBatch batch) {
         batch.draw(
                 Res.chest(open),
-                wX - Player.wX,
-                wY - Player.wY,
+                wX - World.player.wX,
+                wY - World.player.wY,
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
         );
 
-        if ((Player.getX() - 1 == x || Player.getX() == x || Player.getX() + 1 == x) && (Player.getY() - 1 == y || Player.getY() == y || Player.getY() + 1 == y)) {
+        if ((World.player.getX() - 1 == x || World.player.getX() == x || World.player.getX() + 1 == x) && (World.player.getY() - 1 == y || World.player.getY() == y || World.player.getY() + 1 == y)) {
             if (isLooked) {
                 Res.getFont(3).draw(
                         batch,
                         keyTag,
-                        x * 16 * Configuration.getScale() - Player.get_wX() + 3 * 16 * Configuration.getScale(),
-                        y * 16 * Configuration.getScale() - Player.get_wY() + 7 * 16 * Configuration.getScale()
+                        x * 16 * Configuration.getScale() - World.player.get_wX() + 3 * 16 * Configuration.getScale(),
+                        y * 16 * Configuration.getScale() - World.player.get_wY() + 7 * 16 * Configuration.getScale()
                 );
             } else {
                 Res.getFont(3).draw(
                         batch,
                         "open",
-                        x * 16 * Configuration.getScale() - Player.get_wX() + 3 * 16 * Configuration.getScale(),
-                        y * 16 * Configuration.getScale() - Player.get_wY() + 7 * 16 * Configuration.getScale()
+                        x * 16 * Configuration.getScale() - World.player.get_wX() + 3 * 16 * Configuration.getScale(),
+                        y * 16 * Configuration.getScale() - World.player.get_wY() + 7 * 16 * Configuration.getScale()
                 );
             }
         }
@@ -60,10 +61,10 @@ public class Chest extends Obj {
     @Override
     public void frame() {
         if ((Gdx.input.justTouched() && Joystick.isUse()) || (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))) {
-            if ((Player.getX() - 1 == x || Player.getX() == x || Player.getX() + 1 == x) && (Player.getY() - 1 == y || Player.getY() == y || Player.getY() + 1 == y)) {
-                if (!((Player.getX() == x && Player.getY() == y))) {
+            if ((World.player.getX() - 1 == x || World.player.getX() == x || World.player.getX() + 1 == x) && (World.player.getY() - 1 == y || World.player.getY() == y || World.player.getY() + 1 == y)) {
+                if (!((World.player.getX() == x && World.player.getY() == y))) {
                     if (isLooked) {
-                        for (Item item : Player.inventory.items) {
+                        for (Item item : World.player.inventory.items) {
                             if (item.getType().equals(Item.ItemType.KEY)) {
                                 if (((Key) item).getKeyTag().equals(keyTag)) {
                                     isLooked = false;
@@ -75,7 +76,7 @@ public class Chest extends Obj {
                         if (items != null) {
                             open = true;
                             for (Item item : items) {
-                                Player.inventory.set(item);
+                                World.player.inventory.set(item);
                             }
                             items = null;
                         }
@@ -89,8 +90,8 @@ public class Chest extends Obj {
     public void show_obj(SpriteBatch batch) {
         batch.draw(
                 Res.green_obj,
-                wX - Player.get_wX(),
-                wY - Player.get_wY(),
+                wX - World.player.get_wX(),
+                wY - World.player.get_wY(),
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
         );

@@ -2,11 +2,11 @@ package com.zaig100.dg.elements.items;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.zaig100.dg.objects.Player;
-import com.zaig100.dg.screen.PlayScreen;
-import com.zaig100.dg.screen.Render3D;
+import com.zaig100.dg.screen.extensions.Render3D;
+import com.zaig100.dg.screen.game.LevelModScreen;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.world.World;
 
 import org.json.simple.JSONObject;
 
@@ -48,7 +48,7 @@ public class EasterEgg extends Item {
                         16 * Configuration.getScale() - 6 * Configuration.getScale(),
                         16 * Configuration.getScale() - 6 * Configuration.getScale()
                 );
-                if (Player.inf) {
+                if (World.player.inf) {
                     batch.draw(
                             Res.green_obj,
                             x * 16 * Configuration.getScale() + 19 * Configuration.getScale(),
@@ -66,24 +66,24 @@ public class EasterEgg extends Item {
         switch (code) {
             case "4601025111298":
                 batch.draw(Res.cube,
-                        wX + (0.25f * 16 * Configuration.getScale()) - Player.get_wX(),
-                        wY + (0.25f * 16 * Configuration.getScale()) - Player.get_wY(),
+                        wX + (0.25f * 16 * Configuration.getScale()) - World.player.get_wX(),
+                        wY + (0.25f * 16 * Configuration.getScale()) - World.player.get_wY(),
                         16 * Configuration.getScale() * 0.5f,
                         16 * Configuration.getScale() * 0.5f
                 );
                 break;
             case "jokkeer_lovushcera":
                 batch.draw(Res.turn_off,
-                        wX + (0.25f * 16 * Configuration.getScale()) - Player.get_wX(),
-                        wY + (0.25f * 16 * Configuration.getScale()) - Player.get_wY(),
+                        wX + (0.25f * 16 * Configuration.getScale()) - World.player.get_wX(),
+                        wY + (0.25f * 16 * Configuration.getScale()) - World.player.get_wY(),
                         16 * Configuration.getScale() * 0.5f,
                         16 * Configuration.getScale() * 0.5f
                 );
                 break;
             case "inf":
                 batch.draw(Res.sinf,
-                        wX + (0.25f * 16 * Configuration.getScale()) - Player.get_wX(),
-                        wY + (0.25f * 16 * Configuration.getScale()) - Player.get_wY(),
+                        wX + (0.25f * 16 * Configuration.getScale()) - World.player.get_wX(),
+                        wY + (0.25f * 16 * Configuration.getScale()) - World.player.get_wY(),
                         16 * Configuration.getScale() * 0.5f,
                         16 * Configuration.getScale() * 0.5f
                 );
@@ -95,13 +95,13 @@ public class EasterEgg extends Item {
     public boolean use() {
         switch (code) {
             case "4601025111298":
-                PlayScreen.m.setScreen(new Render3D(PlayScreen.m));
+                LevelModScreen.m.setScreen(new Render3D(LevelModScreen.m));
                 break;
             case "jokkeer_lovushcera":
                 Gdx.app.exit();
                 break;
             case "inf":
-                Player.inf = true;
+                World.player.inf = true;
                 return false;
         }
         return true;

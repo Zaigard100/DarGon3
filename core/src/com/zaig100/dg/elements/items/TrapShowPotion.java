@@ -1,9 +1,9 @@
 package com.zaig100.dg.elements.items;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.zaig100.dg.objects.Player;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.world.World;
 
 import org.json.simple.JSONObject;
 
@@ -38,8 +38,8 @@ public class TrapShowPotion extends Item {
     @Override
     public void renderInMap(Batch batch, int wX, int wY) {
         batch.draw(Res.show_trap_potion,
-                wX + (0.25f * 16 * Configuration.getScale()) - Player.get_wX(),
-                wY + (0.25f * 16 * Configuration.getScale()) - Player.get_wY(),
+                wX + (0.25f * 16 * Configuration.getScale()) - World.player.get_wX(),
+                wY + (0.25f * 16 * Configuration.getScale()) - World.player.get_wY(),
                 16 * Configuration.getScale() * 0.5f,
                 16 * Configuration.getScale() * 0.5f
         );
@@ -47,8 +47,8 @@ public class TrapShowPotion extends Item {
 
     @Override
     public boolean use() {
-        if (!Player.isShowObj) {
-            Player.isShowObj = true;
+        if (!World.player.isShowObj) {
+            World.player.isShowObj = true;
             return true;
         }
         return false;

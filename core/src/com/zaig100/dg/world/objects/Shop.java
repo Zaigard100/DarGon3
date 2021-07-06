@@ -1,4 +1,4 @@
-package com.zaig100.dg.objects;
+package com.zaig100.dg.world.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -7,6 +7,7 @@ import com.zaig100.dg.elements.items.Item;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.world.World;
 
 public class Shop extends Obj {
 
@@ -28,8 +29,8 @@ public class Shop extends Obj {
     public void render(SpriteBatch batch) {
         batch.draw(
                 Res.shop,
-                wX - Player.get_wX(),
-                wY - Player.get_wY(),
+                wX - World.player.get_wX(),
+                wY - World.player.get_wY(),
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
         );
@@ -39,12 +40,12 @@ public class Shop extends Obj {
     @Override
     public void frame() {
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
-            if ((Player.getX() - 1 == x || Player.getX() == x || Player.getX() + 1 == x) && (Player.getY() - 1 == y || Player.getY() == y || Player.getY() + 1 == y)) {
-                if (!((Player.getX() == x && Player.getY() == y))) {
-                    if (!Player.isShop) {
-                        Player.map.setShop(this);
-                        Player.isStop = true;
-                        Player.menu_opened = true;
+            if ((World.player.getX() - 1 == x || World.player.getX() == x || World.player.getX() + 1 == x) && (World.player.getY() - 1 == y || World.player.getY() == y || World.player.getY() + 1 == y)) {
+                if (!((World.player.getX() == x && World.player.getY() == y))) {
+                    if (!World.player.isShop) {
+                        World.map.setShop(this);
+                        World.player.isStop = true;
+                        World.player.menu_opened = true;
                         pos = 99;
                     }
                 }
@@ -56,8 +57,8 @@ public class Shop extends Obj {
     public void show_obj(SpriteBatch batch) {
         batch.draw(
                 Res.green_obj,
-                wX - Player.get_wX(),
-                wY - Player.get_wY(),
+                wX - World.player.get_wX(),
+                wY - World.player.get_wY(),
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
         );
@@ -121,17 +122,17 @@ public class Shop extends Obj {
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            if (Player.isShop) {
-                Player.isShop = false;
-                Player.isStop = false;
+            if (World.player.isShop) {
+                World.player.isShop = false;
+                World.player.isStop = false;
             }
             pos = 99;
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             if (pos >= 0 && pos <= 2) {
-                if (cost[pos] <= Player.coin_count) {
-                    Player.coin_count -= cost[pos];
-                    Player.inventory.set(item[pos]);
+                if (cost[pos] <= World.player.coin_count) {
+                    World.player.coin_count -= cost[pos];
+                    World.player.inventory.set(item[pos]);
                 }
             }
         }
@@ -151,17 +152,17 @@ public class Shop extends Obj {
                     }
                 } /// Pos
                 if ((3.5f * 16 * Configuration.getScale() <= scrX) && (4.5f * 16 * Configuration.getScale() >= scrX)) {
-                    if (Player.isShop) {
-                        Player.isShop = false;
-                        Player.isStop = false;
+                    if (World.player.isShop) {
+                        World.player.isShop = false;
+                        World.player.isStop = false;
                     }
                     pos = 99;
                 }
 
                 if (lastPos == pos) {
-                    if (cost[pos] <= Player.coin_count) {
-                        Player.coin_count -= cost[pos];
-                        Player.inventory.set(item[pos]);
+                    if (cost[pos] <= World.player.coin_count) {
+                        World.player.coin_count -= cost[pos];
+                        World.player.inventory.set(item[pos]);
                     }
                 } else {
                     pos = lastPos;

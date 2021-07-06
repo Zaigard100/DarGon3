@@ -2,7 +2,7 @@ package com.zaig100.dg.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.zaig100.dg.objects.Player;
+import com.zaig100.dg.world.World;
 
 
 public class Joystick {
@@ -61,7 +61,7 @@ public class Joystick {
                         }
                     }
                 }
-                if (Player.menu_opened && !Player.isPause) {
+                if (World.player.menu_opened && !World.player.isPause) {
                     use = false;
                 }
             }

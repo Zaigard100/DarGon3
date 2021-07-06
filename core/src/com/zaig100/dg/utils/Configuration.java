@@ -29,7 +29,7 @@ public class Configuration {
     ////static boolean fulscreen = false;
     //static String shader = "shaders/DefautCRT.frag";
 
-    public Configuration(Main m) throws IOException {
+    public static void load(Main m) throws IOException {
 
         if (m.isAndroid()) {
             conf = Gdx.files.local("DGConfig.json").file();
@@ -92,7 +92,7 @@ public class Configuration {
 
     }
 
-    private void createDefaultConfig(File f) {
+    private static void createDefaultConfig(File f) {
         try {
             f.createNewFile();
         } catch (IOException e) {

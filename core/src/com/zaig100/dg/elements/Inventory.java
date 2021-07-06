@@ -8,10 +8,10 @@ import com.zaig100.dg.elements.items.Item;
 import com.zaig100.dg.elements.items.Poition;
 import com.zaig100.dg.elements.items.Sheld;
 import com.zaig100.dg.elements.items.Torch;
-import com.zaig100.dg.objects.Items;
-import com.zaig100.dg.objects.Player;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.world.World;
+import com.zaig100.dg.world.objects.Items;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -78,7 +78,7 @@ public class Inventory {
                         Item item = Item.jsonToItem(items.get(x + y * 4).toJson());
                         if (item == null) return;
                         item.setCount(1);
-                        Player.map.objectsU.add(new Items(Player.getX(), Player.getY(), item, "Drop"));
+                        World.map.objectsU.add(new Items(World.player.getX(), World.player.getY(), item, "Drop"));
                         items.get(x + y * 4).setCount(items.get(x + y * 4).getCount() - 1);
                         if (items.get(x + y * 4).getCount() <= 0) {
                             items.remove(x + y * 4);
@@ -173,7 +173,7 @@ public class Inventory {
                     default:
                         return;
                 }
-                Player.map.objectsU.add(new Items(Player.getX(), Player.getY(), item, "Drop"));
+                World.map.objectsU.add(new Items(World.player.getX(), World.player.getY(), item, "Drop"));
                 items.get(x + y * 4).setCount(items.get(x + y * 4).getCount() - 1);
                 if (items.get(x + y * 4).getCount() <= 0) {
                     items.remove(x + y * 4);
@@ -199,7 +199,7 @@ public class Inventory {
 
     public boolean set(Item item) {
         for (int i = 0; i < 12; i++) {
-            if (item.getType() == Item.ItemType.KEY) break;
+            if (item.getType() == Item.ItemType.KEY||item.getType() == Item.ItemType.EGG) break;
             if (items.get(i).getType() == item.getType()) {
                 items.get(i).setCount(items.get(i).getCount() + item.getCount());
                 return true;

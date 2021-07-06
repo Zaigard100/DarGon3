@@ -1,7 +1,7 @@
-package com.zaig100.dg.objects.mobs;
+package com.zaig100.dg.world.objects.mobs;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.zaig100.dg.objects.Obj;
+import com.zaig100.dg.world.objects.Obj;
 
 public class Mob extends Obj {
     //TODO Mob(Абстракт) сделать рендер,фрейм,тег активейт

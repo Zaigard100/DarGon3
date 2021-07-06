@@ -1,9 +1,9 @@
 package com.zaig100.dg.elements.items;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.zaig100.dg.objects.Player;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.world.World;
 
 import org.json.simple.JSONObject;
 
@@ -55,22 +55,22 @@ public class Money extends Item {
     public void renderInMap(Batch batch, int wX, int wY) {
         if (count <= 10) {
             batch.draw(Res.money,
-                    wX + (0.25f * 16 * Configuration.getScale()) - Player.get_wX(),
-                    wY + (0.25f * 16 * Configuration.getScale()) - Player.get_wY(),
+                    wX + (0.25f * 16 * Configuration.getScale()) - World.player.get_wX(),
+                    wY + (0.25f * 16 * Configuration.getScale()) - World.player.get_wY(),
                     16 * Configuration.getScale() * 0.5f,
                     16 * Configuration.getScale() * 0.5f
             );
         } else if (count <= 50) {
             batch.draw(Res.bundle,
-                    wX + (0.25f * 16 * Configuration.getScale()) - Player.get_wX(),
-                    wY + (0.25f * 16 * Configuration.getScale()) - Player.get_wY(),
+                    wX + (0.25f * 16 * Configuration.getScale()) - World.player.get_wX(),
+                    wY + (0.25f * 16 * Configuration.getScale()) - World.player.get_wY(),
                     16 * Configuration.getScale() * 0.5f,
                     16 * Configuration.getScale() * 0.5f
             );
         } else {
             batch.draw(Res.chest(false),
-                    wX + (0.25f * 16 * Configuration.getScale()) - Player.get_wX(),
-                    wY + (0.25f * 16 * Configuration.getScale()) - Player.get_wY(),
+                    wX + (0.25f * 16 * Configuration.getScale()) - World.player.get_wX(),
+                    wY + (0.25f * 16 * Configuration.getScale()) - World.player.get_wY(),
                     16 * Configuration.getScale() * 0.5f,
                     16 * Configuration.getScale() * 0.5f
             );
@@ -79,8 +79,8 @@ public class Money extends Item {
 
     @Override
     public boolean use() {
-        if (Player.getHp() > 0) {
-            Player.coin_count += count;
+        if (World.player.getHp() > 0) {
+            World.player.coin_count += count;
             count = 0;
             return true;
         }

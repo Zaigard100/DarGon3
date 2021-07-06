@@ -1,8 +1,9 @@
-package com.zaig100.dg.objects;
+package com.zaig100.dg.world.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.world.World;
 
 public class Spinney extends Obj {
     public int wight, height;
@@ -18,7 +19,13 @@ public class Spinney extends Obj {
     public void render(SpriteBatch batch) {
         for (i = 0; i < height; i++) {
             for (j = 0; j < wight; j++) {
-                batch.draw(Res.spinney, (wX + j * 16 * Configuration.getScale()) - Player.get_wX(), (wY + i * 16 * Configuration.getScale()) - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+                batch.draw(
+                        Res.spinney,
+                        (wX + j * 16 * Configuration.getScale()) - World.player.get_wX(),
+                        (wY + i * 16 * Configuration.getScale()) - World.player.get_wY(),
+                        16 * Configuration.getScale(),
+                        16 * Configuration.getScale()
+                );
             }
         }
     }
@@ -34,8 +41,8 @@ public class Spinney extends Obj {
     public void show_obj(SpriteBatch batch) {
         batch.draw(
                 Res.blue_obj,
-                wX - Player.get_wX(),
-                wY - Player.get_wY(),
+                wX - World.player.get_wX(),
+                wY - World.player.get_wY(),
                 wight * 16 * Configuration.getScale(),
                 height * 16 * Configuration.getScale()
         );

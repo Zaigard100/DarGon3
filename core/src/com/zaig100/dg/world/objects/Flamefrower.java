@@ -1,9 +1,10 @@
-package com.zaig100.dg.objects;
+package com.zaig100.dg.world.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.world.World;
 
 public class Flamefrower extends Obj {
 
@@ -57,13 +58,35 @@ public class Flamefrower extends Obj {
     }
 
     public void render(SpriteBatch batch) {
-        batch.draw(Res.flamethrowfer, wX - Player.get_wX(), wY - Player.get_wY(), 8 * Configuration.getScale(), 8 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale(), 1, 1, 90 * angle);
+        batch.draw(
+                Res.flamethrowfer,
+                wX - World.player.get_wX(),
+                wY - World.player.get_wY(),
+                8 * Configuration.getScale(),
+                8 * Configuration.getScale(),
+                16 * Configuration.getScale(),
+                16 * Configuration.getScale(),
+                1,
+                1,
+                90 * angle
+        );
 
         flame_stage = 0;
         while (flame_stage < stage) {
 
 
-            batch.draw(Res.fire(anim_stage), ((x + dx * (flame_stage + 1)) + 3) * 16 * Configuration.getScale() - Player.get_wX(), ((y + dy * (flame_stage + 1)) + 2) * 16 * Configuration.getScale() - Player.get_wY(), 8 * Configuration.getScale(), 8 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale(), 1, 1, 90 * (angle - 1));
+            batch.draw(
+                    Res.fire(anim_stage),
+                    ((x + dx * (flame_stage + 1)) + 3) * 16 * Configuration.getScale() - World.player.get_wX(),
+                    ((y + dy * (flame_stage + 1)) + 2) * 16 * Configuration.getScale() - World.player.get_wY(),
+                    8 * Configuration.getScale(),
+                    8 * Configuration.getScale(),
+                    16 * Configuration.getScale(),
+                    16 * Configuration.getScale(),
+                    1,
+                    1,
+                    90 * (angle - 1)
+            );
             frame();
             flame_stage++;
         }
@@ -72,10 +95,10 @@ public class Flamefrower extends Obj {
     public void frame() {
         timst = 0;
         while (timst < flame_stage) {
-            if ((Player.getX() == x + ((timst + 1) * dx)) && (Player.getY() == y + ((timst + 1) * dy))) {
-                if (Player.getHp() > 0) {
-                    Player.setHp(0);
-                    Player.setDamgeScr(0f, 2);
+            if ((World.player.getX() == x + ((timst + 1) * dx)) && (World.player.getY() == y + ((timst + 1) * dy))) {
+                if (World.player.getHp() > 0) {
+                    World.player.setHp(0);
+                    World.player.setDamgeScr(0f, 2);
                 }
             }
             timst++;
@@ -91,8 +114,8 @@ public class Flamefrower extends Obj {
     public void show_obj(SpriteBatch batch) {
         batch.draw(
                 Res.damage,
-                wX - Player.get_wX(),
-                wY - Player.get_wY(),
+                wX - World.player.get_wX(),
+                wY - World.player.get_wY(),
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
         );

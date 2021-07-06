@@ -15,15 +15,19 @@ import com.zaig100.dg.Main;
 import com.zaig100.dg.elements.items.Poition;
 import com.zaig100.dg.elements.items.Sheld;
 import com.zaig100.dg.elements.items.Torch;
-import com.zaig100.dg.objects.Player;
+import com.zaig100.dg.screen.extensions.Extension;
+import com.zaig100.dg.screen.extensions.Render3D;
+import com.zaig100.dg.screen.extensions.Setting;
+import com.zaig100.dg.screen.game.LevelModScreen;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.LevelRead;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.ShaderManager;
+import com.zaig100.dg.world.World;
 
 import java.util.Random;
 
-public class GameScreen implements Screen {
+public class MenuScreen implements Screen {
     FrameBuffer fbo, fbo2;
     SpriteBatch batch;
     OrthographicCamera cam;
@@ -48,7 +52,7 @@ public class GameScreen implements Screen {
     private int stage;
     private float timer;
 
-    public GameScreen(Main m) {
+    public MenuScreen(Main m) {
         this.m = m;
         batch = new SpriteBatch();
         lR = new LevelRead("levels/01.json", false);
@@ -110,13 +114,13 @@ public class GameScreen implements Screen {
                     break;
                 case 2:
                     dispose();
-                    Player.setHp(4);
-                    Player.inventory.clear();
-                    Player.inventory.set(new Poition(3));
-                    Player.inventory.set(new Sheld(2));
-                    Player.inventory.set(new Torch(1));
-                    Player.coin_count = 10;
-                    m.setScreen(new PlayScreen(m, "levels/01.json", false));
+                    World.player.setHp(4);
+                    World.player.inventory.clear();
+                    World.player.inventory.set(new Poition(3));
+                    World.player.inventory.set(new Sheld(2));
+                    World.player.inventory.set(new Torch(1));
+                    World.player.coin_count = 10;
+                    m.setScreen(new LevelModScreen(m, "levels/01.json", false));
                     break;
                 case 3:
                     dispose();
@@ -203,7 +207,7 @@ public class GameScreen implements Screen {
                 b_Settings = false;
                 isExit = true;
                 button = 2;
-                m.setScreen(new PlayScreen(m, "levels/01.json", false));
+                m.setScreen(new LevelModScreen(m, "levels/01.json", false));
             } else {
                 tick++;
             }
@@ -272,7 +276,7 @@ public class GameScreen implements Screen {
                         m.setScreen(new Render3D(m));
                     }
                     if ((Configuration.getMusic() == 20) && (Configuration.getSound() == 50)) {
-                        m.setScreen(new PlayScreen(m, "levels/Test.json", false));
+                        m.setScreen(new LevelModScreen(m, "levels/Test.json", false));
                     }
                 }
             }

@@ -1,47 +1,57 @@
-package com.zaig100.dg.objects;
+package com.zaig100.dg.world.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.zaig100.dg.elements.items.Item;
+import com.zaig100.dg.elements.items.Poition;
+import com.zaig100.dg.elements.items.Sheld;
+import com.zaig100.dg.elements.items.Torch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.world.World;
 
-public class Teleport extends Obj {
-    public int tx, ty;
-    public boolean hide;
+public class Items extends Obj {
 
-    public Teleport(int x, int y, int tx, int ty, String tag) {
+
+    public Item item;
+    public boolean active;
+
+    public Items(int x, int y, Item item, String tag) {
         super(x, y, tag);
-        type = ObjType.TELEPORT;
-        this.tx = tx;
-        this.ty = ty;
-        this.hide = true;
+        type = ObjType.ITEM;
+        this.item = item;
+        this.active = true;
     }
 
-    public Teleport(int x, int y, int tx, int ty, boolean hide, String tag) {
+    public Items(int x, int y, Item item, boolean active, String tag) {
         super(x, y, tag);
-        this.x = x;
-        this.y = y;
-        this.tx = tx;
-        this.ty = ty;
-        this.hide = hide;
+        this.item = item;
+        this.active = active;
+
     }
 
-    @Override
     public void render(SpriteBatch batch) {
-        batch.draw(Res.teleport, wX - Player.get_wX(), wY - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+        if (active) {
+            item.renderInMap(batch, wX, wY);
+        }
     }
 
-    @Override
-    public void frame() {
-        if ((Player.getX() == x) && (Player.getY() == y)) {
+    public void frame(){
+        if(active) {
             if ((Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) || (Joystick.isUse())) {
-                Player.teleport(tx, ty);
+                if ((World.player.getX() == x) && (World.player.getY() == y)) {
+                    World.player.inventory.set(item);
+                    active = false;
+                }
             }
         }
         if (isMove()) {
             move();
+        }
+        if (!active) {
+            del();
         }
     }
 
@@ -49,8 +59,8 @@ public class Teleport extends Obj {
     public void show_obj(SpriteBatch batch) {
         batch.draw(
                 Res.green_obj,
-                wX - Player.get_wX(),
-                wY - Player.get_wY(),
+                wX - World.player.get_wX(),
+                wY - World.player.get_wY(),
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
         );
@@ -77,29 +87,22 @@ public class Teleport extends Obj {
                     y = Integer.parseInt((func.split(">")[1]));
                 }
                 break;
-            case "TX":
-                if (func.split(">")[1] == "++") {
-                    tx++;
-                } else if (func.split(">")[1] == "--") {
-                    tx--;
-                } else {
-                    tx = Integer.parseInt((func.split(">")[1]));
+            case "item":
+                if (func.split(">")[1] == "poition") {
+                    item = new Poition(1);
+                }
+                if (func.split(">")[1] == "sheld") {
+                    item = new Sheld(1);
+                }
+                if (func.split(">")[1] == "torch") {
+                    item = new Torch(1);
                 }
                 break;
-            case "TY":
-                if (func.split(">")[1] == "++") {
-                    ty++;
-                } else if (func.split(">")[1] == "--") {
-                    ty--;
-                } else {
-                    ty = Integer.parseInt((func.split(">")[1]));
-                }
-                break;
-            case "Hide":
+            case "Active":
                 if (func.split(">")[1] == "++" || func.split(">")[1] == "--") {
-                    hide = !hide;
+                    active = !active;
                 } else {
-                    hide = Boolean.parseBoolean((func.split(">")[1]));
+                    active = Boolean.parseBoolean((func.split(">")[1]));
                 }
                 break;
             case "cordN":
@@ -111,4 +114,11 @@ public class Teleport extends Obj {
         }
     }
 
+    public Item getItem() {
+        return item;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
 }

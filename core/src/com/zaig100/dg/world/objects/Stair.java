@@ -1,4 +1,4 @@
-package com.zaig100.dg.objects;
+package com.zaig100.dg.world.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.world.World;
 
 public class Stair extends Obj {
 
@@ -27,14 +28,20 @@ public class Stair extends Obj {
         if (Res.nextlv.isFlipX() != flip_x) {
             Res.nextlv.flip(flip_x, false);
         }
-        batch.draw(Res.nextlv, wX - Player.get_wX(), wY - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+        batch.draw(
+                Res.nextlv,
+                wX - World.player.get_wX(),
+                wY - World.player.get_wY(),
+                16 * Configuration.getScale(),
+                16 * Configuration.getScale()
+        );
     }
 
     @Override
     public void frame() {
         if ((Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) || (Joystick.isUse())) {
-            if ((x == Player.getX()) && (y == Player.getY())) {
-                Player.setIsSheld(false);
+            if ((x == World.player.getX()) && (y == World.player.getY())) {
+                World.player.setIsSheld(false);
                 isExit = true;
             }
         }
@@ -47,8 +54,8 @@ public class Stair extends Obj {
     public void show_obj(SpriteBatch batch) {
         batch.draw(
                 Res.green_obj,
-                wX - Player.get_wX(),
-                wY - Player.get_wY(),
+                wX - World.player.get_wX(),
+                wY - World.player.get_wY(),
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
         );

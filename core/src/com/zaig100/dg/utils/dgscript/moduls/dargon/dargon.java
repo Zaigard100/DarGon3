@@ -1,22 +1,22 @@
 package com.zaig100.dg.utils.dgscript.moduls.dargon;
 
-import com.zaig100.dg.objects.Arrow;
-import com.zaig100.dg.objects.Crossbow;
-import com.zaig100.dg.objects.Flamefrower;
-import com.zaig100.dg.objects.FlimsyTile;
-import com.zaig100.dg.objects.HideTrap;
-import com.zaig100.dg.objects.Items;
-import com.zaig100.dg.objects.Obj;
-import com.zaig100.dg.objects.Spike;
-import com.zaig100.dg.objects.Spinney;
-import com.zaig100.dg.objects.Stair;
-import com.zaig100.dg.objects.Teleport;
 import com.zaig100.dg.utils.dgscript.lib.ArrayValue;
 import com.zaig100.dg.utils.dgscript.lib.Functions;
 import com.zaig100.dg.utils.dgscript.lib.NumberVal;
 import com.zaig100.dg.utils.dgscript.lib.StringVal;
 import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.utils.dgscript.moduls.Module;
+import com.zaig100.dg.world.objects.Arrow;
+import com.zaig100.dg.world.objects.Crossbow;
+import com.zaig100.dg.world.objects.Flamefrower;
+import com.zaig100.dg.world.objects.FlimsyTile;
+import com.zaig100.dg.world.objects.HideTrap;
+import com.zaig100.dg.world.objects.Items;
+import com.zaig100.dg.world.objects.Obj;
+import com.zaig100.dg.world.objects.Spike;
+import com.zaig100.dg.world.objects.Spinney;
+import com.zaig100.dg.world.objects.Stair;
+import com.zaig100.dg.world.objects.Teleport;
 
 public class dargon implements Module {
     @Override

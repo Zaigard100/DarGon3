@@ -1,71 +1,62 @@
-package com.zaig100.dg.objects;
+package com.zaig100.dg.world.objects;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
-import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.world.World;
 
-public class Button extends Obj {
-    String[] func;
-    Map M;
-    boolean active = true;
+public class HideTrap extends Obj {
+    public boolean active;
 
-    public Button(int x, int y, String[] func, String tag) {
+    public HideTrap(int x, int y, String tag) {
         super(x, y, tag);
-        type = ObjType.BUTTON;
-        this.func = func;
+        type = ObjType.HIDE_TRAP;
+        this.x = x;
+        this.y = y;
+        this.active = true;
     }
 
     @Override
     public void render(SpriteBatch batch) {
-        batch.draw(Res.button, wX - Player.get_wX(), wY - Player.get_wY(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
     }
 
-    @Override
+    public HideTrap(int x, int y, boolean active, String tag) {
+        super(x, y, tag);
+        this.x = x;
+        this.y = y;
+        this.active = active;
+    }
+
     public void frame() {
-
-
-        //Joystick.frame((int) ((Gdx.graphics.getWidth() - 16 * 7 * Configuration.getScale()) / 2), (int) ((Gdx.graphics.getHeight() - 16 * 5 * Configuration.getScale()) / 2));
-        if ((Player.getX() == x) && (Player.getY() == y) && active) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
-                for (int i = 0; i < func.length; i++) {
-                    M.doFunc(func[i]);
+        if (active) {
+            if ((World.player.getX() == x) && (World.player.getY() == y)) {
+                if (!World.player.isSheld()) {
+                    World.player.setHp(World.player.getHp() - 1);
                 }
+                World.player.setDamgeScr(0f, 1);
+                Res.lov.play(1.0f);
                 active = false;
             }
         }
-
-        if ((Player.getX() != x) && (Player.getY() != y)) {
-            active = true;
+        if (!active) {
+            del();
         }
-
-        if (isMove()) {
-            move();
-        }
-
     }
 
     @Override
     public void show_obj(SpriteBatch batch) {
         batch.draw(
-                Res.blue_obj,
-                wX - Player.get_wX(),
-                wY - Player.get_wY(),
+                Res.damage,
+                wX - World.player.get_wX(),
+                wY - World.player.get_wY(),
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
         );
     }
 
-    public Button setMap(Map M) {
-        this.M = M;
-        return this;
-    }
 
     @Override
     public void tag_activate(String func) {
-
         switch (func.split(">")[0]) {
             case "X":
                 if (func.split(">")[1] == "++") {
@@ -83,6 +74,13 @@ public class Button extends Obj {
                     y--;
                 } else {
                     y = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "Active":
+                if (func.split(">")[1] == "++" || func.split(">")[1] == "--") {
+                    active = !active;
+                } else {
+                    active = Boolean.parseBoolean(func.split(">")[1]);
                 }
                 break;
             case "cordN":

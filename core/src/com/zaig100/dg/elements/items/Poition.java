@@ -1,9 +1,9 @@
 package com.zaig100.dg.elements.items;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.zaig100.dg.objects.Player;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.world.World;
 
 import org.json.simple.JSONObject;
 
@@ -38,8 +38,8 @@ public class Poition extends Item {
     @Override
     public void renderInMap(Batch batch, int wX, int wY) {
         batch.draw(Res.hp_potion,
-                wX + (0.25f * 16 * Configuration.getScale()) - Player.get_wX(),
-                wY + (0.25f * 16 * Configuration.getScale()) - Player.get_wY(),
+                wX + (0.25f * 16 * Configuration.getScale()) - World.player.get_wX(),
+                wY + (0.25f * 16 * Configuration.getScale()) - World.player.get_wY(),
                 16 * Configuration.getScale() * 0.5f,
                 16 * Configuration.getScale() * 0.5f
         );
@@ -47,8 +47,8 @@ public class Poition extends Item {
 
     @Override
     public boolean use() {
-        if (Player.getHp() < 4 && Player.getHp() > 0) {
-            Player.setHp(Player.getHp() + 1);
+        if (World.player.getHp() < 4 && World.player.getHp() > 0) {
+            World.player.setHp(World.player.getHp() + 1);
             return true;
         }
         return false;

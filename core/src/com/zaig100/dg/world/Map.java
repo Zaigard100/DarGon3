@@ -1,4 +1,4 @@
-package com.zaig100.dg.objects;
+package com.zaig100.dg.world;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -23,6 +23,22 @@ import com.zaig100.dg.utils.contain.StairC;
 import com.zaig100.dg.utils.contain.TabletC;
 import com.zaig100.dg.utils.contain.TeleportC;
 import com.zaig100.dg.utils.contain.ZonaC;
+import com.zaig100.dg.world.objects.Button;
+import com.zaig100.dg.world.objects.Chest;
+import com.zaig100.dg.world.objects.Crossbow;
+import com.zaig100.dg.world.objects.Door;
+import com.zaig100.dg.world.objects.Flamefrower;
+import com.zaig100.dg.world.objects.FlimsyTile;
+import com.zaig100.dg.world.objects.HideTrap;
+import com.zaig100.dg.world.objects.Items;
+import com.zaig100.dg.world.objects.Obj;
+import com.zaig100.dg.world.objects.Shop;
+import com.zaig100.dg.world.objects.Spike;
+import com.zaig100.dg.world.objects.Spinney;
+import com.zaig100.dg.world.objects.Stair;
+import com.zaig100.dg.world.objects.Tablet;
+import com.zaig100.dg.world.objects.Teleport;
+import com.zaig100.dg.world.objects.Zona;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -40,7 +56,7 @@ public class Map {
     public ArrayList<Obj> objectsO = new ArrayList<>();
     public ArrayList<Stair> stair = new ArrayList<>();
 
-    int mapWidht, mapHeight;
+    public int mapWidht, mapHeight;
     boolean isDark;
     public int[] map;
     int j;
@@ -67,40 +83,40 @@ public class Map {
     }
 
     public void setShop(Shop shop) {
-        Player.isShop = true;
+        World.player.isShop = true;
         this.shop = shop;
     }
 
     public void render(SpriteBatch batch) {
-        for (i = Player.getY() - 4; i < Player.getY() + 4; i++) {
-            for (j = Player.getX() - 5; j < Player.getX() + 5; j++) {
+        for (i = World.player.getY() - 4; i < World.player.getY() + 4; i++) {
+            for (j = World.player.getX() - 5; j < World.player.getX() + 5; j++) {
                 if (i >= 0 && i < mapHeight && j >= 0 && j < mapWidht) {
                     if (map[j + mapWidht * i] == 11) {
-                        batch.draw(Res.tile(0, 0), -Player.wX + (j + 3) * 16 * Configuration.getScale(), -Player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+                        batch.draw(Res.tile(0, 0), -World.player.wX + (j + 3) * 16 * Configuration.getScale(), -World.player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
                     }
                     if (map[j + mapWidht * i] == 12) {
-                        batch.draw(Res.tile(1, 1), -Player.wX + (j + 3) * 16 * Configuration.getScale(), -Player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+                        batch.draw(Res.tile(1, 1), -World.player.wX + (j + 3) * 16 * Configuration.getScale(), -World.player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
                     }
                     if (map[j + mapWidht * i] == 13) {
-                        batch.draw(Res.tile(2, 0), -Player.wX + (j + 3) * 16 * Configuration.getScale(), -Player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+                        batch.draw(Res.tile(2, 0), -World.player.wX + (j + 3) * 16 * Configuration.getScale(), -World.player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
                     }
                     if (map[j + mapWidht * i] == 14) {
-                        batch.draw(Res.tile(1, 0), -Player.wX + (j + 3) * 16 * Configuration.getScale(), -Player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+                        batch.draw(Res.tile(1, 0), -World.player.wX + (j + 3) * 16 * Configuration.getScale(), -World.player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
                     }
                     if (map[j + mapWidht * i] == 15) {
-                        batch.draw(Res.tile(2, 1), -Player.wX + (j + 3) * 16 * Configuration.getScale(), -Player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+                        batch.draw(Res.tile(2, 1), -World.player.wX + (j + 3) * 16 * Configuration.getScale(), -World.player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
                     }
                     if (map[j + mapWidht * i] == 16) {
-                        batch.draw(Res.tile(3, 0), -Player.wX + (j + 3) * 16 * Configuration.getScale(), -Player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+                        batch.draw(Res.tile(3, 0), -World.player.wX + (j + 3) * 16 * Configuration.getScale(), -World.player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
                     }
                     if (map[j + mapWidht * i] == 17) {
-                        batch.draw(Res.tile(3, 1), -Player.wX + (j + 3) * 16 * Configuration.getScale(), -Player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+                        batch.draw(Res.tile(3, 1), -World.player.wX + (j + 3) * 16 * Configuration.getScale(), -World.player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
                     }
                     if (map[j + mapWidht * i] == 18) {
-                        batch.draw(Res.tile(4, 1), -Player.wX + (j + 3) * 16 * Configuration.getScale(), -Player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+                        batch.draw(Res.tile(4, 1), -World.player.wX + (j + 3) * 16 * Configuration.getScale(), -World.player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
                     }
                     if (map[j + mapWidht * i] == 19) {
-                        batch.draw(Res.tile(4, 0), -Player.wX + (j + 3) * 16 * Configuration.getScale(), -Player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+                        batch.draw(Res.tile(4, 0), -World.player.wX + (j + 3) * 16 * Configuration.getScale(), -World.player.wY + (i + 2) * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
                     }
                 }
             }
@@ -112,7 +128,7 @@ public class Map {
             for (int i = 0; i < text.length; i++) {
                 Res.getFont(3).draw(batch, text[i], 8 * Configuration.getScale(), Gdx.graphics.getHeight() / 2 + 4 * Configuration.getScale() * (text.length / 2 - i));
             }
-            if (Player.walked) {
+            if (World.player.walked) {
                 textShow = false;
             }
         }
@@ -129,17 +145,17 @@ public class Map {
         if (objectsU.size() > 0) {
             for (i1 = 0; i1 < objectsU.size(); i1++) {
                 objectsU.get(i1).render(batch);
-                if (!Player.isStop) objectsU.get(i1).frame();
+                if (!World.player.isStop) objectsU.get(i1).frame();
             }
         }
-        Player.render(batch);
-        if (!Player.isStop) Player.tick(0.2f);
-        if (!Player.isStop) Player.frame();
+        World.player.render(batch);
+        if (!World.player.isStop) World.player.tick(0.2f);
+        if (!World.player.isStop) World.player.frame();
 
         if (objectsO.size() > 0) {
             for (i1 = 0; i1 < objectsO.size(); i1++) {
                 objectsO.get(i1).render(batch);
-                if (!Player.isStop) objectsO.get(i1).frame();
+                if (!World.player.isStop) objectsO.get(i1).frame();
             }
         }
     }
@@ -165,9 +181,9 @@ public class Map {
 
     public void object_load(LevelRead lR) {
 
-        Player.setX(lR.getSpawnX());
-        Player.setY(lR.getSpawnY());
-        Player.wCordNormalize();
+        World.player.setX(lR.getSpawnX());
+        World.player.setY(lR.getSpawnY());
+        World.player.wCordNormalize();
         setDark(!lR.isDark());
 
 

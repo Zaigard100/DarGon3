@@ -1,4 +1,4 @@
-package com.zaig100.dg.screen;
+package com.zaig100.dg.screen.extensions;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -20,6 +20,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.zaig100.dg.Main;
+import com.zaig100.dg.screen.MenuScreen;
 
 public class Render3D implements Screen {
     private final Main m;
@@ -175,7 +176,7 @@ public class Render3D implements Screen {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)||Gdx.input.isKeyPressed(Input.Keys.BACK)){
             dispose();
-            m.setScreen(new GameScreen(m));
+            m.setScreen(new MenuScreen(m));
             Gdx.input.setCursorCatched(false);
             Gdx.input.setCatchBackKey(false);
         }

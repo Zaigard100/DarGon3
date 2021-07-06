@@ -2,7 +2,7 @@ package com.zaig100.dg.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.zaig100.dg.Main;
-import com.zaig100.dg.objects.Player;
+import com.zaig100.dg.world.World;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -73,7 +73,7 @@ public class Save {
         jsonObject.put("Path", path);
         jsonObject.put("HP", hp);
         jsonObject.put("Money", money);
-        jsonObject.put("Inventory", Player.inventory.inventoryToJSON());
+        jsonObject.put("Inventory", World.player.inventory.inventoryToJSON());
         try {
             FileWriter file = new FileWriter(f);
             file.write(jsonObject.toJSONString());

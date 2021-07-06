@@ -1,8 +1,9 @@
-package com.zaig100.dg.objects;
+package com.zaig100.dg.world.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.world.World;
 
 public class Arrow extends Obj {
 
@@ -19,10 +20,10 @@ public class Arrow extends Obj {
         this.dx = dx;
         this.dy = dy;
         this.angle = angle;
-        if (Player.getMap().mapHeight > Player.getMap().mapWidht) {
-            far = -Player.getMap().mapHeight * 2;
+        if (World.map.mapHeight > World.map.mapWidht) {
+            far = -World.map.mapHeight * 2;
         } else {
-            far = -Player.getMap().mapWidht * 2;
+            far = -World.map.mapWidht * 2;
         }
     }
 
@@ -40,8 +41,8 @@ public class Arrow extends Obj {
 
         batch.draw(
                 Res.arrow,
-                wX - Player.get_wX(),
-                wY - Player.get_wY(),
+                wX - World.player.get_wX(),
+                wY - World.player.get_wY(),
                 8 * Configuration.getScale(),
                 8 * Configuration.getScale(),
                 16 * Configuration.getScale(),
@@ -56,18 +57,18 @@ public class Arrow extends Obj {
     @Override
     public void frame() {
         //System.out.println("X "+x+" Y " +y);
-        if ((x == Player.getX()) && (y == Player.getY())) {
-            if (Player.getHp() > 0) {
-                if (Player.isSheld()) {
-                    Player.setHp(Player.getHp() - 1);
+        if ((x == World.player.getX()) && (y == World.player.getY())) {
+            if (World.player.getHp() > 0) {
+                if (World.player.isSheld()) {
+                    World.player.setHp(World.player.getHp() - 1);
                 } else {
-                    Player.setHp(Player.getHp() - 2);
+                    World.player.setHp(World.player.getHp() - 2);
                 }
-                Player.setDamgeScr(0f, 3);
+                World.player.setDamgeScr(0f, 3);
             }
 
         }
-        isDel = last() || ((x == Player.getX()) && (y == Player.getY()));
+        isDel = last() || ((x == World.player.getX()) && (y == World.player.getY()));
 
         if (isMove()) {
             move();
@@ -83,8 +84,8 @@ public class Arrow extends Obj {
     public void show_obj(SpriteBatch batch) {
         batch.draw(
                 Res.damage,
-                wX - Player.get_wX(),
-                wY - Player.get_wY(),
+                wX - World.player.get_wX(),
+                wY - World.player.get_wY(),
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
         );

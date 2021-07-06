@@ -1,9 +1,10 @@
-package com.zaig100.dg.objects;
+package com.zaig100.dg.world.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.world.World;
 
 public class Zona extends Obj {
 
@@ -54,8 +55,8 @@ public class Zona extends Obj {
                     for (j = 0; j < wight; j++) {
                         batch.draw(
                                 Res.green_sm_obj,
-                                wX + j * 16 * Configuration.getScale() - Player.get_wX(),
-                                wY + i * 16 * Configuration.getScale() - Player.get_wY(),
+                                wX + j * 16 * Configuration.getScale() - World.player.get_wX(),
+                                wY + i * 16 * Configuration.getScale() - World.player.get_wY(),
                                 16 * Configuration.getScale(),
                                 16 * Configuration.getScale()
                         );
@@ -67,8 +68,8 @@ public class Zona extends Obj {
                     for (j = 0; j < wight; j++) {
                         batch.draw(
                                 Res.red_sm_obj,
-                                wX + j * 16 * Configuration.getScale() - Player.get_wX(),
-                                wY + i * 16 * Configuration.getScale() - Player.get_wY(),
+                                wX + j * 16 * Configuration.getScale() - World.player.get_wX(),
+                                wY + i * 16 * Configuration.getScale() - World.player.get_wY(),
                                 16 * Configuration.getScale(),
                                 16 * Configuration.getScale()
                         );
@@ -130,14 +131,14 @@ public class Zona extends Obj {
         timer += Gdx.graphics.getDeltaTime();
         if (timer >= second) {
             timer = 0;
-            if ((Player.getX() >= x) && (Player.getX() <= x + wight) && (Player.getY() >= y) && (Player.getY() <= y + height)) {
+            if ((World.player.getX() >= x) && (World.player.getX() <= x + wight) && (World.player.getY() >= y) && (World.player.getY() <= y + height)) {
 
                 switch (type) {
                     case HP_PIUS:
-                        Player.hp += 1;
+                        World.player.hp += 1;
                         break;
                     case HP_MINUS:
-                        Player.hp -= 1;
+                        World.player.hp -= 1;
                         break;
                 }
 

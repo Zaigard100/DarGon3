@@ -1,7 +1,7 @@
 package com.zaig100.dg;
 
 import com.badlogic.gdx.Game;
-import com.zaig100.dg.screen.ResLoadScreen;
+import com.zaig100.dg.screen.extensions.ResLoadScreen;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.ShaderManager;
@@ -23,7 +23,7 @@ public class Main extends Game {
     public void create() {
         setScreen(new ResLoadScreen(this));
         try {
-            configuration = new Configuration(this);
+            Configuration.load(this);
         } catch (IOException e) {
             e.printStackTrace();
         }

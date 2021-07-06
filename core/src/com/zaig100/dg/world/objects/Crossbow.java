@@ -1,9 +1,10 @@
-package com.zaig100.dg.objects;
+package com.zaig100.dg.world.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.world.World;
 
 import java.util.ArrayList;
 
@@ -28,7 +29,18 @@ public class Crossbow extends Obj {
     @Override
     public void render(SpriteBatch batch) {
 
-        batch.draw(Res.crossbow(false), wX - Player.get_wX(), wY - Player.get_wY(), 8 * Configuration.getScale(), 8 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale(), 1, 1, angle);
+        batch.draw(
+                Res.crossbow(false),
+                wX - World.player.get_wX(),
+                wY - World.player.get_wY(),
+                8 * Configuration.getScale(),
+                8 * Configuration.getScale(),
+                16 * Configuration.getScale(),
+                16 * Configuration.getScale(),
+                1,
+                1,
+                angle
+        );
         for (Arrow arr : arrs) {
             arr.render(batch);
         }
@@ -55,8 +67,8 @@ public class Crossbow extends Obj {
     public void show_obj(SpriteBatch batch) {
         batch.draw(
                 Res.damage,
-                wX - Player.get_wX(),
-                wY - Player.get_wY(),
+                wX - World.player.get_wX(),
+                wY - World.player.get_wY(),
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
         );

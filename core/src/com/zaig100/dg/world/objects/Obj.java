@@ -1,7 +1,8 @@
-package com.zaig100.dg.objects;
+package com.zaig100.dg.world.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
+import com.zaig100.dg.world.World;
 
 public abstract class Obj {
 
@@ -96,12 +97,12 @@ public abstract class Obj {
     }
 
     public void del() {
-        if (Player.map.objectsU.contains(this)) {
-            Player.map.objectsU.remove(this);
-        } else if (Player.map.objectsO.contains(this)) {
-            Player.map.objectsO.remove(this);
-        } else if (Player.map.stair.contains(this)) {
-            Player.map.stair.remove(this);
+        if (World.map.objectsU.contains(this)) {
+            World.map.objectsU.remove(this);
+        } else if (World.map.objectsO.contains(this)) {
+            World.map.objectsO.remove(this);
+        } else if (World.map.stair.contains(this)) {
+            World.map.stair.remove(this);
         }
     }
 }

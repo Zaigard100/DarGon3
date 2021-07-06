@@ -1,4 +1,4 @@
-package com.zaig100.dg.screen;
+package com.zaig100.dg.screen.extensions;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.zaig100.dg.Main;
+import com.zaig100.dg.screen.MenuScreen;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Font;
 import com.zaig100.dg.utils.ShaderManager;
@@ -261,7 +262,7 @@ public class Setting implements Screen {
             Configuration.setDebug(Debug);
             Configuration.setShader(Shader);
             Configuration.save(Configuration.getConf());
-            m.setScreen(new GameScreen(m));
+            m.setScreen(new MenuScreen(m));
         } else {
             Configuration.setMusic((int) Music);
             Configuration.setSound((int) Sound);
@@ -275,7 +276,7 @@ public class Setting implements Screen {
                 Gdx.graphics.setWindowedMode((int) (16 * 7 * Scale), (int) (16 * 5 * Scale));
             }
             dispose();
-            m.setScreen(new GameScreen(m));
+            m.setScreen(new MenuScreen(m));
             //Gdx.app.exit();
         }
 

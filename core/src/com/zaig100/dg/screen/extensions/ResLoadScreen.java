@@ -1,4 +1,4 @@
-package com.zaig100.dg.screen;
+package com.zaig100.dg.screen.extensions;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Align;
 import com.zaig100.dg.Main;
+import com.zaig100.dg.screen.MenuScreen;
 import com.zaig100.dg.utils.Res;
 
 public class ResLoadScreen implements Screen {
@@ -99,7 +100,7 @@ public class ResLoadScreen implements Screen {
         font.draw(batch, press_layout, 0, height / 2 - height / 3);
 
         if (Gdx.input.justTouched()) {
-            m.setScreen(new GameScreen(m));
+            m.setScreen(new MenuScreen(m));
         }
 
     }

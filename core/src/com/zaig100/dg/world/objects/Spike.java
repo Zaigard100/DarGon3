@@ -1,9 +1,10 @@
-package com.zaig100.dg.objects;
+package com.zaig100.dg.world.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.world.World;
 
 public class Spike extends Obj {
     public boolean active, trigered;
@@ -20,15 +21,15 @@ public class Spike extends Obj {
     public void render(SpriteBatch batch) {
         if (active) {
             batch.draw(Res.spike_1,
-                    wX - Player.get_wX() - Configuration.getScale(),
-                    wY - Player.get_wY() + Configuration.getScale(),
+                    wX - World.player.get_wX() - Configuration.getScale(),
+                    wY - World.player.get_wY() + Configuration.getScale(),
                     16 * Configuration.getScale(),
                     16 * Configuration.getScale()
             );
         } else {
             batch.draw(Res.spike_0,
-                    wX - Player.get_wX() - Configuration.getScale(),
-                    wY - Player.get_wY() + Configuration.getScale(),
+                    wX - World.player.get_wX() - Configuration.getScale(),
+                    wY - World.player.get_wY() + Configuration.getScale(),
                     16 * Configuration.getScale(),
                     16 * Configuration.getScale()
             );
@@ -36,12 +37,12 @@ public class Spike extends Obj {
     }
 
     public void frame() {
-        if ((x == Player.getX()) && (y == Player.getY())) {
-            if (Player.getHp() > 0) {
+        if ((x == World.player.getX()) && (y == World.player.getY())) {
+            if (World.player.getHp() > 0) {
                 trigered = true;
                 if (active) {
-                    Player.setHp(0);
-                    Player.setDamgeScr(0f, 4);
+                    World.player.setHp(0);
+                    World.player.setDamgeScr(0f, 4);
                 }
             }
         }
@@ -55,8 +56,8 @@ public class Spike extends Obj {
     public void show_obj(SpriteBatch batch) {
         batch.draw(
                 Res.damage,
-                wX - Player.get_wX(),
-                wY - Player.get_wY(),
+                wX - World.player.get_wX(),
+                wY - World.player.get_wY(),
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
         );

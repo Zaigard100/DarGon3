@@ -1,4 +1,4 @@
-package com.zaig100.dg.screen;
+package com.zaig100.dg.screen.extensions;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -7,9 +7,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.Main;
-import com.zaig100.dg.objects.Player;
+import com.zaig100.dg.screen.MenuScreen;
+import com.zaig100.dg.screen.game.LevelModScreen;
 import com.zaig100.dg.utils.Font;
 import com.zaig100.dg.utils.PackManager;
+import com.zaig100.dg.world.World;
 
 import org.json.simple.JSONArray;
 
@@ -50,7 +52,7 @@ public class Extension implements Screen {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)||Gdx.input.isKeyJustPressed(Input.Keys.BACK)){
             dispose();
-            m.setScreen(new GameScreen(m));
+            m.setScreen(new MenuScreen(m));
             Gdx.input.setCatchBackKey(false);
         }
 
@@ -81,8 +83,8 @@ public class Extension implements Screen {
         batch.end();
         if(pM.getList().size()>0) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-                m.setScreen(new PlayScreen(m, (String) pM.getList().get(num).get("FirstLevel"), true, (String) pM.getList().get(num).get("PackName"), pM.getDestory().getPath()));
-                Player.inventory.jsonToInventory((JSONArray) pM.getList().get(num).get("Inventory"));
+                m.setScreen(new LevelModScreen(m, (String) pM.getList().get(num).get("FirstLevel"), true, (String) pM.getList().get(num).get("PackName"), pM.getDestory().getPath()));
+                World.player.inventory.jsonToInventory((JSONArray) pM.getList().get(num).get("Inventory"));
             }
         }
     }
@@ -97,8 +99,8 @@ public class Extension implements Screen {
                     num++;
                 }
             }else {
-                m.setScreen(new PlayScreen(m, (String) pM.getList().get(num).get("FirstLevel"), true, (String) pM.getList().get(num).get("PackName"), pM.getDestory().getPath()));
-                Player.inventory.jsonToInventory((JSONArray) pM.getList().get(num).get("Inventory"));
+                m.setScreen(new LevelModScreen(m, (String) pM.getList().get(num).get("FirstLevel"), true, (String) pM.getList().get(num).get("PackName"), pM.getDestory().getPath()));
+                World.player.inventory.jsonToInventory((JSONArray) pM.getList().get(num).get("Inventory"));
             }
         }
     }

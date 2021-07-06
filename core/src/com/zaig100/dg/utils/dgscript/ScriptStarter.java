@@ -1,26 +1,26 @@
 package com.zaig100.dg.utils.dgscript;
 
-import com.zaig100.dg.objects.Obj;
-import com.zaig100.dg.screen.PlayScreen;
+import com.zaig100.dg.screen.game.LevelModScreen;
 import com.zaig100.dg.utils.dgscript.ast.Statement;
 import com.zaig100.dg.utils.dgscript.lib.Functions;
 import com.zaig100.dg.utils.dgscript.lib.Variables;
 import com.zaig100.dg.utils.dgscript.visitors.AsignValid;
 import com.zaig100.dg.utils.dgscript.visitors.FuntionAdder;
 import com.zaig100.dg.utils.dgscript.visitors.UsingInit;
+import com.zaig100.dg.world.objects.Obj;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ScriptStarter {
-    public static PlayScreen ps;
+    public static LevelModScreen ps;
     static Thread threads;
     static Statement program;
     static List<Token> tokens;
     public static boolean isSetObj = false;
     static ArrayList<Obj> objects;
 
-    public static void load(String code, PlayScreen ps) {
+    public static void load(String code, LevelModScreen ps) {
 
         Functions.clear();
         Variables.clear();

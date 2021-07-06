@@ -2,9 +2,9 @@ package com.zaig100.dg.elements.items;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.zaig100.dg.objects.Player;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.world.World;
 
 import org.json.simple.JSONObject;
 
@@ -45,8 +45,8 @@ public class Key extends Item {
     public void renderInMap(Batch batch, int wX, int wY) {
         batch.setColor(r, g, b, 1f);
         batch.draw(spr,
-                wX + (0.25f * 16 * Configuration.getScale()) - Player.get_wX(),
-                wY + (0.25f * 16 * Configuration.getScale()) - Player.get_wY(),
+                wX + (0.25f * 16 * Configuration.getScale()) - World.player.get_wX(),
+                wY + (0.25f * 16 * Configuration.getScale()) - World.player.get_wY(),
                 16 * Configuration.getScale() * 0.5f,
                 16 * Configuration.getScale() * 0.5f
         );

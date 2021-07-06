@@ -1,6 +1,6 @@
 package com.zaig100.dg.utils.contain;
 
-import com.zaig100.dg.objects.Zona;
+import com.zaig100.dg.world.objects.Zona;
 
 public class ZonaC extends ObjC {
     int wight, height;

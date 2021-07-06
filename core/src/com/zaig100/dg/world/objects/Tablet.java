@@ -1,4 +1,4 @@
-package com.zaig100.dg.objects;
+package com.zaig100.dg.world.objects;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.world.World;
 
 public class Tablet extends Obj {
 
@@ -20,8 +21,8 @@ public class Tablet extends Obj {
     public void render(SpriteBatch batch) {
         batch.draw(
                 Res.tablet,
-                wX - Player.get_wX(),
-                wY - Player.get_wY(),
+                wX - World.player.get_wX(),
+                wY - World.player.get_wY(),
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
         );
@@ -30,9 +31,9 @@ public class Tablet extends Obj {
     @Override
     public void frame() {
         if ((Gdx.input.justTouched() && Joystick.isUse()) || (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))) {
-            if ((Player.getX() - 1 == x || Player.getX() == x || Player.getX() + 1 == x) && (Player.getY() - 1 == y || Player.getY() == y || Player.getY() + 1 == y)) {
-                if (!((Player.getX() == x && Player.getY() == y))) {
-                    Player.map.setTablet_text(text);
+            if ((World.player.getX() - 1 == x || World.player.getX() == x || World.player.getX() + 1 == x) && (World.player.getY() - 1 == y || World.player.getY() == y || World.player.getY() + 1 == y)) {
+                if (!((World.player.getX() == x && World.player.getY() == y))) {
+                    World.map.setTablet_text(text);
                 }
             }
         }
@@ -43,8 +44,8 @@ public class Tablet extends Obj {
     public void show_obj(SpriteBatch batch) {
         batch.draw(
                 Res.blue_obj,
-                wX - Player.get_wX(),
-                wY - Player.get_wY(),
+                wX - World.player.get_wX(),
+                wY - World.player.get_wY(),
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
         );

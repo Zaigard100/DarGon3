@@ -1,4 +1,4 @@
-package com.zaig100.dg.screen;
+package com.zaig100.dg.screen.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -16,8 +16,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.zaig100.dg.Main;
-import com.zaig100.dg.objects.Map;
-import com.zaig100.dg.objects.Player;
+import com.zaig100.dg.screen.MenuScreen;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Font;
 import com.zaig100.dg.utils.Joystick;
@@ -25,11 +24,13 @@ import com.zaig100.dg.utils.LevelRead;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.Save;
 import com.zaig100.dg.utils.ShaderManager;
+import com.zaig100.dg.world.Map;
+import com.zaig100.dg.world.World;
 
 import java.io.IOException;
 import java.util.Random;
 
-public class PlayScreen implements Screen {
+public class LevelModScreen implements Screen {
 
     private FrameBuffer fbo, fbo2;
     private SpriteBatch batch;
@@ -67,8 +68,8 @@ public class PlayScreen implements Screen {
     private String packname = "";
     private String derectory = "";
 
-    public PlayScreen(Main m, String path, boolean isPack) {
-        PlayScreen.m = m;
+    public LevelModScreen(Main m, String path, boolean isPack) {
+        LevelModScreen.m = m;
         this.path = path;
         this.isPack = isPack;
         width = Gdx.graphics.getWidth();
@@ -78,8 +79,8 @@ public class PlayScreen implements Screen {
         fbo2 = new FrameBuffer(Pixmap.Format.RGB888, width, height, false);
     }
 
-    public PlayScreen(Main m, String path, boolean isPack, String packname, String derectory) {
-        PlayScreen.m = m;
+    public LevelModScreen(Main m, String path, boolean isPack, String packname, String derectory) {
+        LevelModScreen.m = m;
         this.path = path;
         this.isPack = isPack;
         this.packname = packname;
@@ -105,8 +106,8 @@ public class PlayScreen implements Screen {
         } else {
             lR = new LevelRead(path, isPack);
         }
-        Player.setMap(new Map(lR.getWight(), lR.getHeight(), lR.getMap(), true));
-        Player.map.object_load(lR);
+        World.setMap(new Map(lR.getWight(), lR.getHeight(), lR.getMap(), true));
+        World.map.object_load(lR);
         cam.position.set(new Vector3(width / 2, height / 2, 0));
 
         try {
@@ -116,10 +117,10 @@ public class PlayScreen implements Screen {
                 save = new Save(m, "", path);
             }
             if (lR.isSave()) {
-                Save.setHp(Player.getHp());
-                Save.setMoney(Player.coin_count);
+                Save.setHp(World.player.getHp());
+                Save.setMoney(World.player.coin_count);
                 save.setPath(path);
-                Save.setArr(Player.inventory.inventoryToJSON());
+                Save.setArr(World.player.inventory.inventoryToJSON());
                 save.save(save.getConf());
             }
         } catch (IOException e) {
@@ -134,9 +135,9 @@ public class PlayScreen implements Screen {
         if (!Joystick.isJoystick() && Gdx.input.isTouched()) {
             sensor_timer += delta;
             if (sensor_timer > 1f) {
-                Player.isPause = !Player.isPause;
-                Player.isStop = Player.isPause;
-                Player.inventarIsOpen = false;
+                World.player.isPause = !World.player.isPause;
+                World.player.isStop = World.player.isPause;
+                World.player.inventarIsOpen = false;
                 sensor_timer = 0;
             }
         } else {
@@ -150,7 +151,7 @@ public class PlayScreen implements Screen {
         batch.end();
         fbo.end();
 
-        if (Player.getX() != lR.getSpawnX() || Player.getY() != lR.getSpawnY()) start = false;
+        if (World.player.getX() != lR.getSpawnX() || World.player.getY() != lR.getSpawnY()) start = false;
 
         frame = new Sprite(fbo.getColorBufferTexture());
         frame.setPosition((scrW - 16 * 7 * Configuration.getScale()) / 2, (-scrH + 16 * 5 * Configuration.getScale()) / 2);
@@ -189,16 +190,16 @@ public class PlayScreen implements Screen {
     private void first_render() {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Player.map.render(batch);
+        World.map.render(batch);
 
         stair_update();
 
-        Player.getMap().object_update(batch);
+        World.map.object_update(batch);
 
-        Player.map.dark_render(batch);
+        World.map.dark_render(batch);
 
-        if (Player.isShowObj) {
-            Player.map.show_obj(batch);
+        if (World.player.isShowObj) {
+            World.map.show_obj(batch);
         }
         render_ui();
 
@@ -206,7 +207,7 @@ public class PlayScreen implements Screen {
 
     private void second_render() {
         batch.draw(Res.boards, 0, 0, 16 * 7 * Configuration.getScale() * 10, 16 * 5 * Configuration.getScale() * 10);
-        if (Player.isPause) {
+        if (World.player.isPause) {
             batch.draw(Res.pause_dark, 0, 0, 16 * 7 * Configuration.getScale() * 10, 16 * 5 * Configuration.getScale() * 10);
         }
         frame.draw(batch);
@@ -223,25 +224,25 @@ public class PlayScreen implements Screen {
         }
     }
     private void stair_update() {
-        if (Player.getMap().stair.size() > 0) {
-            for (i = 0; i < Player.getMap().stair.size(); i++) {
-                Player.getMap().stair.get(i).render(batch);
-                Player.getMap().stair.get(i).frame();
-                if (Player.getMap().stair.get(i).isExit()) {
-                    Player.isShowObj = false;
-                    Player.isSheld = false;
-                    Player.isShop = false;
-                    Player.inventarIsOpen = false;
-                    Player.menu_opened = false;
+        if (World.map.stair.size() > 0) {
+            for (i = 0; i < World.map.stair.size(); i++) {
+                World.map.stair.get(i).render(batch);
+                World.map.stair.get(i).frame();
+                if (World.map.stair.get(i).isExit()) {
+                    World.player.isShowObj = false;
+                    World.player.isSheld = false;
+                    World.player.isShop = false;
+                    World.player.inventarIsOpen = false;
+                    World.player.menu_opened = false;
                     dispose();
-                    if (Player.getMap().stair.get(i).isEnd()) {
-                        m.setScreen(new GameScreen(m));
+                    if (World.map.stair.get(i).isEnd()) {
+                        m.setScreen(new MenuScreen(m));
 
                     } else {
                         if (isPack) {
-                            m.setScreen(new PlayScreen(m, Player.getMap().stair.get(i).getNext_path(), isPack, packname, derectory));
+                            m.setScreen(new LevelModScreen(m, World.map.stair.get(i).getNext_path(), isPack, packname, derectory));
                         } else {
-                            m.setScreen(new PlayScreen(m, Player.getMap().stair.get(i).getNext_path(), isPack));
+                            m.setScreen(new LevelModScreen(m, World.map.stair.get(i).getNext_path(), isPack));
                         }
                     }
                 }
@@ -254,15 +255,15 @@ public class PlayScreen implements Screen {
         f1.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 10);
         line = "FPS:" + Gdx.graphics.getFramesPerSecond();
         f1.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 25);
-        line = "X:" + Player.getX() + "  Y:" + Player.getY();
+        line = "X:" + World.player.getX() + "  Y:" + World.player.getY();
         f1.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 40);
-        line = "WX:" + Player.get_wX() + "  WY:" + Player.get_wY();
+        line = "WX:" + World.player.get_wX() + "  WY:" + World.player.get_wY();
         f1.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 55);
         line = "JavaHeap:" + (((int) Gdx.app.getJavaHeap()) / (8 * 1024)) + " KB";
         f1.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 70);
         line = "NativeHeap:" + (((int) Gdx.app.getNativeHeap()) / (8 * 1024)) + " KB";
         f1.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 85);
-        line = "Object Count:" + Player.map.getObjCount();
+        line = "Object Count:" + World.map.getObjCount();
         f1.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 100);
     }
     void pauseMenu() {
@@ -274,9 +275,9 @@ public class PlayScreen implements Screen {
             Res.getFont(6).draw(batch, " Load save", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
             Res.getFont(6).draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
-                Player.isPause = false;
-                Player.isStop = false;
-                Player.inventarIsOpen = false;
+                World.player.isPause = false;
+                World.player.isStop = false;
+                World.player.inventarIsOpen = false;
             }
         }
         if (menu == 1) {
@@ -286,16 +287,15 @@ public class PlayScreen implements Screen {
             Res.getFont(6).draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
                 dispose();
-                m.setScreen(new GameScreen(m));
-                Player.isPause = false;
-                Player.isStop = false;
-                Player.inventarIsOpen = false;
-                Player.isShowObj = false;
-                Player.isSheld = false;
-                Player.isShop = false;
-                Player.inventarIsOpen = false;
-                Player.menu_opened = false;
-                Player.inf = false;
+                m.setScreen(new MenuScreen(m));
+                World.player.isPause = false;
+                World.player.isStop = false;
+                World.player.inventarIsOpen = false;
+                World.player.isShowObj = false;
+                World.player.isSheld = false;
+                World.player.isShop = false;
+                World.player.menu_opened = false;
+                World.player.inf = false;
             }
         }
         if(menu==2) {
@@ -305,22 +305,22 @@ public class PlayScreen implements Screen {
             Res.getFont(6).draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
                 dispose();
-                Player.setHp(save.getHp());
-                Player.coin_count = Save.getMoney();
-                Player.inventory.jsonToInventory(save.getArr());
-                Player.isPause = false;
-                Player.isStop = false;
-                Player.inventarIsOpen = false;
-                Player.isShowObj = false;
-                Player.isSheld = false;
-                Player.isShop = false;
-                Player.inventarIsOpen = false;
-                Player.menu_opened = false;
-                Player.inf = false;
+                World.player.setHp(save.getHp());
+                World.player.coin_count = Save.getMoney();
+                World.player.inventory.jsonToInventory(save.getArr());
+                World.player.isPause = false;
+                World.player.isStop = false;
+                World.player.inventarIsOpen = false;
+                World.player.isShowObj = false;
+                World.player.isSheld = false;
+                World.player.isShop = false;
+                World.player.inventarIsOpen = false;
+                World.player.menu_opened = false;
+                World.player.inf = false;
                 if (isPack) {
-                    m.setScreen(new PlayScreen(m, save.getsPath(), isPack, packname, derectory));
+                    m.setScreen(new LevelModScreen(m, save.getsPath(), isPack, packname, derectory));
                 } else
-                    m.setScreen(new PlayScreen(m, save.getsPath(), isPack));
+                    m.setScreen(new LevelModScreen(m, save.getsPath(), isPack));
             }
 
         }
@@ -333,15 +333,15 @@ public class PlayScreen implements Screen {
             if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || Joystick.isUse()) {
                 exit_timer += Gdx.graphics.getDeltaTime();
                 if (exit_timer > 1.0f) {
-                    Player.isPause = false;
-                    Player.isStop = false;
-                    Player.inventarIsOpen = false;
-                    Player.isShowObj = false;
-                    Player.isSheld = false;
-                    Player.isShop = false;
-                    Player.inventarIsOpen = false;
-                    Player.menu_opened = false;
-                    Player.inf = false;
+                    World.player.isPause = false;
+                    World.player.isStop = false;
+                    World.player.inventarIsOpen = false;
+                    World.player.isShowObj = false;
+                    World.player.isSheld = false;
+                    World.player.isShop = false;
+                    World.player.inventarIsOpen = false;
+                    World.player.menu_opened = false;
+                    World.player.inf = false;
                     Gdx.app.exit();
                 }
             } else {
@@ -372,33 +372,33 @@ public class PlayScreen implements Screen {
 
     private void render_ui() {
 
-        if (!Player.isPause) {
-            Player.render_menu(batch, Res.getFont(3));
+        if (!World.player.isPause) {
+            World.player.render_menu(batch, Res.getFont(3));
             if (start)
                 Res.getFont(6).draw(batch, lR.getLevelname(), 8 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
-            Player.map.show_tablet_text(batch);
+            World.map.show_tablet_text(batch);
         }
-        if (Player.getHp() <= 0 && !Player.isPause) {
+        if (World.player.getHp() <= 0 && !World.player.isPause) {
             wasted_render();
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            if (Player.inventarIsOpen) {
-                Player.inventarIsOpen = false;
-                Player.isStop = false;
-            } else if (Player.isShop) {
-                if (Player.isPause) {
-                    Player.isPause = false;
-                    Player.isStop = false;
+            if (World.player.inventarIsOpen) {
+                World.player.inventarIsOpen = false;
+                World.player.isStop = false;
+            } else if (World.player.isShop) {
+                if (World.player.isPause) {
+                    World.player.isPause = false;
+                    World.player.isStop = false;
                 } else {
-                    Player.isPause = true;
-                    Player.isStop = true;
+                    World.player.isPause = true;
+                    World.player.isStop = true;
                 }
             }
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.F3)) {
             debag = !debag;
         }
-        if (Player.isPause) {
+        if (World.player.isPause) {
             pauseMenu();
         }
         Joystick.render(batch);
@@ -412,7 +412,7 @@ public class PlayScreen implements Screen {
         Res.getFont(11).draw(batch, "Wasted", 2 * 16 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
         Res.getFont(6).draw(batch, "Press Space", 2 * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Joystick.isUse()) {
-            m.setScreen(new GameScreen(m));
+            m.setScreen(new MenuScreen(m));
 
         }
     }
@@ -436,7 +436,7 @@ public class PlayScreen implements Screen {
 
     @Override
     public void pause() {
-        Player.isPause = true;
+        World.player.isPause = true;
     }
 
     @Override

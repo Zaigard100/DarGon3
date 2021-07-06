@@ -2,8 +2,8 @@ package com.zaig100.dg.utils;
 
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
-import com.zaig100.dg.screen.GameScreen;
-import com.zaig100.dg.screen.PlayScreen;
+import com.zaig100.dg.screen.MenuScreen;
+import com.zaig100.dg.screen.game.LevelModScreen;
 import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.ChestC;
 import com.zaig100.dg.utils.contain.CrossbowC;
@@ -77,7 +77,7 @@ public class LevelRead {
             levelname = (String) jsonObject.get("LevelName");
         } catch (NullPointerException npe) {
             System.out.println("LevelName invalid");
-            PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+            LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
         }
 
         try {
@@ -85,7 +85,7 @@ public class LevelRead {
             SpawnY = ((Long) ((JSONArray) jsonObject.get("Spawn")).get(1)).intValue();
         } catch (NullPointerException npe) {
             System.out.println("Spawn invalid in map " + levelname);
-            PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+            LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
         }
 
         map_read();
@@ -130,7 +130,7 @@ public class LevelRead {
             }
         } catch (NullPointerException npe) {
             System.out.println("Map invalid in level " + levelname);
-            PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+            LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
         }
     }
 
@@ -151,7 +151,7 @@ public class LevelRead {
                 } catch (Exception e) {
                     System.out.println("Zona invalid in array " + i + " in map " + levelname);
                     e.printStackTrace();
-                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                    LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
                 }
             }
         }
@@ -174,7 +174,7 @@ public class LevelRead {
                 } catch (Exception e) {
                     System.out.println("Shop invalid in array " + i + " in map " + levelname);
                     e.printStackTrace();
-                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                    LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
                 }
             }
         }
@@ -205,7 +205,7 @@ public class LevelRead {
                     i++;
                 } catch (NullPointerException npe) {
                     System.out.println("Chest invalid in array " + i + " in map " + levelname);
-                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                    LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
                 }
             }
         }
@@ -227,7 +227,7 @@ public class LevelRead {
                     i++;
                 } catch (NullPointerException npe) {
                     System.out.println("HideTrap invalid in array " + i + " in map " + levelname);
-                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                    LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
                 }
             }
         }
@@ -249,7 +249,7 @@ public class LevelRead {
                     i++;
                 } catch (NullPointerException npe) {
                     System.out.println("Teleport invalid in array " + i + " in map " + levelname);
-                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                    LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
                 }
             }
         }
@@ -271,7 +271,7 @@ public class LevelRead {
                     i++;
                 } catch (NullPointerException npe) {
                     System.out.println("Stair invalid in array " + i + " in map " + levelname);
-                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                    LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
                 }
             }
         }
@@ -293,7 +293,7 @@ public class LevelRead {
                     i++;
                 } catch (NullPointerException npe) {
                     System.out.println("Item invalid in array " + i + " in map " + levelname);
-                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                    LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
                 }
             }
         }
@@ -317,7 +317,7 @@ public class LevelRead {
                     i++;
                 } catch (NullPointerException npe) {
                     System.out.println("FlimsyTile invalid in array " + i + " in map " + levelname);
-                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                    LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
                 }
             }
         }
@@ -342,7 +342,7 @@ public class LevelRead {
 
                 } catch (NullPointerException npe) {
                     System.out.println("Flamefrower invalid in array " + i + " in map " + levelname);
-                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                    LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
                 }
             }
         }
@@ -367,7 +367,7 @@ public class LevelRead {
 
                 } catch (NullPointerException npe) {
                     System.out.println("Crossbow invalid in array " + i + " in map " + levelname);
-                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                    LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
                 }
             }
         }
@@ -389,7 +389,7 @@ public class LevelRead {
                     i++;
                 } catch (NullPointerException npe) {
                     System.out.println("Spinney invalid in array " + i + " in map " + levelname);
-                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                    LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
                 }
             }
         }
@@ -413,7 +413,7 @@ public class LevelRead {
                     i++;
                 } catch (NullPointerException npe) {
                     System.out.println("Spike invalid in array " + i + " in map " + levelname);
-                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                    LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
                 }
             }
         }
@@ -440,7 +440,7 @@ public class LevelRead {
                     i++;
                 } catch (NullPointerException npe) {
                     System.out.println("Button invalid in array " + i + " in map " + levelname);
-                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                    LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
                 }
             }
         }
@@ -467,7 +467,7 @@ public class LevelRead {
                     i++;
                 } catch (NullPointerException npe) {
                     System.out.println("Tablet invalid in array " + i + " in map " + levelname);
-                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                    LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
                 }
             }
         }
@@ -489,7 +489,7 @@ public class LevelRead {
                     i++;
                 } catch (NullPointerException npe) {
                     System.out.println("Door invalid in array " + i + " in map " + levelname);
-                    PlayScreen.m.setScreen(new GameScreen(PlayScreen.m));
+                    LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
                 }
             }
         }
