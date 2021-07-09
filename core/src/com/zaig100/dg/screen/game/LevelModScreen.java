@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -48,7 +47,6 @@ public class LevelModScreen implements Screen {
     private String path, line;
 
     private int menu = 0;
-    private Texture fr;
     private Save save;
     private boolean start = true;
 
@@ -57,12 +55,9 @@ public class LevelModScreen implements Screen {
     private float exit_timer = 0, sensor_timer = 0f;
 
     private boolean fir1 = true;
-    private int i;
 
 
     private Viewport viewport;
-
-    //private Iterator iter;
 
     private boolean isPack;
     private String packname = "";
@@ -225,6 +220,7 @@ public class LevelModScreen implements Screen {
     }
     private void stair_update() {
         if (World.map.stair.size() > 0) {
+            int i;
             for (i = 0; i < World.map.stair.size(); i++) {
                 World.map.stair.get(i).render(batch);
                 World.map.stair.get(i).frame();
