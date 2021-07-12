@@ -361,6 +361,14 @@ public class Map {
         }
     }
 
+    public int getTileId(int x,int y){
+            if((x>=0&&x<mapWidht)&&(y>=0&&y<mapHeight)){
+                return map[x + mapWidht * y];
+            }else{
+                return 0;
+            }
+    }
+
     public int getObjCount() {
         return objectsO.size() + objectsU.size() + stair.size();
     }
@@ -373,11 +381,9 @@ public class Map {
         return mapHeight;
     }
 
-
     public boolean isDark() {
         return isDark;
     }
-
 
     public void setDark(boolean dark) {
         isDark = dark;

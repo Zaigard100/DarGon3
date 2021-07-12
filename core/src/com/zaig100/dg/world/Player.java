@@ -11,6 +11,9 @@ import com.zaig100.dg.elements.items.Torch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.ai.way.Coordinate;
+import com.zaig100.dg.utils.ai.way.MainWay;
+import com.zaig100.dg.utils.ai.way.StartWay;
 
 import java.util.Random;
 
@@ -35,7 +38,6 @@ public class Player {
     public boolean isShowObj = false, isShop = false, inf = false;
 
     Random random = new Random();
-
 
     float damgeScr = 100;
     private int getYP;
@@ -196,6 +198,19 @@ public class Player {
                 }
             }
         }
+
+         if ((Gdx.input.isKeyJustPressed(Input.Keys.ALT_RIGHT))) {
+             if (!walked) {
+                 MainWay way = new MainWay(x,y,0,9,15);
+                 way.init();
+                 Coordinate endwey = way.shortWay();
+                 if(endwey instanceof StartWay) {
+                     System.out.println(((StartWay) endwey).getWayStory());
+                 }else{
+                     System.out.println("No Way");
+                 }
+             }
+         }
 
         if (World.map.isGround(oldX, oldY)) {
 
