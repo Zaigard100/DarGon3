@@ -73,7 +73,7 @@ public class Way extends Coordinate {
     }
 
     public void addStory(String story) {
-        this.story = story + "\n" + iter + " : x = " + x + " y =" + y;
+        this.story = story + "\n" + iter + ":x=" + x + "y=" + y;
     }
 
     public void setStory(String story) {

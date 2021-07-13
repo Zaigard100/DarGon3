@@ -22,7 +22,11 @@ public abstract class Obj {
         DOOR
     }
 
-    int x, y, wX, wY, objID;
+    public int x;
+    public int y;
+    int wX;
+    int wY;
+    int objID;
     String tag;
     ObjType type = ObjType.OBJ;
 

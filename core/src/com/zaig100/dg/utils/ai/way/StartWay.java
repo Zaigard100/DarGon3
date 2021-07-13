@@ -24,7 +24,7 @@ public class StartWay extends Coordinate {
                 if(x==0&&y==0) continue;
                 if (World.map.getTileId(this.x + x, this.y + y)==11) {
                     //new Way(this.x + x,this.y + y,iter-1,this); // перебор окружащих путей
-                    new Way(this.x + x, this.y + y, iter - 1, this,iter + " : x = " + this.x  + " y =" + this.y );// перебор путей с сохранением истории
+                    new Way(this.x + x, this.y + y, iter - 1, this,iter + ":x=" + this.x  + "y=" + this.y );// перебор путей с сохранением истории
                 }
             }
         }
