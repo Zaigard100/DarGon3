@@ -4,12 +4,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.contain.SpikeC;
 import com.zaig100.dg.world.World;
 
 public class Spike extends Obj {
     public boolean active, trigered;
     public float tick_sec;
     private float timer, timer1;
+
+    public Spike(SpikeC contain){
+        super(contain.getX(),contain.getY(), contain.getTag());
+        type = ObjType.SPIKE;
+        tick_sec =contain.getTick_sec();
+        active = contain.isActive();
+    }
 
     public Spike(int x, int y, boolean active, float tick_sec, String tag) {
         super(x, y, tag);

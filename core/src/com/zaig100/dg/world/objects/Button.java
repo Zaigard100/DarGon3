@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.world.Map;
 import com.zaig100.dg.world.World;
 
@@ -13,6 +14,13 @@ public class Button extends Obj {
     String[] func;
     Map M;
     boolean active = true;
+
+    public  Button(ButtonС contain,Map m){
+        super(contain.getX(),contain.getY(), contain.getTag());
+        type = ObjType.BUTTON;
+        func = contain.getFunc();
+        M = m;//map
+    }
 
     public Button(int x, int y, String[] func, String tag) {
         super(x, y, tag);

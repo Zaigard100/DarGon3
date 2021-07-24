@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.zaig100.dg.elements.items.Item;
+import com.zaig100.dg.world.elements.items.Item;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.LevelRead;
 import com.zaig100.dg.utils.Res;
@@ -23,6 +23,7 @@ import com.zaig100.dg.utils.contain.StairC;
 import com.zaig100.dg.utils.contain.TabletC;
 import com.zaig100.dg.utils.contain.TeleportC;
 import com.zaig100.dg.utils.contain.ZonaC;
+import com.zaig100.dg.utils.contain.mobC.KamikadzeC;
 import com.zaig100.dg.world.objects.Button;
 import com.zaig100.dg.world.objects.Chest;
 import com.zaig100.dg.world.objects.Crossbow;
@@ -39,6 +40,7 @@ import com.zaig100.dg.world.objects.Stair;
 import com.zaig100.dg.world.objects.Tablet;
 import com.zaig100.dg.world.objects.Teleport;
 import com.zaig100.dg.world.objects.Zona;
+import com.zaig100.dg.world.objects.mobs.Kamikaze;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -190,7 +192,7 @@ public class Map {
         iter = lR.getStair().iterator();
         while (iter.hasNext()) {
             StairC stairС = (StairC) iter.next();
-            stair.add(new Stair(stairС.getX(), stairС.getY(), stairС.getFlipX(), stairС.getNext(), stairС.isEnd(), stairС.getTag()));
+            stair.add(new Stair(stairС));
             stair.get(stair.size() - 1).setObjID(idNum);
             idNum++;
         }
@@ -198,7 +200,7 @@ public class Map {
         iter = lR.getZona().iterator();
         while (iter.hasNext()) {
             ZonaC zonaC = (ZonaC) iter.next();
-            objectsU.add(new Zona(zonaC.getX(), zonaC.getY(), zonaC.getWight(), zonaC.getHeight(), zonaC.getType(), zonaC.getTick(), zonaC.getTag()));
+            objectsU.add(new Zona(zonaC));
             objectsU.get(objectsU.size() - 1).setObjID(idNum);
             idNum++;
         }
@@ -206,7 +208,7 @@ public class Map {
         iter = lR.getTeleport().iterator();
         while (iter.hasNext()) {
             TeleportC teleportC = (TeleportC) iter.next();
-            objectsU.add(new Teleport(teleportC.getX(), teleportC.getY(), teleportC.getTx(), teleportC.getTy(), teleportC.getTag()));
+            objectsU.add(new Teleport(teleportC));
             objectsU.get(objectsU.size() - 1).setObjID(idNum);
             idNum++;
         }
@@ -214,7 +216,7 @@ public class Map {
         iter = lR.getHide_trap().iterator();
         while (iter.hasNext()) {
             HideTrapC hideTrapC = (HideTrapC) iter.next();
-            objectsU.add(new HideTrap(hideTrapC.getX(), hideTrapC.getY(), hideTrapC.isActive(), hideTrapC.getTag()));
+            objectsU.add(new HideTrap(hideTrapC));
             objectsU.get(objectsU.size() - 1).setObjID(idNum);
             idNum++;
         }
@@ -222,7 +224,7 @@ public class Map {
         iter = lR.getFlamefrower().iterator();
         while (iter.hasNext()) {
             FlamefrowerC flamefrowerС = (FlamefrowerC) iter.next();
-            objectsO.add(new Flamefrower(flamefrowerС.getX(), flamefrowerС.getY(), flamefrowerС.getStage(), flamefrowerС.getMax(), flamefrowerС.getRot(), flamefrowerС.getTick_sec(), flamefrowerС.getTag()));
+            objectsO.add(new Flamefrower(flamefrowerС));
             objectsO.get(objectsO.size() - 1).setObjID(idNum);
             idNum++;
         }
@@ -230,7 +232,7 @@ public class Map {
         iter = lR.getCrosbow().iterator();
         while (iter.hasNext()) {
             CrossbowC crossbowC = (CrossbowC) iter.next();
-            objectsO.add(new Crossbow(crossbowC.getX(), crossbowC.getY(), crossbowC.getDx(), crossbowC.getDy(), crossbowC.getAngle(), crossbowC.getTick_sec(), crossbowC.getTag()));
+            objectsO.add(new Crossbow(crossbowC));
             objectsO.get(objectsO.size() - 1).setObjID(idNum);
             idNum++;
         }
@@ -238,7 +240,7 @@ public class Map {
         iter = lR.getFlimsy_tile().iterator();
         while (iter.hasNext()) {
             FlimsyTileC flimsyTileC = (FlimsyTileC) iter.next();
-            objectsU.add(new FlimsyTile(flimsyTileC.getX(), flimsyTileC.getY(), flimsyTileC.getStage(), flimsyTileC.getTick_sec(), flimsyTileC.getTag()));
+            objectsU.add(new FlimsyTile(flimsyTileC));
             objectsU.get(objectsU.size() - 1).setObjID(idNum);
             idNum++;
         }
@@ -246,7 +248,7 @@ public class Map {
         iter = lR.getSpinney().iterator();
         while (iter.hasNext()) {
             SpinneyC spinneyC = (SpinneyC) iter.next();
-            objectsO.add(new Spinney(spinneyC.getX(), spinneyC.getY(), spinneyC.getWight(), spinneyC.getHeight(), spinneyC.getTag()));
+            objectsO.add(new Spinney(spinneyC));
             objectsO.get(objectsO.size() - 1).setObjID(idNum);
             idNum++;
         }
@@ -254,7 +256,7 @@ public class Map {
         iter = lR.getSpike().iterator();
         while (iter.hasNext()) {
             SpikeC spikeC = (SpikeC) iter.next();
-            objectsU.add(new Spike(spikeC.getX(), spikeC.getY(), spikeC.isActive(), spikeC.getTick_sec(), spikeC.getTag()));
+            objectsU.add(new Spike(spikeC));
             objectsU.get(objectsU.size() - 1).setObjID(idNum);
             idNum++;
         }
@@ -262,7 +264,7 @@ public class Map {
         iter = lR.getButton().iterator();
         while (iter.hasNext()) {
             ButtonС buttonC = (ButtonС) iter.next();
-            objectsU.add((new Button(buttonC.getX(), buttonC.getY(), buttonC.getFunc(), buttonC.getTag()).setMap(this)));
+            objectsU.add((new Button(buttonC, this)));
             objectsU.get(objectsU.size() - 1).setObjID(idNum);
             idNum++;
         }
@@ -270,7 +272,14 @@ public class Map {
         iter = lR.getItem().iterator();
         while (iter.hasNext()) {
             ItemC itemC = (ItemC) iter.next();
-            objectsU.add(new Items(itemC.getX(), itemC.getY(), Item.jsonToItem(itemC.getItem()), itemC.isActive(), itemC.getTag()));
+            objectsU.add(new Items(itemC));
+            objectsU.get(objectsU.size() - 1).setObjID(idNum);
+            idNum++;
+        }
+        iter = lR.getKamikaze().iterator();
+        while (iter.hasNext()) {
+            KamikadzeC kamikadzeC = (KamikadzeC) iter.next();
+            objectsU.add(new Kamikaze(kamikadzeC));
             objectsU.get(objectsU.size() - 1).setObjID(idNum);
             idNum++;
         }
@@ -278,28 +287,28 @@ public class Map {
         iter = lR.getTablet().iterator();
         while (iter.hasNext()) {
             TabletC tabletC = (TabletC) iter.next();
-            objectsU.add(new Tablet(tabletC.getX(), tabletC.getY(), tabletC.getText(), tabletC.getTag()));
+            objectsU.add(new Tablet(tabletC));
             objectsU.get(objectsU.size() - 1).setObjID(idNum);
             idNum++;
         }
         iter = lR.getShop().iterator();
         while (iter.hasNext()) {
             ShopC shopC = (ShopC) iter.next();
-            objectsU.add(new Shop(shopC.getX(), shopC.getY(), shopC.getItems(), shopC.getCost(), shopC.getTag()));
+            objectsU.add(new Shop(shopC));
             objectsU.get(stair.size() - 1).setObjID(idNum);
             idNum++;
         }
         iter = lR.getChest().iterator();
         while (iter.hasNext()) {
             ChestC chestC = (ChestC) iter.next();
-            objectsU.add(new Chest(chestC.getX(), chestC.getY(), chestC.getItems(), chestC.isLoked(), chestC.getKeyTag(), chestC.isOpen(), chestC.getTag()));
+            objectsU.add(new Chest(chestC));
             objectsU.get(stair.size() - 1).setObjID(idNum);
             idNum++;
         }
         iter = lR.getDoor().iterator();
         while (iter.hasNext()) {
             DoorC doorC = (DoorC) iter.next();
-            objectsO.add(new Door(doorC.getX(), doorC.getY(), doorC.isDoorOpen(), doorC.getKeyTag(), doorC.getFaicing(), doorC.getTag()));
+            objectsO.add(new Door(doorC));
             objectsO.get(stair.size() - 1).setObjID(idNum);
             idNum++;
         }

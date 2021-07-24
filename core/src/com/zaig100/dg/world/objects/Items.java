@@ -3,10 +3,11 @@ package com.zaig100.dg.world.objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.zaig100.dg.elements.items.Item;
-import com.zaig100.dg.elements.items.Poition;
-import com.zaig100.dg.elements.items.Sheld;
-import com.zaig100.dg.elements.items.Torch;
+import com.zaig100.dg.utils.contain.ItemC;
+import com.zaig100.dg.world.elements.items.Item;
+import com.zaig100.dg.world.elements.items.Poition;
+import com.zaig100.dg.world.elements.items.Sheld;
+import com.zaig100.dg.world.elements.items.Torch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
@@ -17,6 +18,12 @@ public class Items extends Obj {
 
     public Item item;
     public boolean active;
+
+    public  Items(ItemC contain){
+        super(contain.getX(),contain.getY(), contain.getTag());
+        type = ObjType.ITEM;
+        item = Item.jsonToItem(contain.getItem());
+    }
 
     public Items(int x, int y, Item item, String tag) {
         super(x, y, tag);

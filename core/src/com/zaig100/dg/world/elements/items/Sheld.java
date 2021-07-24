@@ -1,4 +1,4 @@
-package com.zaig100.dg.elements.items;
+package com.zaig100.dg.world.elements.items;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.zaig100.dg.utils.Configuration;

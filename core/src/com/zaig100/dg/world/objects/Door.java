@@ -3,8 +3,9 @@ package com.zaig100.dg.world.objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.zaig100.dg.elements.items.Item;
-import com.zaig100.dg.elements.items.Key;
+import com.zaig100.dg.utils.contain.DoorC;
+import com.zaig100.dg.world.elements.items.Item;
+import com.zaig100.dg.world.elements.items.Key;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
@@ -17,6 +18,17 @@ public class Door extends Obj {
     int facing;
     int doorTile;
 
+    public Door(DoorC contain){
+        super(contain.getX(), contain.getY(), contain.getTag());
+        isDoorOpen = contain.isDoorOpen();
+        keyTag = contain.getKeyTag();
+        facing = contain.getFaicing();
+        type = ObjType.DOOR;
+        doorTile = World.map.map[x + y * World.map.getMapWidht()];
+        if (!isDoorOpen) {
+            World.map.map[x + y * World.map.getMapWidht()] = 10;
+        }
+    }
 
     public Door(int x, int y, boolean isDoorOpen, String keyTag, int facing, String tag) {
         super(x, y, tag);

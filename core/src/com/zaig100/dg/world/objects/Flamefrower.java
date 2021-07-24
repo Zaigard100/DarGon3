@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.contain.FlamefrowerC;
 import com.zaig100.dg.world.World;
 
 public class Flamefrower extends Obj {
@@ -14,6 +15,15 @@ public class Flamefrower extends Obj {
     int dx, dy;
     int timst = 0;
     public float tick_sec;
+
+    public  Flamefrower(FlamefrowerC contain){
+        super(contain.getX(), contain.getY(), contain.getTag());
+        type = ObjType.FLAMETHROWER;
+        max = contain.getMax();
+        angle = contain.getRot();
+        stage =contain.getStage();
+        tick_sec = contain.getTick_sec();
+    }
 
     public Flamefrower(int x, int y, int max, int angle, float tick_sec, String tag) {
         super(x, y, tag);

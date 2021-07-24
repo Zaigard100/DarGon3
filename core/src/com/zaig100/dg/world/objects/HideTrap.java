@@ -1,18 +1,26 @@
-package com.zaig100.dg.world.objects;
+ package com.zaig100.dg.world.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.contain.HideTrapC;
 import com.zaig100.dg.world.World;
 
-public class HideTrap extends Obj {
+import java.util.HashMap;
+
+ public class HideTrap extends Obj {
+
     public boolean active;
+
+    public HideTrap(HideTrapC contain){
+        super(contain.getX(), contain.getY(), contain.getTag());
+        type = ObjType.HIDE_TRAP;
+        this.active = true;
+    }
 
     public HideTrap(int x, int y, String tag) {
         super(x, y, tag);
         type = ObjType.HIDE_TRAP;
-        this.x = x;
-        this.y = y;
         this.active = true;
     }
 

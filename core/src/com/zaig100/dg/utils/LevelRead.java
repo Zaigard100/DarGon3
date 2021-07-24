@@ -19,6 +19,8 @@ import com.zaig100.dg.utils.contain.StairC;
 import com.zaig100.dg.utils.contain.TabletC;
 import com.zaig100.dg.utils.contain.TeleportC;
 import com.zaig100.dg.utils.contain.ZonaC;
+import com.zaig100.dg.utils.contain.mobC.KamikadzeC;
+import com.zaig100.dg.world.objects.mobs.Kamikaze;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -59,6 +61,7 @@ public class LevelRead {
     ArrayList<ChestC> chest = new ArrayList<>();
     ArrayList<ShopC> shop = new ArrayList<>();
     ArrayList<ZonaC> zona = new ArrayList<>();
+    ArrayList<KamikadzeC> kamikaze = new ArrayList<>();
 
     public LevelRead(String path, boolean isPack) {
         if (isPack) {
@@ -104,6 +107,7 @@ public class LevelRead {
         chest_read();
         shop_read();
         zona_read();
+        kamikaze_read();
 
         if (jsonObject.get("ReMap") != null) {
             if ((Boolean) jsonObject.get("ReMap")) {
@@ -114,6 +118,28 @@ public class LevelRead {
             isSave = (Boolean) jsonObject.get("save");
         } else {
             isSave = false;
+        }
+    }
+
+    private void kamikaze_read(){
+        if (jsonObject.get("Kamikaze") != null) {
+            i = 0;
+            jsonArray = (JSONArray) jsonObject.get("Kamikaze");
+            iter = jsonArray.iterator();
+            while (iter.hasNext()) {
+                try {
+                    JO = (JSONObject) iter.next();
+                    if ((String) JO.get("Tag") != null) {
+                        kamikaze.add(new com.zaig100.dg.utils.contain.mobC.KamikadzeC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (String) JO.get("Tag"), ((Long) JO.get("Iters")).intValue(),((Long) JO.get("Radius")).intValue()));
+                    } else {
+                        kamikaze.add(new com.zaig100.dg.utils.contain.mobC.KamikadzeC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), "Kmz"+i , ((Long) JO.get("Iters")).intValue(),((Long) JO.get("Radius")).intValue()));
+                    }
+                    i++;
+                } catch (NullPointerException npe) {
+                    System.out.println("Kamikaze invalid in array " + i + " in map " + levelname);
+                    LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
+                }
+            }
         }
     }
 
@@ -581,6 +607,10 @@ public class LevelRead {
                 }
             }
         }
+    }
+
+    public ArrayList<KamikadzeC> getKamikaze() {
+        return kamikaze;
     }
 
     public int[] getMap() {

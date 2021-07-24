@@ -110,6 +110,9 @@ public class Configuration {
     static public void setScale(float scale) {
         Scale = scale;
     }
+    static public void setScale(int scale) {
+        Scale = scale;
+    }
 
     static public int getMusic() {
         return Music;

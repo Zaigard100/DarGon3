@@ -20,9 +20,9 @@ public class MainWay extends Coordinate{
 
     @Override
     public void init() {
-        for (int y = -1; y < 1; y++) {
+        for (int y = -1; y <= 1; y++) {
 
-            for (int x = -1; x < 1; x++) {
+            for (int x = -1; x <= 1; x++) {
 
                 if (x == 0 && y == 0) continue; // пропуск проверки самого себя
 
@@ -40,6 +40,7 @@ public class MainWay extends Coordinate{
         Coordinate ret = new NullWay();
         for(StartWay way:startWays){
             way.init();
+            if(way.x == endX&&way.y == endY) return way;
             if(way.main.iterShort>lenght){
                 lenght =way.main.iterShort;
                 ret = way;

@@ -1,13 +1,13 @@
-package com.zaig100.dg.elements;
+package com.zaig100.dg.world.elements;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.zaig100.dg.elements.items.Empty;
-import com.zaig100.dg.elements.items.Item;
-import com.zaig100.dg.elements.items.Poition;
-import com.zaig100.dg.elements.items.Sheld;
-import com.zaig100.dg.elements.items.Torch;
+import com.zaig100.dg.world.elements.items.Empty;
+import com.zaig100.dg.world.elements.items.Item;
+import com.zaig100.dg.world.elements.items.Poition;
+import com.zaig100.dg.world.elements.items.Sheld;
+import com.zaig100.dg.world.elements.items.Torch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.world.World;

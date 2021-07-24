@@ -6,11 +6,20 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.contain.TeleportC;
 import com.zaig100.dg.world.World;
 
 public class Teleport extends Obj {
     public int tx, ty;
     public boolean hide;
+
+    public Teleport(TeleportC contain){
+        super(contain.getX(),contain.getY(), contain.getTag());
+        type = ObjType.TELEPORT;
+        tx = contain.getTx();
+        ty = contain.getTy();
+        hide = true;
+    }
 
     public Teleport(int x, int y, int tx, int ty, String tag) {
         super(x, y, tag);

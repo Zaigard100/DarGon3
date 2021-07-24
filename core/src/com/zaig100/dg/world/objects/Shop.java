@@ -3,7 +3,8 @@ package com.zaig100.dg.world.objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.zaig100.dg.elements.items.Item;
+import com.zaig100.dg.utils.contain.ShopC;
+import com.zaig100.dg.world.elements.items.Item;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
@@ -17,9 +18,16 @@ public class Shop extends Obj {
     int pos = 0, lastPos = 0;
     int scrX, scrY;
 
+    public Shop(ShopC contain){
+        super(contain.getX(),contain.getY(), contain.getTag());
+        type = ObjType.SHOP;
+        item = contain.getItems();
+        cost = contain.getCost();
+    }
+
     public Shop(int x, int y, Item[] item, int[] cost, String tag) {
         super(x, y, tag);
-
+        type =ObjType.SHOP;
         this.item = item;
         this.cost = cost;
     }

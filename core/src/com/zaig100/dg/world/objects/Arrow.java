@@ -68,7 +68,8 @@ public class Arrow extends Obj {
             }
 
         }
-        isDel = last() || ((x == World.player.getX()) && (y == World.player.getY()));
+        if(last() || ((x == World.player.getX()) && (y == World.player.getY()))) del();
+
 
         if (isMove()) {
             move();

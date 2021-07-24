@@ -19,16 +19,22 @@ public abstract class Obj {
         SPINNEY,
         STAIR,
         TELEPORT,
-        DOOR
+        DOOR,
+        CHEST,
+        TABLET,
+        SHOP,
+        ZONA,
+        MOB,
+        KAMIKAZE
     }
 
     public int x;
     public int y;
-    int wX;
-    int wY;
+    public int wX;
+    public int wY;
     int objID;
     String tag;
-    ObjType type = ObjType.OBJ;
+    public ObjType type = ObjType.OBJ;
 
     public Obj(int x, int y, String tag) {
         this.x = x;
@@ -64,6 +70,28 @@ public abstract class Obj {
             }
             if (wY < (y + 2) * 16 * (int) Configuration.getScale()) {
                 wY = (int) (wY + Configuration.getScale());
+            }
+        }
+    }
+
+    public void move(float speed) {
+        if (wX != (x + 3) * 16 * (int) Configuration.getScale()) {
+            if (wX > (x + 3) * 16 * (int) Configuration.getScale()) {
+                wX = (int) (wX - Configuration.getScale()*speed);
+
+            }
+            if (wX < (x + 3) * 16 * (int) Configuration.getScale()) {
+                wX = (int) (wX + Configuration.getScale()*speed);
+            }
+
+        }
+
+        if (wY != (y + 2) * 16 * (int) Configuration.getScale()) {
+            if (wY > (y + 2) * 16 * (int) Configuration.getScale()) {
+                wY = (int) (wY - Configuration.getScale()*speed);
+            }
+            if (wY < (y + 2) * 16 * (int) Configuration.getScale()) {
+                wY = (int) (wY + Configuration.getScale()*speed);
             }
         }
     }

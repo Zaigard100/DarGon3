@@ -27,7 +27,7 @@ public class DesktopLauncher {
 
 	};
 	static final String[] icon = new String[]{"texture/icon.png","texture/amonghero.png","texture/firedhero.png","texture/shotedhero.png"};
-	public static void main (String[] arg) throws IOException {
+	public static void main (String[] args) throws IOException {
 		Date d = new Date();
 		Random r = new Random();
 		Main m = new Main(false);
@@ -41,11 +41,49 @@ public class DesktopLauncher {
 		}
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = title ;
+
+		config.title = title;
 		config.width = (int) (7 *16*Configuration.getScale());
 		config.height = (int) (5 *16*Configuration.getScale());
 		config.resizable = false;
 		config.addIcon(icon[r.nextInt(icon.length)], Files.FileType.Internal);
+
+		for(int i = 0; i < args.length;i++){
+			switch (args[i]){
+				case "-resolution": // -resolution 896 640
+					try {
+						config.width = Integer.parseInt(args[i + 1]);
+						config.height = Integer.parseInt(args[i + 2]);
+					}catch (Exception e){
+						System.out.println("Invalid \"-resolution\" argument");
+					}
+					break;
+				case "-fullscreen": // -fullscreen true
+					try{
+					config.fullscreen = Boolean.parseBoolean(args[i+1]);
+					}catch (Exception e){
+						System.out.println("Invalid \"-fullscreen\" argument");
+					}
+					break;
+				case "-scale": // -scale 8
+					try{
+					Configuration.setScale(Integer.parseInt(args[i+1]));
+					}catch (Exception e){
+						System.out.println("Invalid \"-scale\" argument");
+					}
+					break;
+			}
+		}
+		if(config.width<(int) (7 *16*Configuration.getScale())){
+			config.width = (int) (7 *16*Configuration.getScale());
+		}
+		if(config.height<(int) (5 *16*Configuration.getScale())){
+			config.height = (int) (5 *16*Configuration.getScale());
+		}
 		new LwjglApplication(m, config);
+	}
+
+	private void argCheck(){
+
 	}
 }

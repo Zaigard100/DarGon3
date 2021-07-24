@@ -3,11 +3,19 @@ package com.zaig100.dg.world.objects;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.contain.SpinneyC;
 import com.zaig100.dg.world.World;
 
 public class Spinney extends Obj {
     public int wight, height;
     private int i, j;
+
+    public Spinney(SpinneyC contain){
+        super(contain.getX(),contain.getY(), contain.getTag());
+        type = ObjType.SPINNEY;
+        wight = contain.getWight();
+        height = contain.getHeight();
+    }
 
     public Spinney(int x, int y, int wight, int height, String tag) {
         super(x, y, tag);

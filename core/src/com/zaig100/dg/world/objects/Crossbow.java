@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.contain.CrossbowC;
 import com.zaig100.dg.world.World;
 
 import java.util.ArrayList;
@@ -13,7 +14,15 @@ public class Crossbow extends Obj {
     public int dx, dy, angle;
     public float tick_sec;
     float timer = 0;
-    ArrayList<Arrow> arrs = new ArrayList<>();
+
+    public Crossbow(CrossbowC contain){
+        super(contain.getX(), contain.getY(), contain.getTag());
+        type = ObjType.CROSSBOW;
+        dx =contain.getDx();
+        dy =-contain.getDy();
+        angle = contain.getAngle();
+        tick_sec = contain.getTick_sec();
+    }
 
     public Crossbow(int x, int y, int dx, int dy, int angel, float tick_sec, String tag) {
 
@@ -23,7 +32,7 @@ public class Crossbow extends Obj {
         this.dy = dy;
         this.angle = angel;
         this.tick_sec = tick_sec;
-        arrs.add(new Arrow(x, y, dx, dy, angle, tag + "Arr" + arrs.size()));
+        World.map.objectsO.add(new Arrow(x, y, dx, dy, angle, tag + "Arr"));
     }
 
     @Override
@@ -41,22 +50,12 @@ public class Crossbow extends Obj {
                 1,
                 angle
         );
-        for (Arrow arr : arrs) {
-            arr.render(batch);
-        }
 
     }
 
     @Override
     public void frame() {
         tick(tick_sec);
-        for (Arrow arr : arrs) {
-            if (arr.isDel) {
-                arrs.remove(arr);
-                return;
-            }
-            arr.frame();
-        }
         if (isMove()) {
             move();
         }
@@ -72,15 +71,12 @@ public class Crossbow extends Obj {
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
         );
-        for (Arrow arr : arrs) {
-            arr.show_obj(batch);
-        }
     }
 
     public void tick(float second) {
         timer += Gdx.graphics.getDeltaTime();
         if (timer >= second) {
-            arrs.add(new Arrow(x, y, dx, dy, angle, tag + "Arr" + arrs.size()));
+            World.map.objectsO.add(new Arrow(x, y, dx, dy, angle, tag + "Arr"));
             timer = 0;
         }
     }

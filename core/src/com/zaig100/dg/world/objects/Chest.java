@@ -3,8 +3,9 @@ package com.zaig100.dg.world.objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.zaig100.dg.elements.items.Item;
-import com.zaig100.dg.elements.items.Key;
+import com.zaig100.dg.utils.contain.ChestC;
+import com.zaig100.dg.world.elements.items.Item;
+import com.zaig100.dg.world.elements.items.Key;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
@@ -15,14 +16,23 @@ import java.util.ArrayList;
 public class Chest extends Obj {
     ArrayList<Item> items;
     boolean open;
-    boolean isLooked;
+    boolean isLoked;
     String keyTag;
 
+    public Chest(ChestC contain){
+        super(contain.getX(), contain.getY(), contain.getTag());
+        type = ObjType.CHEST;
+        items = contain.getItems();
+        open = contain.isOpen();
+        isLoked = contain.isLoked();
+        keyTag = contain.getKeyTag();
+    }
 
-    public Chest(int x, int y, ArrayList<Item> items, boolean isLooked, String keyTag, boolean open, String tag) {
+    public Chest(int x, int y, ArrayList<Item> items, boolean isLoked, String keyTag, boolean open, String tag) {
         super(x, y, tag);
+        type = ObjType.CHEST;
         this.items = items;
-        this.isLooked = isLooked;
+        this.isLoked = isLoked;
         this.keyTag = keyTag;
         this.open = open;
     }
@@ -39,7 +49,7 @@ public class Chest extends Obj {
         );
 
         if ((World.player.getX() - 1 == x || World.player.getX() == x || World.player.getX() + 1 == x) && (World.player.getY() - 1 == y || World.player.getY() == y || World.player.getY() + 1 == y)) {
-            if (isLooked) {
+            if (isLoked) {
                 Res.getFont(3).draw(
                         batch,
                         keyTag,
@@ -63,11 +73,11 @@ public class Chest extends Obj {
         if ((Gdx.input.justTouched() && Joystick.isUse()) || (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))) {
             if ((World.player.getX() - 1 == x || World.player.getX() == x || World.player.getX() + 1 == x) && (World.player.getY() - 1 == y || World.player.getY() == y || World.player.getY() + 1 == y)) {
                 if (!((World.player.getX() == x && World.player.getY() == y))) {
-                    if (isLooked) {
+                    if (isLoked) {
                         for (Item item : World.player.inventory.items) {
                             if (item.getType().equals(Item.ItemType.KEY)) {
                                 if (((Key) item).getKeyTag().equals(keyTag)) {
-                                    isLooked = false;
+                                    isLoked = false;
                                     break;
                                 }
                             }
@@ -130,9 +140,9 @@ public class Chest extends Obj {
                 break;
             case "IsDoorOpen":
                 if (func.split(">")[1] == "++" || func.split(">")[1] == "--") {
-                    isLooked = !isLooked;
+                    isLoked = !isLoked;
                 } else {
-                    isLooked = Boolean.getBoolean(func.split(">")[1]);
+                    isLoked = Boolean.getBoolean(func.split(">")[1]);
                 }
                 break;
             case "cordN":

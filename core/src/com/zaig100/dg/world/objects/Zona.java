@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.contain.ZonaC;
 import com.zaig100.dg.world.World;
 
 public class Zona extends Obj {
@@ -25,15 +26,25 @@ public class Zona extends Obj {
     }
 
     int wight, height;
-    ZonaType type;
+    ZonaType zonaType;
     float tick, timer;
     int i, j;
 
-    public Zona(int x, int y, int wight, int height, ZonaType type, float tick, String tag) {
+    public Zona(ZonaC contain){
+        super(contain.getX(),contain.getY(), contain.getTag());
+        type = ObjType.ZONA;
+        zonaType = contain.getType();
+        wight = contain.getWight();
+        height = contain.getHeight();
+        tick = contain.getTick();
+    }
+
+    public Zona(int x, int y, int wight, int height, ZonaType zonaType, float tick, String tag) {
         super(x, y, tag);
+        type = ObjType.ZONA;
         this.wight = Math.abs(wight);
         this.height = Math.abs(height);
-        this.type = type;
+        this.zonaType = zonaType;
         this.tick = tick;
     }
 
@@ -49,7 +60,7 @@ public class Zona extends Obj {
 
     @Override
     public void show_obj(SpriteBatch batch) {
-        switch (type) {
+        switch (zonaType) {
             case HP_PIUS:
                 for (i = 0; i < height; i++) {
                     for (j = 0; j < wight; j++) {
@@ -133,11 +144,12 @@ public class Zona extends Obj {
             timer = 0;
             if ((World.player.getX() >= x) && (World.player.getX() <= x + wight) && (World.player.getY() >= y) && (World.player.getY() <= y + height)) {
 
-                switch (type) {
+                switch (zonaType) {
                     case HP_PIUS:
                         World.player.hp += 1;
                         break;
                     case HP_MINUS:
+                        World.player.setDamgeScr(0f,1);
                         World.player.hp -= 1;
                         break;
                 }

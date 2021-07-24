@@ -4,16 +4,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.zaig100.dg.elements.Inventory;
-import com.zaig100.dg.elements.items.Poition;
-import com.zaig100.dg.elements.items.Sheld;
-import com.zaig100.dg.elements.items.Torch;
+import com.zaig100.dg.world.elements.Inventory;
+import com.zaig100.dg.world.elements.items.Poition;
+import com.zaig100.dg.world.elements.items.Sheld;
+import com.zaig100.dg.world.elements.items.Torch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.ai.way.Coordinate;
 import com.zaig100.dg.utils.ai.way.MainWay;
 import com.zaig100.dg.utils.ai.way.StartWay;
+import com.zaig100.dg.world.objects.Obj;
 
 import java.util.Random;
 
@@ -168,7 +169,6 @@ public class Player {
      public void frame() {
         if (hp > 0) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.TAB) || Joystick.isBag()) {
-                System.out.println(menu_opened);
                 Joystick.setUse(false);
                 menu_opened = !menu_opened;
             }
@@ -201,14 +201,19 @@ public class Player {
 
          if ((Gdx.input.isKeyJustPressed(Input.Keys.ALT_RIGHT))) {
              if (!walked) {
-                 MainWay way = new MainWay(x,y,0,9,15);
-                 way.init();
-                 Coordinate endwey = way.shortWay();
-                 if(endwey instanceof StartWay) {
-                     System.out.println(((StartWay) endwey).getWayStory());
-                 }else{
-                     System.out.println("No Way");
+                 for(Obj stair:World.map.stair){
+                     System.out.println("Stair " + (World.map.stair.indexOf(stair)+1)+":");
+                     MainWay way = new MainWay(x,y,stair.x,stair.y,15);
+                     way.init();
+                     Coordinate endwey = way.shortWay();
+                     if(endwey instanceof StartWay) {
+                         System.out.println(((StartWay) endwey).getWayStory());
+                     }else{
+                         System.out.println("No Way");
+                     }
+                     System.out.println();
                  }
+
              }
          }
 

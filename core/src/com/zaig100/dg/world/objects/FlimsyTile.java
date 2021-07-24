@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.contain.FlimsyTileC;
 import com.zaig100.dg.world.World;
 
 public class FlimsyTile extends Obj {
@@ -12,6 +13,13 @@ public class FlimsyTile extends Obj {
     public int crashed_lvl;
     public float tick_sec;
     float timer = 0;
+
+    public  FlimsyTile(FlimsyTileC contain){
+        super(contain.getX(), contain.getY(), contain.getTag());
+        type = ObjType.FLIMSY_TILE;
+        crashed_lvl = 3 - contain.getStage();
+        tick_sec = contain.getTick_sec();
+    }
 
     public FlimsyTile(int x, int y, int stage, float tick_sec, String tag) {
         super(x, y, tag);

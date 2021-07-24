@@ -25,7 +25,6 @@ public class Mob extends Obj {
     int endX,endY;
     Stage state;
 
-    //TODO Mob(Абстракт) сделать рендер,фрейм,тег активейт
     public Mob(int x, int y, String tag) {
         super(x, y, tag);
     }

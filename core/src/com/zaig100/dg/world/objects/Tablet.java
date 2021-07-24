@@ -6,11 +6,18 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.contain.TabletC;
 import com.zaig100.dg.world.World;
 
 public class Tablet extends Obj {
 
     String[] text;
+
+    public Tablet(TabletC contain){
+        super(contain.getX(),contain.getY(), contain.getTag());
+        type = ObjType.TABLET;
+        text = contain.getText();
+    }
 
     public Tablet(int x, int y, String[] text, String tag) {
         super(x, y, tag);

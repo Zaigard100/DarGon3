@@ -1,6 +1,6 @@
 package com.zaig100.dg.utils.contain;
 
-import com.zaig100.dg.elements.items.Item;
+import com.zaig100.dg.world.elements.items.Item;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
