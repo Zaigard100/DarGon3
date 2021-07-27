@@ -7,6 +7,7 @@ import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.contain.ButtonС;
+import com.zaig100.dg.utils.contain.TeleportC;
 import com.zaig100.dg.world.Map;
 import com.zaig100.dg.world.World;
 
@@ -15,17 +16,22 @@ public class Button extends Obj {
     Map M;
     boolean active = true;
 
-    public  Button(ButtonС contain,Map m){
+
+    public Button(ButtonС contain, Map m){
         super(contain.getX(),contain.getY(), contain.getTag());
         type = ObjType.BUTTON;
         func = contain.getFunc();
         M = m;//map
+        this.contain = contain;
     }
 
-    public Button(int x, int y, String[] func, String tag) {
-        super(x, y, tag);
+    public void load(ButtonС contain){
+        x = contain.getX();
+        y = contain.getY();
+        tag = contain.getTag();
         type = ObjType.BUTTON;
-        this.func = func;
+        func = contain.getFunc();
+        this.contain = contain;
     }
 
     @Override

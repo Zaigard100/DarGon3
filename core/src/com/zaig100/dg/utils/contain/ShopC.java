@@ -5,6 +5,8 @@ import com.zaig100.dg.world.elements.items.Item;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.util.Arrays;
+
 public class ShopC extends ObjC {
     int[] cost = new int[3];
     Item[] items = new Item[3];
@@ -26,5 +28,16 @@ public class ShopC extends ObjC {
 
     public Item[] getItems() {
         return items;
+    }
+
+    @Override
+    public String toString() {
+        return "ShopC{" +
+                "cost=" + Arrays.toString(cost) +
+                ", items=" + Arrays.toString(items) +
+                ", x=" + x +
+                ", y=" + y +
+                ", tag='" + tag + '\'' +
+                '}';
     }
 }

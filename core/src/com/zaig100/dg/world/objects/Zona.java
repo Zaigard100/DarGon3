@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.ZonaC;
 import com.zaig100.dg.world.World;
 
@@ -30,6 +31,7 @@ public class Zona extends Obj {
     float tick, timer;
     int i, j;
 
+
     public Zona(ZonaC contain){
         super(contain.getX(),contain.getY(), contain.getTag());
         type = ObjType.ZONA;
@@ -37,15 +39,18 @@ public class Zona extends Obj {
         wight = contain.getWight();
         height = contain.getHeight();
         tick = contain.getTick();
+        this.contain = contain;
     }
 
-    public Zona(int x, int y, int wight, int height, ZonaType zonaType, float tick, String tag) {
-        super(x, y, tag);
+    public void load(ZonaC contain){
+        x = contain.getX();
+        y = contain.getY();
+        tag = contain.getTag();
         type = ObjType.ZONA;
-        this.wight = Math.abs(wight);
-        this.height = Math.abs(height);
-        this.zonaType = zonaType;
-        this.tick = tick;
+        zonaType = contain.getType();
+        wight = contain.getWight();
+        height = contain.getHeight();
+        this.contain = contain;
     }
 
     @Override

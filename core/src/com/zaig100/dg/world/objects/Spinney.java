@@ -10,18 +10,23 @@ public class Spinney extends Obj {
     public int wight, height;
     private int i, j;
 
+
     public Spinney(SpinneyC contain){
         super(contain.getX(),contain.getY(), contain.getTag());
         type = ObjType.SPINNEY;
-        wight = contain.getWight();
-        height = contain.getHeight();
+        wight = Math.abs(contain.getWight());
+        height = Math.abs(contain.getHeight());
+        this.contain = contain;
     }
 
-    public Spinney(int x, int y, int wight, int height, String tag) {
-        super(x, y, tag);
+    public void load(SpinneyC contain){
+        x = contain.getX();
+        y = contain.getY();
+        tag = contain.getTag();
         type = ObjType.SPINNEY;
-        this.wight = Math.abs(wight);
-        this.height = Math.abs(height);
+        wight = Math.abs(contain.getWight());
+        height = Math.abs(contain.getHeight());
+        this.contain = contain;
     }
 
     public void render(SpriteBatch batch) {

@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.StairC;
 import com.zaig100.dg.world.World;
 
@@ -23,13 +24,15 @@ public class Stair extends Obj {
         end = contain.isEnd();
     }
 
-    public Stair(int x, int y, boolean flip_x, String next_path, boolean end, String tag) {
-        super(x, y, tag);
+    public void load(StairC contain){
+        x = contain.getX();
+        y = contain.getY();
+        tag = contain.getTag();
         type = ObjType.STAIR;
-        this.flip_x = flip_x;
-        this.next_path = next_path;
-        this.end = end;
-
+        flip_x = contain.getFlipX();
+        next_path = contain.getNext();
+        end = contain.isEnd();
+        this.contain = contain;
     }
 
     public void render(SpriteBatch batch) {

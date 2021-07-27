@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.FlamefrowerC;
 import com.zaig100.dg.world.World;
 
@@ -16,22 +17,37 @@ public class Flamefrower extends Obj {
     int timst = 0;
     public float tick_sec;
 
-    public  Flamefrower(FlamefrowerC contain){
+
+    public  Flamefrower(FlamefrowerC contain) {
         super(contain.getX(), contain.getY(), contain.getTag());
         type = ObjType.FLAMETHROWER;
         max = contain.getMax();
         angle = contain.getRot();
-        stage =contain.getStage();
+        stage = contain.getStage();
         tick_sec = contain.getTick_sec();
+        if (angle == 0) {
+            dx = 1;
+        }
+        if (angle == 1) {
+            dy = 1;
+        }
+        if (angle == 2) {
+            dx = -1;
+        }
+        if (angle == 3) {
+            dy = -1;
+        }
     }
 
-    public Flamefrower(int x, int y, int max, int angle, float tick_sec, String tag) {
-        super(x, y, tag);
+    public void load(FlamefrowerC contain){
+        x = contain.getX();
+        y = contain.getY();
+        tag = contain.getTag();
         type = ObjType.FLAMETHROWER;
-        this.stage = 0;
-        this.max = max;
-        this.angle = angle;
-        this.tick_sec = tick_sec;
+        max = contain.getMax();
+        angle = contain.getRot();
+        stage = contain.getStage();
+        tick_sec = contain.getTick_sec();
         if (angle == 0) {
             dx = 1;
         }
@@ -44,27 +60,7 @@ public class Flamefrower extends Obj {
         if (angle == 3) {
             dy = -1;
         }
-    }
-
-    public Flamefrower(int x, int y, int stage, int max, int angle, float tick_sec, String tag) {
-        super(x, y, tag);
-        this.stage = stage;
-        this.max = max;
-        this.angle = angle;
-        this.tick_sec = tick_sec;
-        //this.player = player;
-        if (angle == 0) {
-            dx = 1;
-        }
-        if (angle == 1) {
-            dy = 1;
-        }
-        if (angle == 2) {
-            dx = -1;
-        }
-        if (angle == 3) {
-            dy = -1;
-        }
+        this.contain = contain;
     }
 
     public void render(SpriteBatch batch) {

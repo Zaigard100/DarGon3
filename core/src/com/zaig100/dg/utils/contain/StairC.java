@@ -26,4 +26,15 @@ public class StairC extends ObjC {
         return isEnd;
     }
 
+    @Override
+    public String toString() {
+        return "StairC{" +
+                "next='" + next + '\'' +
+                ", flipX=" + flipX +
+                ", isEnd=" + isEnd +
+                ", x=" + x +
+                ", y=" + y +
+                ", tag='" + tag + '\'' +
+                '}';
+    }
 }

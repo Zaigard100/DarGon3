@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.TabletC;
 import com.zaig100.dg.world.World;
 
@@ -13,15 +14,21 @@ public class Tablet extends Obj {
 
     String[] text;
 
+
     public Tablet(TabletC contain){
         super(contain.getX(),contain.getY(), contain.getTag());
         type = ObjType.TABLET;
         text = contain.getText();
+        this.contain = contain;
     }
 
-    public Tablet(int x, int y, String[] text, String tag) {
-        super(x, y, tag);
-        this.text = text;
+    public void load(TabletC contain){
+        x = contain.getX();
+        y = contain.getY();
+        tag = contain.getTag();
+        type = ObjType.TABLET;
+        text = contain.getText();
+        this.contain = contain;
     }
 
     @Override

@@ -16,4 +16,15 @@ public class TeleportC extends ObjC {
     public int getTy() {
         return ty;
     }
+
+    @Override
+    public String toString() {
+        return "TeleportC{" +
+                "tx=" + tx +
+                ", ty=" + ty +
+                ", x=" + x +
+                ", y=" + y +
+                ", tag='" + tag + '\'' +
+                '}';
+    }
 }

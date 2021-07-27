@@ -16,4 +16,15 @@ public class SpinneyC extends ObjC {
     public int getHeight() {
         return height;
     }
+
+    @Override
+    public String toString() {
+        return "SpinneyC{" +
+                "wight=" + wight +
+                ", height=" + height +
+                ", x=" + x +
+                ", y=" + y +
+                ", tag='" + tag + '\'' +
+                '}';
+    }
 }

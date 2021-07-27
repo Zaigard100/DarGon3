@@ -1,5 +1,7 @@
 package com.zaig100.dg.utils.contain;
 
+import java.util.Arrays;
+
 public class TabletC extends ObjC {
     String[] text;
 
@@ -10,5 +12,15 @@ public class TabletC extends ObjC {
 
     public String[] getText() {
         return text;
+    }
+
+    @Override
+    public String toString() {
+        return "TabletC{" +
+                "text=" + Arrays.toString(text) +
+                ", x=" + x +
+                ", y=" + y +
+                ", tag='" + tag + '\'' +
+                '}';
     }
 }

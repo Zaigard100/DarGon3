@@ -1,8 +1,8 @@
 package com.zaig100.dg.utils.contain;
 
 public abstract class ObjC {
-    int x, y;
-    String tag;
+    public int x, y;
+    public String tag;
 
     public ObjC(int x, int y, String tag) {
         this.x = x;

@@ -11,4 +11,14 @@ public class HideTrapC extends ObjC {
     public boolean isActive() {
         return active;
     }
+
+    @Override
+    public String toString() {
+        return "HideTrapC{" +
+                "active=" + active +
+                ", x=" + x +
+                ", y=" + y +
+                ", tag='" + tag + '\'' +
+                '}';
+    }
 }

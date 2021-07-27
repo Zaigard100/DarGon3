@@ -3,6 +3,8 @@ package com.zaig100.dg.world.objects;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.zaig100.dg.utils.contain.ButtonС;
+import com.zaig100.dg.utils.contain.CrossbowC;
 import com.zaig100.dg.utils.contain.DoorC;
 import com.zaig100.dg.world.elements.items.Item;
 import com.zaig100.dg.world.elements.items.Key;
@@ -18,9 +20,10 @@ public class Door extends Obj {
     int facing;
     int doorTile;
 
+
     public Door(DoorC contain){
         super(contain.getX(), contain.getY(), contain.getTag());
-        isDoorOpen = contain.isDoorOpen();
+        isDoorOpen = contain.isOpen();
         keyTag = contain.getKeyTag();
         facing = contain.getFaicing();
         type = ObjType.DOOR;
@@ -30,16 +33,15 @@ public class Door extends Obj {
         }
     }
 
-    public Door(int x, int y, boolean isDoorOpen, String keyTag, int facing, String tag) {
-        super(x, y, tag);
-        this.isDoorOpen = isDoorOpen;
-        this.keyTag = keyTag;
-        this.facing = facing;
-        type = ObjType.DOOR;
+    public void load(DoorC contain){
+        x = contain.getX();
+        y = contain.getY();
+        tag = contain.getTag();
         doorTile = World.map.map[x + y * World.map.getMapWidht()];
         if (!isDoorOpen) {
             World.map.map[x + y * World.map.getMapWidht()] = 10;
         }
+        this.contain = contain;
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.contain.ChestC;
+import com.zaig100.dg.utils.contain.SpinneyC;
 import com.zaig100.dg.world.elements.items.Item;
 import com.zaig100.dg.world.elements.items.Key;
 import com.zaig100.dg.utils.Configuration;
@@ -19,6 +20,7 @@ public class Chest extends Obj {
     boolean isLoked;
     String keyTag;
 
+
     public Chest(ChestC contain){
         super(contain.getX(), contain.getY(), contain.getTag());
         type = ObjType.CHEST;
@@ -26,17 +28,20 @@ public class Chest extends Obj {
         open = contain.isOpen();
         isLoked = contain.isLoked();
         keyTag = contain.getKeyTag();
+        this.contain = contain;
     }
 
-    public Chest(int x, int y, ArrayList<Item> items, boolean isLoked, String keyTag, boolean open, String tag) {
-        super(x, y, tag);
+    public void load(ChestC contain){
+        x = contain.getX();
+        y = contain.getY();
+        tag = contain.getTag();
         type = ObjType.CHEST;
-        this.items = items;
-        this.isLoked = isLoked;
-        this.keyTag = keyTag;
-        this.open = open;
+        items = contain.getItems();
+        open = contain.isOpen();
+        isLoked = contain.isLoked();
+        keyTag = contain.getKeyTag();
+        this.contain = contain;
     }
-
 
     @Override
     public void render(SpriteBatch batch) {

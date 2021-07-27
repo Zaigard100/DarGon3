@@ -18,20 +18,24 @@ public class Shop extends Obj {
     int pos = 0, lastPos = 0;
     int scrX, scrY;
 
+
     public Shop(ShopC contain){
         super(contain.getX(),contain.getY(), contain.getTag());
         type = ObjType.SHOP;
         item = contain.getItems();
         cost = contain.getCost();
+        this.contain = contain;
     }
 
-    public Shop(int x, int y, Item[] item, int[] cost, String tag) {
-        super(x, y, tag);
-        type =ObjType.SHOP;
-        this.item = item;
-        this.cost = cost;
+    public void load(ShopC contain){
+        x = contain.getX();
+        y = contain.getY();
+        tag = contain.getTag();
+        type = ObjType.SHOP;
+        item = contain.getItems();
+        cost = contain.getCost();
+        this.contain = contain;
     }
-
 
     @Override
     public void render(SpriteBatch batch) {

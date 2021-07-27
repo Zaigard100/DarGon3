@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.SpikeC;
 import com.zaig100.dg.world.World;
 
@@ -12,18 +13,23 @@ public class Spike extends Obj {
     public float tick_sec;
     private float timer, timer1;
 
+
     public Spike(SpikeC contain){
         super(contain.getX(),contain.getY(), contain.getTag());
         type = ObjType.SPIKE;
         tick_sec =contain.getTick_sec();
         active = contain.isActive();
+        this.contain = contain;
     }
 
-    public Spike(int x, int y, boolean active, float tick_sec, String tag) {
-        super(x, y, tag);
+    public void load(SpikeC contain){
+        x = contain.getX();
+        y = contain.getY();
+        tag = contain.getTag();
         type = ObjType.SPIKE;
-        this.tick_sec = tick_sec;
-        this.active = active;
+        tick_sec =contain.getTick_sec();
+        active = contain.isActive();
+        this.contain = contain;
     }
 
     public void render(SpriteBatch batch) {

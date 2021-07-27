@@ -18,4 +18,15 @@ public class KamikadzeC extends ObjC {
     public int getFindRadius() {
         return findRadius;
     }
+
+    @Override
+    public String toString() {
+        return "KamikadzeC{" +
+                "iter=" + iter +
+                ", findRadius=" + findRadius +
+                ", x=" + x +
+                ", y=" + y +
+                ", tag='" + tag + '\'' +
+                '}';
+    }
 }

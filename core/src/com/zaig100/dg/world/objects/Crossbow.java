@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.CrossbowC;
 import com.zaig100.dg.world.World;
 
@@ -15,6 +16,7 @@ public class Crossbow extends Obj {
     public float tick_sec;
     float timer = 0;
 
+
     public Crossbow(CrossbowC contain){
         super(contain.getX(), contain.getY(), contain.getTag());
         type = ObjType.CROSSBOW;
@@ -22,17 +24,21 @@ public class Crossbow extends Obj {
         dy =-contain.getDy();
         angle = contain.getAngle();
         tick_sec = contain.getTick_sec();
+        World.map.objectsO.add(new Arrow(x, y, dx, dy, angle, tag + "Arr"));
+        this.contain = contain;
     }
 
-    public Crossbow(int x, int y, int dx, int dy, int angel, float tick_sec, String tag) {
-
-        super(x, y, tag);
+    public void load(CrossbowC contain){
+        x = contain.getX();
+        y = contain.getY();
+        tag = contain.getTag();
         type = ObjType.CROSSBOW;
-        this.dx = dx;
-        this.dy = dy;
-        this.angle = angel;
-        this.tick_sec = tick_sec;
+        dx =contain.getDx();
+        dy =-contain.getDy();
+        angle = contain.getAngle();
+        tick_sec = contain.getTick_sec();
         World.map.objectsO.add(new Arrow(x, y, dx, dy, angle, tag + "Arr"));
+        this.contain = contain;
     }
 
     @Override

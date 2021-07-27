@@ -1,6 +1,8 @@
 package com.zaig100.dg.utils.dgscript.ast.expression;
 
+import com.zaig100.dg.utils.contain.ObjC;
 import com.zaig100.dg.utils.dgscript.ast.Expression;
+import com.zaig100.dg.utils.dgscript.lib.DGObjectValue;
 import com.zaig100.dg.utils.dgscript.lib.Function;
 import com.zaig100.dg.utils.dgscript.lib.FunctionVal;
 import com.zaig100.dg.utils.dgscript.lib.NumberVal;
@@ -8,6 +10,7 @@ import com.zaig100.dg.utils.dgscript.lib.StringVal;
 import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.utils.dgscript.visitors.Visitor;
 import com.zaig100.dg.utils.dgscript.visitors.optimizators.ResultVisitor;
+import com.zaig100.dg.world.objects.Obj;
 
 public final class ValueExpression implements Expression {
 
@@ -23,6 +26,10 @@ public final class ValueExpression implements Expression {
 
     public ValueExpression(Function value) {
         this.value = new FunctionVal(value);
+    }
+
+    public ValueExpression(ObjC value, Obj.ObjType type) {
+        this.value = new DGObjectValue(value,type);
     }
 
     public ValueExpression(Value value) {

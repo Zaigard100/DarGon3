@@ -51,4 +51,17 @@ public class ChestC extends ObjC {
     public String getKeyTag() {
         return keyTag;
     }
+
+    @Override
+    public String toString() {
+        return "ChestC{" +
+                "items=" + items +
+                ", isLoked=" + isLoked +
+                ", open=" + open +
+                ", keyTag='" + keyTag + '\'' +
+                ", x=" + x +
+                ", y=" + y +
+                ", tag='" + tag + '\'' +
+                '}';
+    }
 }

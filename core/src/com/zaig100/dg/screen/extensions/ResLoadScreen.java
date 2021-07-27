@@ -61,7 +61,7 @@ public class ResLoadScreen implements Screen {
         this.zaigard[7] = new Texture("zaigard/6.jpg");
         this.zaigard[2] = new Texture("zaigard/7.jpg");
         progresbar = new Texture("texture/resume.png");
-        load_layout.setText(font, "Load resurse: " + String.valueOf(0) + "%", Color.BLACK, Gdx.graphics.getWidth(), Align.center, true);
+        load_layout.setText(font, "Load resource: " + String.valueOf(0) + "%", Color.BLACK, Gdx.graphics.getWidth(), Align.center, true);
         press_layout.setText(font, "Press to screen", Color.BLACK, Gdx.graphics.getWidth(), Align.center, true);
     }
 
@@ -71,7 +71,7 @@ public class ResLoadScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
         if (tick_timer > 0.15f) {
             Res.sprL();
-            load_layout.setText(font, "Load resurse: " + String.valueOf((int) ((float) Res.i / load_while * 100)) + "%", Color.BLACK, Gdx.graphics.getWidth(), Align.center, true);
+            load_layout.setText(font, "Load resource: " + String.valueOf((int) ((float) Res.i / load_while * 100)) + "%", Color.BLACK, Gdx.graphics.getWidth(), Align.center, true);
             tick_timer = 0;
         }
         batch.begin();

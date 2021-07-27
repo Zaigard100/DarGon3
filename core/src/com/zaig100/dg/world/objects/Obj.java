@@ -2,6 +2,7 @@ package com.zaig100.dg.world.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
+import com.zaig100.dg.utils.contain.ObjC;
 import com.zaig100.dg.world.World;
 
 public abstract class Obj {
@@ -33,8 +34,10 @@ public abstract class Obj {
     public int wX;
     public int wY;
     int objID;
-    String tag;
+    public String tag;
     public ObjType type = ObjType.OBJ;
+
+    public ObjC contain;
 
     public Obj(int x, int y, String tag) {
         this.x = x;

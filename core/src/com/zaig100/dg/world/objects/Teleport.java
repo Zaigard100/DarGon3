@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.contain.SpinneyC;
 import com.zaig100.dg.utils.contain.TeleportC;
 import com.zaig100.dg.world.World;
 
@@ -13,29 +14,24 @@ public class Teleport extends Obj {
     public int tx, ty;
     public boolean hide;
 
+
     public Teleport(TeleportC contain){
         super(contain.getX(),contain.getY(), contain.getTag());
         type = ObjType.TELEPORT;
         tx = contain.getTx();
         ty = contain.getTy();
         hide = true;
+        this.contain = contain;
     }
 
-    public Teleport(int x, int y, int tx, int ty, String tag) {
-        super(x, y, tag);
+    public void load(TeleportC contain){
+        x = contain.getX();
+        y = contain.getY();
+        tag = contain.getTag();
         type = ObjType.TELEPORT;
-        this.tx = tx;
-        this.ty = ty;
-        this.hide = true;
-    }
-
-    public Teleport(int x, int y, int tx, int ty, boolean hide, String tag) {
-        super(x, y, tag);
-        this.x = x;
-        this.y = y;
-        this.tx = tx;
-        this.ty = ty;
-        this.hide = hide;
+        tx = contain.getTx();
+        ty = contain.getTy();
+        this.contain = contain;
     }
 
     @Override

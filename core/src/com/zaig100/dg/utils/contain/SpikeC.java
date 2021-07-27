@@ -20,4 +20,15 @@ public class SpikeC extends ObjC {
     public void setTick_sec(double tick_sec) {
         this.tick_sec = (float) tick_sec;
     }
+
+    @Override
+    public String toString() {
+        return "SpikeC{" +
+                "active=" + active +
+                ", tick_sec=" + tick_sec +
+                ", x=" + x +
+                ", y=" + y +
+                ", tag='" + tag + '\'' +
+                '}';
+    }
 }

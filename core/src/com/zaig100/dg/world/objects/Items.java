@@ -19,7 +19,7 @@ public class Items extends Obj {
     public Item item;
     public boolean active;
 
-    public  Items(ItemC contain){
+    public Items(ItemC contain){
         super(contain.getX(),contain.getY(), contain.getTag());
         type = ObjType.ITEM;
         item = Item.jsonToItem(contain.getItem());
@@ -27,16 +27,17 @@ public class Items extends Obj {
 
     public Items(int x, int y, Item item, String tag) {
         super(x, y, tag);
+        contain = new ItemC(x,y, item.toJson(),true,tag);
         type = ObjType.ITEM;
         this.item = item;
-        this.active = true;
     }
 
-    public Items(int x, int y, Item item, boolean active, String tag) {
-        super(x, y, tag);
-        this.item = item;
-        this.active = active;
-
+    public void load(ItemC contain){
+        x = contain.getX();
+        y = contain.getY();
+        tag = contain.getTag();
+        type = ObjType.ITEM;
+        item = Item.jsonToItem(contain.getItem());
     }
 
     public void render(SpriteBatch batch) {

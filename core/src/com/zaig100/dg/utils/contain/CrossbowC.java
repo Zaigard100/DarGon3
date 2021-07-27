@@ -30,4 +30,17 @@ public class CrossbowC extends ObjC {
     public void setTick_sec(double tick_sec) {
         this.tick_sec = (float) tick_sec;
     }
+
+    @Override
+    public String toString() {
+        return "CrossbowC{" +
+                "dx=" + dx +
+                ", dy=" + dy +
+                ", angle=" + angle +
+                ", tick_sec=" + tick_sec +
+                ", x=" + x +
+                ", y=" + y +
+                ", tag='" + tag + '\'' +
+                '}';
+    }
 }

@@ -3,6 +3,7 @@
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.HideTrapC;
 import com.zaig100.dg.world.World;
 
@@ -12,27 +13,25 @@ import java.util.HashMap;
 
     public boolean active;
 
+
     public HideTrap(HideTrapC contain){
         super(contain.getX(), contain.getY(), contain.getTag());
         type = ObjType.HIDE_TRAP;
         this.active = true;
+        this.contain = contain;
     }
 
-    public HideTrap(int x, int y, String tag) {
-        super(x, y, tag);
-        type = ObjType.HIDE_TRAP;
-        this.active = true;
-    }
+     public void load(HideTrapC contain){
+         x = contain.getX();
+         y = contain.getY();
+         tag = contain.getTag();
+         type = ObjType.HIDE_TRAP;
+         this.active = true;
+         this.contain = contain;
+     }
 
     @Override
     public void render(SpriteBatch batch) {
-    }
-
-    public HideTrap(int x, int y, boolean active, String tag) {
-        super(x, y, tag);
-        this.x = x;
-        this.y = y;
-        this.active = active;
     }
 
     public void frame() {

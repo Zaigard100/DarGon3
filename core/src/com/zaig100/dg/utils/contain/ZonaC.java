@@ -37,4 +37,17 @@ public class ZonaC extends ObjC {
     public float getTick() {
         return tick;
     }
+
+    @Override
+    public String toString() {
+        return "ZonaC{" +
+                "wight=" + wight +
+                ", height=" + height +
+                ", type=" + type +
+                ", tick=" + tick +
+                ", x=" + x +
+                ", y=" + y +
+                ", tag='" + tag + '\'' +
+                '}';
+    }
 }

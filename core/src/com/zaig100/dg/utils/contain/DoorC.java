@@ -3,14 +3,14 @@ package com.zaig100.dg.utils.contain;
 public class DoorC extends ObjC {
 
     String keyTag;
-    boolean isDoorOpen;
+    boolean isOpen;
     int faicing;
 
 
-    public DoorC(int x, int y, String keyTag, boolean isDoorOpen, int faicing, String tag) {
+    public DoorC(int x, int y, String keyTag, boolean isOpen, int faicing, String tag) {
         super(x, y, tag);
         this.keyTag = keyTag;
-        this.isDoorOpen = isDoorOpen;
+        this.isOpen = isOpen;
         this.faicing = faicing;
     }
 
@@ -18,11 +18,23 @@ public class DoorC extends ObjC {
         return keyTag;
     }
 
-    public boolean isDoorOpen() {
-        return isDoorOpen;
+    public boolean isOpen() {
+        return isOpen;
     }
 
     public int getFaicing() {
         return faicing;
+    }
+
+    @Override
+    public String toString() {
+        return "DoorC{" +
+                "keyTag='" + keyTag + '\'' +
+                ", isDoorOpen=" + isOpen +
+                ", faicing=" + faicing +
+                ", x=" + x +
+                ", y=" + y +
+                ", tag='" + tag + '\'' +
+                '}';
     }
 }

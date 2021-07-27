@@ -6,33 +6,37 @@ import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.ai.way.MainWay;
 import com.zaig100.dg.utils.ai.way.StartWay;
+import com.zaig100.dg.utils.contain.TeleportC;
 import com.zaig100.dg.utils.contain.mobC.KamikadzeC;
 import com.zaig100.dg.world.Player;
 import com.zaig100.dg.world.World;
 import com.zaig100.dg.world.objects.Arrow;
 
+import java.util.Objects;
+
 public class Kamikaze extends Mob {
 
     int findRadius,iter;
     boolean active = false;
-    String instruction;
     StartWay start;
-
-    float timer;
-
-    public Kamikaze(int x, int y,int iter, int findRadius, String tag) {
-        super(x, y, tag);
-        this.findRadius = findRadius;
-        this.iter = iter;
-    }
 
     public Kamikaze(KamikadzeC contain) {
         super(contain.getX(),contain.getY(), contain.getTag());
         type = ObjType.KAMIKAZE;
         findRadius = contain.getFindRadius();
         iter = contain.getIter();
+        this.contain = contain;
     }
 
+    public void load(KamikadzeC contain){
+        x = contain.getX();
+        y = contain.getY();
+        tag = contain.getTag();
+        type = ObjType.KAMIKAZE;
+        findRadius = contain.getFindRadius();
+        iter = contain.getIter();
+        this.contain = contain;
+    }
     @Override
     public void render(SpriteBatch batch) {
         batch.draw(
@@ -58,7 +62,6 @@ public class Kamikaze extends Mob {
 
             if(World.player.getX()==x&&World.player.getY()==y){
                 if(!isMove()) {
-                    System.out.println("Boom");
                     active = false;
                     World.player.setDamgeScr(0f,1);
                     World.player.setHp(World.player.hp-2);
@@ -79,8 +82,6 @@ public class Kamikaze extends Mob {
         }
 
     }
-
-
 
     private double distance(int oX,int oY){
         return Math.sqrt(((oX-getX())*(oX-getX()))+((oY-getY())*(oY-getY())));
