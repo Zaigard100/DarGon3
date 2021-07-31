@@ -23,6 +23,7 @@ public class Items extends Obj {
         super(contain.getX(),contain.getY(), contain.getTag());
         type = ObjType.ITEM;
         item = Item.jsonToItem(contain.getItem());
+        active = true;
     }
 
     public Items(int x, int y, Item item, String tag) {

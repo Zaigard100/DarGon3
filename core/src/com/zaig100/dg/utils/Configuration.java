@@ -43,7 +43,6 @@ public class Configuration {
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            System.out.println(conf.canExecute());
         if(!(conf.exists())) {
             createDefaultConfig(conf);
         }
