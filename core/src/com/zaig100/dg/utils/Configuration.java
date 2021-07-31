@@ -18,7 +18,7 @@ public class Configuration {
 
     static File conf;
 
-    static JSONObject jsonObject;
+    public static JSONObject jsonObject;
 
     static float Scale = 6;
     static int Music = 50;
@@ -38,13 +38,13 @@ public class Configuration {
         }
         JSONParser jsonParser = new JSONParser();
 
-
-        if(!(conf.exists())) {
             try {
                 jsonObject = (JSONObject) jsonParser.parse("{}");
             } catch (ParseException e) {
                 e.printStackTrace();
             }
+            System.out.println(conf.canExecute());
+        if(!(conf.exists())) {
             createDefaultConfig(conf);
         }
 
@@ -74,13 +74,15 @@ public class Configuration {
     }
 
     static public void save(File f) {
+
+        System.out.println(conf.getAbsolutePath());
+
         jsonObject.put("Scale", Scale);
         jsonObject.put("Music", Music);
         jsonObject.put("Sound", Sound);
         jsonObject.put("Sensor", sensor);
         jsonObject.put("Debug", debug);
         jsonObject.put("Shader", shader);
-
         try {
             FileWriter file = new FileWriter(f);
             file.write(jsonObject.toJSONString());

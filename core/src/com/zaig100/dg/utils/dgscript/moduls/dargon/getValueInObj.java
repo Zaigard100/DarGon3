@@ -1,6 +1,7 @@
 package com.zaig100.dg.utils.dgscript.moduls.dargon;
 
 import com.zaig100.dg.utils.contain.DoorC;
+import com.zaig100.dg.utils.contain.ItemC;
 import com.zaig100.dg.utils.dgscript.lib.ArrayValue;
 import com.zaig100.dg.utils.dgscript.lib.DGObjectValue;
 import com.zaig100.dg.utils.dgscript.lib.Function;
@@ -47,8 +48,16 @@ public class getValueInObj implements Function {
                         return new NumberVal(((DoorC) val.getObject()).getFaicing());
                     }
                 break;
-            case ITEM: break;//TODO доделать
-            case SHOP: break;
+            case ITEM:
+            if(val.getObject() instanceof ItemC){
+                if ("active".equals(name) || "Active".equals(name)) {
+                    return NumberVal.fromBoolean(((ItemC) val.getObject()).isActive());
+                }
+            }
+            break;
+            case SHOP:
+
+                break;
             case ZONA: break;
             case ARROW: break;
             case CHEST: break;

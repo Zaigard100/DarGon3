@@ -7,7 +7,9 @@ import com.zaig100.dg.Main;
 import com.zaig100.dg.utils.Configuration;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Random;
 
 public class DesktopLauncher {
@@ -28,15 +30,17 @@ public class DesktopLauncher {
 	};
 	static final String[] icon = new String[]{"texture/icon.png","texture/amonghero.png","texture/firedhero.png","texture/shotedhero.png"};
 	public static void main (String[] args) throws IOException {
-		Date d = new Date();
+		GregorianCalendar calendar = new GregorianCalendar();
 		Random r = new Random();
 		Main m = new Main(false);
 
 		Configuration.load(m);
 
-		///System.out.println(d.getDay());
+
 		String title = "DarGon: " + spl[r.nextInt(spl.length)];
-		if((d.getDay()==4)&&(d.getMonth()==5)) {
+
+
+		if((calendar.get(Calendar.MONTH)==5)&&(calendar.get(Calendar.DAY_OF_MONTH)==18)) {
 			title = "DarGon: " + "Today may be the developer's birthday";
 		}
 

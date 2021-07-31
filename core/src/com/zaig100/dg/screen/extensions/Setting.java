@@ -15,6 +15,8 @@ import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Font;
 import com.zaig100.dg.utils.ShaderManager;
 
+import java.io.IOException;
+
 
 public class Setting implements Screen {
 
@@ -254,7 +256,14 @@ public class Setting implements Screen {
     }
 
     void exit() {
-
+        if(Configuration.jsonObject == null){
+            try {
+                Configuration.load(m);
+                System.out.println("JO is null");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         if (Scale == Configuration.getScale()) {
             Configuration.setMusic((int) Music);
             Configuration.setSound((int) Sound);
