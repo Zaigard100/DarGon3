@@ -223,8 +223,8 @@ public class Map {
 
         iter = lR.getFlamefrower().iterator();
         while (iter.hasNext()) {
-            FlamefrowerC flamefrowerС = (FlamefrowerC) iter.next();
-            objectsO.add(new Flamefrower(flamefrowerС));
+            FlamefrowerC flamefrowerC = (FlamefrowerC) iter.next();
+            objectsO.add(new Flamefrower(flamefrowerC));
             objectsO.get(objectsO.size() - 1).setObjID(idNum);
             idNum++;
         }

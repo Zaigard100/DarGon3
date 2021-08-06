@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.contain.ItemC;
+import com.zaig100.dg.utils.dgscript.lib.NumberVal;
+import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.world.elements.items.Item;
 import com.zaig100.dg.world.elements.items.Poition;
 import com.zaig100.dg.world.elements.items.Sheld;
@@ -76,6 +78,33 @@ public class Items extends Obj {
     }
 
     @Override
+    public void setVal(String name, Value val) {
+        switch (name) {
+            case "X":
+            case "x":
+                x = val.asInt();
+                break;
+            case "Y":
+            case "y":
+                y = val.asInt();
+                break;
+        }
+    }
+
+    @Override
+    public Value getVal(String name) {
+        switch (name) {
+            case "X":
+            case "x":
+                return new NumberVal(x);
+            case "Y":
+            case "y":
+                return new NumberVal(y);
+        }
+        return null;
+    }
+
+    @Override
     public void tag_activate(String func) {
         switch (func.split(">")[0]) {
             case "X":
@@ -94,17 +123,6 @@ public class Items extends Obj {
                     y--;
                 } else {
                     y = Integer.parseInt((func.split(">")[1]));
-                }
-                break;
-            case "item":
-                if (func.split(">")[1] == "poition") {
-                    item = new Poition(1);
-                }
-                if (func.split(">")[1] == "sheld") {
-                    item = new Sheld(1);
-                }
-                if (func.split(">")[1] == "torch") {
-                    item = new Torch(1);
                 }
                 break;
             case "Active":

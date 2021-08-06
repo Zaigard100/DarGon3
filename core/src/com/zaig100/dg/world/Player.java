@@ -24,6 +24,7 @@ public class Player {
     int y;
     int oldX;
     int oldY;
+    float frameStepDist = 0f;
     public int wX;
     public int wY;
     public int hp = 4;
@@ -33,6 +34,7 @@ public class Player {
     boolean walked = false, walked_anim = false, flip = false;
     int sx, sy;
     int wasted_id = 0;
+    public float speed = 1;
 
     boolean[] slots = new boolean[2];
     public boolean isSheld = false;
@@ -229,13 +231,23 @@ public class Player {
 
         }
 
+        frameStepDist = Configuration.getScale() * Gdx.graphics.getDeltaTime()* 60 * speed;
+
         if (wX != x * 16 * Configuration.getScale()) {
             if (wX > x * 16 * Configuration.getScale()) {
-                wX = (int) (wX - Configuration.getScale());
+                if((wX - frameStepDist)>x * 16 * Configuration.getScale()){
+                    wX =  wX - (int)frameStepDist;
+                }else{
+                    wX = (int) (x * 16 * Configuration.getScale());
+                }
                 flip = true;
             }
             if (wX < x * 16 * Configuration.getScale()) {
-                wX = (int) (wX + Configuration.getScale());
+                if((wX + frameStepDist)<x * 16 * Configuration.getScale()){
+                    wX = wX + (int)frameStepDist;
+                }else{
+                    wX = (int) (x * 16 * Configuration.getScale());
+                }
                 flip = false;
             }
 
@@ -243,10 +255,19 @@ public class Player {
 
         if (wY != y * 16 * Configuration.getScale()) {
             if (wY > y * 16 * Configuration.getScale()) {
-                wY = (int) (wY - Configuration.getScale());
+                if((wY - frameStepDist)>y * 16 * Configuration.getScale()){
+                    wY = wY - (int)frameStepDist;
+                }else{
+                    wY = (int) (y * 16 * Configuration.getScale());
+                }
+                flip = false;
             }
             if (wY < y * 16 * Configuration.getScale()) {
-                wY = (int) (wY + Configuration.getScale());
+                if((wY + frameStepDist)<y * 16 * Configuration.getScale()){
+                    wY = wY + (int)frameStepDist;
+                }else{
+                    wY = (int) (y * 16 * Configuration.getScale());
+                }
             }
         }
 
@@ -268,7 +289,7 @@ public class Player {
 
     public void tick(float second) {
         timer += Gdx.graphics.getDeltaTime();
-        if (timer >= second) {
+        if (timer >= second/speed) {
             if (stage > 4) {
                 stage = 0;
             }

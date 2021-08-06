@@ -8,6 +8,9 @@ import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.StairC;
+import com.zaig100.dg.utils.dgscript.lib.NumberVal;
+import com.zaig100.dg.utils.dgscript.lib.StringVal;
+import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.world.World;
 
 public class Stair extends Obj {
@@ -70,6 +73,48 @@ public class Stair extends Obj {
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
         );
+    }
+
+    @Override
+    public void setVal(String name, Value val) {
+        switch (name) {
+            case "X":
+            case "x":
+                x = val.asInt();
+                break;
+            case "Y":
+            case "y":
+                y = val.asInt();
+                break;
+            case "Next": case "next":
+                next_path = val.asString();
+                break;
+            case "end": case "End":
+                end = val.asInt() == 1;
+                break;
+            case "flipx": case "flipX": case "FlipX":
+                flip_x = val.asInt() == 1;
+                break;
+        }
+    }
+
+    @Override
+    public Value getVal(String name) {
+        switch (name) {
+            case "X":
+            case "x":
+                return new NumberVal(x);
+            case "Y":
+            case "y":
+                return new NumberVal(y);
+            case "Next": case "next":
+                return  new StringVal(next_path);
+            case "end": case "End":
+                return NumberVal.fromBoolean(end);
+            case "flipx": case "flipX": case "FlipX":
+                return NumberVal.fromBoolean(flip_x);
+        }
+        return null;
     }
 
     @Override

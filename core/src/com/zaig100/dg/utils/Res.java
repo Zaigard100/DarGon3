@@ -20,6 +20,8 @@ public class Res {
     static int month = c.get(Calendar.MONTH);
     static int day = c.get(Calendar.DAY_OF_MONTH);
 
+    static public Texture black = new Texture(Gdx.files.internal("texture/black.png"));
+
     static public Texture ui = new Texture(Gdx.files.internal("texture/UI.png"));
     static public Texture tileset = new Texture(Gdx.files.internal("texture/TileSet.png"));
     static public Texture logo;
@@ -46,6 +48,8 @@ public class Res {
     static public Texture sheld;
     static public Texture torch;
     static public Texture show_trap_potion, sinf;
+    static public Texture speed_potion;
+    static public Texture slowdown_potion;
 
     static public Texture bundle;
 
@@ -135,6 +139,8 @@ public class Res {
             case 2:
                 Res.settings_button = new Sprite(ui, 42, 32, 21, 21);
                 Res.settings_button_toched = new Sprite(ui, 63, 32, 21, 21);
+                speed_potion = new Texture(Gdx.files.internal("texture/speed_potion.png"));
+                slowdown_potion = new Texture(Gdx.files.internal("texture/slowdown_potion.png"));
                 break;
             case 3:
                 Res.nextlv = new TextureRegion(new Texture(Gdx.files.internal("texture/nextlevel.png")));

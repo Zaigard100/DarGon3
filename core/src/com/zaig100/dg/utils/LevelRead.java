@@ -215,17 +215,17 @@ public class LevelRead {
                 try {
                     JO = (JSONObject) iter.next();
                     if ((String) JO.get("Tag") != null) {
-                        if (JO.get("Loked") == null || JO.get("Open") == null) {
+                        if (JO.get("Locked") == null || JO.get("Open") == null) {
                             chest.add(new com.zaig100.dg.utils.contain.ChestC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (JSONArray) JO.get("Items"), (String) JO.get("Tag")));
                         } else {
-                            chest.add(new com.zaig100.dg.utils.contain.ChestC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (JSONArray) JO.get("Items"), (Boolean) JO.get("Loked"), (String) JO.get("KeyTag"), (Boolean) JO.get("Open"), (String) JO.get("Tag")));
+                            chest.add(new com.zaig100.dg.utils.contain.ChestC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (JSONArray) JO.get("Items"), (Boolean) JO.get("Locked"), (String) JO.get("KeyTag"), (Boolean) JO.get("Open"), (String) JO.get("Tag")));
                         }
 
                     } else {
-                        if (JO.get("Loked") == null || JO.get("Open") == null) {
+                        if (JO.get("Locked") == null || JO.get("Open") == null) {
                             chest.add(new com.zaig100.dg.utils.contain.ChestC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (JSONArray) JO.get("Items"), (String) JO.get("Tag")));
                         } else {
-                            chest.add(new com.zaig100.dg.utils.contain.ChestC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (JSONArray) JO.get("Items"), (Boolean) JO.get("Loked"), (String) JO.get("KeyTag"), (Boolean) JO.get("Open"), (String) JO.get("Tag")));
+                            chest.add(new com.zaig100.dg.utils.contain.ChestC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (JSONArray) JO.get("Items"), (Boolean) JO.get("Locked"), (String) JO.get("KeyTag"), (Boolean) JO.get("Open"), (String) JO.get("Tag")));
                         }
                     }
                     i++;
@@ -408,9 +408,9 @@ public class LevelRead {
                 try {
                     JO = (JSONObject) iter.next();
                     if ((String) JO.get("Tag") != null) {
-                        spinney.add(new com.zaig100.dg.utils.contain.SpinneyC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Widht")).intValue(), ((Long) JO.get("Height")).intValue(), (String) JO.get("Tag")));
+                        spinney.add(new com.zaig100.dg.utils.contain.SpinneyC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Width")).intValue(), ((Long) JO.get("Height")).intValue(), (String) JO.get("Tag")));
                     } else {
-                        spinney.add(new com.zaig100.dg.utils.contain.SpinneyC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Widht")).intValue(), ((Long) JO.get("Height")).intValue(), "Sn" + i));
+                        spinney.add(new com.zaig100.dg.utils.contain.SpinneyC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("Width")).intValue(), ((Long) JO.get("Height")).intValue(), "Sn" + i));
                     }
                     i++;
                 } catch (NullPointerException npe) {

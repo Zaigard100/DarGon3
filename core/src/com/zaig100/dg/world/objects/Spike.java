@@ -6,6 +6,8 @@ import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.SpikeC;
+import com.zaig100.dg.utils.dgscript.lib.NumberVal;
+import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.world.World;
 
 public class Spike extends Obj {
@@ -98,6 +100,37 @@ public class Spike extends Obj {
                 timer1 += Gdx.graphics.getDeltaTime();
             }
         }
+    }
+    @Override
+    public void setVal(String name, Value val) {
+        switch (name) {
+            case "X":
+            case "x":
+                x = val.asInt();
+                break;
+            case "Y":
+            case "y":
+                y = val.asInt();
+                break;
+            case "Active": case "active":
+                active = val.asInt() == 1;
+                break;
+        }
+    }
+
+    @Override
+    public Value getVal(String name) {
+        switch (name) {
+            case "X":
+            case "x":
+                return new NumberVal(x);
+            case "Y":
+            case "y":
+                return new NumberVal(y);
+            case "Active": case "active":
+                return NumberVal.fromBoolean(active);
+        }
+        return null;
     }
 
     @Override

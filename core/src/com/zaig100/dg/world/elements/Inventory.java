@@ -156,7 +156,7 @@ public class Inventory {
             if (!items.get(x + y * 4).getType().equals("empty") || items.get(x + y * 4).getCount() > 0) {
                 Item item;
                 switch (items.get(x + y * 4).getType()) {
-                    case POTION:
+                    case POITION:
                         item = new Poition(1);
                         break;
                     case SHELD:

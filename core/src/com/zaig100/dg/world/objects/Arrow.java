@@ -3,6 +3,8 @@ package com.zaig100.dg.world.objects;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
+import com.zaig100.dg.utils.dgscript.lib.NumberVal;
+import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.world.World;
 
 public class Arrow extends Obj {
@@ -12,7 +14,6 @@ public class Arrow extends Obj {
     public int angle;
     float timer = 0;
     int far;
-    public boolean isDel;
 
     public Arrow(int x, int y, int dx, int dy, int angle, String tag) {
         super(x, y, tag);
@@ -34,6 +35,53 @@ public class Arrow extends Obj {
         this.dy = dy;
         this.angle = angle;
         this.far = -far;
+    }
+
+    @Override
+    public void setVal(String name, Value val) {
+        switch (name) {
+            case "X":
+            case "x":
+                x = val.asInt();
+                break;
+            case "Y":
+            case "y":
+                y = val.asInt();
+                break;
+            case "dx": case "Dx":case "DX":case "dX":
+                dx = val.asInt();
+                break;
+            case "dy": case "Dy":case "DY":case "dY":
+                dy = val.asInt();
+                break;
+            case "Angle": case "angle":
+                angle = val.asInt();
+                break;
+            case "Far": case "far":
+                far = val.asInt();
+                break;
+        }
+    }
+
+    @Override
+    public Value getVal(String name) {
+        switch (name) {
+            case "X":
+            case "x":
+                return new NumberVal(x);
+            case "Y":
+            case "y":
+                return new NumberVal(y);
+            case "dx": case "Dx":case "DX":case "dX":
+                return new NumberVal(dx);
+            case "dy": case "Dy":case "DY":case "dY":
+                return new NumberVal(dy);
+            case "Angle": case "angle":
+                return new NumberVal(angle);
+            case "Far": case "far":
+                return new NumberVal(far);
+        }
+        return null;
     }
 
     @Override

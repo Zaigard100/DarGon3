@@ -7,22 +7,23 @@ import com.zaig100.dg.world.World;
 
 import org.json.simple.JSONObject;
 
-public class Poition extends Item {
+public class SlowdownPoition extends Item {
 
-    public Poition() {
-        super();
-        type = ItemType.POITION;
-    }
+    float power;
 
-    public Poition(int i) {
-        super(i);
-        type = ItemType.POITION;
+    public SlowdownPoition(int count, float power) {
+        super(count);
+        type = ItemType.SLOWDOWN_POITION;
+        if(power<1){
+            power = 1;
+        }
+        this.power = power;
     }
 
     @Override
     public void render(Batch batch, int x, int y) {
         batch.draw(
-                Res.hp_potion,
+                Res.slowdown_potion,
                 x * 16 * Configuration.getScale() + 19 * Configuration.getScale(),
                 y * 16 * Configuration.getScale() + 19 * Configuration.getScale(),
                 16 * Configuration.getScale() - 6 * Configuration.getScale(),
@@ -37,7 +38,7 @@ public class Poition extends Item {
 
     @Override
     public void renderInMap(Batch batch, int wX, int wY) {
-        batch.draw(Res.hp_potion,
+        batch.draw(Res.slowdown_potion,
                 wX + (0.25f * 16 * Configuration.getScale()) - World.player.get_wX(),
                 wY + (0.25f * 16 * Configuration.getScale()) - World.player.get_wY(),
                 16 * Configuration.getScale() * 0.5f,
@@ -47,18 +48,18 @@ public class Poition extends Item {
 
     @Override
     public boolean use() {
-        if (World.player.getHp() < 4 && World.player.getHp() > 0) {
-            World.player.setHp(World.player.getHp() + 1);
+        if(World.player.speed>1/power){
+            World.player.speed = 1/power;
             return true;
         }
         return false;
     }
 
-    @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("Type", type.toString());
         json.put("Count", count);
+        json.put("Power", power);
         return json;
     }
 }

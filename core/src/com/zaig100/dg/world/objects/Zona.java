@@ -6,6 +6,9 @@ import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.ZonaC;
+import com.zaig100.dg.utils.dgscript.lib.NumberVal;
+import com.zaig100.dg.utils.dgscript.lib.StringVal;
+import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.world.World;
 
 public class Zona extends Obj {
@@ -93,6 +96,59 @@ public class Zona extends Obj {
                 }
                 break;
         }
+    }
+
+    @Override
+    public void setVal(String name, Value val) {
+        switch (name) {
+            case "X":
+            case "x":
+                x = val.asInt();
+                break;
+            case "Y":
+            case "y":
+                y = val.asInt();
+                break;
+            case "wight":
+            case "Wight":
+                wight = val.asInt();
+                break;
+            case "Height":
+            case "height":
+                height = val.asInt();
+                break;
+            case "type": case "Type":
+                switch (val.asString()) {
+                    case "hp+":
+                        zonaType = ZonaType.HP_PIUS;
+                        break;
+                    case "hp-":
+                        zonaType = ZonaType.HP_MINUS;
+                        break;
+                }
+                break;
+        }
+    }
+
+    @Override
+    public Value getVal(String name) {
+        switch (name) {
+            case "X":
+            case "x":
+                return new NumberVal(x);
+            case "Y":
+            case "y":
+                return new NumberVal(y);
+            case "wight":
+            case "Wight":
+                return new NumberVal(wight);
+            case "Height":
+            case "height":
+                return new NumberVal(height);
+            case "type": case "Type":
+                return new StringVal(type.name());
+        }
+        return null;
     }
 
     @Override

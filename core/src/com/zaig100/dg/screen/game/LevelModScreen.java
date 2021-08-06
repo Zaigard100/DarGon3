@@ -62,6 +62,7 @@ public class LevelModScreen implements Screen {
     private boolean isPack;
     private String packname = "";
     private String derectory = "";
+    private boolean black_frame;
 
     public LevelModScreen(Main m, String path, boolean isPack) {
         LevelModScreen.m = m;
@@ -177,6 +178,7 @@ public class LevelModScreen implements Screen {
 
         batch.begin();
         frame.draw(batch);
+
         batch.end();
 
     }
@@ -230,6 +232,7 @@ public class LevelModScreen implements Screen {
                     World.player.isShop = false;
                     World.player.inventarIsOpen = false;
                     World.player.menu_opened = false;
+                    World.player.speed = 1;
                     dispose();
                     if (World.map.stair.get(i).isEnd()) {
                         m.setScreen(new MenuScreen(m));
@@ -282,8 +285,6 @@ public class LevelModScreen implements Screen {
             Res.getFont(6).draw(batch, " Load save", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
             Res.getFont(6).draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
-                dispose();
-                m.setScreen(new MenuScreen(m));
                 World.player.isPause = false;
                 World.player.isStop = false;
                 World.player.inventarIsOpen = false;
@@ -292,6 +293,10 @@ public class LevelModScreen implements Screen {
                 World.player.isShop = false;
                 World.player.menu_opened = false;
                 World.player.inf = false;
+                World.player.speed = 1;
+                dispose();
+                m.setScreen(new MenuScreen(m));
+
             }
         }
         if(menu==2) {
@@ -300,7 +305,6 @@ public class LevelModScreen implements Screen {
             Res.getFont(6).draw(batch, ">Load save<", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
             Res.getFont(6).draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
-                dispose();
                 World.player.setHp(save.getHp());
                 World.player.coin_count = Save.getMoney();
                 World.player.inventory.jsonToInventory(save.getArr());
@@ -310,9 +314,10 @@ public class LevelModScreen implements Screen {
                 World.player.isShowObj = false;
                 World.player.isSheld = false;
                 World.player.isShop = false;
-                World.player.inventarIsOpen = false;
                 World.player.menu_opened = false;
                 World.player.inf = false;
+                World.player.speed = 1;
+                dispose();
                 if (isPack) {
                     m.setScreen(new LevelModScreen(m, save.getsPath(), isPack, packname, derectory));
                 } else
@@ -335,9 +340,9 @@ public class LevelModScreen implements Screen {
                     World.player.isShowObj = false;
                     World.player.isSheld = false;
                     World.player.isShop = false;
-                    World.player.inventarIsOpen = false;
                     World.player.menu_opened = false;
                     World.player.inf = false;
+                    World.player.speed = 1;
                     Gdx.app.exit();
                 }
             } else {
@@ -408,6 +413,16 @@ public class LevelModScreen implements Screen {
         Res.getFont(11).draw(batch, "Wasted", 2 * 16 * Configuration.getScale(), 4.5f * 16 * Configuration.getScale());
         Res.getFont(6).draw(batch, "Press Space", 2 * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Joystick.isUse()) {
+            World.player.isPause = false;
+            World.player.isStop = false;
+            World.player.inventarIsOpen = false;
+            World.player.isShowObj = false;
+            World.player.isSheld = false;
+            World.player.isShop = false;
+            World.player.menu_opened = false;
+            World.player.inf = false;
+            World.player.speed = 1;
+            dispose();
             m.setScreen(new MenuScreen(m));
 
         }

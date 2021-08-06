@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.CrossbowC;
 import com.zaig100.dg.utils.contain.DoorC;
+import com.zaig100.dg.utils.dgscript.lib.NumberVal;
+import com.zaig100.dg.utils.dgscript.lib.StringVal;
+import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.world.elements.items.Item;
 import com.zaig100.dg.world.elements.items.Key;
 import com.zaig100.dg.utils.Configuration;
@@ -98,6 +101,48 @@ public class Door extends Obj {
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
         );
+    }
+
+    @Override
+    public void setVal(String name, Value val) {
+        switch (name) {
+            case "X":
+            case "x":
+                x = val.asInt();
+                break;
+            case "Y":
+            case "y":
+                y = val.asInt();
+                break;
+            case "Open": case "open":
+                isDoorOpen = (val.asInt() == 1);
+                break;
+            case "keyTag": case "KeyTag": case "keytag":
+                keyTag = val.asString();
+                break;
+            case "facing": case "Facing":
+                facing = val.asInt();
+                break;
+        }
+    }
+
+    @Override
+    public Value getVal(String name) {
+        switch (name) {
+            case "X":
+            case "x":
+                return new NumberVal(x);
+            case "Y":
+            case "y":
+                return new NumberVal(y);
+            case "Open": case "open":
+                return  NumberVal.fromBoolean(isDoorOpen);
+            case "keyTag": case "KeyTag": case "keytag":
+                return new StringVal(keyTag);
+            case "facing": case "Facing":
+                return new NumberVal(facing);
+        }
+        return null;
     }
 
     @Override

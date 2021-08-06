@@ -8,6 +8,8 @@ import com.zaig100.dg.utils.Joystick;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.contain.SpinneyC;
 import com.zaig100.dg.utils.contain.TeleportC;
+import com.zaig100.dg.utils.dgscript.lib.NumberVal;
+import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.world.World;
 
 public class Teleport extends Obj {
@@ -66,6 +68,53 @@ public class Teleport extends Obj {
                 16 * Configuration.getScale(),
                 16 * Configuration.getScale()
         );
+    }
+
+    @Override
+    public void setVal(String name, Value val) {
+        switch (name) {
+            case "X":
+            case "x":
+                x = val.asInt();
+                break;
+            case "Y":
+            case "y":
+                y = val.asInt();
+                break;
+            case "TX":
+            case "tX":
+            case "tx":
+                tx = val.asInt();
+                break;
+            case "TY":
+            case "tY":
+            case "ty":
+                ty = val.asInt();
+                break;
+        }
+
+    }
+
+
+    @Override
+    public Value getVal(String name) {
+        switch (name) {
+            case "X":
+            case "x":
+                return new NumberVal(x);
+            case "Y":
+            case "y":
+                return new NumberVal(y);
+            case "TX":
+            case "tX":
+            case "tx":
+                return new NumberVal(tx);
+            case "TY":
+            case "tY":
+            case "ty":
+                return new NumberVal(ty);
+        }
+        return null;
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.zaig100.dg.world.objects;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.contain.ObjC;
+import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.world.World;
 
 public abstract class Obj {
@@ -98,6 +99,10 @@ public abstract class Obj {
             }
         }
     }
+
+    public abstract void setVal(String name, Value val);
+
+    public abstract Value getVal(String name);
 
     public boolean isMove() {
         return (wX != (x + 3) * 16 * (int) Configuration.getScale() || wY != (y + 2) * 16 * (int) Configuration.getScale());

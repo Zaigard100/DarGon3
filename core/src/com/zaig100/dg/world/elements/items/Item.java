@@ -9,13 +9,15 @@ public abstract class Item {
     public enum ItemType {
         ITEM("item"),
         EMPTY("empty"),
-        POTION("potion"),
+        POITION("potion"),
         SHELD("sheld"),
         TORCH("torch"),
         KEY("key"),
         EGG("egg"),
-        SHOW_TRAP_POTION("show_trap"),
-        MONEY("money");
+        SHOW_TRAP_POITION("show_trap"),
+        MONEY("money"),
+        SPEED_POITION("speed"),
+        SLOWDOWN_POITION("slowdown");
 
         String name;
 
@@ -67,6 +69,10 @@ public abstract class Item {
                 return new TrapShowPotion((((Number) item.get("Count"))).intValue());
             case "money":
                 return new Money((((Number) item.get("Count"))).intValue());
+            case "speed":
+                return new SpeedPoition((((Number) item.get("Count"))).intValue(),(((Number) item.get("Power"))).floatValue());
+            case "slowdown":
+                return new SlowdownPoition((((Number) item.get("Count"))).intValue(),(((Number) item.get("Power"))).floatValue());
             case "egg":
                 return new EasterEgg((String) item.get("Code"));
             default:

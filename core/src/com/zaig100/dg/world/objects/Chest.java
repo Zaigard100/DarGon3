@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.contain.ChestC;
-import com.zaig100.dg.utils.contain.SpinneyC;
+import com.zaig100.dg.utils.dgscript.lib.NumberVal;
+import com.zaig100.dg.utils.dgscript.lib.StringVal;
+import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.world.elements.items.Item;
 import com.zaig100.dg.world.elements.items.Key;
 import com.zaig100.dg.utils.Configuration;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 public class Chest extends Obj {
     ArrayList<Item> items;
     boolean open;
-    boolean isLoked;
+    boolean isLocked;
     String keyTag;
 
 
@@ -26,7 +28,7 @@ public class Chest extends Obj {
         type = ObjType.CHEST;
         items = contain.getItems();
         open = contain.isOpen();
-        isLoked = contain.isLoked();
+        isLocked = contain.isLoked();
         keyTag = contain.getKeyTag();
         this.contain = contain;
     }
@@ -38,9 +40,51 @@ public class Chest extends Obj {
         type = ObjType.CHEST;
         items = contain.getItems();
         open = contain.isOpen();
-        isLoked = contain.isLoked();
+        isLocked = contain.isLoked();
         keyTag = contain.getKeyTag();
         this.contain = contain;
+    }
+
+    @Override
+    public void setVal(String name, Value val) {
+        switch (name) {
+            case "X":
+            case "x":
+                x = val.asInt();
+                break;
+            case "Y":
+            case "y":
+                y = val.asInt();
+                break;
+            case "open": case "Open":
+                open = (val.asInt() == 1);
+                break;
+            case "isLocked": case "IsLocked": case "islocked":
+                isLocked = (val.asInt() == 1);
+                break;
+            case "keyTag": case "KeyTag": case "keytag":
+                keyTag = val.asString();
+                break;
+        }
+    }
+
+    @Override
+    public Value getVal(String name) {
+        switch (name) {
+            case "X":
+            case "x":
+                return new NumberVal(x);
+            case "Y":
+            case "y":
+                return new NumberVal(y);
+            case "open": case "Open":
+                return NumberVal.fromBoolean(open);
+            case "isLocked": case "IsLocked": case "islocked":
+                return NumberVal.fromBoolean(isLocked);
+            case "keyTag": case "KeyTag": case "keytag":
+                return  new StringVal(keyTag);
+        }
+        return null;
     }
 
     @Override
@@ -54,7 +98,7 @@ public class Chest extends Obj {
         );
 
         if ((World.player.getX() - 1 == x || World.player.getX() == x || World.player.getX() + 1 == x) && (World.player.getY() - 1 == y || World.player.getY() == y || World.player.getY() + 1 == y)) {
-            if (isLoked) {
+            if (isLocked) {
                 Res.getFont(3).draw(
                         batch,
                         keyTag,
@@ -78,11 +122,11 @@ public class Chest extends Obj {
         if ((Gdx.input.justTouched() && Joystick.isUse()) || (Gdx.input.isKeyJustPressed(Input.Keys.SPACE))) {
             if ((World.player.getX() - 1 == x || World.player.getX() == x || World.player.getX() + 1 == x) && (World.player.getY() - 1 == y || World.player.getY() == y || World.player.getY() + 1 == y)) {
                 if (!((World.player.getX() == x && World.player.getY() == y))) {
-                    if (isLoked) {
+                    if (isLocked) {
                         for (Item item : World.player.inventory.items) {
                             if (item.getType().equals(Item.ItemType.KEY)) {
                                 if (((Key) item).getKeyTag().equals(keyTag)) {
-                                    isLoked = false;
+                                    isLocked = false;
                                     break;
                                 }
                             }
@@ -145,9 +189,9 @@ public class Chest extends Obj {
                 break;
             case "IsDoorOpen":
                 if (func.split(">")[1] == "++" || func.split(">")[1] == "--") {
-                    isLoked = !isLoked;
+                    isLocked = !isLocked;
                 } else {
-                    isLoked = Boolean.getBoolean(func.split(">")[1]);
+                    isLocked = Boolean.getBoolean(func.split(">")[1]);
                 }
                 break;
             case "cordN":

@@ -5,6 +5,8 @@ import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.HideTrapC;
+import com.zaig100.dg.utils.dgscript.lib.NumberVal;
+import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.world.World;
 
 import java.util.HashMap;
@@ -61,6 +63,32 @@ import java.util.HashMap;
         );
     }
 
+     @Override
+     public void setVal(String name, Value val) {
+         switch (name) {
+             case "X":
+             case "x":
+                 x = val.asInt();
+                 break;
+             case "Y":
+             case "y":
+                 y = val.asInt();
+                 break;
+         }
+     }
+
+     @Override
+     public Value getVal(String name) {
+         switch (name) {
+             case "X":
+             case "x":
+                 return new NumberVal(x);
+             case "Y":
+             case "y":
+                 return new NumberVal(y);
+         }
+         return null;
+     }
 
     @Override
     public void tag_activate(String func) {

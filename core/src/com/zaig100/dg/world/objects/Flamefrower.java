@@ -6,6 +6,8 @@ import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.FlamefrowerC;
+import com.zaig100.dg.utils.dgscript.lib.NumberVal;
+import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.world.World;
 
 public class Flamefrower extends Obj {
@@ -149,6 +151,45 @@ public class Flamefrower extends Obj {
                 anim_stage = 0;
             }
         }
+    }
+
+    @Override
+    public void setVal(String name, Value val) {
+        switch (name) {
+            case "X":
+            case "x":
+                x = val.asInt();
+                break;
+            case "Y":
+            case "y":
+                y = val.asInt();
+                break;
+            case "max": case "Max":
+                max = val.asInt();
+            case "angle": case "Angle":
+                angle = val.asInt();
+            case "Stage": case "stage":
+                stage = val.asInt();
+        }
+    }
+
+    @Override
+    public Value getVal(String name) {
+        switch (name) {
+            case "X":
+            case "x":
+                return new NumberVal(x);
+            case "Y":
+            case "y":
+                return new NumberVal(y);
+            case "max": case "Max":
+                return new NumberVal(max);
+            case "angle": case "Angle":
+                return new NumberVal(angle);
+            case "Stage": case "stage":
+                return  new NumberVal(stage);
+        }
+        return null;
     }
 
     @Override

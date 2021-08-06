@@ -11,12 +11,12 @@ public class TrapShowPotion extends Item {
 
     public TrapShowPotion() {
         super();
-        type = ItemType.SHOW_TRAP_POTION;
+        type = ItemType.SHOW_TRAP_POITION;
     }
 
     public TrapShowPotion(int count) {
         super(count);
-        type = ItemType.SHOW_TRAP_POTION;
+        type = ItemType.SHOW_TRAP_POITION;
     }
 
     @Override

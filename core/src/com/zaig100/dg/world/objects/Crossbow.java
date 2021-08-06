@@ -6,6 +6,8 @@ import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.CrossbowC;
+import com.zaig100.dg.utils.dgscript.lib.NumberVal;
+import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.world.World;
 
 import java.util.ArrayList;
@@ -39,6 +41,53 @@ public class Crossbow extends Obj {
         tick_sec = contain.getTick_sec();
         World.map.objectsO.add(new Arrow(x, y, dx, dy, angle, tag + "Arr"));
         this.contain = contain;
+    }
+
+    @Override
+    public void setVal(String name, Value val) {
+        switch (name) {
+            case "X":
+            case "x":
+                x = val.asInt();
+                break;
+            case "Y":
+            case "y":
+                y = val.asInt();
+                break;
+            case "dx": case "Dx":case "DX":case "dX":
+                dx = val.asInt();
+                break;
+            case "dy": case "Dy":case "DY":case "dY":
+                dy = val.asInt();
+                break;
+            case "Angle": case "angle":
+                angle = val.asInt();
+                break;
+            case "Tick": case "tick":
+                tick_sec = (float) val.asNum();
+                break;
+        }
+    }
+
+    @Override
+    public Value getVal(String name) {
+        switch (name) {
+            case "X":
+            case "x":
+                return new NumberVal(x);
+            case "Y":
+            case "y":
+                return new NumberVal(y);
+            case "dx": case "Dx":case "DX":case "dX":
+                return new NumberVal(dx);
+            case "dy": case "Dy":case "DY":case "dY":
+                return new NumberVal(dy);
+            case "Angle": case "angle":
+                return new NumberVal(angle);
+            case "Tick": case "tick":
+                return new NumberVal(tick_sec);
+        }
+        return null;
     }
 
     @Override

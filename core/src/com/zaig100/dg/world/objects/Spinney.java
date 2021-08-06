@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.contain.SpinneyC;
+import com.zaig100.dg.utils.dgscript.lib.NumberVal;
+import com.zaig100.dg.utils.dgscript.lib.StringVal;
+import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.world.World;
 
 public class Spinney extends Obj {
@@ -59,6 +62,47 @@ public class Spinney extends Obj {
                 wight * 16 * Configuration.getScale(),
                 height * 16 * Configuration.getScale()
         );
+    }
+
+    @Override
+    public void setVal(String name, Value val) {
+        switch (name) {
+            case "X":
+            case "x":
+                x = val.asInt();
+                break;
+            case "Y":
+            case "y":
+                y = val.asInt();
+                break;
+            case "wight":
+            case "Wight":
+                wight = val.asInt();
+                break;
+            case "Height":
+            case "height":
+                height = val.asInt();
+                break;
+        }
+    }
+
+    @Override
+    public Value getVal(String name) {
+        switch (name) {
+            case "X":
+            case "x":
+                return new NumberVal(x);
+            case "Y":
+            case "y":
+                return new NumberVal(y);
+            case "wight":
+            case "Wight":
+                return new NumberVal(wight);
+            case "Height":
+            case "height":
+                return new NumberVal(height);
+        }
+        return null;
     }
 
     @Override

@@ -8,6 +8,8 @@ import com.zaig100.dg.utils.ai.way.MainWay;
 import com.zaig100.dg.utils.ai.way.StartWay;
 import com.zaig100.dg.utils.contain.TeleportC;
 import com.zaig100.dg.utils.contain.mobC.KamikadzeC;
+import com.zaig100.dg.utils.dgscript.lib.NumberVal;
+import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.world.Player;
 import com.zaig100.dg.world.World;
 import com.zaig100.dg.world.objects.Arrow;
@@ -83,7 +85,91 @@ public class Kamikaze extends Mob {
 
     }
 
-    private double distance(int oX,int oY){
+    @Override
+    public void setVal(String name, Value val) {
+        super.setVal(name, val);
+        switch (name){
+            case "X": case "x":
+                x = val.asInt();
+                break;
+            case "Y": case "y":
+                y = val.asInt();
+                break;
+            case "Radius": case "radius":
+                findRadius = val.asInt();
+                break;
+            case "Iter": case "iter":
+                iter = val.asInt();
+                break;
+        }
+    }
+
+    @Override
+    public Value getVal(String name) {
+
+        switch (name){
+            case "X": case "x":
+                return new NumberVal(x);
+            case "Y": case "y":
+                return new NumberVal(y);
+            case "Radius": case "radius":
+                return new NumberVal(findRadius);
+            case "Iter": case "iter":
+                return new NumberVal(iter);
+        }
+        return super.getVal(name);
+    }
+
+    @Override
+    public void tag_activate(String func) {
+        super.tag_activate(func);
+        switch (func.split(">")[0]) {
+            case "X":
+                if (func.split(">")[1] == "++") {
+                    x++;
+                } else if (func.split(">")[1] == "--") {
+                    x--;
+                } else {
+                    x = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "Y":
+                if (func.split(">")[1] == "++") {
+                    y++;
+                } else if (func.split(">")[1] == "--") {
+                    y--;
+                } else {
+                    y = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "Radius":
+                if (func.split(">")[1] == "++") {
+                    findRadius++;
+                } else if (func.split(">")[1] == "--") {
+                    findRadius--;
+                } else {
+                    findRadius = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "Iter":
+                if (func.split(">")[1] == "++") {
+                    iter++;
+                } else if (func.split(">")[1] == "--") {
+                    iter--;
+                } else {
+                    iter = Integer.parseInt((func.split(">")[1]));
+                }
+                break;
+            case "cordN":
+                cordinateNormalize();
+                break;
+            case "del":
+                del();
+                break;
+        }
+    }
+
+    private double distance(int oX, int oY){
         return Math.sqrt(((oX-getX())*(oX-getX()))+((oY-getY())*(oY-getY())));
     }
 

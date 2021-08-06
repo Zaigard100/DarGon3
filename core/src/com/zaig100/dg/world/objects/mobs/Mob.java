@@ -1,6 +1,8 @@
 package com.zaig100.dg.world.objects.mobs;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.zaig100.dg.utils.dgscript.lib.NumberVal;
+import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.world.objects.Obj;
 
 public class Mob extends Obj {
@@ -27,6 +29,16 @@ public class Mob extends Obj {
 
     public Mob(int x, int y, String tag) {
         super(x, y, tag);
+    }
+
+    @Override
+    public void setVal(String name, Value val) {
+
+    }
+
+    @Override
+    public Value getVal(String name) {
+        return NumberVal.ZERO;
     }
 
     @Override

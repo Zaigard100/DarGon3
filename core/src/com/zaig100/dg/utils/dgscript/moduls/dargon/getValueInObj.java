@@ -30,50 +30,6 @@ public class getValueInObj implements Function {
     }
 
     Value getVal(DGObjectValue val, StringVal name) {
-        if ("X".equals(name) || "x".equals(name)) {
-            return new NumberVal(val.getObject().getX());
-        } else if ("Y".equals(name) || "y".equals(name)) {
-            return new NumberVal(val.getObject().getY());
-        } else if ("Tag".equals(name) || "tag".equals(name) || "TAG".equals(name)) {
-            return new StringVal(val.getObject().tag);
-        }
-        switch (val.getType()){
-            case DOOR:
-                if(val.getObject() instanceof DoorC)
-                    if ("keyTag".equals(name) || "KeyTag".equals(name) || "keytag".equals(name)) {
-                        return new StringVal(((DoorC) val.getObject()).getKeyTag());
-                    } else if ("isOpen".equals(name) || "IsOpen".equals(name) || "isopen".equals(name)) {
-                        return NumberVal.fromBoolean(((DoorC) val.getObject()).isOpen());
-                    } else if ("facing".equals(name) || "Facing".equals(name)) {
-                        return new NumberVal(((DoorC) val.getObject()).getFaicing());
-                    }
-                break;
-            case ITEM:
-            if(val.getObject() instanceof ItemC){
-                if ("active".equals(name) || "Active".equals(name)) {
-                    return NumberVal.fromBoolean(((ItemC) val.getObject()).isActive());
-                }
-            }
-            break;
-            case SHOP:
-
-                break;
-            case ZONA: break;
-            case ARROW: break;
-            case CHEST: break;
-            case SPIKE: break;
-            case STAIR: break;
-            case BUTTON: break;
-            case TABLET: break;
-            case SPINNEY: break;
-            case CROSSBOW: break;
-            case KAMIKAZE: break;
-            case TELEPORT: break;
-            case HIDE_TRAP: break;
-            case FLIMSY_TILE: break;
-            case FLAMETHROWER: break;
-            case MOB: break;
-        }
 
         return null;
     }
