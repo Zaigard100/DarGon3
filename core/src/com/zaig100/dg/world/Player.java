@@ -24,7 +24,7 @@ public class Player {
     int y;
     int oldX;
     int oldY;
-    float frameStepDist = 0f;
+    double frameStepDist = 0f;
     public int wX;
     public int wY;
     public int hp = 4;
@@ -230,47 +230,47 @@ public class Player {
             oldY = y;
 
         }
-
-        frameStepDist = Configuration.getScale() * Gdx.graphics.getDeltaTime()* 60 * speed;
-
-        if (wX != x * 16 * Configuration.getScale()) {
-            if (wX > x * 16 * Configuration.getScale()) {
-                if((wX - frameStepDist)>x * 16 * Configuration.getScale()){
-                    wX =  wX - (int)frameStepDist;
-                }else{
-                    wX = (int) (x * 16 * Configuration.getScale());
+         frameStepDist += Configuration.getScale() * Gdx.graphics.getDeltaTime() * 60 * speed;
+        if(frameStepDist>1){
+            if (wX != x * 16 * Configuration.getScale()) {
+                if (wX > x * 16 * Configuration.getScale()) {
+                    if ((wX - frameStepDist) > x * 16 * Configuration.getScale()) {
+                        wX = wX - (int) frameStepDist;
+                    } else {
+                        wX = (int) (x * 16 * Configuration.getScale());
+                    }
+                    flip = true;
                 }
-                flip = true;
-            }
-            if (wX < x * 16 * Configuration.getScale()) {
-                if((wX + frameStepDist)<x * 16 * Configuration.getScale()){
-                    wX = wX + (int)frameStepDist;
-                }else{
-                    wX = (int) (x * 16 * Configuration.getScale());
+                if (wX < x * 16 * Configuration.getScale()) {
+                    if ((wX + frameStepDist) < x * 16 * Configuration.getScale()) {
+                        wX = wX + (int) frameStepDist;
+                    } else {
+                        wX = (int) (x * 16 * Configuration.getScale());
+                    }
+                    flip = false;
                 }
-                flip = false;
+
             }
 
+            if (wY != y * 16 * Configuration.getScale()) {
+                if (wY > y * 16 * Configuration.getScale()) {
+                    if ((wY - frameStepDist) > y * 16 * Configuration.getScale()) {
+                        wY = wY - (int) frameStepDist;
+                    } else {
+                        wY = (int) (y * 16 * Configuration.getScale());
+                    }
+                    flip = false;
+                }
+                if (wY < y * 16 * Configuration.getScale()) {
+                    if ((wY + frameStepDist) < y * 16 * Configuration.getScale()) {
+                        wY = wY + (int) frameStepDist;
+                    } else {
+                        wY = (int) (y * 16 * Configuration.getScale());
+                    }
+                }
+            }
+            frameStepDist = 0;
         }
-
-        if (wY != y * 16 * Configuration.getScale()) {
-            if (wY > y * 16 * Configuration.getScale()) {
-                if((wY - frameStepDist)>y * 16 * Configuration.getScale()){
-                    wY = wY - (int)frameStepDist;
-                }else{
-                    wY = (int) (y * 16 * Configuration.getScale());
-                }
-                flip = false;
-            }
-            if (wY < y * 16 * Configuration.getScale()) {
-                if((wY + frameStepDist)<y * 16 * Configuration.getScale()){
-                    wY = wY + (int)frameStepDist;
-                }else{
-                    wY = (int) (y * 16 * Configuration.getScale());
-                }
-            }
-        }
-
         if ((wX != x * 16 * Configuration.getScale()) || (wY != y * 16 * Configuration.getScale())) {
 
             walked = true;

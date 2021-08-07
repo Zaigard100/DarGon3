@@ -40,14 +40,13 @@ public class DesktopLauncher {
 		String title = "DarGon: " + spl[r.nextInt(spl.length)];
 
 
-		if((calendar.get(Calendar.MONTH)==5)&&(calendar.get(Calendar.DAY_OF_MONTH)==18)) {
+		if((calendar.get(Calendar.MONTH)== Calendar.JUNE)&&(calendar.get(Calendar.DAY_OF_MONTH)==18)) {
 			title = "DarGon: " + "Today may be the developer's birthday";
 		}
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
-		config.vSyncEnabled = false;
-		config.foregroundFPS =300;
+		config.foregroundFPS = 300;
 		config.title = title;
 		config.width = (int) (7 *16*Configuration.getScale());
 		config.height = (int) (5 *16*Configuration.getScale());
@@ -77,6 +76,12 @@ public class DesktopLauncher {
 					}catch (Exception e){
 						System.out.println("Invalid \"-scale\" argument");
 					}
+					break;
+				case "-fps": // -fps 30
+					config.foregroundFPS = Integer.parseInt(args[i+1]);
+					break;
+				case "-vsync": // -vsync false
+					config.vSyncEnabled = Boolean.parseBoolean(args[i+1]);
 					break;
 			}
 		}
