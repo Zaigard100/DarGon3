@@ -19,6 +19,7 @@ import java.util.Objects;
 public class Kamikaze extends Mob {
 
     int findRadius,iter;
+    float speed;
     boolean active = false;
     StartWay start;
 
@@ -27,6 +28,7 @@ public class Kamikaze extends Mob {
         type = ObjType.KAMIKAZE;
         findRadius = contain.getFindRadius();
         iter = contain.getIter();
+        speed = contain.getSpeed();
         this.contain = contain;
     }
 
@@ -37,6 +39,7 @@ public class Kamikaze extends Mob {
         type = ObjType.KAMIKAZE;
         findRadius = contain.getFindRadius();
         iter = contain.getIter();
+        speed = contain.getSpeed();
         this.contain = contain;
     }
     @Override
@@ -79,7 +82,7 @@ public class Kamikaze extends Mob {
 
             }
 
-            move(0.5f);
+            move(speed);
 
         }
 

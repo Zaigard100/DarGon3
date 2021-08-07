@@ -130,9 +130,9 @@ public class LevelRead {
                 try {
                     JO = (JSONObject) iter.next();
                     if ((String) JO.get("Tag") != null) {
-                        kamikaze.add(new com.zaig100.dg.utils.contain.mobC.KamikadzeC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (String) JO.get("Tag"), ((Long) JO.get("Iters")).intValue(),((Long) JO.get("Radius")).intValue()));
+                        kamikaze.add(new com.zaig100.dg.utils.contain.mobC.KamikadzeC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), (String) JO.get("Tag"), ((Long) JO.get("Iters")).intValue(),((Long) JO.get("Radius")).intValue(),((Number)JO.get("Speed")).floatValue()));
                     } else {
-                        kamikaze.add(new com.zaig100.dg.utils.contain.mobC.KamikadzeC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), "Kmz"+i , ((Long) JO.get("Iters")).intValue(),((Long) JO.get("Radius")).intValue()));
+                        kamikaze.add(new com.zaig100.dg.utils.contain.mobC.KamikadzeC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), "Kmz"+i , ((Long) JO.get("Iters")).intValue(),((Long) JO.get("Radius")).intValue(),((Number)JO.get("Speed")).floatValue()));
                     }
                     i++;
                 } catch (NullPointerException npe) {

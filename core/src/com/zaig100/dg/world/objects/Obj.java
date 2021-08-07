@@ -1,5 +1,6 @@
 package com.zaig100.dg.world.objects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.contain.ObjC;
@@ -37,6 +38,7 @@ public abstract class Obj {
     int objID;
     public String tag;
     public ObjType type = ObjType.OBJ;
+    double frameStepDist = 0;
 
     public ObjC contain;
 
@@ -56,48 +58,49 @@ public abstract class Obj {
         wY = (y + 2) * 16 * (int) Configuration.getScale();
     }
 
-    public void move() {
-        if (wX != (x + 3) * 16 * (int) Configuration.getScale()) {
-            if (wX > (x + 3) * 16 * (int) Configuration.getScale()) {
-                wX = (int) (wX - Configuration.getScale());
-
-            }
-            if (wX < (x + 3) * 16 * (int) Configuration.getScale()) {
-                wX = (int) (wX + Configuration.getScale());
-            }
-
-        }
-
-        if (wY != (y + 2) * 16 * (int) Configuration.getScale()) {
-            if (wY > (y + 2) * 16 * (int) Configuration.getScale()) {
-                wY = (int) (wY - Configuration.getScale());
-            }
-            if (wY < (y + 2) * 16 * (int) Configuration.getScale()) {
-                wY = (int) (wY + Configuration.getScale());
-            }
-        }
+    public void move(){
+        move(1f);
     }
 
     public void move(float speed) {
-        if (wX != (x + 3) * 16 * (int) Configuration.getScale()) {
-            if (wX > (x + 3) * 16 * (int) Configuration.getScale()) {
-                wX = (int) (wX - Configuration.getScale()*speed);
+        frameStepDist += Configuration.getScale() * Gdx.graphics.getDeltaTime() * 60* speed;
+        if(frameStepDist>1) {
+            if (wX != (x + 3) * 16 * (int) Configuration.getScale()) {
+                if (wX > (x + 3) * 16 * (int) Configuration.getScale()) {
+                    if ((wX - frameStepDist) > (x+3) * 16 * Configuration.getScale()) {
+                        wX = (int) (wX - frameStepDist);
+                    }else{
+                        wX = (x + 3) * 16 * (int) Configuration.getScale();
+                    }
+                }
+                if (wX < (x + 3) * 16 * (int) Configuration.getScale()) {
+                    if ((wX + frameStepDist) < (x+3) * 16 * Configuration.getScale()) {
+                        wX = (int) (wX + frameStepDist);
+                    }else {
+                        wX = (x + 3) * 16 * (int) Configuration.getScale();
+                    }
+                }
 
             }
-            if (wX < (x + 3) * 16 * (int) Configuration.getScale()) {
-                wX = (int) (wX + Configuration.getScale()*speed);
-            }
 
+            if (wY != (y + 2) * 16 * (int) Configuration.getScale()) {
+                if (wY > (y + 2) * 16 * (int) Configuration.getScale()) {
+                    if ((wY - frameStepDist) > (y+2) * 16 * Configuration.getScale()) {
+                        wY = (int) (wY - frameStepDist);
+                    }else{
+                        wY = (y + 2) * 16 * (int) Configuration.getScale();
+                    }
+                }
+                if (wY < (y + 2) * 16 * (int) Configuration.getScale()) {
+                    if ((wY + frameStepDist) < (y+2) * 16 * Configuration.getScale()) {
+                        wY = (int) (wY + frameStepDist);
+                    }else{
+                        wY = (y + 2) * 16 * (int) Configuration.getScale();
+                    }
+                }
+            }
         }
-
-        if (wY != (y + 2) * 16 * (int) Configuration.getScale()) {
-            if (wY > (y + 2) * 16 * (int) Configuration.getScale()) {
-                wY = (int) (wY - Configuration.getScale()*speed);
-            }
-            if (wY < (y + 2) * 16 * (int) Configuration.getScale()) {
-                wY = (int) (wY + Configuration.getScale()*speed);
-            }
-        }
+        frameStepDist = 0;
     }
 
     public abstract void setVal(String name, Value val);
