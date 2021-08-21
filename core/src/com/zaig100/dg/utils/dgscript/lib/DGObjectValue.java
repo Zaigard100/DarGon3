@@ -4,10 +4,10 @@ import com.zaig100.dg.utils.contain.ObjC;
 import com.zaig100.dg.world.objects.Obj;
 
 public class DGObjectValue implements Value {
-    ObjC object;
+    Obj object;
     Obj.ObjType type;
 
-    public DGObjectValue(ObjC object, Obj.ObjType type){
+    public DGObjectValue(Obj object, Obj.ObjType type){
         this.object = object;
         this.type = type;
     }
@@ -37,7 +37,7 @@ public class DGObjectValue implements Value {
         return Types.OBJ;
     }
 
-    public ObjC getObject() {
+    public Obj getObject() {
         return object;
     }
 

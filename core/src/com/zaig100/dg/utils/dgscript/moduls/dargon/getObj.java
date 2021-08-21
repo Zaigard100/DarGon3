@@ -24,12 +24,12 @@ public class getObj implements Function {
         if (args.length == 1) {
             ArrayValue objVal = new ArrayValue(cond.size());
             for (int i = 0; i < cond.size(); i++) {
-                objVal.set(i, dargon.objInValue(cond.get(i).contain,cond.get(i).type));
+                objVal.set(i, dargon.objInValue(cond.get(i),cond.get(i).type));
             }
             return objVal;
         }
         if (args.length == 2) {
-            return dargon.objInValue(cond.get((int) args[1].asNum()).contain,cond.get((int) args[1].asNum()).getType());
+            return dargon.objInValue(cond.get((int) args[1].asNum()),cond.get((int) args[1].asNum()).getType());
         }
         throw new RuntimeException("Argument count exeption");
     }

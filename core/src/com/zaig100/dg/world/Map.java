@@ -136,9 +136,9 @@ public class Map {
         }
     }
 
-    public void setTablet_text(String[] text) {
+    public void setTablet_text(ArrayList<String> text) {
         if (textShow) return;
-        this.text = text;
+        this.text = (String[]) text.toArray();
         textShow = true;
     }
 

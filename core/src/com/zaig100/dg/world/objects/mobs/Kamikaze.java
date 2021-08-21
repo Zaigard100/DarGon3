@@ -1,3 +1,4 @@
+
 package com.zaig100.dg.world.objects.mobs;
 
 import com.badlogic.gdx.Gdx;
@@ -76,10 +77,11 @@ public class Kamikaze extends Mob {
             if(!isMove()) {
                 MainWay main = new MainWay(x, y, endX, endY, iter);
                 main.init();
-                start = (StartWay) main.shortWay();
-                x = start.getX();
-                y = start.getY();
-
+                if(main.shortWay() instanceof StartWay) {
+                    start = (StartWay) main.shortWay();
+                    x = start.getX();
+                    y = start.getY();
+                }
             }
 
             move(speed);

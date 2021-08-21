@@ -28,7 +28,7 @@ public final class ValueExpression implements Expression {
         this.value = new FunctionVal(value);
     }
 
-    public ValueExpression(ObjC value, Obj.ObjType type) {
+    public ValueExpression(Obj value, Obj.ObjType type) {
         this.value = new DGObjectValue(value,type);
     }
 

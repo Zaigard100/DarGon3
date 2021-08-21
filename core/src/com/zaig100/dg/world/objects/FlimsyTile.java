@@ -117,6 +117,9 @@ public class FlimsyTile extends Obj {
             case "y":
                 y = val.asInt();
                 break;
+            case "stage":
+            case "Stage":
+                crashed_lvl = 3 - val.asInt();
         }
     }
 
@@ -129,6 +132,9 @@ public class FlimsyTile extends Obj {
             case "Y":
             case "y":
                 return new NumberVal(y);
+            case "stage":
+            case "Stage":
+                return  new NumberVal(3-crashed_lvl);
         }
         return null;
     }

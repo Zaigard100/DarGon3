@@ -12,15 +12,19 @@ import com.zaig100.dg.utils.dgscript.lib.NumberVal;
 import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.world.World;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Tablet extends Obj {
 
-    String[] text;
+    ArrayList<String> text;
 
 
     public Tablet(TabletC contain){
         super(contain.getX(),contain.getY(), contain.getTag());
         type = ObjType.TABLET;
-        text = contain.getText();
+        Collections.addAll(text, contain.getText());
         this.contain = contain;
     }
 
@@ -29,7 +33,7 @@ public class Tablet extends Obj {
         y = contain.getY();
         tag = contain.getTag();
         type = ObjType.TABLET;
-        text = contain.getText();
+        Collections.addAll(text, contain.getText());
         this.contain = contain;
     }
 
@@ -78,6 +82,12 @@ public class Tablet extends Obj {
             case "y":
                 y = val.asInt();
                 break;
+            case "add":
+            case "Add":
+                text.add(val.asString());
+            case "remove":
+            case "Remove":
+                text.remove(val.asInt());
         }
     }
 

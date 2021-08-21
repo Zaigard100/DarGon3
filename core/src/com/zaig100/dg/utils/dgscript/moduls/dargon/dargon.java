@@ -14,7 +14,7 @@ public class dargon implements Module {
         Functions.set("setValueInObj", new setValueInObj());
     }
 
-    static DGObjectValue objInValue(ObjC obj, Obj.ObjType type) {
+    static DGObjectValue objInValue(Obj obj, Obj.ObjType type) {
        return new DGObjectValue(obj,type);
     }
 
