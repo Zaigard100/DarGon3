@@ -1,0 +1,7 @@
+DarGon3.6.1:https://github.com/Zaigard100/DarGon3/releases/download/3.6.1/DarGon3.6.1.jar
+DarGon3.6.2:https://github.com/Zaigard100/DarGon3/releases/download/3.6.2/DarGon3.6.2.jar
+DarGon3.6.3:https://github.com/Zaigard100/DarGon3/releases/download/3.6.3/DarGon3.6.3.jar
+DarGon3.7:https://github.com/Zaigard100/DarGon3/releases/download/3.7/DarGon3.7.jar
+DarGon3.7.1:https://github.com/Zaigard100/DarGon3/releases/download/3.7.1/DarGon3.7.1.jar.zip
+DarGon3.7.2: https://github.com/Zaigard100/DarGon3/releases/download/3.7.2/DarGon3.7.2.jar
+DarGon3.7.2.1:https://github.com/Zaigard100/DarGon3/releases/download/3.7.2.1/DarGon3.7.2.1.jar
