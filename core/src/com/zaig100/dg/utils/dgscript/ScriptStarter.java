@@ -14,13 +14,14 @@ import java.util.List;
 
 public class ScriptStarter {
     public static LevelModScreen ps;
-    static Thread threads;
-    static Statement program;
-    static List<Token> tokens;
-    public static boolean isSetObj = false;
-    static ArrayList<Obj> objects;
+    Thread threads;
+    Statement program;
+    List<Token> tokens;
+    public boolean isSetObj = false;
+     ArrayList<Obj> objects;
 
-    public static void load(String code, LevelModScreen ps) {
+
+    public  void load(String code, LevelModScreen ps) {
 
         Functions.clear();
         Variables.clear();
@@ -44,20 +45,20 @@ public class ScriptStarter {
         };
     }
 
-    public static void start() {
+    public  void start() {
         threads.start();
     }
 
-    public static void setObj(Obj object) {
+    public  void setObj(Obj object) {
         objects.add(object);
         isSetObj = true;
     }
 
-    public static ArrayList<Obj> setObjs() {
+    public ArrayList<Obj> setObjs() {
         return objects;
     }
 
-    public static void clear() {
+    public  void clear() {
         isSetObj = true;
         objects.clear();
     }

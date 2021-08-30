@@ -23,6 +23,7 @@ import com.zaig100.dg.utils.LevelRead;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.Save;
 import com.zaig100.dg.utils.ShaderManager;
+import com.zaig100.dg.utils.dgscript.ScriptStarter;
 import com.zaig100.dg.world.Map;
 import com.zaig100.dg.world.World;
 
@@ -56,6 +57,8 @@ public class LevelModScreen implements Screen {
 
     private boolean fir1 = true;
 
+    //TODO Script test;
+    //ScriptStarter script = new ScriptStarter();
 
     private Viewport viewport;
 
@@ -105,6 +108,15 @@ public class LevelModScreen implements Screen {
         World.setMap(new Map(lR.getWight(), lR.getHeight(), lR.getMap(), true));
         World.map.object_load(lR);
         cam.position.set(new Vector3(width / 2, height / 2, 0));
+
+        /*TODO Script test;
+
+        script.load(
+                "use dargon\n" +
+                        "",
+                this
+        );
+        */
 
         try {
             if (isPack) {

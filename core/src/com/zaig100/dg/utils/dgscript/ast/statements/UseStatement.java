@@ -2,6 +2,7 @@ package com.zaig100.dg.utils.dgscript.ast.statements;
 
 import com.zaig100.dg.utils.dgscript.ast.Statement;
 import com.zaig100.dg.utils.dgscript.moduls.Module;
+import com.zaig100.dg.utils.dgscript.moduls.dargon.dargon;
 import com.zaig100.dg.utils.dgscript.moduls.math.math;
 import com.zaig100.dg.utils.dgscript.moduls.std.std;
 import com.zaig100.dg.utils.dgscript.moduls.system.system;
@@ -23,6 +24,8 @@ public class UseStatement implements Statement {
 
     public Module moduleInit(String name) {
         switch (name) {
+            case "dargon":
+                return new dargon();
             case "std":
                 return new std();
             case "math":
