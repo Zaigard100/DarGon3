@@ -14,6 +14,7 @@ public abstract class Obj {
         ARROW,
         BUTTON,
         CROSSBOW,
+        CROSSBOW_AI,
         FLAMETHROWER,
         FLIMSY_TILE,
         HIDE_TRAP,
