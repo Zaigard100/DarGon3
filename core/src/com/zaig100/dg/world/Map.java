@@ -49,7 +49,7 @@ public class Map {
 
     private int idNum = 0;
 
-    String[] text;
+    ArrayList<String> text;
     boolean textShow;
 
     private Iterator iter;
@@ -127,8 +127,8 @@ public class Map {
 
     public void show_tablet_text(Batch batch) {
         if (textShow) {
-            for (int i = 0; i < text.length; i++) {
-                Res.getFont(3).draw(batch, text[i], 8 * Configuration.getScale(), Gdx.graphics.getHeight() / 2 + 4 * Configuration.getScale() * (text.length / 2 - i));
+            for (int i = 0; i < text.size(); i++) {
+                Res.getFont(3).draw(batch, text.get(i), 8 * Configuration.getScale(), Gdx.graphics.getHeight() / 2 + 4 * Configuration.getScale() * (text.size() / 2 - i));
             }
             if (World.player.walked) {
                 textShow = false;
@@ -138,7 +138,7 @@ public class Map {
 
     public void setTablet_text(ArrayList<String> text) {
         if (textShow) return;
-        this.text = (String[]) text.toArray();
+        this.text = text;
         textShow = true;
     }
 

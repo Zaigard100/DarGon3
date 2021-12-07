@@ -8,6 +8,7 @@ import com.zaig100.dg.utils.Configuration;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
@@ -28,13 +29,15 @@ public class DesktopLauncher {
 
 	};
 	static final String[] icon = new String[]{"texture/icon.png","texture/amonghero.png","texture/firedhero.png","texture/shotedhero.png"};
-	public static void main (String[] args) throws IOException {
+	public static void main (String[] args) throws IOException, InterruptedException {
+
+		System.out.println("DarGon start");
+
 		GregorianCalendar calendar = new GregorianCalendar();
 		Random r = new Random();
 		Main m = new Main(false);
 
 		Configuration.load(m);
-
 
 		String title = "DarGon: " + spl[r.nextInt(spl.length)];
 
@@ -88,8 +91,8 @@ public class DesktopLauncher {
 		if(config.width<(int) (7 *16*Configuration.getScale())){
 			config.width = (int) (7 *16*Configuration.getScale());
 		}
-		if(config.height<(int) (5 *16*Configuration.getScale())){
-			config.height = (int) (5 *16*Configuration.getScale());
+		if(config.height<(int) (5 *16*Configuration.getScale())) {
+			config.height = (int) (5 * 16 * Configuration.getScale());
 		}
 		new LwjglApplication(m, config);
 	}

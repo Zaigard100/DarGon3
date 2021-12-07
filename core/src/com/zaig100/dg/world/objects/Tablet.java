@@ -14,11 +14,12 @@ import com.zaig100.dg.world.World;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 public class Tablet extends Obj {
 
-    ArrayList<String> text;
+    ArrayList<String> text = new ArrayList<>();
 
 
     public Tablet(TabletC contain){
@@ -33,7 +34,7 @@ public class Tablet extends Obj {
         y = contain.getY();
         tag = contain.getTag();
         type = ObjType.TABLET;
-        Collections.addAll(text, contain.getText());
+        text.addAll(Arrays.asList(contain.getText()));
         this.contain = contain;
     }
 

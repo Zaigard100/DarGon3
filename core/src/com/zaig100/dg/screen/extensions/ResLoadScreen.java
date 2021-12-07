@@ -53,9 +53,9 @@ public class ResLoadScreen implements Screen {
         load_layout = new GlyphLayout();
         press_layout = new GlyphLayout();
         this.zaigard[0] = new Texture("zaigard/0.jpg");
-        this.zaigard[1] = new Texture("zaigard/1.jpeg");
-        this.zaigard[3] = new Texture("zaigard/2.jpeg");
-        this.zaigard[4] = new Texture("zaigard/3.jpeg");
+        this.zaigard[1] = new Texture("zaigard/1.jpg");
+        this.zaigard[3] = new Texture("zaigard/2.jpg");
+        this.zaigard[4] = new Texture("zaigard/3.jpg");
         this.zaigard[5] = new Texture("zaigard/4.jpg");
         this.zaigard[6] = new Texture("zaigard/5.jpg");
         this.zaigard[7] = new Texture("zaigard/6.jpg");
