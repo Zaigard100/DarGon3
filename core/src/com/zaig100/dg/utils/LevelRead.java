@@ -6,6 +6,7 @@ import com.zaig100.dg.screen.MenuScreen;
 import com.zaig100.dg.screen.game.LevelModScreen;
 import com.zaig100.dg.utils.contain.ButtonС;
 import com.zaig100.dg.utils.contain.ChestC;
+import com.zaig100.dg.utils.contain.CrossbowAIC;
 import com.zaig100.dg.utils.contain.CrossbowC;
 import com.zaig100.dg.utils.contain.DoorC;
 import com.zaig100.dg.utils.contain.FlamefrowerC;
@@ -62,6 +63,7 @@ public class LevelRead {
     ArrayList<ShopC> shop = new ArrayList<>();
     ArrayList<ZonaC> zona = new ArrayList<>();
     ArrayList<KamikadzeC> kamikaze = new ArrayList<>();
+    ArrayList<CrossbowAIC> crosbow_ai = new ArrayList<>();
 
     public LevelRead(String path, boolean isPack) {
         if (isPack) {
@@ -108,6 +110,7 @@ public class LevelRead {
         shop_read();
         zona_read();
         kamikaze_read();
+        crosbow_ai_read();
 
         if (jsonObject.get("ReMap") != null) {
             if ((Boolean) jsonObject.get("ReMap")) {
@@ -120,6 +123,31 @@ public class LevelRead {
             isSave = false;
         }
     }
+    private void crosbow_ai_read(){
+        if (jsonObject.get("CrosbowAI") != null) {
+            i = 0;
+            jsonArray = (JSONArray) jsonObject.get("CrosbowAI");
+            iter = jsonArray.iterator();
+            while (iter.hasNext()) {
+                try {
+                    JO = (JSONObject) iter.next();
+                    if ((String) JO.get("Tag") != null) {
+                        crosbow_ai.add(new com.zaig100.dg.utils.contain.CrossbowAIC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("DX")).intValue(), ((Long) JO.get("DY")).intValue(), ((Long) JO.get("Angle")).intValue(), (String) JO.get("Tag"),((Long) JO.get("Distance")).intValue(),(Boolean) JO.get("Diagonal")));
+                    } else {
+                        crosbow_ai.add(new com.zaig100.dg.utils.contain.CrossbowAIC(((Long) JO.get("X")).intValue(), ((Long) JO.get("Y")).intValue(), ((Long) JO.get("DX")).intValue(), ((Long) JO.get("DY")).intValue(), ((Long) JO.get("Angle")).intValue(), "Cb" + i,((Long) JO.get("Distance")).intValue(),(Boolean) JO.get("Diagonal")));
+                    }
+                    if (JO.get("Tick") != null)
+                        crosbow_ai.get(crosbow_ai.size() - 1).setTick_sec((double) ((Long) JO.get("Tick")));
+                    i++;
+
+                } catch (NullPointerException npe) {
+                    System.out.println("CrossbowAI invalid in array " + i + " in map " + levelname);
+                    LevelModScreen.m.setScreen(new MenuScreen(LevelModScreen.m));
+                }
+            }
+        }
+    }
+
 
     private void kamikaze_read(){
         if (jsonObject.get("Kamikaze") != null) {
@@ -691,6 +719,9 @@ public class LevelRead {
 
     public ArrayList<CrossbowC> getCrosbow() {
         return crosbow;
+    }
+    public ArrayList<CrossbowAIC> getCrosbowAI() {
+        return crosbow_ai;
     }
 
     public ArrayList<SpinneyC> getSpinney() {

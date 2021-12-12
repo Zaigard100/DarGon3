@@ -18,50 +18,73 @@ public class CrosbowAI extends Crossbow{
 
     @Override
     public void frame() {
+        if( Math.sqrt( (x - World.player.getX())*(x - World.player.getX()) + (y - World.player.getY())*(y - World.player.getY()))<=distance){
         super.frame();
 
         if(World.player.getX() == x){
             if(y>World.player.getY()){
-                dy = 1;
+                dy = -1;
+                dx = 0;
+                angle = 90;
             }
             if(y<World.player.getY()){
-                dy = -1;
+                dy = 1;
+                dx = 0;
+                angle = 270;
             }
+            return;
         }
 
         if(World.player.getY() == y){
-            if(y>World.player.getX()){
-                dy = -1;
+            if(x>World.player.getX()){
+                dx = -1;
+               dy = 0;
+                angle = 0;
             }
-            if(y<World.player.getX()){
-                dy = 1;
+            if(x<World.player.getX()){
+                dx = 1;
+                dy = 0;
+                angle = 180;
             }
+            return;
         }
 
-        if(diagonal){
+        if(diagonal) {
+            try {
+                if (Math.abs((x - World.player.getX()) / (y - World.player.getY())) == 1) {
 
-            if(x-y == World.player.getX()-World.player.getY()){
-                if(y<World.player.getY()) {
-                    dy = -1;
-                    dx = 1;
+                    if (y > World.player.getY()) {
+                        dy = -1;
+
+                    } else if (y < World.player.getY()) {
+                        dy = 1;
+                    }
+
+                    if (x > World.player.getX()) {
+                        dx = -1;
+                    } else if (x < World.player.getX()) {
+                        dx = 1;
+                    }
+
+                    if (dy == 1) {
+                        if (dx == 1) {
+                            angle = 180 + 45;
+                        } else if (dx == -1) {
+                            angle = 270 + 45;
+                        }
+                    } else if (dy == -1) {
+                        if (dx == 1) {
+                            angle = 90 + 45;
+                        } else if (dx == -1) {
+                            angle = 45;
+                        }
+                    }
+
                 }
-                if(y<World.player.getY()) {
-                    dy = 1;
-                    dx = -1;
-                }
+            } catch (ArithmeticException e) {
+                e.printStackTrace();
             }
-
-            if(-x-y == -World.player.getX()-World.player.getY()){
-                if(y<World.player.getY()) {
-                    dy = 1;
-                    dx = 1;
-                }
-                if(y<World.player.getY()) {
-                    dy = -1;
-                    dx = -1;
-                }
-            }
-
+        }
         }
     }
 }

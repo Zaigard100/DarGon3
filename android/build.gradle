@@ -92,8 +92,7 @@ task run(type: Exec) {
 }
 
 dependencies {
-    implementation "com.googlecode.json-simple:json-simple:${jsonSimpleVersion}"
-    implementation 'com.badlogicgames.gdx:gdx-tools:1.9.14'
+    implementation 'com.badlogicgames.gdx:gdx-tools:1.10.0'
 }
 
 

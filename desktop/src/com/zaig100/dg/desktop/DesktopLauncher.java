@@ -48,7 +48,7 @@ public class DesktopLauncher {
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 
-		config.vSyncEnabled = false;
+		config.vSyncEnabled = true;
 		config.foregroundFPS = 10000;
 		config.title = title;
 		config.width = (int) (7 *16*Configuration.getScale());

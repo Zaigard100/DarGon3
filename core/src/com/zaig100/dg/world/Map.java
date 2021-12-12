@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.zaig100.dg.utils.contain.CrossbowAIC;
 import com.zaig100.dg.world.elements.items.Item;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.LevelRead;
@@ -26,6 +27,7 @@ import com.zaig100.dg.utils.contain.ZonaC;
 import com.zaig100.dg.utils.contain.mobC.KamikadzeC;
 import com.zaig100.dg.world.objects.Button;
 import com.zaig100.dg.world.objects.Chest;
+import com.zaig100.dg.world.objects.CrosbowAI;
 import com.zaig100.dg.world.objects.Crossbow;
 import com.zaig100.dg.world.objects.Door;
 import com.zaig100.dg.world.objects.Flamefrower;
@@ -233,6 +235,13 @@ public class Map {
         while (iter.hasNext()) {
             CrossbowC crossbowC = (CrossbowC) iter.next();
             objectsO.add(new Crossbow(crossbowC));
+            objectsO.get(objectsO.size() - 1).setObjID(idNum);
+            idNum++;
+        }
+        iter = lR.getCrosbowAI().iterator();
+        while (iter.hasNext()) {
+            CrossbowAIC crossbowAIC = (CrossbowAIC) iter.next();
+            objectsO.add(new CrosbowAI(crossbowAIC));
             objectsO.get(objectsO.size() - 1).setObjID(idNum);
             idNum++;
         }

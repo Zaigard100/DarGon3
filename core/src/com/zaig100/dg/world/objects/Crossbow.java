@@ -192,8 +192,4 @@ public class Crossbow extends Obj {
                 break;
         }
     }
-
-    public void setTick_sec(float tick_sec) {
-        this.tick_sec = tick_sec;
-    }
 }

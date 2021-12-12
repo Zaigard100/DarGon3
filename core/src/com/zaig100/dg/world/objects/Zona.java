@@ -207,7 +207,9 @@ public class Zona extends Obj {
 
                 switch (zonaType) {
                     case HP_PIUS:
-                        World.player.hp += 1;
+                        if(World.player.getX()<4) {
+                            World.player.hp += 1;
+                        }
                         break;
                     case HP_MINUS:
                         World.player.setDamgeScr(0f,1);
