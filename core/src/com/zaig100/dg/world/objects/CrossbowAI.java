@@ -4,12 +4,12 @@ import com.zaig100.dg.utils.contain.CrossbowAIC;
 import com.zaig100.dg.utils.contain.CrossbowC;
 import com.zaig100.dg.world.World;
 
-public class CrosbowAI extends Crossbow{
+public class CrossbowAI extends Crossbow{
 
     int distance;
     boolean diagonal;
 
-    public CrosbowAI(CrossbowAIC contain) {
+    public CrossbowAI(CrossbowAIC contain) {
         super(contain);
         type = ObjType.CROSSBOW_AI;
         this.distance = contain.getDistanse();

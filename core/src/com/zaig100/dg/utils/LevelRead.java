@@ -124,9 +124,9 @@ public class LevelRead {
         }
     }
     private void crosbow_ai_read(){
-        if (jsonObject.get("CrosbowAI") != null) {
+        if (jsonObject.get("CrossbowAI") != null) {
             i = 0;
-            jsonArray = (JSONArray) jsonObject.get("CrosbowAI");
+            jsonArray = (JSONArray) jsonObject.get("CrossbowAI");
             iter = jsonArray.iterator();
             while (iter.hasNext()) {
                 try {
