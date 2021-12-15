@@ -77,8 +77,8 @@
       "X": 4,
       "Y": 0,
       "FlipX": false,
-      "NextClose": "levels/26.json",
-      "End": true
+      "Next": "levels/26.json",
+      "End": false
     }
   ]
 }

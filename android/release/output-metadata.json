@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "artifactType": {
     "type": "APK",
     "kind": "Directory"
@@ -10,9 +10,11 @@
     {
       "type": "SINGLE",
       "filters": [],
+      "attributes": [],
       "versionCode": 1,
-      "versionName": "3.8beta1",
+      "versionName": "3.8",
       "outputFile": "android-release.apk"
     }
-  ]
+  ],
+  "elementType": "File"
 }

@@ -359,9 +359,9 @@
     {
       "X": 0,
       "Y": 5,
-      "NextClosed": "levels/26.json",
+      "Next": "levels/26.json",
       "FlipX": false,
-      "End": true
+      "End": false
     },
     {
       "X": 0,
