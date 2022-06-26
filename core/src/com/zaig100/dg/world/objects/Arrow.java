@@ -123,7 +123,7 @@ public class Arrow extends Obj {
             move();
         } else {
             x += dx;
-            y += dy;
+            y -= dy;
             timer = 0;
             far++;
         }

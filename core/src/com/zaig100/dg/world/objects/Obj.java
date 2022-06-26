@@ -64,39 +64,39 @@ public abstract class Obj {
     }
 
     public void move(float speed) {
-        frameStepDist += Configuration.getScale() * Gdx.graphics.getDeltaTime() * 60* speed;
-        if(frameStepDist>1) {
+        frameStepDist += Configuration.getScale() * Gdx.graphics.getDeltaTime() * 60 * speed;
+        if(frameStepDist>=1) {
             if (wX != (x + 3) * 16 * (int) Configuration.getScale()) {
                 if (wX > (x + 3) * 16 * (int) Configuration.getScale()) {
                     if ((wX - frameStepDist) > (x+3) * 16 * Configuration.getScale()) {
-                        wX = (int) (wX - frameStepDist);
+                        wX = wX - (int)frameStepDist;
                     }else{
-                        wX = (x + 3) * 16 * (int) Configuration.getScale();
+                        wX = (int)((x + 3) * 16 *  Configuration.getScale());
                     }
+
                 }
                 if (wX < (x + 3) * 16 * (int) Configuration.getScale()) {
                     if ((wX + frameStepDist) < (x+3) * 16 * Configuration.getScale()) {
-                        wX = (int) (wX + frameStepDist);
+                        wX = wX + (int)frameStepDist;
                     }else {
-                        wX = (x + 3) * 16 * (int) Configuration.getScale();
+                        wX = (int)((x + 3) * 16 *  Configuration.getScale());
                     }
                 }
-
             }
 
             if (wY != (y + 2) * 16 * (int) Configuration.getScale()) {
                 if (wY > (y + 2) * 16 * (int) Configuration.getScale()) {
-                    if ((wY - frameStepDist) > (y+2) * 16 * Configuration.getScale()) {
-                        wY = (int) (wY - frameStepDist);
+                    if ((int)(wY - frameStepDist) > (y+2) * 16 * Configuration.getScale()) {
+                        wY =  wY - (int)frameStepDist;
                     }else{
-                        wY = (y + 2) * 16 * (int) Configuration.getScale();
+                        wY = (int)((y + 2) * 16 * Configuration.getScale());
                     }
                 }
                 if (wY < (y + 2) * 16 * (int) Configuration.getScale()) {
                     if ((wY + frameStepDist) < (y+2) * 16 * Configuration.getScale()) {
-                        wY = (int) (wY + frameStepDist);
+                        wY = wY + (int)frameStepDist;
                     }else{
-                        wY = (y + 2) * 16 * (int) Configuration.getScale();
+                        wY = (int)((y + 2) * 16 * Configuration.getScale());
                     }
                 }
             }
