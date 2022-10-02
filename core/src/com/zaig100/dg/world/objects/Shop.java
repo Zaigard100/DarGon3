@@ -140,15 +140,16 @@ public class Shop extends Obj {
                 World.player.isShop = false;
                 World.player.isStop = false;
             }
-            pos = 99;
+            pos = 99;//ЧЗХ
         }
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             if (pos >= 0 && pos <= 2) {
                 if (cost[pos] <= World.player.coin_count) {
                     World.player.coin_count -= cost[pos];
-                    World.player.inventory.set(item[pos]);
+                    World.player.inventory.set(Item.jsonToItem(item[pos].toJson()));
                 }
             }
+            item =  ((ShopC)contain).getItems();
         }
 
     }
@@ -176,8 +177,9 @@ public class Shop extends Obj {
                 if (lastPos == pos) {
                     if (cost[pos] <= World.player.coin_count) {
                         World.player.coin_count -= cost[pos];
-                        World.player.inventory.set(item[pos]);
+                        World.player.inventory.set(Item.jsonToItem(item[pos].toJson()));
                     }
+                    item =  ((ShopC)contain).getItems();
                 } else {
                     pos = lastPos;
                 }

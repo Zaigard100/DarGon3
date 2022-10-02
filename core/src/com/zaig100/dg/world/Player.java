@@ -79,12 +79,30 @@ public class Player {
 
     public void render(SpriteBatch batch) {
         if (getHp() > 0) {
-            batch.draw(Res.hero(flip, walked_anim, stage), 16 * Configuration.getScale() * 3, 16 * Configuration.getScale() * 2, 16 * Configuration.getScale(), 16 * Configuration.getScale());
+            batch.draw(
+                    Res.hero(flip, walked_anim, stage),
+                    16 * Configuration.getScale() * 3,
+                    16 * Configuration.getScale() * 2,
+                    16 * Configuration.getScale(),
+                    16 * Configuration.getScale()
+            );
             if (isSheld) {
                 if (flip) {
-                    batch.draw(Res.sheld, 16 * Configuration.getScale() * 3.25f, 16 * Configuration.getScale() * 2, 16 * Configuration.getScale() * 0.75f, 16 * Configuration.getScale() * 0.75f);
+                    batch.draw(
+                            Res.sheld,
+                            16 * Configuration.getScale() * 3.25f,
+                            16 * Configuration.getScale() * 2,
+                            16 * Configuration.getScale() * 0.75f,
+                            16 * Configuration.getScale() * 0.75f
+                    );
                 } else {
-                    batch.draw(Res.sheld, 16 * Configuration.getScale() * 3, 16 * Configuration.getScale() * 2, 16 * Configuration.getScale() * 0.75f, 16 * Configuration.getScale() * 0.75f);
+                    batch.draw(
+                            Res.sheld,
+                            16 * Configuration.getScale() * 3,
+                            16 * Configuration.getScale() * 2,
+                            16 * Configuration.getScale() * 0.75f,
+                            16 * Configuration.getScale() * 0.75f
+                    );
                 }
             }
         } else {
@@ -92,24 +110,56 @@ public class Player {
             //wasted_id == -1: Texture = null!!
 
             if (wasted_id == 0) {
-                batch.draw(Res.hero(flip, walked_anim, stage), 16 * Configuration.getScale() * 3, 16 * Configuration.getScale() * 2, 16 * Configuration.getScale(), 16 * Configuration.getScale());
+                batch.draw(
+                        Res.hero(flip, walked_anim, stage),
+                        16 * Configuration.getScale() * 3,
+                        16 * Configuration.getScale() * 2,
+                        16 * Configuration.getScale(),
+                        16 * Configuration.getScale()
+                );
             }
             if (wasted_id == 1) {
-                batch.draw(Res.amonghero, 16 * Configuration.getScale() * 3, 16 * Configuration.getScale() * 2, 16 * Configuration.getScale(), 16 * Configuration.getScale());
+                batch.draw(
+                        Res.amonghero,
+                        16 * Configuration.getScale() * 3,
+                        16 * Configuration.getScale() * 2,
+                        16 * Configuration.getScale(),
+                        16 * Configuration.getScale());
             }
             if (wasted_id == 2) {
-                batch.draw(Res.firedhero, 16 * Configuration.getScale() * 3, 16 * Configuration.getScale() * 2, 16 * Configuration.getScale(), 16 * Configuration.getScale());
+                batch.draw(
+                        Res.firedhero,
+                        16 * Configuration.getScale() * 3,
+                        16 * Configuration.getScale() * 2,
+                        16 * Configuration.getScale(),
+                        16 * Configuration.getScale());
             }
             if (wasted_id == 3) {
-                batch.draw(Res.shotedhero, 16 * Configuration.getScale() * 3, 16 * Configuration.getScale() * 2, 16 * Configuration.getScale(), 16 * Configuration.getScale());
+                batch.draw(
+                        Res.shotedhero,
+                        16 * Configuration.getScale() * 3,
+                        16 * Configuration.getScale() * 2,
+                        16 * Configuration.getScale(),
+                        16 * Configuration.getScale());
             }
             if (wasted_id == 4) {
-                batch.draw(Res.spikedhero, 16 * Configuration.getScale() * 3, 16 * Configuration.getScale() * 2, 16 * Configuration.getScale(), 16 * Configuration.getScale());
+                batch.draw(
+                        Res.spikedhero,
+                        16 * Configuration.getScale() * 3,
+                        16 * Configuration.getScale() * 2,
+                        16 * Configuration.getScale(),
+                        16 * Configuration.getScale());
             }
 
         }
         if (damgeScr < 0.5f) {
-            batch.draw(Res.damage, 0, 0, 112 * Configuration.getScale(), 80 * Configuration.getScale());
+            batch.draw(
+                    Res.damage,
+                    0,
+                    0,
+                    112 * Configuration.getScale(),
+                    80 * Configuration.getScale()
+            );
             damgeScr = damgeScr + Gdx.graphics.getDeltaTime();
         }
 
@@ -117,11 +167,22 @@ public class Player {
 
 
     public void render_menu(SpriteBatch batch, BitmapFont font) {
-        batch.draw(Res.menu, 6 * 16 * Configuration.getScale() + 2 * Configuration.getScale(), 4 * 16 * Configuration.getScale() + 2 * Configuration.getScale(), 12 * Configuration.getScale(), 12 * Configuration.getScale());
+        batch.draw(
+                Res.menu,
+                6 * 16 * Configuration.getScale() + 2 * Configuration.getScale(),
+                4 * 16 * Configuration.getScale() + 2 * Configuration.getScale(),
+                12 * Configuration.getScale(),
+                12 * Configuration.getScale()
+        );
         if (menu_opened) {
             menu_use();
             if (hp > 0) {
-                batch.draw(Res.HP(hp), 6 * 16 * Configuration.getScale(), 3 * 16 * Configuration.getScale(), 16 * Configuration.getScale(), 16 * Configuration.getScale());
+                batch.draw(
+                        Res.HP(hp),
+                        6 * 16 * Configuration.getScale(),
+                        3 * 16 * Configuration.getScale(),
+                        16 * Configuration.getScale(),
+                        16 * Configuration.getScale());
             }
 
             batch.draw(

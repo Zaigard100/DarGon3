@@ -1,5 +1,6 @@
 package com.zaig100.dg.world.objects;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.zaig100.dg.utils.Configuration;
@@ -19,7 +20,7 @@ public class Crossbow extends Obj {
     float timer = 0;
 
 
-    public Crossbow(CrossbowC contain){
+    public Crossbow(CrossbowC contain) {
         super(contain.getX(), contain.getY(), contain.getTag());
         type = ObjType.CROSSBOW;
         dx =contain.getDx();
@@ -192,4 +193,6 @@ public class Crossbow extends Obj {
                 break;
         }
     }
+
+
 }

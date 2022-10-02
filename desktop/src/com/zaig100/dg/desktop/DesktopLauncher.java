@@ -24,8 +24,8 @@ public class DesktopLauncher {
 			"V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V^V","Welcome to the dungeon DarGon",
 			"Another splash","Very Well!!!!","And you are subscribed to groups?","They are already here...",
 			"Globglabgala","System.out.println('Hello World!!');","frame = new Sprite(fram.getColorBufferTexture());",
-			"Remember 0.1beta1","Pay attention to 1 and 14","Also try Portallers 2D","Validol","Now only on PC","Open the chest"
-			,"Give money for food","Perhaps the original","Braid in 4K","Last"
+			"Remember 0.1beta1","Pay attention to 1 and 14","Also try Portallers 2D","XlebMedovi","Yes..","Open the chest"
+			,"Give money for food","Perhaps the original","Braid in 4K","Bonsai Garden","Last"
 
 	};
 	static final String[] icon = new String[]{"texture/icon.png","texture/amonghero.png","texture/firedhero.png","texture/shotedhero.png"};
@@ -56,9 +56,16 @@ public class DesktopLauncher {
 		config.resizable = false;
 		config.addIcon(icon[r.nextInt(icon.length)], Files.FileType.Internal);
 
+		if(config.width<(int) (7 *16*Configuration.getScale())){
+			config.width = (int) (7 *16*Configuration.getScale());
+		}
+		if(config.height<(int) (5 *16*Configuration.getScale())) {
+			config.height = (int) (5 * 16 * Configuration.getScale());
+		}
+
 		for(int i = 0; i < args.length;i++){
 			switch (args[i]){
-				case "-resolution": // -resolution 896 640
+				case "-r": // -r 896 640
 					try {
 						config.width = Integer.parseInt(args[i + 1]);
 						config.height = Integer.parseInt(args[i + 2]);
@@ -66,7 +73,7 @@ public class DesktopLauncher {
 						System.out.println("Invalid \"-resolution\" argument");
 					}
 					break;
-				case "-fullscreen": // -fullscreen true
+				case "-fs": // -fs true
 					try{
 					config.fullscreen = Boolean.parseBoolean(args[i+1]);
 					}catch (Exception e){
@@ -88,12 +95,7 @@ public class DesktopLauncher {
 					break;
 			}
 		}
-		if(config.width<(int) (7 *16*Configuration.getScale())){
-			config.width = (int) (7 *16*Configuration.getScale());
-		}
-		if(config.height<(int) (5 *16*Configuration.getScale())) {
-			config.height = (int) (5 * 16 * Configuration.getScale());
-		}
+
 		new LwjglApplication(m, config);
 	}
 }

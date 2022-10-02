@@ -35,6 +35,7 @@ public class Items extends Obj {
         this.item = item;
     }
 
+
     public void load(ItemC contain){
         x = contain.getX();
         y = contain.getY();

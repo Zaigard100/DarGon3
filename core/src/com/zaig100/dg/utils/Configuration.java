@@ -74,7 +74,7 @@ public class Configuration {
 
     static public void save(File f) {
 
-        System.out.println(conf.getAbsolutePath());
+        //System.out.println(conf.getAbsolutePath());
 
         jsonObject.put("Scale", Scale);
         jsonObject.put("Music", Music);
