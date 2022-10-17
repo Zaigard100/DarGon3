@@ -288,7 +288,7 @@ public class Setting implements Screen {
             Res.cleanFont();
             dispose();
             m.setScreen(new MenuScreen(m));
-            //Gdx.app.exit();
+
         }
 
     }

@@ -382,13 +382,11 @@ public class LevelModScreen implements Screen {
         }
 
     }
-
+    int sy;
     private void sensor_pause() {
         if (Gdx.input.justTouched()) {
-            System.out.print(Gdx.input.getX());
-            System.out.print(" ");
-            System.out.println(Gdx.input.getY());
-            if ((Gdx.input.getY() > 170/8 * Configuration.getScale()) && (Gdx.input.getY() <= 285/8 * Configuration.getScale())) {
+            sy = (int) ((Gdx.graphics.getHeight() - 16 * 5 * Configuration.getScale()) / 2);
+            if ((Gdx.input.getY()-sy > 170/8 * Configuration.getScale()) && (Gdx.input.getY()-sy <= 285/8 * Configuration.getScale())) {
                 if (menu != 0) {
                     menu = 0;
                 } else {
@@ -397,7 +395,7 @@ public class LevelModScreen implements Screen {
                     World.player.inventarIsOpen = false;
                 }
             }
-            if ((Gdx.input.getY() > 285/8 * Configuration.getScale()) && (Gdx.input.getY() <= 410/8 * Configuration.getScale())) {
+            if ((Gdx.input.getY()-sy > 285/8 * Configuration.getScale()) && (Gdx.input.getY()-sy <= 410/8 * Configuration.getScale())) {
                 if (menu != 1) {
                     menu = 1;
                 } else {
@@ -413,7 +411,7 @@ public class LevelModScreen implements Screen {
                     m.setScreen(new MenuScreen(m));
                 }
             }
-            if ((Gdx.input.getY() > 410/8 * Configuration.getScale()) && (Gdx.input.getY() <= 540/8 * Configuration.getScale())) {
+            if ((Gdx.input.getY()-sy > 410/8 * Configuration.getScale()) && (Gdx.input.getY()-sy <= 540/8 * Configuration.getScale())) {
                 if (menu != 2) {
                     menu = 2;
                 } else {
@@ -439,7 +437,7 @@ public class LevelModScreen implements Screen {
         }
 
         if (Gdx.input.isTouched()) {
-            if ((Gdx.input.getY() > 540/8 * Configuration.getScale())) {
+            if ((Gdx.input.getY()-sy > 540/8 * Configuration.getScale())) {
                 if (menu != 3) {
                     menu = 3;
                 } else {
