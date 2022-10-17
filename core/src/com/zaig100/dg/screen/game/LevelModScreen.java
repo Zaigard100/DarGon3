@@ -1,5 +1,7 @@
 package com.zaig100.dg.screen.game;
 
+import static jdk.nashorn.internal.objects.Global.print;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
@@ -285,7 +287,7 @@ public class LevelModScreen implements Screen {
             Res.getFont(6).draw(batch, " Main menu", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
             Res.getFont(6).draw(batch, " Load save", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
             Res.getFont(6).draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                 World.player.isPause = false;
                 World.player.isStop = false;
                 World.player.inventarIsOpen = false;
@@ -316,7 +318,7 @@ public class LevelModScreen implements Screen {
             Res.getFont(6).draw(batch, " Main menu", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
             Res.getFont(6).draw(batch, ">Load save<", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
             Res.getFont(6).draw(batch, " Exit(Hold)", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
-            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (Joystick.isUse() && Gdx.input.justTouched())) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                 World.player.setHp(save.getHp());
                 World.player.coin_count = Save.getMoney();
                 World.player.inventory.jsonToInventory(save.getArr());
@@ -343,35 +345,33 @@ public class LevelModScreen implements Screen {
             Res.getFont(6).draw(batch, " Main menu", 2.2f * 16 * Configuration.getScale(), 2.5f * 16 * Configuration.getScale());
             Res.getFont(6).draw(batch, " Load save", 2.2f * 16 * Configuration.getScale(), 1.5f * 16 * Configuration.getScale());
             Res.getFont(6).draw(batch, ">Exit(Hold)<", 2.2f * 16 * Configuration.getScale(), 0.5f * 16 * Configuration.getScale());
-            if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || Joystick.isUse()) {
+            if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
                 exit_timer += Gdx.graphics.getDeltaTime();
-                if (exit_timer > 1.0f) {
-                    World.player.isPause = false;
-                    World.player.isStop = false;
-                    World.player.inventarIsOpen = false;
-                    World.player.isShowObj = false;
-                    World.player.isSheld = false;
-                    World.player.isShop = false;
-                    World.player.menu_opened = false;
-                    World.player.inf = false;
-                    World.player.speed = 1;
-                    Gdx.app.exit();
-                }
-            } else {
-                exit_timer = 0;
+
+                World.player.isPause = false;
+                World.player.isStop = false;
+                World.player.inventarIsOpen = false;
+                World.player.isShowObj = false;
+                World.player.isSheld = false;
+                World.player.isShop = false;
+                World.player.menu_opened = false;
+                World.player.inf = false;
+                World.player.speed = 1;
+                Gdx.app.exit();
+
             }
-        }else{
-            exit_timer = 0;
         }
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.W)) {
             menu--;
             Res.click[random.nextInt(2)].play(Configuration.getSound());
         }
-        if (Gdx.input.isKeyJustPressed(Input.Keys.S) || (!Joystick.isUse() && Gdx.input.justTouched())) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
             menu++;
             Res.click[random.nextInt(2)].play(Configuration.getSound());
         }
+
+        sensor_pause();
 
         if (menu >= 4) {
             menu = 0;
@@ -381,6 +381,88 @@ public class LevelModScreen implements Screen {
             menu = 3;
         }
 
+    }
+
+    private void sensor_pause() {
+        if (Gdx.input.justTouched()) {
+            System.out.print(Gdx.input.getX());
+            System.out.print(" ");
+            System.out.println(Gdx.input.getY());
+            if ((Gdx.input.getY() > 170/8 * Configuration.getScale()) && (Gdx.input.getY() <= 285/8 * Configuration.getScale())) {
+                if (menu != 0) {
+                    menu = 0;
+                } else {
+                    World.player.isPause = false;
+                    World.player.isStop = false;
+                    World.player.inventarIsOpen = false;
+                }
+            }
+            if ((Gdx.input.getY() > 285/8 * Configuration.getScale()) && (Gdx.input.getY() <= 410/8 * Configuration.getScale())) {
+                if (menu != 1) {
+                    menu = 1;
+                } else {
+                    World.player.isPause = false;
+                    World.player.isStop = false;
+                    World.player.inventarIsOpen = false;
+                    World.player.isShowObj = false;
+                    World.player.isSheld = false;
+                    World.player.isShop = false;
+                    World.player.menu_opened = false;
+                    World.player.inf = false;
+                    World.player.speed = 1;
+                    m.setScreen(new MenuScreen(m));
+                }
+            }
+            if ((Gdx.input.getY() > 410/8 * Configuration.getScale()) && (Gdx.input.getY() <= 540/8 * Configuration.getScale())) {
+                if (menu != 2) {
+                    menu = 2;
+                } else {
+                    World.player.setHp(save.getHp());
+                    World.player.coin_count = Save.getMoney();
+                    World.player.inventory.jsonToInventory(save.getArr());
+                    World.player.isPause = false;
+                    World.player.isStop = false;
+                    World.player.inventarIsOpen = false;
+                    World.player.isShowObj = false;
+                    World.player.isSheld = false;
+                    World.player.isShop = false;
+                    World.player.menu_opened = false;
+                    World.player.inf = false;
+                    World.player.speed = 1;
+                    dispose();
+                    if (isPack) {
+                        m.setScreen(new LevelModScreen(m, save.getsPath(), isPack, packname, derectory));
+                    } else
+                        m.setScreen(new LevelModScreen(m, save.getsPath(), isPack));
+                }
+            }
+        }
+
+        if (Gdx.input.isTouched()) {
+            if ((Gdx.input.getY() > 540/8 * Configuration.getScale())) {
+                if (menu != 3) {
+                    menu = 3;
+                } else {
+                    exit_timer += Gdx.graphics.getDeltaTime();
+                        if (exit_timer > 1.0f) {
+                            World.player.isPause = false;
+                            World.player.isStop = false;
+                            World.player.inventarIsOpen = false;
+                            World.player.isShowObj = false;
+                            World.player.isSheld = false;
+                            World.player.isShop = false;
+                            World.player.menu_opened = false;
+                            World.player.inf = false;
+                            World.player.speed = 1;
+                            Gdx.app.exit();
+                        }
+                    }
+                }else {
+                    exit_timer = 0;
+                }
+            } else {
+            exit_timer = 0;
+        }
     }
 
     private void render_ui() {

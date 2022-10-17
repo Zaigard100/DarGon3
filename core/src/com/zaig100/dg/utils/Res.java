@@ -328,6 +328,9 @@ public class Res {
         return fonts.get(size);
     }
 
+    static public void cleanFont(){
+        fonts.clear();
+    }
 
     static public void dispose() {
         for (Map.Entry<Integer, BitmapFont> entry : fonts.entrySet()) {

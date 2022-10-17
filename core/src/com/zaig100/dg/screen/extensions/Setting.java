@@ -13,6 +13,7 @@ import com.zaig100.dg.Main;
 import com.zaig100.dg.screen.MenuScreen;
 import com.zaig100.dg.utils.Configuration;
 import com.zaig100.dg.utils.Font;
+import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.ShaderManager;
 
 import java.io.IOException;
@@ -284,6 +285,7 @@ public class Setting implements Screen {
             if (!Gdx.graphics.isFullscreen() && !m.isAndroid()) {
                 Gdx.graphics.setWindowedMode((int) (16 * 7 * Scale), (int) (16 * 5 * Scale));
             }
+            Res.cleanFont();
             dispose();
             m.setScreen(new MenuScreen(m));
             //Gdx.app.exit();
