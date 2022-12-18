@@ -249,12 +249,15 @@ public class LevelModScreen implements Screen {
                     World.player.speed = 1;
                     dispose();
                     if (World.map.stair.get(i).isEnd()) {
+                        World.del();
                         m.setScreen(new MenuScreen(m));
 
                     } else {
+                        World.del();
                         if (isPack) {
                             m.setScreen(new LevelModScreen(m, World.map.stair.get(i).getNext_path(), isPack, packname, derectory));
                         } else {
+
                             m.setScreen(new LevelModScreen(m, World.map.stair.get(i).getNext_path(), isPack));
                         }
                     }
@@ -308,6 +311,7 @@ public class LevelModScreen implements Screen {
                 World.player.menu_opened = false;
                 World.player.inf = false;
                 World.player.speed = 1;
+                World.del();
                 dispose();
                 m.setScreen(new MenuScreen(m));
 
@@ -331,6 +335,7 @@ public class LevelModScreen implements Screen {
                 World.player.menu_opened = false;
                 World.player.inf = false;
                 World.player.speed = 1;
+                World.del();
                 dispose();
                 if (isPack) {
                     m.setScreen(new LevelModScreen(m, save.getsPath(), isPack, packname, derectory));
@@ -357,6 +362,7 @@ public class LevelModScreen implements Screen {
                 World.player.menu_opened = false;
                 World.player.inf = false;
                 World.player.speed = 1;
+                World.del();
                 Gdx.app.exit();
 
             }
@@ -408,6 +414,7 @@ public class LevelModScreen implements Screen {
                     World.player.menu_opened = false;
                     World.player.inf = false;
                     World.player.speed = 1;
+                    World.del();
                     m.setScreen(new MenuScreen(m));
                 }
             }
@@ -427,6 +434,7 @@ public class LevelModScreen implements Screen {
                     World.player.menu_opened = false;
                     World.player.inf = false;
                     World.player.speed = 1;
+                    World.del();
                     dispose();
                     if (isPack) {
                         m.setScreen(new LevelModScreen(m, save.getsPath(), isPack, packname, derectory));
@@ -514,6 +522,7 @@ public class LevelModScreen implements Screen {
             World.player.menu_opened = false;
             World.player.inf = false;
             World.player.speed = 1;
+            World.del();
             dispose();
             m.setScreen(new MenuScreen(m));
 
@@ -553,6 +562,7 @@ public class LevelModScreen implements Screen {
 
     @Override
     public void dispose() {
+
         batch.dispose();
         fbo.dispose();
         fbo2.dispose();

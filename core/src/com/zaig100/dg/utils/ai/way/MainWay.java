@@ -28,6 +28,7 @@ public class MainWay extends Coordinate{
 
                 if (World.map.getTileId(this.x + x, this.y + y) == 11) {
                     startWays.add(new StartWay(this.x + x, this.y + y, endX, endY, iter,this)); // добавление окружащих путей
+                    System.out.println(this.x + x+" "+ this.y + y);
                 }
 
             }

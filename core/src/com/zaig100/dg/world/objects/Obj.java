@@ -7,7 +7,7 @@ import com.zaig100.dg.utils.contain.ObjC;
 import com.zaig100.dg.utils.dgscript.lib.Value;
 import com.zaig100.dg.world.World;
 
-public abstract class Obj {
+public abstract class Obj implements Runnable {
 
     public enum ObjType {
         OBJ,
@@ -138,6 +138,11 @@ public abstract class Obj {
 
     public int getObjID() {
         return objID;
+    }
+
+    @Override
+    public void run() {
+        frame();
     }
 
     public void del() {

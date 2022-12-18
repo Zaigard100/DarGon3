@@ -37,6 +37,7 @@ public class Way extends Coordinate {
 
     @Override
     public void init() {
+
         if(iter>startWay.main.iterShort) {
             if ((x == startWay.getEndX()) && (y == startWay.getEndY())) { // проверка является ли координаты пути целью
 
@@ -59,6 +60,7 @@ public class Way extends Coordinate {
                     if (World.map.getTileId(this.x + x, this.y + y) == 11) {
                         //new Way(this.x + x, this.y + y, iter - 1,this, startWay)  // перебор окружащих путей
                         new Way(this.x + x, this.y + y, iter - 1,this, startWay); // перебор путей с сохранением истории
+
                     }
 
                 }

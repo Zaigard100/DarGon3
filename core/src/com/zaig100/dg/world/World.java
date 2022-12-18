@@ -9,7 +9,9 @@ public class World {
         player = new Player(0,0);
         map =null;
     }
-
+    public static void del(){
+        map.del();
+    }
     public static void setMap(Map map) {
         World.map = map;
     }

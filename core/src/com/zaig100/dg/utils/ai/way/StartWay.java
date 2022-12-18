@@ -19,6 +19,7 @@ public class StartWay extends Coordinate {
 
     @Override
     public void init() {
+
         for(int y = -1; y<=1; y++){
             for(int x = -1; x<=1; x++){
                 if(x==0&&y==0) continue;
@@ -46,5 +47,4 @@ public class StartWay extends Coordinate {
     public void setWayStory(String wayStory) {
         this.wayStory = wayStory;
     }
-
 }

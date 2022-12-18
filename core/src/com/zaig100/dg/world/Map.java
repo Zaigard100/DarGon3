@@ -158,10 +158,12 @@ public class Map {
         if (objectsO.size() > 0) {
             for (i1 = 0; i1 < objectsO.size(); i1++) {
                 objectsO.get(i1).render(batch);
-                if (!World.player.isStop) objectsO.get(i1).frame();
+                    if (!World.player.isStop) {
+                        objectsO.get(i1).frame();
+                    }
+                }
             }
         }
-    }
 
     public void show_obj(SpriteBatch batch) {
         int i1;
@@ -381,9 +383,23 @@ public class Map {
     public int getTileId(int x,int y){
             if((x>=0&&x<mapWidht)&&(y>=0&&y<mapHeight)){
                 return map[x + mapWidht * y];
+
             }else{
                 return 0;
             }
+    }
+
+    public void del(){
+        if (objectsU.size() > 0) {
+            for (i = 0; i < objectsU.size(); i++) {
+                objectsU.get(i).del();
+            }
+        }
+        if (objectsO.size() > 0) {
+            for (i = 0; i < objectsO.size(); i++) {
+                objectsO.get(i).del();
+            }
+        }
     }
 
     public int getObjCount() {
