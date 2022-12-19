@@ -23,12 +23,12 @@ public class CrossbowAI extends Crossbow{
 
         if(World.player.getX() == x){
             if(y>World.player.getY()){
-                dy = -1;
+                dy = 1;
                 dx = 0;
                 angle = 90;
             }
             if(y<World.player.getY()){
-                dy = 1;
+                dy = -1;
                 dx = 0;
                 angle = 270;
             }
@@ -54,10 +54,10 @@ public class CrossbowAI extends Crossbow{
                 if (Math.abs((x - World.player.getX()) / (y - World.player.getY())) == 1) {
 
                     if (y > World.player.getY()) {
-                        dy = -1;
+                        dy = 1;
 
                     } else if (y < World.player.getY()) {
-                        dy = 1;
+                        dy = -1;
                     }
 
                     if (x > World.player.getX()) {
@@ -66,13 +66,13 @@ public class CrossbowAI extends Crossbow{
                         dx = 1;
                     }
 
-                    if (dy == 1) {
+                    if (dy == -1) {
                         if (dx == 1) {
                             angle = 180 + 45;
                         } else if (dx == -1) {
                             angle = 270 + 45;
                         }
-                    } else if (dy == -1) {
+                    } else if (dy == 1) {
                         if (dx == 1) {
                             angle = 90 + 45;
                         } else if (dx == -1) {
