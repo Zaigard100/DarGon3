@@ -90,12 +90,14 @@
       "Active": false
     }
   ],
+
   "Stair": [
     {
       "X": 1,
       "Y": 1,
-      "FlipX": true,
-      "End": true
+      "Next": "levels/27.json",
+      "FlipX": false,
+      "End": false
     }
   ],
   "save": false

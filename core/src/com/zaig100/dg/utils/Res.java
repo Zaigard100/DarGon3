@@ -192,7 +192,7 @@ public class Res {
             settingmisc = Gdx.audio.newMusic(Gdx.files.internal("sounds/settings.mp3"));
 */
             case 10:
-                Res.click[0] = Gdx.audio.newSound(Gdx.files.internal("sounds/click.mp3"));
+                Res.click[0] = Gdx.audio.newSound(Gdx.files.internal("sounds/click1.mp3"));
                 Res.click[1] = Gdx.audio.newSound(Gdx.files.internal("sounds/click1.mp3"));
                 Res.click[2] = Gdx.audio.newSound(Gdx.files.internal("sounds/click2.mp3"));
                 break;

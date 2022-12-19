@@ -1,6 +1,6 @@
 android {
     buildToolsVersion "30.0.3"
-    compileSdkVersion 31
+    compileSdkVersion 32
 
     sourceSets {
         main {
@@ -20,9 +20,9 @@ android {
     defaultConfig {
         applicationId "com.zaig100.dg"
         minSdkVersion 14
-        targetSdkVersion 31
+        targetSdkVersion 32
         versionCode 1
-        versionName '3.8.2'
+        versionName '3.9'
     }
     buildTypes {
         release {

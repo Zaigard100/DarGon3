@@ -215,6 +215,7 @@ public class MenuScreen implements Screen {
         } else {
             batch.draw(Res.play_button, 7 * 16 * 4 / 8 * Configuration.getScale() - 32 * 4 / 8 * Configuration.getScale(), 5 * 16 * 4 / 8 * Configuration.getScale() - 32 * 4 / 8 * Configuration.getScale() - 32 * 3 / 8 * Configuration.getScale(), 32 * 8 / 8 * Configuration.getScale(), 32 * 8 / 8 * Configuration.getScale());//play button
         }
+        /*
         if (b_Tutorial) {
             batch.draw(Res.tutorial_button_toched, 14 * 8 / 8 * Configuration.getScale(), 5 * 16 * 4 / 8 * Configuration.getScale() - 21 * 4 / 8 * Configuration.getScale() - 32 * 3 / 8 * Configuration.getScale(), 21 * 8 / 8 * Configuration.getScale(), 21 * 8 / 8 * Configuration.getScale());
             if (tick < 120) {
@@ -229,7 +230,7 @@ public class MenuScreen implements Screen {
             }
         } else
             batch.draw(Res.tutorial_button, 14 * 8 / 8 * Configuration.getScale(), 5 * 16 * 4 / 8 * Configuration.getScale() - 21 * 4 / 8 * Configuration.getScale() - 32 * 3 / 8 * Configuration.getScale(), 21 * 8 / 8 * Configuration.getScale(), 21 * 8 / 8 * Configuration.getScale());//tutorial
-
+        */
         if (b_Settings) {
             batch.draw(Res.settings_button_toched, 7 * 16 * 8 / 8 * Configuration.getScale() - 21 * 8 / 8 * Configuration.getScale() - 14 * 8 / 8 * Configuration.getScale(), 5 * 16 * 4 / 8 * Configuration.getScale() - 21 * 4 / 8 * Configuration.getScale() - 32 * 3 / 8 * Configuration.getScale(), 21 * 8 / 8 * Configuration.getScale(), 21 * 8 / 8 * Configuration.getScale());
             if (tick < 120) {
@@ -280,6 +281,7 @@ public class MenuScreen implements Screen {
                     }
                 }
             }
+            /*
             if ((mY > 109 / 6 * Configuration.getScale()) && (mY < 239 / 6 * Configuration.getScale())) {
                 if ((mX > 116 / 8 * Configuration.getScale()) && (mX < 276 / 8 * Configuration.getScale())) {
                     tick = 0;
@@ -288,6 +290,8 @@ public class MenuScreen implements Screen {
                     //isPres =true;
                 }
             }
+            */
+
             if ((mY > 75 / 6 * Configuration.getScale()) && (mY < 256 / 6 * Configuration.getScale())) {
                 if ((mX < 576 / 8 * Configuration.getScale() * 1) && (mX > 320 / 8 * Configuration.getScale() * 1)) {
                     tick = 0;
