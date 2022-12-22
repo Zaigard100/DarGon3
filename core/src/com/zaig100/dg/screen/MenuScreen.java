@@ -12,8 +12,13 @@ import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.zaig100.dg.Main;
+import com.zaig100.dg.world.Player;
+import com.zaig100.dg.world.elements.items.EasterEgg;
+import com.zaig100.dg.world.elements.items.Money;
 import com.zaig100.dg.world.elements.items.Poition;
 import com.zaig100.dg.world.elements.items.Sheld;
+import com.zaig100.dg.world.elements.items.SlowdownPoition;
+import com.zaig100.dg.world.elements.items.SpeedPoition;
 import com.zaig100.dg.world.elements.items.Torch;
 import com.zaig100.dg.screen.extensions.Extension;
 import com.zaig100.dg.screen.extensions.Render3D;
@@ -24,6 +29,7 @@ import com.zaig100.dg.utils.LevelRead;
 import com.zaig100.dg.utils.Res;
 import com.zaig100.dg.utils.ShaderManager;
 import com.zaig100.dg.world.World;
+import com.zaig100.dg.world.elements.items.TrapShowPotion;
 
 import java.util.Random;
 
@@ -51,14 +57,16 @@ public class MenuScreen implements Screen {
     int button = 0;
     private int stage;
     private float timer;
+    Player player;
 
     public MenuScreen(Main m) {
         this.m = m;
         batch = new SpriteBatch();
-        lR = new LevelRead("levels/01.json", false);
+        lR = new LevelRead("levels/01.json");
         map = lR.getMap();
         wW = lR.getWight();
         hW = lR.getHeight();
+        player = new Player(0,0);
         width = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();
         fbo = new FrameBuffer(Pixmap.Format.RGB888, width, height, false);
@@ -114,13 +122,13 @@ public class MenuScreen implements Screen {
                     break;
                 case 2:
                     dispose();
-                    World.player.setHp(4);
-                    World.player.inventory.clear();
-                    World.player.inventory.set(new Poition(3));
-                    World.player.inventory.set(new Sheld(2));
-                    World.player.inventory.set(new Torch(1));
-                    World.player.coin_count = 10;
-                    m.setScreen(new LevelModScreen(m, "levels/01.json", false));
+                    player.setHp(4);
+                    player.inventory.clear();
+                    player.inventory.set(new Poition(3));
+                    player.inventory.set(new Sheld(2));
+                    player.inventory.set(new Torch(1));
+                    player.coin_count = 0;
+                    m.setScreen(new LevelModScreen(m, "levels/01.json",player));
                     break;
                 case 3:
                     dispose();
@@ -207,7 +215,14 @@ public class MenuScreen implements Screen {
                 b_Settings = false;
                 isExit = true;
                 button = 2;
-                m.setScreen(new LevelModScreen(m, "levels/01.json", false));
+                player.setHp(4);
+                player.inventory.clear();
+                player.inventory.set(new Poition(3));
+                player.inventory.set(new Sheld(2));
+                player.inventory.set(new Torch(1));
+                player.coin_count = 0;
+                player.wCordNormalize();
+                m.setScreen(new LevelModScreen(m, "levels/01.json",player));
             } else {
                 tick++;
             }
@@ -277,7 +292,38 @@ public class MenuScreen implements Screen {
                         m.setScreen(new Render3D(m));
                     }
                     if ((Configuration.getMusic() == 20) && (Configuration.getSound() == 50)) {
-                        m.setScreen(new LevelModScreen(m, "levels/Test.json", false));
+                        player.setHp(4);
+                        player.inventory.clear();
+                        player.inventory.set(new Poition(99));
+                        player.inventory.set(new Sheld(99));
+                        player.inventory.set(new Torch(99));
+                        player.coin_count = 0;
+                        player.setPosition(2,2);
+                        player.wCordNormalize();
+                        m.setScreen(new LevelModScreen(m, "levels/Test.json",player));
+                    }
+                }
+            }
+            if (mX > 6 * 16 * Configuration.getScale() && mX < 7 * 16 * Configuration.getScale()) {
+                if (mY > 3 * 16 * Configuration.getScale() && mY < 4 * 16 * Configuration.getScale()) {
+
+                    if ((Configuration.getMusic() == 0) && (Configuration.getSound() == 0)) {
+                        player.setHp(4);
+                        player.inventory.clear();
+                        player.inventory.set(new Poition(99));
+                        player.inventory.set(new Sheld(99));
+                        player.inventory.set(new Torch(99));
+                        player.inventory.set(new SlowdownPoition(99,2));
+                        player.inventory.set(new SpeedPoition(99,2));
+                        player.inventory.set(new Money(9999));
+                        player.inventory.set(new TrapShowPotion(99));
+                        player.inventory.set(new EasterEgg("4601025111298"));
+                        player.inventory.set(new EasterEgg("jokkeer_lovushcera"));
+                        player.inventory.set(new EasterEgg("inf"));
+                        player.coin_count = 0;
+                        player.setPosition(0,6);
+                        player.wCordNormalize();
+                        m.setScreen(new LevelModScreen(m, "levels/AllLevels.json",player));
                     }
                 }
             }

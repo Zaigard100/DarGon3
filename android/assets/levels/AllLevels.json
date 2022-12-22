@@ -1,0 +1,251 @@
+{
+  "LevelName": "First",
+  "Spawn": [
+    0,
+    6
+  ],
+  "isDark": true,
+  "map": [
+    [10,10,11,11,10,10,11,11,10,10,11,11,10,10,10],
+    [10,11,11,10,10,11,11,10,10,11,11,10,10,10,10],
+    [10,10,11,11,10,10,11,11,10,10,11,11,10,10,10],
+    [10,11,11,10,10,11,11,10,10,11,11,10,10,10,10],
+    [10,10,11,11,10,10,11,11,10,10,11,11,10,10,10],
+    [10,10,11,10,10,10,11,10,10,10,11,10,10,10,10],
+    [11,11,11,11,11,11,11,11,11,11,11,11,11,11,11],
+    [10,10,11,10,10,10,11,10,10,10,11,10,10,10,10],
+    [10,10,11,11,10,10,11,11,10,10,11,11,10,10,10],
+    [10,11,11,10,10,11,11,10,10,11,11,10,10,10,10],
+    [10,10,11,11,10,10,11,11,10,10,11,10,10,10,10],
+    [10,11,11,10,10,11,11,10,10,10,10,10,10,10,10],
+    [10,10,11,11,10,10,11,11,10,10,10,10,10,10,10]
+  ],
+  "ReMap": true,
+  "isDark": false,
+  "Stair": [
+    {
+      "X": 3,
+      "Y": 8,
+      "FlipX": true,
+      "Next": "levels/01.json",
+      "End": false
+    },
+    {
+      "X": 1,
+      "Y": 9,
+      "FlipX": true,
+      "Next": "levels/02.json",
+      "End": false
+    },
+    {
+      "X": 3,
+      "Y": 10,
+      "FlipX": true,
+      "Next": "levels/03.json",
+      "End": false
+    },
+    {
+      "X": 1,
+      "Y": 11,
+      "FlipX": true,
+      "Next": "levels/04.json",
+      "End": false
+    },
+    {
+      "X": 3,
+      "Y": 12,
+      "FlipX": true,
+      "Next": "levels/05.json",
+      "End": false
+    },
+    {
+      "X": 3,
+      "Y": 4,
+      "FlipX": true,
+      "Next": "levels/06.json",
+      "End": false
+    },
+    {
+      "X": 1,
+      "Y": 3,
+      "FlipX": true,
+      "Next": "levels/07.json",
+      "End": false
+    },
+    {
+      "X": 3,
+      "Y": 2,
+      "FlipX": true,
+      "Next": "levels/08.json",
+      "End": false
+    },
+    {
+      "X": 1,
+      "Y": 1,
+      "FlipX": true,
+      "Next": "levels/09.json",
+      "End": false
+    },
+    {
+      "X": 3,
+      "Y": 0,
+      "FlipX": true,
+      "Next": "levels/10.json",
+      "End": false
+    },
+    {
+      "X": 7,
+      "Y": 8,
+      "FlipX": true,
+      "Next": "levels/11.json",
+      "End": false
+    },
+    {
+      "X": 5,
+      "Y": 9,
+      "FlipX": true,
+      "Next": "levels/12.json",
+      "End": false
+    },
+    {
+      "X": 7,
+      "Y": 10,
+      "FlipX": true,
+      "Next": "levels/13.json",
+      "End": false
+    },
+    {
+      "X": 5,
+      "Y": 11,
+      "FlipX": true,
+      "Next": "levels/14.json",
+      "End": false
+    },
+    {
+      "X": 7,
+      "Y": 12,
+      "FlipX": true,
+      "Next": "levels/15.json",
+      "End": false
+    },
+    {
+      "X": 7,
+      "Y": 4,
+      "FlipX": true,
+      "Next": "levels/16.json",
+      "End": false
+    },
+    {
+      "X": 5,
+      "Y": 3,
+      "FlipX": true,
+      "Next": "levels/17.json",
+      "End": false
+    },
+    {
+      "X": 7,
+      "Y": 2,
+      "FlipX": true,
+      "Next": "levels/18.json",
+      "End": false
+    },
+    {
+      "X": 5,
+      "Y": 1,
+      "FlipX": true,
+      "Next": "levels/19.json",
+      "End": false
+    },
+    {
+      "X": 7,
+      "Y": 0,
+      "FlipX": true,
+      "Next": "levels/20.json",
+      "End": false
+    },
+    {
+      "X": 11,
+      "Y": 8,
+      "FlipX": true,
+      "Next": "levels/21.json",
+      "End": false
+    },
+    {
+      "X": 9,
+      "Y": 9,
+      "FlipX": true,
+      "Next": "levels/22.json",
+      "End": false
+    },
+    {
+      "X": 11,
+      "Y": 10,
+      "FlipX": true,
+      "Next": "levels/23.json",
+      "End": false
+    },
+    {
+      "X": 9,
+      "Y": 11,
+      "FlipX": true,
+      "Next": "levels/24.json",
+      "End": false
+    },
+    {
+      "X": 11,
+      "Y": 12,
+      "FlipX": true,
+      "Next": "levels/25.json",
+      "End": false
+    },
+    {
+      "X": 11,
+      "Y": 4,
+      "FlipX": true,
+      "Next": "levels/26.json",
+      "End": false
+    },
+    {
+      "X": 9,
+      "Y": 3,
+      "FlipX": true,
+      "Next": "levels/27.json",
+      "End": false
+    }
+  ],
+
+  "Tablet": [
+    {
+      "X": 2,
+      "Y": 6,
+      "Text": [
+        "^^^^^^^",
+        "_01-05_",
+        "_06-10_",
+        "```````"
+      ]
+    },
+    {
+      "X": 6,
+      "Y": 6,
+      "Text": [
+        "^^^^^^^",
+        "_10-15_",
+        "_16-20_",
+        "```````"
+      ]
+    },
+    {
+      "X": 10,
+      "Y": 6,
+      "Text": [
+        "^^^^^^^",
+        "_21-25_",
+        "_26-27_",
+        "```````"
+      ]
+    }
+  ],
+
+  "save": false
+}

@@ -189,7 +189,7 @@ public class Map {
         World.player.setX(lR.getSpawnX());
         World.player.setY(lR.getSpawnY());
         World.player.wCordNormalize();
-        setDark(!lR.isDark());
+        setDark(lR.isDark());
 
 
         iter = lR.getStair().iterator();

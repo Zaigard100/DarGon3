@@ -7,7 +7,7 @@ public class World {
 
     static{
         player = new Player(0,0);
-        map =null;
+        map = null;
     }
     public static void del(){
         map.del();
@@ -17,5 +17,9 @@ public class World {
     }
     public Map getMap() {
         return map;
+    }
+
+    public static void setPlayer(Player player) {
+        World.player = player;
     }
 }

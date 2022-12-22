@@ -83,7 +83,7 @@ public class Extension implements Screen {
         batch.end();
         if(pM.getList().size()>0) {
             if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-                m.setScreen(new LevelModScreen(m, (String) pM.getList().get(num).get("FirstLevel"), true, (String) pM.getList().get(num).get("PackName"), pM.getDestory().getPath()));
+                //m.setScreen(new LevelModScreen(m, (String) pM.getList().get(num).get("FirstLevel"), true, (String) pM.getList().get(num).get("PackName"), pM.getDestory().getPath()));
                 World.player.inventory.jsonToInventory((JSONArray) pM.getList().get(num).get("Inventory"));
             }
         }
@@ -99,7 +99,7 @@ public class Extension implements Screen {
                     num++;
                 }
             }else {
-                m.setScreen(new LevelModScreen(m, (String) pM.getList().get(num).get("FirstLevel"), true, (String) pM.getList().get(num).get("PackName"), pM.getDestory().getPath()));
+                //m.setScreen(new LevelModScreen(m, (String) pM.getList().get(num).get("FirstLevel"), true, (String) pM.getList().get(num).get("PackName"), pM.getDestory().getPath()));
                 World.player.inventory.jsonToInventory((JSONArray) pM.getList().get(num).get("Inventory"));
             }
         }

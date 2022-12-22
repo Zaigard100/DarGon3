@@ -27,6 +27,7 @@ import com.zaig100.dg.utils.Save;
 import com.zaig100.dg.utils.ShaderManager;
 import com.zaig100.dg.utils.dgscript.ScriptStarter;
 import com.zaig100.dg.world.Map;
+import com.zaig100.dg.world.Player;
 import com.zaig100.dg.world.World;
 
 import java.io.IOException;
@@ -59,20 +60,19 @@ public class LevelModScreen implements Screen {
 
     private boolean fir1 = true;
 
+    public Player player;
+    boolean u_player = false;
+
     //TODO Script test;
     //ScriptStarter script = new ScriptStarter();
 
     private Viewport viewport;
 
-    private boolean isPack;
-    private String packname = "";
-    private String derectory = "";
     private boolean black_frame;
 
-    public LevelModScreen(Main m, String path, boolean isPack) {
+    public LevelModScreen(Main m, String path) {
         LevelModScreen.m = m;
         this.path = path;
-        this.isPack = isPack;
         width = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();
         batch = new SpriteBatch();
@@ -80,12 +80,11 @@ public class LevelModScreen implements Screen {
         fbo2 = new FrameBuffer(Pixmap.Format.RGB888, width, height, false);
     }
 
-    public LevelModScreen(Main m, String path, boolean isPack, String packname, String derectory) {
+    public LevelModScreen(Main m, String path, Player player) {
         LevelModScreen.m = m;
         this.path = path;
-        this.isPack = isPack;
-        this.packname = packname;
-        this.derectory = derectory;
+        this.player = player;
+        u_player =true;
         width = Gdx.graphics.getWidth();
         height = Gdx.graphics.getHeight();
         batch = new SpriteBatch();
@@ -102,13 +101,10 @@ public class LevelModScreen implements Screen {
         debag = Configuration.isDebug();
         f1 = new BitmapFont();
         f1.setColor(Color.WHITE);
-        if (isPack) {
-            lR = new LevelRead(derectory + path, isPack);
-        } else {
-            lR = new LevelRead(path, isPack);
-        }
+        lR = new LevelRead(path);
         World.setMap(new Map(lR.getWight(), lR.getHeight(), lR.getMap(), true));
         World.map.object_load(lR);
+        if(u_player) World.setPlayer(player);
         cam.position.set(new Vector3(width / 2, height / 2, 0));
 
         /*TODO Script test;
@@ -121,11 +117,9 @@ public class LevelModScreen implements Screen {
         */
 
         try {
-            if (isPack) {
-                save = new Save(m, packname, path);
-            } else {
-                save = new Save(m, "", path);
-            }
+
+            save = new Save(m, "", path);
+
             if (lR.isSave()) {
                 Save.setHp(World.player.getHp());
                 Save.setMoney(World.player.coin_count);
@@ -254,12 +248,8 @@ public class LevelModScreen implements Screen {
 
                     } else {
                         World.del();
-                        if (isPack) {
-                            m.setScreen(new LevelModScreen(m, World.map.stair.get(i).getNext_path(), isPack, packname, derectory));
-                        } else {
+                        m.setScreen(new LevelModScreen(m, World.map.stair.get(i).getNext_path()));
 
-                            m.setScreen(new LevelModScreen(m, World.map.stair.get(i).getNext_path(), isPack));
-                        }
                     }
                 }
             }
@@ -281,6 +271,8 @@ public class LevelModScreen implements Screen {
         f1.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 85);
         line = "Object Count:" + World.map.getObjCount();
         f1.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 100);
+        line = "Level:" + lR.getLevelname() +"("+path+")";
+        f1.draw(batch, line, 10, 5f * 16 * Configuration.getScale() - 115);
     }
     void pauseMenu() {
         batch.draw(Res.pause_dark, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -337,10 +329,7 @@ public class LevelModScreen implements Screen {
                 World.player.speed = 1;
                 World.del();
                 dispose();
-                if (isPack) {
-                    m.setScreen(new LevelModScreen(m, save.getsPath(), isPack, packname, derectory));
-                } else
-                    m.setScreen(new LevelModScreen(m, save.getsPath(), isPack));
+                m.setScreen(new LevelModScreen(m, save.getsPath()));
             }
 
         }
@@ -415,6 +404,7 @@ public class LevelModScreen implements Screen {
                     World.player.inf = false;
                     World.player.speed = 1;
                     World.del();
+                    dispose();
                     m.setScreen(new MenuScreen(m));
                 }
             }
@@ -436,10 +426,7 @@ public class LevelModScreen implements Screen {
                     World.player.speed = 1;
                     World.del();
                     dispose();
-                    if (isPack) {
-                        m.setScreen(new LevelModScreen(m, save.getsPath(), isPack, packname, derectory));
-                    } else
-                        m.setScreen(new LevelModScreen(m, save.getsPath(), isPack));
+                    m.setScreen(new LevelModScreen(m, save.getsPath()));
                 }
             }
         }
@@ -460,6 +447,7 @@ public class LevelModScreen implements Screen {
                             World.player.menu_opened = false;
                             World.player.inf = false;
                             World.player.speed = 1;
+                            dispose();
                             Gdx.app.exit();
                         }
                     }
@@ -562,7 +550,6 @@ public class LevelModScreen implements Screen {
 
     @Override
     public void dispose() {
-
         batch.dispose();
         fbo.dispose();
         fbo2.dispose();

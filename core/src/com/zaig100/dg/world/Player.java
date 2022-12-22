@@ -55,11 +55,8 @@ public class Player {
         this.oldY = y;
         this.wX = (int) (x * 16 * Configuration.getScale());
         this.wY = (int) (y * 16 * Configuration.getScale());
-        this.hp = 4;
-        this.inventory.set(0, new Poition(3));
-        this.inventory.set(1, new Sheld(2));
-        this.inventory.set(2, new Torch(1));
-        coin_count = 10;
+
+        coin_count = 0;
     }
 
     public Player(int x, int y, int hp) {
@@ -69,10 +66,7 @@ public class Player {
         this.oldY = y;
         this.wX = x * 16 * (int) Configuration.getScale();
         this.wY = y * 16 * (int) Configuration.getScale();
-        this.inventory.set(0, new Poition(3));
-        this.inventory.set(1, new Sheld(2));
-        this.inventory.set(2, new Torch(1));
-        coin_count = 10;
+        coin_count = 0;
         this.hp = hp;
 
     }
@@ -417,6 +411,11 @@ public class Player {
 
     public void setX(int x) {
         this.x = x;
+    }
+
+    public void setPosition(int x,int y){
+        this.x = x;
+        this.y = y;
     }
 
     public int getY() {

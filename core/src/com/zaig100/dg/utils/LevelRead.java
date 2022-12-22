@@ -65,12 +65,9 @@ public class LevelRead {
     ArrayList<KamikadzeC> kamikaze = new ArrayList<>();
     ArrayList<CrossbowAIC> crosbow_ai = new ArrayList<>();
 
-    public LevelRead(String path, boolean isPack) {
-        if (isPack) {
-            in = new InputStreamReader(Gdx.files.getFileHandle(path, Files.FileType.Absolute).read());
-        } else {
-            in = new InputStreamReader(Gdx.files.internal(path).read());
-        }
+    public LevelRead(String path) {
+
+        in = new InputStreamReader(Gdx.files.internal(path).read());
 
         try {
             jsonObject = (JSONObject) jsonParser.parse(in);
@@ -116,6 +113,9 @@ public class LevelRead {
             if ((Boolean) jsonObject.get("ReMap")) {
                 map_correct();
             }
+        }
+        if (jsonObject.get("isDark") != null) {
+            isDark = (Boolean) jsonObject.get("isDark");
         }
         if (jsonObject.get("save") != null) {
             isSave = (Boolean) jsonObject.get("save");
